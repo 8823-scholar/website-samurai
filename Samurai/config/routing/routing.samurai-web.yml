@@ -1,0 +1,13 @@
+###
+ # config/routing/routing.samurai-web.yml
+ # 
+ # URLルーティングを行いたい場合は、ここに条件を記述してください。
+ # 
+ # <example>
+ #     alias:
+ #         url   : '/example/:id/show.html'
+ #         param : { action : 'example_friend_show' }
+ #         requirements : { id : '^\d+$' }
+ # </example>
+ #/
+

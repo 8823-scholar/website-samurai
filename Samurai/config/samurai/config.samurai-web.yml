@@ -1,0 +1,28 @@
+###
+ # config/samurai/config.samurai-web.yml
+ # 
+ # SamuraiFW用の設定上書ファイル。
+ # アプリケーションに応じて設定を変更したい場合は、ここに記述してください。
+ #/
+## ログディレクティブ
+loggers:
+    display:
+        enable : true
+        client : SimpleDisplay
+        log_level : warn
+    simple:
+        enable : true
+        client : SimpleFile
+        log_level : debug
+        logfile : 'log/samurai-web.log'
+    mail:
+        enable : false
+        client : Mail
+        log_level : warn
+        from : 'alert@samurai.example.jp'
+        subject : 'Samurai Alert'
+        mail:
+            - foo@samurai.example.jp
+    php:
+        enable : true
+        client : PhpErrorHandler

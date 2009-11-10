@@ -1,0 +1,12 @@
+###
+ # config/activegateway/activegateway.samurai-web.yml
+ # 
+ # dsnは配列形式で複数記述する事によって、ランダムでどちらか一方を使用するようになります。
+ # 
+ # <example>
+ #     alias :
+ #         dsn  : '[driver]://[user]:[password]@[host]/[dbname]'
+ #         conf : '/path/to/samurai/config/activegateway/conf/alias.yml'
+ # </example>
+ #/
+
