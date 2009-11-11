@@ -1,0 +1,52 @@
+/**
+ * css/common.css
+ * 
+ * 共通設定
+ * いたるところで使用される汎用的なクラスなどが記述される。
+ * 
+ * @package     Samurai
+ * @subpackage  www.css
+ * @copyright   BEFOOL,Inc.
+ * @author      Satoshi Kiuchi <satoshi.kiuchi@befool.co.jp>
+ */
+/********************
+  位置系
+********************/
+    #samurai .left
+    {
+        float : left;
+    }
+    #samurai .right
+    {
+        float : right;
+    }
+    #samurai .clear
+    {
+        clear : both;
+    }
+    /* テキスト関連 
+    #samurai .text-left
+    {
+        text-align : left;
+    }
+    #samurai .text-right
+    {
+        text-align : right;
+    }
+    #samurai .text-center
+    {
+        text-align : center;
+    }
+    #samurai .vertical-top
+    {
+        vertical-align : top;
+    }
+    #samurai .vertical-bottom
+    {
+        vertical-align : bottom;
+    }
+    #samurai .clear-lineheight
+    {
+        line-height : 1.3;
+    }
+    */

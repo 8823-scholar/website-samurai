@@ -57,7 +57,7 @@ class Etc_Helper_Smarty_Html
      * @param      boolean $params['prefix']   prefixを反映させるかどうか
      * @return     string  <A></A>タグ
      */
-    public function A(array $params=array())
+    public function a(array $params=array())
     {
         $href     = '';
         $value    = '';
@@ -104,12 +104,12 @@ class Etc_Helper_Smarty_Html
         //imageの場合
         if($image){
             $escape = false;
-            $value = $this->_makeTag('IMG', array('src'=>$image), NULL);
+            $value = $this->_makeTag('img', array('src'=>$image), NULL);
         }
         if($icon){
             $value = $escape ? htmlspecialchars($value) : $value ;
             $escape = false;
-            $value = $this->_makeTag('IMG', array('src'=>$icon, 'class'=>'icon'), NULL) . $value;
+            $value = $this->_makeTag('img', array('src'=>$icon, 'class'=>'icon'), NULL) . $value;
         }
         //出力
         $params['href'] = $this->isAbsolutePath($href, false) && !$no_prefix ? $this->prefix . $href : $href ;
@@ -123,21 +123,20 @@ class Etc_Helper_Smarty_Html
                     $params['accesskey'] = $access; break;
             }
         }
-        return $this->_makeTag('A', $params, $value, $escape);
+        return $this->_makeTag('a', $params, $value, $escape);
     }
     
     
     /**
-     * function A のエイリアス。
-     * 情報を、書き換えて、Aを呼び出します。
+     * function a のエイリアス。
+     * 情報を、書き換えて、aを呼び出します。
      * @access     public
-     * @since      1.0.0
      * @param      string  $params['to']        送り先
      * @param      string  $params['subject']   件名
      * @param      string  $params['body']      本文
      * @return     string  メールリンクタグ
      */
-    public function MAIL($params){
+    public function mail($params){
         $to      = '';
         $subject = NULL;
         $body    = NULL;
@@ -164,7 +163,6 @@ class Etc_Helper_Smarty_Html
     /**
      * フォームタグ生成。
      * @access     public
-     * @since      1.0.0
      * @param      string  $params['action']    データ送付先
      * @param      string  $params['method']    METHOD
      * @param      string  $params['file']      ファイルを送付するかどうか
@@ -173,7 +171,7 @@ class Etc_Helper_Smarty_Html
      * @param      boolean $params['end']       終了タグかどうか
      * @return     string  フォームタグ
      */
-    public function FORM($params){
+    public function form($params){
         $action    = '';
         $method    = 'POST';
         $file      = false;
@@ -229,7 +227,6 @@ class Etc_Helper_Smarty_Html
     /**
      * インプット。
      * @access     public
-     * @since      1.0.0
      * @param      string  $params['type']
      * @param      string  $params['name']
      * @param      string  $params['value']
@@ -242,7 +239,7 @@ class Etc_Helper_Smarty_Html
      * @param      boolean $params['escape']
      * @return     string  インプットタグ
      */
-    public function INPUT($params){
+    public function input($params){
         $type      = 'text';
         $name      = '';
         $value     = NULL;
@@ -345,9 +342,8 @@ class Etc_Helper_Smarty_Html
      * インプットタグエイリアス。
      * インプットタグの各種省略形メソッド。
      * @access     public
-     * @since      1.0.0
      */
-    public function TEXT($params){
+    public function text($params){
         if(!isset($params['type'])) $params['type'] = 'text';
         //デフォルト
         if(isset($params['inner_label'])){
@@ -373,26 +369,26 @@ class Etc_Helper_Smarty_Html
             unset($params['inner_label']);
             return $this->input($params).$this->input($dummy_params);
         }
-        return $this->INPUT($params);
+        return $this->input($params);
     }
-    public function PASSWORD($params){
+    public function password($params){
         $params['type'] = 'password';
-        return $this->TEXT($params);
+        return $this->text($params);
     }
-    public function HIDDEN($params){
+    public function hidden($params){
         $params['type'] = 'hidden';
-        return $this->INPUT($params);
+        return $this->input($params);
     }
-    public function CHECKBOX($params){
+    public function checkbox($params){
         $params['type'] = 'checkbox';
         if(isset($params['label'])){
             if(!isset($params['id'])) $params['id'] = $params['name'].'_'.$params['value'];
             $params['escape'] = false;
-            $params['label'] = ' ' . $this->_makeTag('LABEL', array('for'=>$params['id'], 'class'=>$params['name']), htmlspecialchars($params['label']));
+            $params['label'] = ' ' . $this->_makeTag('label', array('for'=>$params['id'], 'class'=>$params['name']), htmlspecialchars($params['label']));
         }
-        return $this->INPUT($params);
+        return $this->input($params);
     }
-    public function RADIO($params){
+    public function radio($params){
         $params['type'] = 'radio';
         if(isset($params['label']) || isset($params['image'])){
             $params['escape'] = false;
@@ -404,22 +400,22 @@ class Etc_Helper_Smarty_Html
                 $label = htmlspecialchars($params['label']);
             }
             if(!isset($params['id'])) $params['id'] = $params['name'].'_'.$params['value'];
-            $params['label'] = ' ' . $this->_makeTag('LABEL', array('for'=>$params['id'], 'class'=>$params['name']), htmlspecialchars($params['label']));
+            $params['label'] = ' ' . $this->_makeTag('label', array('for'=>$params['id'], 'class'=>$params['name']), htmlspecialchars($params['label']));
         }
-        return $this->INPUT($params);
+        return $this->input($params);
     }
-    public function FILE($params){
+    public function file($params){
         $params['type'] = 'file';
-        return $this->INPUT($params);
+        return $this->input($params);
     }
-    public function SUBMIT($params){
+    public function submit($params){
         if(!isset($params['type'])) $params['type'] = 'submit';
         if(!isset($params['class'])) $params['class'] = 'submit';
         if(isset($params['dispatch'])){
             $params['name'] = 'dispatch_'.$params['dispatch'];
             unset($params['dispatch']);
         }
-        return $this->INPUT($params);
+        return $this->input($params);
     }
     
     
@@ -428,7 +424,6 @@ class Etc_Helper_Smarty_Html
      * セレクトボックスは、飲み込むのにちょっと時間がかかるかもしれない。
      * {Html->select item=$item label='title' value='id' name='hoge' selected=$request.hoge}
      * @access     public
-     * @since      1.0.0
      * @param      array   $params['item']
      * @param      string  $params['name']
      * @param      string  $params['selected']
@@ -441,7 +436,7 @@ class Etc_Helper_Smarty_Html
      * @param      boolean $params['group']
      * @return     string  セレクトボックス
      */
-    public function SELECT($params){
+    public function select($params){
         $name        = 'selectbox';
         $selected    = '';
         $label       = '';
@@ -478,29 +473,29 @@ class Etc_Helper_Smarty_Html
         
         //生成
         $select   = array();
-        $select[] = $this->_makeTag('SELECT', $params, '', false, false);
+        $select[] = $this->_makeTag('select', $params, '', false, false);
         foreach($item as $_key => $_val){
             if($group){
-                if($_key) $select[] = $this->_makeTag('OPTGROUP', array('label' => htmlspecialchars($_key)), '', false, false);
+                if($_key) $select[] = $this->_makeTag('optgroup', array('label' => htmlspecialchars($_key)), '', false, false);
                 foreach($_val as $_key2 => $_val2){
                     if($selected == $_val2[$value]){
-                        $select[] = $this->_makeTag('OPTION', array('selected', 'value' => htmlspecialchars($_val2[$value])), $_val2[$label], $escape);
+                        $select[] = $this->_makeTag('option', array('selected', 'value' => htmlspecialchars($_val2[$value])), $_val2[$label], $escape);
                     } else {
-                        $select[] = $this->_makeTag('OPTION', array('value' => htmlspecialchars($_val2[$value])), $_val2[$label], $escape);
+                        $select[] = $this->_makeTag('option', array('value' => htmlspecialchars($_val2[$value])), $_val2[$label], $escape);
                     }
                 }
-                if($_key) $select[] = '</OPTGROUP>';
+                if($_key) $select[] = '</optgroup>';
             } else {
                 $_value = $value && isset($_val[$value]) ? $_val[$value] : $_key;
                 $_label = $label && isset($_val[$label]) ? $_val[$label] : $_val;
                 if($selected == $_value){
-                    $select[] = $this->_makeTag('OPTION', array('selected', 'value' => htmlspecialchars($_value)), $_label, $escape);
+                    $select[] = $this->_makeTag('option', array('selected', 'value' => htmlspecialchars($_value)), $_label, $escape);
                 } else {
-                    $select[] = $this->_makeTag('OPTION', array('value' => htmlspecialchars($_value)), $_label, $escape);
+                    $select[] = $this->_makeTag('option', array('value' => htmlspecialchars($_value)), $_label, $escape);
                 }
             }
         }
-        $select[] = '</SELECT>';
+        $select[] = '</select>';
         
         $select = join("\r\n", $select);
         return $select;
@@ -517,7 +512,7 @@ class Etc_Helper_Smarty_Html
      * @param      int     $params['height']
      * @return     string  テキストエリアタグ
      */
-    function TEXTAREA($params){
+    function textarea($params){
         $name      = 'textarea';
         $value     = '';
         $width     = NULL;
@@ -578,14 +573,14 @@ class Etc_Helper_Smarty_Html
         }
         
         //生成
-        return $this->_makeTag('TEXTAREA', $params, $value, true);
+        return $this->_makeTag('textarea', $params, $value, true);
     }
     
     
     /**
      * BUTTON
      */
-    public function BUTTON($params=array()){
+    public function button($params=array()){
         $value = '';
         $href  = '';
         foreach($params as $_key=>$_val){
@@ -602,7 +597,7 @@ class Etc_Helper_Smarty_Html
             if(isset($params['onClick'])) $params['onClick'] = array();
             $params['onClick'][] = "location.href='{$href}';return false;";
         }
-        return $this->_makeTag('BUTTON', $params, $value, true);
+        return $this->_makeTag('button', $params, $value, true);
     }
     
     
@@ -627,7 +622,7 @@ class Etc_Helper_Smarty_Html
         }
         $src = "{$base_url}{$path}/{$name}.png";
         $params = array('src' => $src, 'class'=>'icon');
-        return $this->_makeTag('IMG', $params, NULL);
+        return $this->_makeTag('img', $params, NULL);
     }
     /**
      * スペーサーGIFの挿入。
@@ -647,7 +642,7 @@ class Etc_Helper_Smarty_Html
         $params['width']  = $width;
         $params['height'] = $height;
         $params['src']    = $this->spacer_url;
-        return $this->_makeTag('IMG', $params, NULL);
+        return $this->_makeTag('img', $params, NULL);
     }
     
     
@@ -704,10 +699,10 @@ class Etc_Helper_Smarty_Html
             if($this->isAbsolutePath($file, false)) $file = $this->prefix . $file;
             //読込
             if($type == 'css'){
-                $tags[] = $this->_makeTag('LINK', array('rel' => 'stylesheet', 'href' => $file, 'type' => 'text/css'), NULL);
+                $tags[] = $this->_makeTag('link', array('rel' => 'stylesheet', 'href' => $file, 'type' => 'text/css'), NULL);
             }
             elseif($type == 'javascript'){
-                $tags[] = $this->_makeTag('SCRIPT', array('src' => $file, 'type' => 'text/javascript'));
+                $tags[] = $this->_makeTag('script', array('src' => $file, 'type' => 'text/javascript'));
             }
         }
         return join("\r\n", $tags);

@@ -1,0 +1,64 @@
+/**
+ * theme/base/css/hack.ie6.css
+ * 
+ * IE6用のハックCSS
+ * IE6でどうしてもうまく行かない表示はここで調節してください。
+ * また、アンダースコアハックの必要はない (IE6の時だけ読み込むようにしているので)。
+ * 
+ * @package     Bokumachi
+ * @copyright   BEFOOL,Inc.
+ */
+/** 基本 **/
+#bokumachi
+{
+    word-break : break-all;
+    word-wrap  : break-word;
+}
+
+/** TOPバー **/
+BODY
+{
+    background : url(null) fixed;
+}
+#bokumachi UL#topbar
+{
+    position : absolute;
+    top : expression(eval(document.documentElement.scrollTop));
+    left : expression(eval(document.documentElement.scrollLeft));
+}
+
+/** ヘッダー **/
+#bokumachi #header H1.logo
+{
+    margin-left : 4px;
+}
+#bokumachi #header DIV.adsense
+{
+    margin-right : 5px;
+}
+#bokumachi #header DIV.search
+{
+    margin-top : 4px;
+    margin-right : 3px;
+}
+
+
+
+
+
+/** ロガー **/
+#bokumachi_logger_field
+{
+    position : absolute;
+    bottom : expression(eval(document.documentElement.scrollBottom));
+}
+
+/*アイコン*/
+#bokumachi #contents #main LI.photo,
+#bokumachi #contents #main DIV.photo,
+#bokumachi #contents #main DIV.shop,
+#bokumachi #contents #main DIV.facility,
+#bokumachi #contents DIV.login
+{
+    background : none;
+}

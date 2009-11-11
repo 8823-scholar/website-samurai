@@ -1,0 +1,39 @@
+/**
+ * css/base.css
+ * 
+ * 基本設定
+ * font-sizeやline-heightなどを調整
+ * 
+ * @package     Samurai
+ * @subpackage  www.css
+ * @copyright   BEFOOL,Inc.
+ * @author      Satoshi Kiuchi <satoshi.kiuchi@befool.co.jp>
+ */
+/********************
+  基本設定
+********************/
+    body
+    {
+        background : #FFFFFF url('../../image/layout/background.png') repeat fixed !important;
+    }
+    #samurai
+    {
+        color : #333333;
+        font-size : 12px;
+        font-family : 'ＭＳ Ｐゴシック', sans-serif;
+        word-break : break-all;
+        word-wrap  : break-word;
+    }
+    #samurai A
+    {
+        color : #669933;
+        text-decoration : none;
+    }
+    #samurai A:hover
+    {
+        text-decoration : underline;
+    }
+    #samurai H1, #samurai H2, #samurai H3, #samurai H4, #samurai H5
+    {
+        line-height : 1.3;
+    }

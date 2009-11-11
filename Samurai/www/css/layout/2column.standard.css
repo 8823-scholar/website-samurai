@@ -1,0 +1,446 @@
+/**
+ * css/layout/2column.standard.css
+ * 
+ * レイアウト - 2column
+ * 
+ * @package     Samurai
+ * @subpackage  www.css
+ * @copyright   BEFOOL,Inc.
+ * @author      Satoshi Kiuchi <satoshi.kiuchi@befool.co.jp>
+ */
+/** インポート **/
+@import url('./standard.css');
+
+
+/********************
+  コンテンツ
+********************/
+    /** メイン **/
+    #bokumachi #contents #main
+    {
+        float : left;
+        width : 570px;
+        padding-left : 10px;
+        padding-right : 5px;
+    }
+    #bokumachi #contents #main .column
+    {
+        clear : both;
+        margin-bottom : 15px;
+        line-height : 1.5;
+    }
+    #bokumachi #contents #main .column_half
+    {
+        width : 280px;
+        margin-bottom : 15px;
+        line-height : 1.5;
+    }
+    
+    /** サイドバー **/
+    #bokumachi #contents #sidebar
+    {
+        float : right;
+        width : 200px;
+        padding-left : 5px;
+        padding-right : 10px;
+    }
+    #bokumachi #contents #sidebar .column
+    {
+        clear : both;
+        margin-bottom : 15px;
+        line-height : 1.5;
+    }
+    
+    
+/********************
+  見出し
+********************/
+    #bokumachi #contents #main H2
+    {
+        height : 40px;
+        font-size : 18px;
+        font-weight : bolder;
+        padding-top : 7px;
+        padding-left : 10px;
+        background : url('../../image/layout/tag.h2.png') no-repeat;
+    }
+    #bokumachi #contents #main .column H3
+    {
+        height : 25px;
+        font-size : 13px;
+        font-weight : bolder;
+        padding-top : 5px;
+        padding-left : 7px;
+        color : #FFFFFF;
+        background : url('../../image/layout/tag.h3.png') no-repeat;
+    }
+    #bokumachi #contents #main .column_half H3
+    {
+        height : 25px;
+        font-size : 13px;
+        font-weight : bolder;
+        padding-top : 4px;
+        padding-left : 5px;
+        color : #FFFFFF;
+        background : url('../../image/layout/tag.h3.half.png') no-repeat;
+    }
+    #bokumachi #contents #main .column H4
+    {
+        font-weight : bold;
+        margin-bottom : 10px;
+    }
+    #bokumachi #contents #sidebar .column .box H4.top
+    {
+        width : 187px;
+        height : 15px;
+        padding : 8px 5px 2px 8px;
+        font-size : 11px;
+        color : #666666;
+        background : url('../../image/layout/tag.h4.sidebar.png') no-repeat;
+    }
+    
+    
+/********************
+  ボックス
+********************/
+    #bokumachi #contents #main .column .box
+    {
+        
+    }
+    #bokumachi #contents #main .column .box UL.menu
+    {
+        margin : 10px 0px;
+    }
+    
+    
+    
+    
+    
+/********************
+  メニュー
+********************/
+    #bokumachi #contents #sidebar .menu H4
+    {
+        color : #FFFFFF;
+        font-size : 12px;
+        font-weight : bold;
+        padding-left : 7px;
+        padding-top : 7px;
+        padding-bottom : 6px;
+        padding-right : 5px;
+    }
+    #bokumachi #contents #sidebar .menu UL
+    {
+        border : 1px solid #999999;
+    }
+    #bokumachi #contents #sidebar .menu UL LI
+    {
+        margin-top : -1px;
+        border-top : 1px dashed #999999;
+    }
+    #bokumachi #contents #sidebar .menu UL LI A
+    {
+        display : block;
+        padding : 2px 5px;
+    }
+    #bokumachi #contents #sidebar .menu UL UL
+    {
+        border : none;
+    }
+    #bokumachi #contents #sidebar .menu UL UL LI
+    {
+        padding-left : 15px;
+        background : url('../../image/layout/sidebar.menu.arrow.png') 5px 5px no-repeat;
+    }
+    #bokumachi #contents #sidebar .menu UL UL UL LI
+    {
+        padding-left : 25px;
+        background : url('../../image/layout/sidebar.menu.arrow.png') 15px 5px no-repeat;
+    }
+    
+    
+    
+    
+    
+    
+/********************
+  ログイン
+********************/
+    #bokumachi #contents #sidebar .login .top
+    {
+        width : 200px;
+        height : 5px;
+        background : url('../../image/layout/sidebar.login.background.top.png') no-repeat;
+    }
+    #bokumachi #contents #sidebar .login .middle
+    {
+        width : 186px;
+        padding : 0px 7px 5px;
+        background : url('../../image/layout/sidebar.login.background.middle.png') repeat-y;
+    }
+    #bokumachi #contents #sidebar .login .middle INPUT.user,
+    #bokumachi #contents #sidebar .login .middle INPUT.pass
+    {
+        width : 160px;
+        height : 16px;
+        vertical-align : middle;
+        margin-top : 1px;
+        margin-bottom : 3px;
+        border : 1px solid #999999;
+    }
+    #bokumachi #contents #sidebar .login .middle INPUT.hold
+    {
+        width : 12px;
+        height : 12px;
+        vertical-align : middle;
+        margin : 7px 3px 10px 0px;
+    }
+    #bokumachi #contents #sidebar .login .middle LABEL.hold
+    {
+        font-size : 10px;
+    }
+    #bokumachi #contents #sidebar .login .middle INPUT.submit,
+    #bokumachi #contents #sidebar .login .middle IMG.regist
+    {
+        margin-bottom : 5px;
+    }
+    #bokumachi #contents #sidebar .login .middle DIV.hr_dashed
+    {
+        width : 184px;
+        margin : 5px auto 10px;
+    }
+    #bokumachi #contents #sidebar .login .middle UL.menu LI
+    {
+        text-align : right;
+        margin-top : 5px;
+    }
+    #bokumachi #contents #sidebar .login .bottom
+    {
+        width : 200px;
+        height : 5px;
+        background : url('../../image/layout/sidebar.login.background.bottom.png') no-repeat;
+    }
+/********************
+  ユーザー情報
+********************/
+    #bokumachi #contents #sidebar .user .top
+    {
+        height : 5px;
+        background : url('../../image/layout/sidebar.login.background.top.png') no-repeat;
+        font-size : 0px;
+    }
+    #bokumachi #contents #sidebar .user .middle
+    {
+        background : url('../../image/layout/sidebar.login.background.middle.png') repeat-y;
+        padding : 0px 7px;
+    }
+    #bokumachi #contents #sidebar .user .bottom
+    {
+        height : 5px;
+        background : url('../../image/layout/sidebar.login.background.bottom.png') no-repeat;
+    }
+    
+    #bokumachi #contents #sidebar .user .name
+    {
+        text-align : center;
+        font-weight : bold;
+    }
+    
+    #bokumachi #contents #sidebar .user .name A
+    {
+        color : #3399CC;
+    }
+    
+    #bokumachi #contents #sidebar .user .photo .top
+    {
+        height : 3px;
+        background : url('../../image/action/mypage/sidebar.user.photo.frame.top.png') no-repeat;
+        font-size : 0px;
+    }
+    #bokumachi #contents #sidebar .user .photo .middle
+    {
+        padding : 0px 3px;
+        background : url('../../image/action/mypage/sidebar.user.photo.frame.middle.png') repeat-y;
+    }
+    #bokumachi #contents #sidebar .user .photo .middle .frame
+    {
+        text-align : center;
+        border : solid 1px #999999;
+    }
+    #bokumachi #contents #sidebar .user .photo .bottom
+    {
+        height : 3px;
+        background : url('../../image/action/mypage/sidebar.user.photo.frame.bottom.png') no-repeat;
+    }
+    
+    #bokumachi #contents #sidebar .user .photo IMG
+    {
+        
+    }
+    
+    #bokumachi #contents #sidebar .user .introduction
+    {
+        margin-top : 1px;
+    }
+    #bokumachi #contents #sidebar .user .introduction .top
+    {
+        height : 13px;
+        background : url('../../image/action/mypage/sidebar.user.introduction.frame.top.png') no-repeat;
+        font-size : 0px;
+    }
+    #bokumachi #contents #sidebar .user .introduction .middle
+    {
+        background : url('../../image/action/mypage/sidebar.user.introduction.frame.middle.png') repeat-y;
+    }
+    #bokumachi #contents #sidebar .user .introduction .bottom
+    {
+        height : 10px;
+        background : url('../../image/action/mypage/sidebar.user.introduction.frame.bottom.png') no-repeat;
+        font-size : 0px;
+    }
+    
+    #bokumachi #contents #sidebar .user .operate
+    {
+        margin-top : 10px;
+    }
+    
+    
+/********************
+  リスト
+********************/
+    #bokumachi #contents #main TABLE.list
+    {
+        width : 100%;
+    }
+    #bokumachi #contents #main TABLE.list TH
+    {
+        padding : 5px;
+        border : 1px solid #CCCCCC;
+        background : #F5F5F5;
+        text-align : center;
+        color : #666666;
+    }
+    #bokumachi #contents #main TABLE.list TD
+    {
+        padding : 5px;
+        border : 1px solid #CCCCCC;
+        background : #FFFFFF;
+    }
+    #bokumachi #contents #main TABLE.list TD.none
+    {
+        padding : 10px;
+        text-align : right;
+    }
+    
+    #bokumachi #contents #main .column UL LI.none
+    {
+        padding : 5px;
+        text-align : right;
+    }
+    
+    #bokumachi #contents #sidebar .column .box .middle UL.list LI
+    {
+        
+    }
+    
+    
+/********************
+  フォーム
+********************/
+    #bokumachi #contents #main TABLE.form
+    {
+        width : 100%;
+        border : 1px solid #CCCCCC;
+    }
+    #bokumachi #contents #main TABLE.form TH
+    {
+        width : 115px;
+        padding : 5px;
+        padding-left : 10px;
+        text-align : left;
+        vertical-align : top;
+        color : #666666;
+        border : 1px solid #CCCCCC;
+        background : #F5F5F5 url('../../image/layout/form.th.optional.png') left repeat-y;
+    }
+    #bokumachi #contents #main TABLE.form TH.required
+    {
+        background : #F5F5F5 url('../../image/layout/form.th.required.png') left repeat-y;
+    }
+    #bokumachi #contents #main TABLE.form TD.input
+    {
+        padding : 5px;
+        vertical-align : top;
+        border : 1px solid #CCCCCC;
+    }
+    #bokumachi #contents #main TABLE.form TD.submit
+    {
+        padding : 20px;
+        text-align : center;
+    }
+    #bokumachi #contents #main TABLE.form TD.submit INPUT.submit,
+    #bokumachi #contents #main TABLE.form TD.submit BUTTON.submit
+    {
+        height : 34px;
+        margin : 0px 10px;
+        padding-left : 15px;
+        padding-right : 15px;
+        border : 1px solid #BBBBBB;
+        color : #444444;
+        background : #E5E5E5 url('../../image/layout/form.submit.png') repeat-x;
+        vertical-align : middle;
+    }
+    #bokumachi #contents #main INPUT.dummy
+    {
+        color : #777777;
+    }
+    #bokumachi #contents #main TABLE.form .example
+    {
+        padding : 5px;
+        color : #777777;
+    }
+    
+    
+/********************
+  pager
+********************/
+    #bokumachi #contents #main .pager
+    {
+        padding : 10px;
+        text-align : center;
+    }
+    #bokumachi #contents #main .pager .now
+    {
+        padding : 5px;
+        margin-left : 3px;
+        margin-right : 3px;
+        background : #FFFFFF;
+        border : 1px solid #CCCCCC;
+        font-weight : bold;
+    }
+    #bokumachi #contents #main .pager .page
+    {
+        margin-left : 3px;
+        margin-right : 3px;
+        border : 1px solid #CCCCCC;
+    }
+    #bokumachi #contents #main .pager .prev
+    {
+        margin-right : 7px;
+        border : 1px solid #CCCCCC;
+    }
+    #bokumachi #contents #main .pager .next
+    {
+        margin-left : 7px;
+        border : 1px solid #CCCCCC;
+    }
+    #bokumachi #contents #main .pager A
+    {
+        padding : 5px;
+        background : #EEEEEE;
+    }
+    #bokumachi #contents #main .pager A:hover
+    {
+        background : #FFFFFF;
+        color : #333333;
+    }
