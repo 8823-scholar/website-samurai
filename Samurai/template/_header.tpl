@@ -17,7 +17,9 @@
             {Html->load type='javascript' file=$js}
         {/if}
         
-        <title>Samurai Framework</title>
+        {assign_array var='html.title.' value='Samurai Framework'}
+        {assign_array var='html.title.' value='PHP WEB Framework'}
+        <title>{$html.title|@join:' | '}</title>
     </head>
     <body>
     <div id='samurai'>
@@ -29,8 +31,8 @@
                 <li>{Html->a href='/' value='SamuraiFW' class='with-icon samurai'}</li>
                 <li>{Html->a href='/about/samurai' value='概要'}</li>
                 <li>{Html->a href='/downloads/index' value='ダウンロード'}</li>
-                <li>{Html->a href='/documents/api' value='API'}</li>
-                <li>{Html->a href='/documents/index' value='ドキュメント'}</li>
+                <li>{Html->a href='/source/api' value='API'}</li>
+                <li>{Html->a href='/documents/ja/index' value='ドキュメント'}</li>
                 <li>{Html->a href='/development/index' value='開発'}</li>
                 <li>{Html->a href='/community/index' value='コミュニティ'}</li>
             </ul>

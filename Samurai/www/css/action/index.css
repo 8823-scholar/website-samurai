@@ -15,5 +15,58 @@
     {
         width : 800px;
         height : 350px;
+        position : relative;
         background : #FFFFFF url('../../image/action/index/topimage.png') no-repeat left bottom;
     }
+
+    /** main menu **/
+    #samurai #contents.index #topimage ul.main
+    {
+        width : 200px;
+        position : relative;
+        top : 80px;
+        left : 545px;
+    }
+    #samurai #contents.index #topimage ul.main li a
+    {
+        display : block;
+        color : #333333;
+        padding : 5px 5px 5px 35px;
+    }
+    #samurai #contents.index #topimage ul.main li a:hover
+    {
+        background-color : #EEEEEE !important;
+        text-decoration : none;
+    }
+    #samurai #contents.index #topimage ul.main li.download a
+    {
+        background : url('../../image/action/index/icon.download.png') no-repeat 5px;
+    }
+    #samurai #contents.index #topimage ul.main li.download .version
+    {
+        color : #999999;
+        font-size : 10px;
+    }
+
+    /** sub menu **/
+    #samurai #contents.index #topimage ul.sub
+    {
+        width : 250px;
+        position : relative;
+        top : 105px;
+        left : 550px;
+    }
+    #samurai #contents.index #topimage ul.sub li
+    {
+        margin-bottom : 6px;
+    }
+    #samurai #contents.index #topimage ul.sub li a
+    {
+        padding : 2px 2px 2px 24px;
+        background : url('../../image/icon/li.png') no-repeat;
+    }
+    #samurai #contents.index #topimage ul.sub li.blank
+    {
+        height : 20px;
+    }
+

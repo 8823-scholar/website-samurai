@@ -32,6 +32,10 @@
         height : 14px;
         margin-right : 15px;
     }
+    #samurai #header ul.menu.left li a.samurai
+    {
+        color : #333333;
+    }
     #samurai #header ul.menu.right li
     {
         float : right;
