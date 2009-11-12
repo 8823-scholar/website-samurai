@@ -12,9 +12,11 @@
         {Html->load type='css' file='/css/common.css'}
         {Html->load type='css' file=$css|default:'/css/layout/standard.css'}
         {Html->load type='css' file='/css/wickey.css'}
+        
         {if $js}
             {Html->load type='javascript' file=$js}
         {/if}
+        
         <title>Samurai Framework</title>
     </head>
     <body>
@@ -43,7 +45,9 @@
         
         
         {** コンテンツ **}
-        <div id='contents'>
-            <div class='words'>
-                世の人は 我をなんとも 言わば言え 我為すことは 我のみぞ知る <span class='name'>by 坂本竜馬</span>
+        <div id='contents' class='{$action|default:"someaction"}'>
+            <div class='top haiku'>
+                <span class='phrase'>世の人は 我をなんとも 言わば言え 我為すことは 我のみぞ知る</span>
+                <span class='composed_by'>by 坂本竜馬</span>
             </div>
+            <div class='middle'>

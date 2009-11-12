@@ -1,0 +1,19 @@
+/**
+ * css/action/index.css
+ * 
+ * アクション - index
+ * 
+ * @package     Samurai
+ * @subpackage  www.css
+ * @copyright   BEFOOL,Inc.
+ * @author      Satoshi Kiuchi <satoshi.kiuchi@befool.co.jp>
+ */
+/********************
+  TOPイメージ
+********************/
+    #samurai #contents.index #topimage
+    {
+        width : 800px;
+        height : 350px;
+        background : #FFFFFF url('../../image/action/index/topimage.png') no-repeat left bottom;
+    }

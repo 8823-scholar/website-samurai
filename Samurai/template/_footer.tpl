@@ -1,6 +1,9 @@
 {**
  * _footer.tpl
  *}
+                <div class='clear'></div>
+            </div>
+            <div class='bottom'></div>
         </div>
         
         

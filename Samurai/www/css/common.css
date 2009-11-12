@@ -24,7 +24,11 @@
     {
         clear : both;
     }
-    /* テキスト関連 
+    
+    
+/********************
+  テキスト関連
+********************/
     #samurai .text-left
     {
         text-align : left;
@@ -49,4 +53,18 @@
     {
         line-height : 1.3;
     }
-    */
+    
+    
+/********************
+  アイコン
+********************/
+    #samurai .with-icon
+    {
+        padding-top : 3px;
+        padding-left : 22px;
+        padding-bottom : 3px;
+    }
+    #samurai .with-icon.samurai
+    {
+        background : url('../image/icon/samurai.png') no-repeat left;
+    }
