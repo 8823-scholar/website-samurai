@@ -33,7 +33,12 @@
     {
         text-decoration : underline;
     }
-    #samurai H1, #samurai H2, #samurai H3, #samurai H4, #samurai H5
+    
+    
+/********************
+  段落設定
+********************/
+    #samurai P
     {
         line-height : 1.3;
     }

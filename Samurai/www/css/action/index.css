@@ -9,6 +9,19 @@
  * @author      Satoshi Kiuchi <satoshi.kiuchi@befool.co.jp>
  */
 /********************
+  レイアウト
+********************/
+    #samurai #contents.index #main
+    {
+        width : 500px;
+    }
+    #samurai #contents.index #sidebar
+    {
+        width : 270px;
+    }
+    
+    
+/********************
   TOPイメージ
 ********************/
     #samurai #contents.index #topimage
@@ -18,7 +31,7 @@
         position : relative;
         background : #FFFFFF url('../../image/action/index/topimage.png') no-repeat left bottom;
     }
-
+    
     /** main menu **/
     #samurai #contents.index #topimage ul.main
     {
@@ -31,7 +44,7 @@
     {
         display : block;
         color : #333333;
-        padding : 5px 5px 5px 35px;
+        padding : 10px 10px 10px 35px;
     }
     #samurai #contents.index #topimage ul.main li a:hover
     {
@@ -47,26 +60,37 @@
         color : #999999;
         font-size : 10px;
     }
-
+    
     /** sub menu **/
     #samurai #contents.index #topimage ul.sub
     {
-        width : 250px;
+        width : 240px;
         position : relative;
         top : 105px;
         left : 550px;
     }
     #samurai #contents.index #topimage ul.sub li
     {
-        margin-bottom : 6px;
+        margin-bottom : 10px;
     }
     #samurai #contents.index #topimage ul.sub li a
     {
-        padding : 2px 2px 2px 24px;
+        padding : 3px 3px 3px 24px;
         background : url('../../image/icon/li.png') no-repeat;
     }
     #samurai #contents.index #topimage ul.sub li.blank
     {
-        height : 20px;
+        height : 15px;
     }
-
+    
+    
+/********************
+  紹介
+********************/
+    /** welcome **/
+    #samurai #contents.index #main .welcome h2
+    {
+        font-size : 18px;
+        font-weight : bold;
+        margin-bottom : 10px;
+    }
