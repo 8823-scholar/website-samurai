@@ -13,8 +13,8 @@
 
 
 /********************
-  layout
-********************/
+ * layout
+ *******************/
     #samurai #contents #main
     {
         float : left;
@@ -28,20 +28,24 @@
         padding : 10px 10px 10px 5px;
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    #bokumachi #contents #main .column
+
+
+/********************
+ * main
+ *******************/
+    #samurai #contents #main .column
     {
         clear : both;
         margin-bottom : 15px;
-        line-height : 1.5;
     }
+    
+    
+    
+    
+    
+    
+    
+    
     #bokumachi #contents #main .column_half
     {
         width : 280px;
@@ -50,13 +54,6 @@
     }
     
     /** サイドバー **/
-    #bokumachi #contents #sidebar
-    {
-        float : right;
-        width : 200px;
-        padding-left : 5px;
-        padding-right : 10px;
-    }
     #bokumachi #contents #sidebar .column
     {
         clear : both;
