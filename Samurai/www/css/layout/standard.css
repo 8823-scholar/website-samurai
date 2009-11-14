@@ -90,12 +90,52 @@
 ********************/
     #samurai #footer
     {
-        width : 802px;
+        width : 782px;
         margin : 0px auto 10px;
-        text-align : center;
+        padding : 10px;
+        color : #666666;
+        background : url('../../image/layout/footer.background.png') no-repeat left top;
     }
-    
-    
+    #samurai #footer h5
+    {
+        font-weight : bold;
+        margin-bottom : 3px;
+    }
+    #samurai #footer ul.abouts
+    {
+        float : right;
+        width : 300px;
+    }
+    #samurai #footer ul.abouts li
+    {
+        float : left;
+        display : inline;
+    }
+    #samurai #footer .copyright
+    {
+        clear : right;
+        float : right;
+    }
+    /** Built on Samurai **/
+    #samurai #footer .built_on_samurai
+    {
+        float : left;
+        width : 250px;
+        background : url('../../image/layout/vr.dashed.png') repeat-y right;
+    }
+    #samurai #footer .built_on_samurai ul li
+    {
+        padding-left : 10px;
+        margin-left : 10px;
+        margin-bottom : 3px;
+        background : url('../../image/icon/li.li.li.png') no-repeat 0px 3px;
+    }
+
+
+
+
+
+
 /********************
   その他
 ********************/

@@ -134,3 +134,29 @@
         background : url('../../image/icon/li.li.png') no-repeat 0px 0px;
         margin-bottom : 10px;
     }
+
+
+/********************
+ * サイドバー
+ *******************/
+    #samurai #contents.index #sidebar .nearly_posted h4
+    {
+        padding : 5px;
+        color : #FFFFFF;
+        text-align : center;
+        background : #C1C1C1 url('../../image/action/index/nearly.posted.header.png') no-repeat left top;
+    }
+    #samurai #contents.index #sidebar .nearly_posted ul
+    {
+        padding : 5px;
+        background : #F0F0F0 url('../../image/action/index/nearly.posted.footer.png') no-repeat left bottom;
+    }
+    #samurai #contents.index #sidebar .nearly_posted ul li
+    {
+        margin-bottom : 10px;
+    }
+    #samurai #contents.index #sidebar .nearly_posted ul li .date
+    {
+        color : #666666;
+        font-size : 10px;
+    }

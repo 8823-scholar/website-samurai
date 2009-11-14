@@ -10,11 +10,11 @@ generator:
     renderer:
         name : 'smarty'
         suffix : 'tpl'
-#    generator:
-#        package   : 'Package'
-#        author    : 'Foo Bar <foo@bar.jp>'
-#        copyright : 'Foo Project'
-#        licence   : 'http://www.php.net/license/3_01.txt The PHP License, version 3.01'
+    generator:
+        package   : 'Samurai'
+        author    : 'Satoshi Kiuchi <satoshi.kiuchi@befool.co.jp>'
+        copyright : 'Samurai Framework Project'
+        licence   : 'http://opensource.org/licenses/bsd-license.php  The modified BSD License'
 #    encoding:
 #        config   : UTF-8
 #        script   : UTF-8
