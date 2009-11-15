@@ -25,14 +25,12 @@
     <div id='samurai'>
         {** ヘッダー **}
         <div id='header'>
-            <h1>Samurai Framework is PHP Web Aplication Framework.</h1>
-            
             <ul class='menu left'>
                 <li>{Html->a href='/' value='SamuraiFW' class='with-icon samurai'}</li>
                 <li>{Html->a href='/about/samurai' value='概要'}</li>
                 <li>{Html->a href='/downloads/index' value='ダウンロード'}</li>
                 <li>{Html->a href='/source/api' value='API'}</li>
-                <li>{Html->a href='/documents/ja/index' value='ドキュメント'}</li>
+                <li>{Html->a href='/documents/ja/FrontPage' value='ドキュメント'}</li>
                 <li>{Html->a href='/development/index' value='開発'}</li>
                 <li>{Html->a href='/community/index' value='コミュニティ'}</li>
             </ul>
@@ -51,5 +49,6 @@
             <div class='top haiku'>
                 <span class='phrase'>世の人は 我をなんとも 言わば言え 我為すことは 我のみぞ知る</span>
                 <span class='composed_by'>by 坂本竜馬</span>
+                <div class='clear'></div>
             </div>
             <div class='middle'>

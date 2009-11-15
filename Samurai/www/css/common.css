@@ -22,7 +22,8 @@
     }
     #samurai .clear
     {
-        clear : both;
+        clear : both !important;
+        float : none !important;
     }
     
     

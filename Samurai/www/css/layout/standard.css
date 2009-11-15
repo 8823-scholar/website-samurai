@@ -12,19 +12,17 @@
 /********************
   header
 ********************/
+    html
+    {
+        overflow : auto;
+        overflow-y : scroll;
+    }
     #samurai #header
     {
         width : 790px;
         margin : 0px auto 10px;
         padding : 6px;
         background : url('../../image/layout/header.background.png') no-repeat bottom;
-    }
-    #samurai #header h1
-    {
-        height : 1px;
-        font-size : 1px;
-        line-height : 0;
-        text-indent : -2000px;
     }
     #samurai #header ul.menu.left li
     {
@@ -52,6 +50,30 @@
         width : 802px;
         margin : 0px auto 10px;
     }
+    #samurai #contents h1
+    {
+        padding : 8px 5px;
+        font-size : 14px;
+        font-weight : bold;
+        color : #FFFFFF;
+        background : url('../../image/layout/tag.h1.png') repeat-x top left;
+    }
+    /** パンくず **/
+    #samurai #contents ul.breads
+    {
+        padding : 5px;
+        background : url('../../image/layout/tag.hr.dashed.png') repeat-x left bottom;
+    }
+    #samurai #contents ul.breads li
+    {
+        float : left;
+        margin-right : 5px;
+    }
+    #samurai #contents ul.breads li.selected
+    {
+        font-weight : bold;
+    }
+
     /** 俳句 **/
     #samurai #contents .top.haiku
     {
@@ -59,6 +81,10 @@
         background : url('../../image/layout/contents.background.top.png') no-repeat top;
         font-size : 10px;
         color : #999999;
+    }
+    #samurai #contents .top.haiku .phrase
+    {
+        float : left;
     }
     #samurai #contents .top.haiku .composed_by
     {
@@ -68,7 +94,7 @@
     /** middle **/
     #samurai #contents .middle
     {
-        padding : 1px;
+        padding : 0px 1px 0px 1px;
         border-top : 1px solid #999999;
         background : url('../../image/layout/contents.background.middle.png') repeat-y;
     }
@@ -91,7 +117,7 @@
     #samurai #footer
     {
         width : 782px;
-        margin : 0px auto 10px;
+        margin : 10px auto 0px;
         padding : 10px;
         color : #666666;
         background : url('../../image/layout/footer.background.png') no-repeat left top;
@@ -104,7 +130,6 @@
     #samurai #footer ul.abouts
     {
         float : right;
-        width : 300px;
     }
     #samurai #footer ul.abouts li
     {
@@ -121,7 +146,7 @@
     {
         float : left;
         width : 250px;
-        background : url('../../image/layout/vr.dashed.png') repeat-y right;
+        background : url('../../image/layout/tag.vr.dashed.png') repeat-y right;
     }
     #samurai #footer .built_on_samurai ul li
     {

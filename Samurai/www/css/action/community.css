@@ -1,0 +1,50 @@
+/**
+ * css/action/community.css
+ * 
+ * アクション - community
+ * 
+ * @package     Samurai
+ * @subpackage  www.css
+ * @copyright   BEFOOL,Inc.
+ * @author      Satoshi Kiuchi <satoshi.kiuchi@befool.co.jp>
+ */
+/********************
+  フォーラム
+********************/
+    /** nearly **/
+    #samurai #contents.community #main .forum table.list.nearly th.forum
+    {
+        width : 91px;
+    }
+    #samurai #contents.community #main .forum table.list.nearly td.subject .user
+    {
+        color : #666666;
+    }
+    #samurai #contents.community #main .forum table.list.nearly th.date
+    {
+        width : 100px;
+    }
+    #samurai #contents.community #main .forum table.list.nearly td.date
+    {
+        text-align : center;
+    }
+
+    /** forums **/
+    #samurai #contents.community #main .forum table.list.forums th.topics,
+    #samurai #contents.community #main .forum table.list.forums th.articles
+    {
+        width : 40px;
+    }
+    #samurai #contents.community #main .forum table.list.forums td.topics,
+    #samurai #contents.community #main .forum table.list.forums td.articles
+    {
+        text-align : center;
+    }
+    #samurai #contents.community #main .forum table.list.forums th.date
+    {
+        width : 100px;
+    }
+    #samurai #contents.community #main .forum table.list.forums td.date
+    {
+        text-align : center;
+    }

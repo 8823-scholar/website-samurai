@@ -41,4 +41,31 @@
     #samurai P
     {
         line-height : 1.3;
+        margin : 10px 0px;
+    }
+
+
+/********************
+ * テーブル設定
+ *******************/
+    #samurai #contents table
+    {
+        margin : 10px;
+    }
+    #samurai #contents table th
+    {
+        padding : 5px;
+        color : #666666;
+        border : 1px solid #999999;
+        background : #F0F0F0;
+    }
+    #samurai #contents table td
+    {
+        padding : 5px;
+        border : 1px solid #999999;
+        vertical-align : top;
+    }
+    #samurai #contents table.list
+    {
+        width : 100%;
     }

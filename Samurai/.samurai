@@ -11,7 +11,7 @@ generator:
         name : 'smarty'
         suffix : 'tpl'
     generator:
-        package   : 'Samurai'
+        package   : 'SamuraiWEB'
         author    : 'Satoshi Kiuchi <satoshi.kiuchi@befool.co.jp>'
         copyright : 'Samurai Framework Project'
         licence   : 'http://opensource.org/licenses/bsd-license.php  The modified BSD License'

@@ -96,15 +96,20 @@
     {
         font-size : 18px;
         font-weight : bold;
+        padding : 0px;
         margin-bottom : 5px;
+        background : none;
+        border : none;
     }
     #samurai #contents.index #main .welcome h3
     {
         font-size : 10px;
         font-weight : bold;
+        padding : 0px;
         margin-bottom : 10px;
         color : #666666;
         text-align : right;
+        border : none;
     }
     #samurai #contents.index #main .welcome em
     {
@@ -114,6 +119,8 @@
     /** points **/
     #samurai #contents.index #main .points h3
     {
+        padding : 0px;
+        border : none;
         font-weight : bold;
     }
     #samurai #contents.index #main .points ul li

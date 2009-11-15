@@ -1,0 +1,5 @@
+###
+ # community - index.yml
+ #/
+View:
+    success : 'community/index.tpl'

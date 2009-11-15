@@ -26,8 +26,8 @@
         float : right;
         width : 200px;
         padding : 10px 10px 10px 5px;
-    }
-    
+    } 
+
 
 
 /********************
@@ -38,6 +38,36 @@
         clear : both;
         margin-bottom : 15px;
     }
+    /** 見出し **/
+    #samurai #contents #main h2
+    {
+        padding : 5px 2px;
+        color : #555555;
+        font-size : 14px;
+        font-weight : bold;
+        border-bottom : 1px solid #999999;
+        margin-bottom : 10px;
+    }
+    #samurai #contents #main h3
+    {
+        padding : 2px 5px;
+        color : #555555;
+        font-size : 14px;
+        font-weight : bold;
+        border-left : 8px solid #669966;
+        margin-bottom : 10px;
+    }
+    #samurai #contents #main h4
+    {
+        padding : 2px 5px;
+        color : #555555;
+        font-size : 12px;
+        font-weight : bold;
+        border-left : 5px solid #666666;
+        margin-left : 2px;
+        margin-bottom : 10px;
+    }
+
     
     
     
@@ -52,63 +82,6 @@
         margin-bottom : 15px;
         line-height : 1.5;
     }
-    
-    /** サイドバー **/
-    #bokumachi #contents #sidebar .column
-    {
-        clear : both;
-        margin-bottom : 15px;
-        line-height : 1.5;
-    }
-    
-    
-/********************
-  見出し
-********************/
-    #bokumachi #contents #main H2
-    {
-        height : 40px;
-        font-size : 18px;
-        font-weight : bolder;
-        padding-top : 7px;
-        padding-left : 10px;
-        background : url('../../image/layout/tag.h2.png') no-repeat;
-    }
-    #bokumachi #contents #main .column H3
-    {
-        height : 25px;
-        font-size : 13px;
-        font-weight : bolder;
-        padding-top : 5px;
-        padding-left : 7px;
-        color : #FFFFFF;
-        background : url('../../image/layout/tag.h3.png') no-repeat;
-    }
-    #bokumachi #contents #main .column_half H3
-    {
-        height : 25px;
-        font-size : 13px;
-        font-weight : bolder;
-        padding-top : 4px;
-        padding-left : 5px;
-        color : #FFFFFF;
-        background : url('../../image/layout/tag.h3.half.png') no-repeat;
-    }
-    #bokumachi #contents #main .column H4
-    {
-        font-weight : bold;
-        margin-bottom : 10px;
-    }
-    #bokumachi #contents #sidebar .column .box H4.top
-    {
-        width : 187px;
-        height : 15px;
-        padding : 8px 5px 2px 8px;
-        font-size : 11px;
-        color : #666666;
-        background : url('../../image/layout/tag.h4.sidebar.png') no-repeat;
-    }
-    
     
 /********************
   ボックス
