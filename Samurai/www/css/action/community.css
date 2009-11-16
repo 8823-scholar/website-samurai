@@ -30,6 +30,13 @@
     }
 
     /** forums **/
+    #samurai #contents.community #main .forum table.list.forums td.forum .title
+    {
+        font-weight : bold;
+        padding : 0px 0px 2px;
+        margin-bottom : 5px;
+        background : url('../../image/layout/tag.hr.dashed.png') repeat-x bottom;
+    }
     #samurai #contents.community #main .forum table.list.forums th.topics,
     #samurai #contents.community #main .forum table.list.forums th.articles
     {

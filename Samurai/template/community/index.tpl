@@ -39,7 +39,7 @@
                 {section loop=4 name='formus'}
                     <tr>
                         <td class='forum'>
-                            <span class='title'>{Html->a href="/community/forum/1" value='Q&A'}</span>
+                            <div class='title'>{Html->a href="/community/forum/1" value='Q&A'}</div>
                             <div class='description'>わからないことはここへ書き込んでください。</div>
                         </td>
                         <td class='topics'>12</td>
