@@ -1,13 +1,13 @@
 <?
 /**
- * DescribeSamuraiwebForumManager
+ * DescribeWebForumManager
  *
- * @package    Samuraiweb
+ * @package    SamuraiWEB
  * @subpackage Spec
  * @copyright  Samurai Framework Project
  * @author     Satoshi Kiuchi <satoshi.kiuchi@befool.co.jp>
  */
-class DescribeSamuraiwebForumManager extends PHPSpec_Context
+class DescribeWebForumManager extends PHPSpec_Context
 {
     private
         $ForumManager;
@@ -80,7 +80,7 @@ class DescribeSamuraiwebForumManager extends PHPSpec_Context
     }
     public function it記事の取得：再帰的()
     {
-        $article = $this->getArticlesReflexive(3, 5);
+        $article = $this->ForumManager->getArticlesReflexive(3, 5);
         $this->spec($article->children)->shouldNot->beNull();
         $this->spec($article->children->fetch()->children)->shouldNot->beNull();
     }
@@ -145,8 +145,14 @@ class DescribeSamuraiwebForumManager extends PHPSpec_Context
         $datas = array(
             array('forum_id' => 1, 'parent_id' => NULL, 'name' => 'hayabusa', 'subject' => '1', 'body' => '1'),
             array('forum_id' => 1, 'parent_id' => 1, 'name' => 'falcon', 'subject' => '1:1', 'body' => '1:1'),
+            array('forum_id' => 1, 'parent_id' => 1, 'name' => 'falcon', 'subject' => '1:2', 'body' => '1:2'),
             array('forum_id' => 2, 'parent_id' => NULL, 'name' => 'hayabusa', 'subject' => '2', 'body' => '2'),
             array('forum_id' => 3, 'parent_id' => NULL, 'name' => 'falcon', 'subject' => '3', 'body' => '3'),
+            array('forum_id' => 3, 'parent_id' => 5, 'name' => 'falcon', 'subject' => '3:1', 'body' => '3:1'),
+            array('forum_id' => 3, 'parent_id' => 5, 'name' => 'falcon', 'subject' => '3:2', 'body' => '3:2'),
         );
+        foreach($datas as $data){
+            $this->ForumManager->AG->create('forum_articles', $data);
+        }
     }
 }
