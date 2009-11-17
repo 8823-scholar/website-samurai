@@ -1,5 +1,5 @@
 ###
- # config/samurai/samurai.samurai-web.dicon
+ # config/samurai/samurai.web.dicon
  # 
  # SamuraiFW用のメインコンテナ設定ファイル。
  #/

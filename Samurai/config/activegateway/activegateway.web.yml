@@ -1,5 +1,5 @@
 ###
- # config/activegateway/activegateway.samurai-web.yml
+ # config/activegateway/activegateway.web.yml
  # 
  # dsnは配列形式で複数記述する事によって、ランダムでどちらか一方を使用するようになります。
  # 

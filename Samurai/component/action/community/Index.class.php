@@ -5,11 +5,11 @@
  * [[機能説明]]
  * 
  * @package    SamuraiWEB
- * @subpackage Action.
+ * @subpackage Action.Community
  * @copyright  Samurai Framework Project
  * @author     Satoshi Kiuchi <satoshi.kiuchi@befool.co.jp>
  */
-class Action_Community_Index extends Samuraiweb_Action
+class Action_Community_Index extends Web_Action
 {
     /**
      * 実行トリガー。

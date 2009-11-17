@@ -1,6 +1,6 @@
 <?
 /**
- * config/renderer/simple.samurai-web.php
+ * config/renderer/simple.web.php
  * 
  * Simple用の初期化スクリプト。
  * 

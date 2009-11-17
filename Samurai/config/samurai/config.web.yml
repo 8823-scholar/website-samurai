@@ -1,5 +1,5 @@
 ###
- # config/samurai/config.samurai-web.yml
+ # config/samurai/config.web.yml
  # 
  # SamuraiFW用の設定上書ファイル。
  # アプリケーションに応じて設定を変更したい場合は、ここに記述してください。
@@ -14,7 +14,7 @@ loggers:
         enable : true
         client : SimpleFile
         log_level : debug
-        logfile : 'log/samurai-web.log'
+        logfile : 'log/web.log'
     mail:
         enable : false
         client : Mail

@@ -2,14 +2,14 @@
 /**
  * Action_Index
  * 
- * [[機能説明]]
+ * インデックスアクション
  * 
- * @package    Package
- * @subpackage Action.
- * @copyright  Foo Project
- * @author     Foo Bar <foo@bar.jp>
+ * @package    SamuraiWEB
+ * @subpackage Action
+ * @copyright  Samurai Framework Project
+ * @author     Satoshi Kiuchi <satoshi.kiuchi@befool.co.jp>
  */
-class Action_Index extends Samurai_Action
+class Action_Index extends Web_Action
 {
     /**
      * 実行トリガー。

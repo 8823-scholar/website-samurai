@@ -1,6 +1,6 @@
 <?
 /**
- * Samuraiweb_Action
+ * Web_Action
  * 
  * Samurai WEB での基本アクション
  * すべてのSamurai WEBアクションはこれを継承する
@@ -10,7 +10,7 @@
  * @copyright  Samurai Framework Project
  * @author     Satoshi Kiuchi <satoshi.kiuchi@befool.co.jp>
  */
-class Samuraiweb_Action extends Samurai_Action
+class Web_Action extends Samurai_Action
 {
     /**
      * コンストラクタ。

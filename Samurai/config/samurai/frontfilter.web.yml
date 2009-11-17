@@ -1,5 +1,5 @@
 ###
- # config/samurai/frontfilter.samurai-web.yml
+ # config/samurai/frontfilter.web.yml
  # 
  # FrontFilter設定ファイル。
  # Action決定以前に処理したいフィルタリング処理はここに記述してください。

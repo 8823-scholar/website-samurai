@@ -91,7 +91,7 @@ class DescribeSamuraiwebForumManager extends PHPSpec_Context
     public function beforeAll()
     {
         //コンポーネント準備
-        $this->ForumManager = new Samuraiweb_Forum_Manager();
+        $this->ForumManager = new Web_Forum_Manager();
         $this->ForumManager->AG = ActiveGatewayManager::getActiveGateway('sandbox');
         //DB作成
         $this->ForumManager->AG->executeQuery("

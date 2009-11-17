@@ -1,6 +1,6 @@
 <?
 /**
- * config/renderer/smarty.samurai-web.php
+ * config/renderer/smarty.web.php
  * 
  * Smarty用の初期化スクリプト。
  * Samurai_Renderer::initメソッドの中でインクルードされるので、

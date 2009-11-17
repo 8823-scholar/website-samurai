@@ -1,6 +1,6 @@
 <?
 /**
- * config/renderer/phptal.samurai-web.php
+ * config/renderer/phptal.web.php
  * 
  * Phptal用の初期化スクリプト。
  * 
