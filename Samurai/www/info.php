@@ -11,7 +11,7 @@
  */
 //SamuraiFWの起動
 define('SAMURAI_APPLICATION_NAME', 'web');
-if(!preg_match($_SERVER['HTTP_HOST'], '/samurai-fw\.org$/')){
+if(!preg_match('/samurai-fw\.org$/', $_SERVER['HTTP_HOST'])){
     define('SAMURAI_ENVIRONMENT', 'local');
 }
 include_once('Samurai/Samurai.class.php');

@@ -43,5 +43,10 @@ class Action_Community_Index extends Web_Action
         $condition->order->sort = 'ASC';
         $forums = $this->ForumManager->gets($condition);
         $this->forums = $forums->toArray();
+        //仮
+        if($this->forums){
+            $this->forums[0]['last_posted'] = '2009-11-20 02:45:44';
+            $this->forums[0]['last_article'] = array('name' => 'hayabusa', 'id' => 1, 'subject' => 'インストールの仕方について');
+        }
     }
 }

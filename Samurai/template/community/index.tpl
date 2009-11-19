@@ -3,7 +3,7 @@
  *}
 {assign_array var='html.title.' value='コミュニティ'}
 {include file='_header.tpl' action='community'
-    css='/css/layout/2column.standard.css, /css/action/community.css'}
+    css='/css/layout/1column.standard.css, /css/action/community.css'}
     <h1>コミュニティ</h1>
     <ul class='breads'>
         <li>{Html->a href='/' value='ホーム'}</li>
@@ -33,20 +33,27 @@
 
             <h4>フォーラム一覧</h4>
             <table class='list forums'>
+                {*
                 <tr>
-                    <th class='forum'>フォーラム</th><th class='topics'>トピック</th><th class='articles'>投稿数</th><th class='date'>最終投稿</th>
+                    <th class='forum'>フォーラム</th><th class='articles'>投稿数</th><th class='date'>最新の投稿</th>
                 </tr>
+                *}
                 {foreach from=$forums item='forum'}
                     <tr>
                         <td class='forum'>
                             <div class='title'>{Html->a href="/community/forum/`$forum.id`" value=$forum.title}</div>
                             <div class='description'>{$forum.description|escape:'html'|nl2br}</div>
                         </td>
-                        <td class='topics'>{$forum.topic_count}</td>
-                        <td class='articles'>{$forum.article_count}</td>
-                        <td class='date'>
-                            {if $forum.last_posted !== NULL}
-                                {$forum.last_posted|date_format:'%Y-%m-%d %H:%I'}
+                        <td class='articles'>
+                            {$forum.article_count}件の投稿<br />
+                            {$forum.topic_count}件のトピック
+                        </td>
+                        <td class='last-posted'>
+                            {if $forum.last_posted}
+                                <em>最新の投稿</em>
+                                <span class='by'>by {$forum.last_article.name|escape:'html'}</span><br />
+                                <span class='subject'>{Html->a href="/community/forum/`$forum.id`/article/`$forum.last_article.id`" value=$forum.last_article.subject}</span><br />
+                                <span class='date'>投稿日：{$forum.last_posted|date_format:'%Y年%m月%d日 %H:%I'}<br />
                             {/if}
                         </td>
                     </tr>
@@ -70,13 +77,5 @@
                 {/section}
             </table>
         </div>
-    </div>
-    
-    
-    <div id='sidebar'>
-
-        <div class='someone column'>
-        </div>
-
     </div>
 {include file='_footer.tpl'}

@@ -30,28 +30,27 @@
     }
 
     /** forums **/
+    #samurai #contents.community #main .forum table.list.forums td
+    {
+        line-height : 1.3;
+        border : 2px solid #FFFFFF;
+        background : #F5F5F5;
+    }
     #samurai #contents.community #main .forum table.list.forums td.forum .title
     {
         font-weight : bold;
         padding : 0px 0px 2px;
         margin-bottom : 5px;
-        background : url('../../image/layout/tag.hr.dashed.png') repeat-x bottom;
     }
-    #samurai #contents.community #main .forum table.list.forums th.topics,
-    #samurai #contents.community #main .forum table.list.forums th.articles
-    {
-        width : 40px;
-    }
-    #samurai #contents.community #main .forum table.list.forums td.topics,
     #samurai #contents.community #main .forum table.list.forums td.articles
     {
+        width : 110px;
         text-align : center;
+        vertical-align : middle;
+        background : #F0F0F0;
     }
-    #samurai #contents.community #main .forum table.list.forums th.date
+    #samurai #contents.community #main .forum table.list.forums td.last-posted
     {
-        width : 100px;
-    }
-    #samurai #contents.community #main .forum table.list.forums td.date
-    {
-        text-align : center;
+        width : 210px;
+        color : #666666;
     }
