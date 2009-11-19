@@ -85,6 +85,100 @@ class DescribeWebForumManager extends PHPSpec_Context
         $this->spec($article->children->fetch()->children)->shouldNot->beNull();
     }
 
+    //操作系
+    public function it追加()
+    {
+        $dto = new stdClass();
+        $dto->title = '追加しますたよ';
+        $dto->description = 'うっほうっほうほほほほほ。';
+        $forum = $this->ForumManager->add($dto);
+        $this->spec($forum->title)->should->be('追加しますたよ');
+        $this->spec($forum->description)->should->be('うっほうっほうほほほほほ。');
+    }
+    public function it保存()
+    {
+        $forum = $this->ForumManager->get(2);
+        $forum->title = 'このフォーラムはすでに編集されている。';
+        $forum->description = 'ID:2のフォーラムを編集しましたが、なにか？';
+        $this->ForumManager->save($forum);
+        $forum = $this->ForumManager->get(2);
+        $this->spec($forum->title)->should->be('このフォーラムはすでに編集されている。');
+        $this->spec($forum->description)->should->be('ID:2のフォーラムを編集しましたが、なにか？');
+    }
+    public function it編集()
+    {
+        $this->ForumManager->edit(2, array('title' => 'editしますた'));
+        $forum = $this->ForumManager->get(2);
+        $this->spec($forum->title)->should->be('editしますた');
+    }
+    public function it破壊()
+    {
+        $forum = $this->ForumManager->get(4);
+        $this->spec($forum)->shouldNot->beNull();
+        $this->ForumManager->destroy($forum);
+        $forum = $this->ForumManager->get(4);
+        $this->spec($forum)->should->beNull();
+    }
+    public function it削除()
+    {
+        $forum = $this->ForumManager->get(3);
+        $this->spec($forum)->shouldNot->beNull();
+        $this->ForumManager->delete($forum->id);
+        $forum = $this->ForumManager->get(3);
+        $this->spec($forum)->should->beNull();
+    }
+
+    public function it記事の追加()
+    {
+        $dto = new stdClass();
+        $dto->name = 'hayabusa';
+        $dto->mail = 'hayabusa@samurai-fw.org';
+        $dto->subject = '記事の追加です';
+        $dto->body = '記事の追加なんてほんとにできるの？';
+        $article = $this->ForumManager->addArticle(4, $dto);
+        $this->spec($article->forum_id)->should->be(4);
+        $this->spec($article->name)->should->be('hayabusa');
+        $this->spec($article->mail)->should->be('hayabusa@samurai-fw.org');
+        $this->spec($article->subject)->should->be('記事の追加です');
+        $this->spec($article->body)->should->be('記事の追加なんてほんとにできるの？');
+    }
+    public function it記事の保存()
+    {
+        $article = $this->ForumManager->getArticle(1, 2);
+        $article->subject = '編集しますた';
+        $article->body = 'forum:1, id:2 の記事を編集しましたが、なにか？';
+        $this->ForumManager->saveArticle($article);
+        $article = $this->ForumManager->getArticle(1, 2);
+        $this->spec($article->subject)->should->be('編集しますた');
+        $this->spec($article->body)->should->be('forum:1, id:2 の記事を編集しましたが、なにか？');
+
+    }
+    public function it記事の編集()
+    {
+        $this->ForumManager->editArticle(1, 3, array('subject'=>'1:3,edited', 'body'=>'1:3,edited'));
+        $article = $this->ForumManager->getArticle(1, 3);
+        $this->spec($article->subject)->should->be('1:3,edited');
+        $this->spec($article->body)->should->be('1:3,edited');
+    }
+    public function it記事の破壊()
+    {
+        $article = $this->ForumManager->getArticle(4, 8);
+        $this->spec($article)->shouldNot->beNull();
+        $this->ForumManager->destroyArticle($article);
+        $article = $this->ForumManager->getArticle(4, 8);
+        $this->spec($article)->should->beNull();
+    }
+    public function it記事の削除()
+    {
+        $article = $this->ForumManager->getArticle(1, 3);
+        $this->spec($article)->shouldNot->beNull();
+        $this->ForumManager->deleteArticle($article->forum_id, $article->id);
+        $article = $this->ForumManager->getArticle(1, 3);
+        $this->spec($article)->should->beNull();
+    }
+
+
+
 
 
     //準備
@@ -115,11 +209,11 @@ class DescribeWebForumManager extends PHPSpec_Context
                 `forum_id` int(11) NOT NULL default '0' COMMENT '=forum.id',
                 `parent_id` int(11) default NULL COMMENT '=forum_articles.id',
                 `name` varchar(64) collate utf8_unicode_ci NOT NULL COMMENT '名前',
-                `mail` varchar(128) collate utf8_unicode_ci NOT NULL COMMENT 'メールアドレス',
+                `mail` varchar(128) collate utf8_unicode_ci NOT NULL default '' COMMENT 'メールアドレス',
                 `subject` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT '件名',
                 `body` text collate utf8_unicode_ci NOT NULL COMMENT '本文',
                 `user_id` int(11) NOT NULL default '0' COMMENT '=user.id',
-                `user_role` varchar(16) collate utf8_unicode_ci NOT NULL COMMENT '=user.role',
+                `user_role` varchar(16) collate utf8_unicode_ci NOT NULL default 'normal' COMMENT '=user.role',
                 `mail_display` enum('0','1') collate utf8_unicode_ci NOT NULL default '0' COMMENT 'メールアドレスを表示するかどうか',
                 `mail_inform` enum('0','1') collate utf8_unicode_ci NOT NULL default '0' COMMENT 'メール通知するかどうか',
                 `reply_count` int(11) NOT NULL default '0' COMMENT '返信数',

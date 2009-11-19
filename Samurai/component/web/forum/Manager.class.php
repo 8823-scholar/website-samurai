@@ -133,7 +133,7 @@ class Web_Forum_Manager extends Samurai_Model
     public function add($dto)
     {
         $dto = (object)$dto;
-        return $this->AG->cretae($this->_table, $dto);
+        return $this->AG->create($this->_table, $dto);
     }
 
     /**
@@ -210,7 +210,7 @@ class Web_Forum_Manager extends Samurai_Model
             $condition->where->id = $id;
         }
         $condition->where->forum_id = $forum_id;
-        $this->updateDetail($this->_table_articles, $attributes, $condition);
+        $this->AG->updateDetail($this->_table_articles, $attributes, $condition);
     }
 
 
