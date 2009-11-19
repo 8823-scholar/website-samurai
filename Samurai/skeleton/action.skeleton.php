@@ -8,7 +8,7 @@
  * @subpackage Action.
 <?include('_doc_comment.skeleton.php');?>
  */
-class <?=$class_name?> extends Samuraiweb_Action
+class <?=$class_name?> extends Web_Action
 {
     /**
      * 実行トリガー。
