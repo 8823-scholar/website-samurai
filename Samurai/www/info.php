@@ -11,7 +11,9 @@
  */
 //SamuraiFWの起動
 define('SAMURAI_APPLICATION_NAME', 'web');
-//define('SAMURAI_MODE', 'dev');
+if(!preg_match($_SERVER['HTTP_HOST'], '/samurai-fw\.org$/')){
+    define('SAMURAI_ENVIRONMENT', 'local');
+}
 include_once('Samurai/Samurai.class.php');
 Samurai::unshiftSamuraiDir(dirname(dirname(__FILE__)));
 Samurai::init();

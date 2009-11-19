@@ -2,7 +2,7 @@
 /**
  * Action_Community_Index
  * 
- * [[機能説明]]
+ * コミュニティ / TOPページ
  * 
  * @package    SamuraiWEB
  * @subpackage Action.Community
@@ -11,6 +11,12 @@
  */
 class Action_Community_Index extends Web_Action
 {
+    public
+        $forums = array();
+    public
+        $ForumManager;
+
+
     /**
      * 実行トリガー。
      * @access     public
@@ -18,6 +24,24 @@ class Action_Community_Index extends Web_Action
     public function execute()
     {
         parent::execute();
+
+        $this->_setForums();
+
         return 'success';
+    }
+
+
+
+
+    /**
+     * フォーラムの一覧をセットする
+     * @access     private
+     */
+    private function _setForums()
+    {
+        $condition = $this->ForumManager->getCondition();
+        $condition->order->sort = 'ASC';
+        $forums = $this->ForumManager->gets($condition);
+        $this->forums = $forums->toArray();
     }
 }

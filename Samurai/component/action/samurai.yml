@@ -1,8 +1,40 @@
 ###
  # *.yml
  #/
-#Convert:
-#    * : 'trim'
-#    
-#Validate:
-#    
+Debug:
+    ip:
+        - 127.0.*
+        - 192.168.0.*
+    debugger:
+        - Log
+        - ExecutionTime
+        - Device
+        - Request
+        - Renderer
+        - ActiveGateway
+        - Samurai
+        - DeviceChanger
+    
+ExecutionTime:
+    
+ActiveGateway:
+    
+Cookie:
+    
+Session:
+    cookie_lifetime : 31536000
+    gc_maxlifetime  : 43200
+    gc_divisor      : 10000
+    
+DIContainer:
+    
+Auth:
+    type : db
+    name : user
+    enable : false
+    
+View:
+    login : 'Action: auth_login'
+    error_403 : 'Action: error_403'
+    error_404 : 'Action: error_404'
+    invalidToken : 'Action: error_token'

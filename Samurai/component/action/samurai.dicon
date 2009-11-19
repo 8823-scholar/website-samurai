@@ -1,0 +1,12 @@
+###
+ # *.yml
+ #/
+## ActiveGateway
+AG:
+    class : 'ActiveGatewayManager::getActiveGateway'
+    args  : ['base']
+
+
+## Main
+ForumManager:
+    class : Web_Forum_Manager

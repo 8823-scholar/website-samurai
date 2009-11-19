@@ -36,17 +36,21 @@
                 <tr>
                     <th class='forum'>フォーラム</th><th class='topics'>トピック</th><th class='articles'>投稿数</th><th class='date'>最終投稿</th>
                 </tr>
-                {section loop=4 name='formus'}
+                {foreach from=$forums item='forum'}
                     <tr>
                         <td class='forum'>
-                            <div class='title'>{Html->a href="/community/forum/1" value='Q&A'}</div>
-                            <div class='description'>わからないことはここへ書き込んでください。</div>
+                            <div class='title'>{Html->a href="/community/forum/`$forum.id`" value=$forum.title}</div>
+                            <div class='description'>{$forum.description|escape:'html'|nl2br}</div>
                         </td>
-                        <td class='topics'>12</td>
-                        <td class='articles'>12</td>
-                        <td class='date'>2009-11-15 12:20</td>
+                        <td class='topics'>{$forum.topic_count}</td>
+                        <td class='articles'>{$forum.article_count}</td>
+                        <td class='date'>
+                            {if $forum.last_posted !== NULL}
+                                {$forum.last_posted|date_format:'%Y-%m-%d %H:%I'}
+                            {/if}
+                        </td>
                     </tr>
-                {/section}
+                {/foreach}
             </table>
 
             <h4>最新の書き込み</h4>
