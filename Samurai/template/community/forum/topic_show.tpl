@@ -39,9 +39,9 @@
                 </tr>
                 {foreach from=$articles item='article' key='key'}
                     {if $key % 2}
-                        {assign var='_class' value='even'}
-                    {else}
                         {assign var='_class' value='odd'}
+                    {else}
+                        {assign var='_class' value='even'}
                     {/if}
                     <tr class='{$_class}' id='article:{$article.id}'>
                         <td class='user'>
@@ -84,7 +84,7 @@
         {** 書き込み **}
         <div class='form-reply column'>
             <h3>このトピックに書き込む</h3>
-            {Html->form action='/community/forum/topic/reply'}
+            {Html->form action='/community/forum/topic/reply/confirm'}
                 {Html->hidden name='forum_id' value=$forum->id}
                 {Html->hidden name='topic_id' value=$topic->id}
                 <table class='form'>
@@ -92,16 +92,35 @@
                         <tr>
                             <th class='required'>名前</th>
                             <td class='input'>
-                                {Html->input name='name' value=$request.name}
+                                {Html->text name='name' value=$request.name}
                             </td>
                         </tr>
                         <tr>
-                            <th class='required'>MAIL</th>
+                            <th class='required'>メールアドレス</th>
                             <td class='input'>
-                                {Html->input name='mail' value=$request.mail}
+                                {Html->text name='mail' value=$request.mail}<br />
+                                {Html->checkbox name='mail_inform' value='1' label='返信があった時にメールで通知する' selected=$request.mail_inform} /
+                                {Html->checkbox name='mail_display' value='1' label='メールアドレスを公開する' selected=$request.mail_display}
                             </td>
                         </tr>
                     {/if}
+                    <tr>
+                        <th class='required'>件名</th>
+                        <td class='input'>
+                            {Html->text name='subject' value=$request.subject|default:$subject}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class='required'>本文</th>
+                        <td class='input'>
+                            {Html->textarea name='body' value=$request.body}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class='submit' colspan='2'>
+                            {Html->submit value='確認画面'}
+                        </td>
+                    </tr>
                 </table>
             {/Html->form}
         </div>

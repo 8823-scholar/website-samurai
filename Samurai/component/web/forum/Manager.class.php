@@ -266,4 +266,21 @@ class Web_Forum_Manager extends Samurai_Model
         $condition->where->forum_id = $forum_id;
         $this->AG->deleteDetail($this->_table_articles, $condition);
     }
+
+
+
+    /**
+     * 返信
+     * @access    public
+     * @param     object   $parent   ActiveGatewayRecord
+     * @param     object   $dto
+     * @return    object   ActiveGatewayRecord
+     */
+    public function reply(ActiveGatewayRecord $parent, $dto)
+    {
+        $dto->forum_id = $parent->forum_id;
+        $dto->root_id = $parent->root_id ? $parent->root_id : $parent->id ;
+        $dto->parent_id = $parent->id;
+        return $this->AG->create($this->_table_articles, $dto);
+    }
 }

@@ -1,0 +1,5 @@
+###
+ # community - forum - topic - reply.yml
+ #/
+View:
+    success : 'community/forum/topic_reply.tpl'

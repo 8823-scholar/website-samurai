@@ -1,0 +1,9 @@
+###
+ # community - forum - topic - reply - *.yml
+ #/
+Convert:
+    * : 'trim'
+    subject,body,mail_inform : 'toObject > dto'
+    
+Validate:
+    subject.required : '入力してください。'

@@ -78,9 +78,22 @@
     {
         width : 150px;
         background : #F0F0F0;
-        padding : 10px;
+        padding : 5px;
         text-align : left;
         vertical-align : top;
+    }
+    #samurai #contents #main table.form td
+    {
+        padding : 5px;
+    }
+    #samurai #contents #main table.form td.submit
+    {
+        padding : 10px;
+        text-align : right;
+    }
+    #samurai #contents #main table.form td.submit input
+    {
+        margin : 0px 5px;
     }
 
 

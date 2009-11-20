@@ -34,7 +34,7 @@
                 <li>{Html->a href='/community/forum/topic/add' value='トピックの作成'}</li>
             </ul>
             
-            <table class='list'>
+            <table class='list clear'>
                 <tr>
                     <th class='topic'>題名/トピック情報</th><th class='article'>投稿数</th><th class='last-replied'>最新の投稿</th>
                 </tr>

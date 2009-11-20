@@ -90,7 +90,7 @@
         background : #FFFFFF;
         vertical-align : top;
     }
-    #samurai #contents.community.forum.topic.show #main .articles table.list tr.even td
+    #samurai #contents.community.forum.topic.show #main .articles table.list tr.odd td
     {
         background : #F5F5F5;
     }
@@ -126,4 +126,23 @@
     #samurai #contents.community.forum.topic.show #main .articles table.list td.contents .body
     {
         clear : both;
+    }
+    /** 書き込みフォーム **/
+    #samurai #contents.community.forum.topic.show #main .form-reply table.form td.input .name
+    {
+        width : 300px;
+    }
+    #samurai #contents.community.forum.topic.show #main .form-reply table.form td.input .mail
+    {
+        width : 300px;
+        margin-bottom : 5px;
+    }
+    #samurai #contents.community.forum.topic.show #main .form-reply table.form td.input .subject
+    {
+        width : 500px;
+    }
+    #samurai #contents.community.forum.topic.show #main .form-reply table.form td.input .body
+    {
+        width : 550px;
+        height : 300px;
     }

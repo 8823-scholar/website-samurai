@@ -24,8 +24,6 @@ class Etc_Helper_Smarty_Html
         /** @var        array   引き回したい変数があればここに投げ込む */
         $args = array();
     public
-        $_no_id = false;
-    public
         /** @var        object  Deviceコンポーネント */
         $Device,
         /** @var        object  Utilityコンポーネント */
@@ -199,7 +197,7 @@ class Etc_Helper_Smarty_Html
         }
         //閉じタグの場合
         if(!$action) $end = true;
-        if($end) return '</FORM>';
+        if($end) return '</form>';
         
         //準備
         if($this->use_session){
@@ -215,7 +213,7 @@ class Etc_Helper_Smarty_Html
         $params['method'] = $method;
         if($file) $params['enctype'] = 'multipart/form-data';
         $form = array();
-        $form[] = $this->_makeTag('FORM', $params, '', false, false, false);
+        $form[] = $this->_makeTag('form', $params, '', false, false, false);
         foreach($args as $_key => $_val){
             $form[] = $this->_array2input($_key, $_val, 'hidden');
         }
@@ -283,16 +281,7 @@ class Etc_Helper_Smarty_Html
         if($type) $params['type']  = $type;
         if($name) $params['name']  = $name;
         if($value !== NULL) $params['value'] = $value;
-        if($this->_no_id){
-            if(!isset($params['class']) && $name){
-                $params['class'] = $name;
-            }
-        } else {
-            if(!isset($params['id']) && $name){
-                $params['id'] = $name;
-            }
-        }
-        
+        if(!isset($params['class']) && $name) $params['class'] = $name;
         if($disabled) $params[] = 'disabled';
         
         //生成
@@ -336,7 +325,7 @@ class Etc_Helper_Smarty_Html
                 if($maxlength) $params['maxlength'] = $maxlength;
                 break;
         }
-        return $this->_makeTag('INPUT', $params, $label, $escape, false);
+        return $this->_makeTag('input', $params, $label, $escape, false);
     }
     /**
      * インプットタグエイリアス。
@@ -538,15 +527,7 @@ class Etc_Helper_Smarty_Html
         $params['name'] = $name;
         if($width!==NULL)  $params['cols'] = $width;
         if($height!==NULL) $params['rows'] = $height;
-        if($this->_no_id){
-            if(!isset($params['class']) && $name){
-                $params['class'] = $name;
-            }
-        } else {
-            if(!isset($params['id']) && $name){
-                $params['id'] = $name;
-            }
-        }
+        if(!isset($params['class']) && $name) $params['class'] = $name;
         if($istyle){
             if($this->Device->i){
                 if($istyle=='hira') $params['istyle'] = '1';
