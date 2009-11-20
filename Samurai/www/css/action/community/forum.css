@@ -1,0 +1,56 @@
+/**
+ * css/action/community/forum.css
+ * 
+ * アクション - community - forum
+ * 
+ * @package     Samurai
+ * @subpackage  www.css
+ * @copyright   BEFOOL,Inc.
+ * @author      Satoshi Kiuchi <satoshi.kiuchi@befool.co.jp>
+ */
+/********************
+  フォーラム詳細
+********************/
+    #samurai #contents.community.forum.show #main .description
+    {
+        padding : 10px;
+        border : 1px solid #CCCCCC;
+        background : #F5F5F5;
+    }
+    /** トピック一覧 **/
+    #samurai #contents.community.forum.show #main .topics table.list th
+    {
+        border : none;
+        background : #EEEEEE;
+        color : #666666;
+        font-weight : bold;
+    }
+    #samurai #contents.community.forum.show #main .topics table.list td
+    {
+        line-height : 1.3;
+        border : 2px solid #FFFFFF;
+        background : #F5F5F5;
+        vertical-align : middle;
+    }
+    #samurai #contents.community.forum.show #main .topics table.list td.topic .subject
+    {
+        font-size : 13px;
+        font-weight : bold;
+        padding : 0px 0px 2px;
+        margin-bottom : 5px;
+    }
+    #samurai #contents.community.forum.show #main .topics table.list td.topic .by
+    {
+        color : #666666;
+    }
+    #samurai #contents.community.forum.show #main .topics table.list td.articles
+    {
+        width : 110px;
+        text-align : center;
+        background : #F0F0F0;
+    }
+    #samurai #contents.community.forum.show #main .topics table.list td.last-replied
+    {
+        width : 210px;
+        color : #666666;
+    }

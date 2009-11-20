@@ -49,11 +49,11 @@
                             {$forum.topic_count}件のトピック
                         </td>
                         <td class='last-posted'>
-                            {if $forum.last_posted}
+                            {if $forum.last_posted_at}
                                 <em>最新の投稿</em>
                                 <span class='by'>by {$forum.last_article.name|escape:'html'}</span><br />
                                 <span class='subject'>{Html->a href="/community/forum/`$forum.id`/article/`$forum.last_article.id`" value=$forum.last_article.subject}</span><br />
-                                <span class='date'>投稿日：{$forum.last_posted|date_format:'%Y年%m月%d日 %H:%I'}<br />
+                                <span class='date'>投稿日：{$forum.last_posted_at|date_format:'%Y年%m月%d日 %H:%I'}</span><br />
                             {/if}
                         </td>
                     </tr>

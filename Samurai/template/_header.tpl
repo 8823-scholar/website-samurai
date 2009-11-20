@@ -19,7 +19,7 @@
         
         {assign_array var='html.title.' value='Samurai Framework'}
         {assign_array var='html.title.' value='PHP WEB Framework'}
-        <title>{$html.title|@join:' | '}</title>
+        <title>{$html.title|@join:' | '|escape:'html'}</title>
     </head>
     <body>
     <div id='samurai'>
