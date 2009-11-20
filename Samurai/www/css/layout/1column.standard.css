@@ -64,10 +64,25 @@
     /** テーブル **/
     #samurai #contents #main table.list
     {
-        width : 780px;
+        width : 100%;
         margin-left : 0px;
         margin-right : 0px;
     }
+    #samurai #contents #main table.form
+    {
+        width : 100%;
+        margin-left : 0px;
+        margin-right : 0px;
+    }
+    #samurai #contents #main table.form th
+    {
+        width : 150px;
+        background : #F0F0F0;
+        padding : 10px;
+        text-align : left;
+        vertical-align : top;
+    }
+
 
     
     

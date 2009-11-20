@@ -39,10 +39,11 @@
                 </tr>
                 {foreach from=$articles item='article' key='key'}
                     {if $key % 2}
-                        <tr class='even'>
+                        {assign var='_class' value='even'}
                     {else}
-                        <tr class='odd'>
+                        {assign var='_class' value='odd'}
                     {/if}
+                    <tr class='{$_class}' id='article:{$article.id}'>
                         <td class='user'>
                             {if $article.user_id}
                                 <span class='name'>{Html->a href="/community/user/`$article.user_id`" value=$article.name}</span><br />
@@ -83,10 +84,25 @@
         {** 書き込み **}
         <div class='form-reply column'>
             <h3>このトピックに書き込む</h3>
-            {Html->form action=''}
-            <table class='form'>
-                
-            </table>
+            {Html->form action='/community/forum/topic/reply'}
+                {Html->hidden name='forum_id' value=$forum->id}
+                {Html->hidden name='topic_id' value=$topic->id}
+                <table class='form'>
+                    {if !$User->logined}
+                        <tr>
+                            <th class='required'>名前</th>
+                            <td class='input'>
+                                {Html->input name='name' value=$request.name}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class='required'>MAIL</th>
+                            <td class='input'>
+                                {Html->input name='mail' value=$request.mail}
+                            </td>
+                        </tr>
+                    {/if}
+                </table>
             {/Html->form}
         </div>
 
