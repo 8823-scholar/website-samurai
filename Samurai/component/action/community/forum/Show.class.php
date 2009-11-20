@@ -12,11 +12,9 @@
 class Action_Community_Forum_Show extends Web_Action_Forum
 {
     public
-        $forum,
         $topics = array();
     public
-        $Pager,
-        $ForumManager;
+        $Pager;
 
 
     /**
@@ -26,14 +24,13 @@ class Action_Community_Forum_Show extends Web_Action_Forum
     public function execute()
     {
         parent::execute();
-
-        $this->forum = $this->ForumManager->get($this->Request->get('forum_id'));
-        if(!$this->forum) throw new Web_Exception('No such forum.');
+        $this->_setForum();
 
         //トピックの取得
         $condition = $this->ForumManager->getCondition();
         $condition->setLimit(10);
         $condition->setOffset($this->Request->get('page', 1));
+        $condition->where->parent_id = NULL;
         $topics = $this->ForumManager->getArticles($this->forum->id, $condition);
         $this->topics = $topics->toArray();
 

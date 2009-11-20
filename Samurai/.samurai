@@ -12,7 +12,7 @@ generator:
         suffix : 'tpl'
     generator:
         package   : 'SamuraiWEB'
-        author    : 'Satoshi Kiuchi <satoshi.kiuchi@befool.co.jp>'
+        author    : 'Satoshinosuke Kiuchi <scholar@hayabusa-lab.jp>'
         copyright : 'Samurai Framework Project'
         licence   : 'http://opensource.org/licenses/bsd-license.php  The modified BSD License'
 #    encoding:

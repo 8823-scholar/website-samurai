@@ -1,0 +1,5 @@
+###
+ # community - forum - topic - show.yml
+ #/
+View:
+    success : 'community/forum/topic_show.tpl'

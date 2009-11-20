@@ -29,6 +29,11 @@
         {** トピック一覧 **}
         <div class='topics column'>
             <h3>トピック一覧</h3>
+            
+            <ul class='menu'>
+                <li>{Html->a href='/community/forum/topic/add' value='トピックの作成'}</li>
+            </ul>
+            
             <table class='list'>
                 <tr>
                     <th class='topic'>題名/トピック情報</th><th class='article'>投稿数</th><th class='last-replied'>最新の投稿</th>
@@ -37,7 +42,7 @@
                     <tr>
                         <td class='topic'>
                             <span class='subject'>
-                                {Html->a href="/community/forum/`$topic.forum_id`/article/`$topic.id`" value=$topic.subject}
+                                {Html->a href="/community/forum/`$topic.forum_id`/topic/`$topic.id`" value=$topic.subject}
                             </span><br />
                             <span class='body'>{$topic.body|truncate:64|escape:'html'}</span>
                             <div class='by at text-right'>

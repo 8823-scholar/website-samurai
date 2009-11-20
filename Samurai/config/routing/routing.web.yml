@@ -14,3 +14,7 @@ forum:
     url   : '/community/forum/:forum_id'
     param : { action : community_forum_show }
     requirements : { forum_id : '^\d+$' }
+forum_topic:
+    url   : '/community/forum/:forum_id/topic/:topic_id'
+    param : { action : community_forum_topic_show }
+    requirements : { forum_id : '^\d+$', topic_id : '^\d+$' }
