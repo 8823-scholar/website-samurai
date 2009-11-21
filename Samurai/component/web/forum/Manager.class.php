@@ -141,7 +141,7 @@ class Web_Forum_Manager extends Samurai_Model
      * @access     public
      * @param      int      $forum_id
      * @param      mixed    $dto
-     * @param      object   $User
+     * @param      object   $User       Web_User
      * @return     object   ActiveGatewayRecord
      */
     public function addArticle($forum_id, $dto, Web_User $User=NULL)
@@ -152,7 +152,17 @@ class Web_Forum_Manager extends Samurai_Model
             $dto->user_id = $User->id;
             $dto->user_role = $User->role;
         }
-        return $this->AG->create($this->_table_articles, $dto);
+        $article = $this->AG->create($this->_table_articles, $dto);
+        //フォーラムの更新
+        $sql = 'UPDATE `' . $this->_table . '`
+                SET `last_posted_id` = :posted_id, `last_posted_at` = :posted_at,
+                    `topic_count` = `topic_count` + :topic_up, `article_count` = `article_count` + :article_up
+                WHERE `id` = :forum_id';
+        $topic_up = isset($article->root_id) && $article->root_id ? 0 : 1 ;
+        $article_up = isset($article->root_id) && $article->root_id ? 1 : 0 ;
+        $params = array(':posted_id' => $article->id, ':posted_at' => $article->created_at, ':topic_up' => $topic_up, ':article_up' => $article_up, ':forum_id' => $forum_id);
+        $this->AG->executeUpdate($sql, $params);
+        return $article;
     }
 
     /**
@@ -278,9 +288,16 @@ class Web_Forum_Manager extends Samurai_Model
      */
     public function reply(ActiveGatewayRecord $parent, $dto)
     {
-        $dto->forum_id = $parent->forum_id;
         $dto->root_id = $parent->root_id ? $parent->root_id : $parent->id ;
         $dto->parent_id = $parent->id;
-        return $this->AG->create($this->_table_articles, $dto);
+        $article = $this->addArticle($parent->forum_id, $dto);
+        //トピックの更新
+        $topic = $parent->root_id ? $this->getArticle($parent->forum_id, $parent->root_id) : $parent ;
+        $sql = 'UPDATE `' . $this->_table_articles . '`
+                SET `reply_count` = `reply_count` + 1, `last_replied_id` = :replied_id, `last_replied_at` = :replied_at, `updated_at` = :updated_at
+                WHERE `id` = :id';
+        $params = array(':replied_id' => $article->id, ':replied_at' => $article->created_at, ':updated_at' => time(), ':id' => $topic->id);
+        $this->AG->executeUpdate($sql, $params);
+        return $article;
     }
 }
