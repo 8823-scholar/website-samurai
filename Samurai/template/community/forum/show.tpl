@@ -62,7 +62,7 @@
                                 <em>最新の投稿</em>
                                 <span class='by'>by {$topic.last_article.name}</span><br />
                                 <span class='subject'>
-                                    {Html->a href="/community/forum/`$topic.forum_id`/article/`$topic.last_article.id`" value=$topic.last_article.subject}
+                                    {Html->a href="/community/forum/`$topic.forum_id`/topic/`$topic.id`?page=`$topic.last_article.page`#article:`$topic.last_article.id`" value=$topic.last_article.subject}
                                 </span><br />
                                 <span class='date'>{$topic.last_replied_at|date_format:'%Y年%m月%d日 %H:%I'}</span>
                             {/if}

@@ -42,11 +42,11 @@ class Action_Community_Index extends Web_Action
         $condition = $this->ForumManager->getCondition();
         $condition->order->sort = 'ASC';
         $forums = $this->ForumManager->gets($condition);
-        $this->forums = $forums->toArray();
-        //仮
-        if($this->forums){
-            $this->forums[0]['last_posted_at'] = '2009-11-20 02:45:44';
-            $this->forums[0]['last_article'] = array('name' => 'hayabusa', 'id' => 1, 'subject' => 'インストールの仕方について');
+        foreach($forums as $forum){
+            if(!$forum->last_posted_id) continue;
+            $forum->last_article = $this->ForumManager->getArticle($forum->id, $forum->last_posted_id);
+            $forum->last_article->page = 1;
         }
+        $this->forums = $forums->toArray();
     }
 }

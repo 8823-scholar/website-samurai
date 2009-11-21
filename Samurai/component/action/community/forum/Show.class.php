@@ -32,6 +32,13 @@ class Action_Community_Forum_Show extends Web_Action_Forum
         $condition->setOffset($this->Request->get('page', 1));
         $condition->where->parent_id = NULL;
         $topics = $this->ForumManager->getArticles($this->forum->id, $condition);
+
+        //最新の返信記事を取得
+        foreach($topics as $topic){
+            if(!$topic->last_replied_id) continue;
+            $topic->last_article = $this->ForumManager->getArticle($this->forum->id, $topic->last_replied_id);
+            $topic->last_article->page = floor($topic->reply_count / 20) + 1;
+        }
         $this->topics = $topics->toArray();
 
         return 'success';
