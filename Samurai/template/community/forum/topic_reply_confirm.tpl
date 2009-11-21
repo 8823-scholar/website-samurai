@@ -2,7 +2,7 @@
  * community - forum - topic_reply_confirm.tpl
  *}
 {assign_array var='html.title.' value='返信(確認)'}
-{assign_array var='html.title.' value=$topic->subject}
+{assign_array var='html.title.' value=$article->subject}
 {assign_array var='html.title.' value=$forum->title}
 {assign_array var='html.title.' value='フォーラム'}
 {assign_array var='html.title.' value='コミュニティ'}
@@ -18,7 +18,7 @@
         <li class='delimiter'>&gt;</li>
         <li>{Html->a href="/community/forum/`$forum->id`" value=$forum->title}<li>
         <li class='delimiter'>&gt;</li>
-        <li>{Html->a href="/community/forum/`$forum->id`/topic/`$topic->id`" value=$topic->subject}</li>
+        <li>{Html->a href="/community/forum/`$forum->id`/topic/`$topic->id`" value=$article->subject}</li>
         <li class='delimiter'>&gt;</li>
         <li class='selected'>返信(確認)</li>
         <li class='clear'></li>
@@ -66,6 +66,9 @@
             {Html->form action='/community/forum/topic/reply/done'}
                 {Html->hidden name='forum_id' value=$forum->id}
                 {Html->hidden name='topic_id' value=$topic->id}
+                {if $request.article_id}
+                    {Html->hidden name='article_id' value=$article->id}
+                {/if}
                 <table class='form'>
                     {if !$User->logined}
                         <tr>
@@ -110,8 +113,13 @@
                     </tr>
                     <tr>
                         <td class='submit' colspan='2'>
-                            {Html->submit value='戻る' dispatch='community_forum_topic_show'}
-                            {Html->submit value='投稿する'}
+                            {if $request.article_id}
+                                {Html->submit value='戻る' dispatch='community_forum_topic_reply'}
+                                {Html->submit value='返信する'}
+                            {else}
+                                {Html->submit value='戻る' dispatch='community_forum_topic_show'}
+                                {Html->submit value='投稿する'}
+                            {/if}
                         </td>
                     </tr>
                 </table>

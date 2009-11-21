@@ -10,3 +10,13 @@ AG:
 ## Main
 ForumManager:
     class : Web_Forum_Manager
+
+
+## Other
+Pager:
+    class : Etc_Helper_Pager_Activegateway
+
+
+## Mock
+User:
+    class : Web_User

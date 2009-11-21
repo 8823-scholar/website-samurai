@@ -11,6 +11,10 @@
  */
 class Web_User
 {
+    public
+        $logined = false;
+
+
     /**
      * コンストラクタ。
      * @access     public

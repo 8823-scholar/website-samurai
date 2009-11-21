@@ -13,6 +13,8 @@ class Action_Community_Forum_Topic_Reply_Done extends Web_Action_Forum
 {
     public
         $article;
+    public
+        $Cookie;
 
 
     /**
@@ -40,6 +42,12 @@ class Action_Community_Forum_Topic_Reply_Done extends Web_Action_Forum
         $dto->mail_inform = $this->Request->get('mail_inform', '0');
         $dto->mail_display = $this->Request->get('mail_display', '0');
         $this->ForumManager->reply($this->article, $dto);
+
+        //cookieに情報を保存
+        if(!$this->User->logined){
+            $this->Cookie->set('name', $dto->name, time() + 60*60*24*30, '/');
+            $this->Cookie->set('mail', $dto->mail, time() + 60*60*24*30, '/');
+        }
 
         return 'success';
     }

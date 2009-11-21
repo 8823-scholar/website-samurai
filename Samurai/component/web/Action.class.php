@@ -12,6 +12,10 @@
  */
 class Web_Action extends Samurai_Action
 {
+    public
+        $User;
+
+
     /**
      * コンストラクタ。
      * @access     public

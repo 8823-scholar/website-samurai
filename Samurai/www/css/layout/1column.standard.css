@@ -95,6 +95,11 @@
     {
         margin : 0px 5px;
     }
+    /** pager **/
+    #samurai #contents #main .pager
+    {
+        text-align : right;
+    }
 
 
     

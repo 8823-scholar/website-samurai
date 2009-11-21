@@ -1,5 +1,5 @@
 ###
- # community - forum - topic - reply - confirm.yml
+ # community - forum - topic - reply - done.yml
  #/
 View:
-    success : 'community/forum/topic_reply_confirm.tpl'
+    success : 'community/forum/topic_reply_done.tpl'
