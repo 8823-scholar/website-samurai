@@ -29,8 +29,13 @@ class Action_Community_Forum_Topic_Reply extends Web_Action_Forum
         $this->_setForum();
         $this->_setTopic();
 
-        //対象記事を取得
-        $this->_setArticle();
+        //返信対象の記事を取得
+        if($article_id = $this->Request->get('article_id')){
+            $this->article = $this->ForumManager->getArticle($this->forum->id, $article_id);
+            if(!$this->article) throw new Web_Exception('No such article.');
+        } else {
+            $this->article = $this->topic;
+        }
 
         //フォームのデフォルト値をセット
         $this->_setDefault();

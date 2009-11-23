@@ -66,6 +66,7 @@
             {Html->form action='/community/forum/topic/reply/done'}
                 {Html->hidden name='forum_id' value=$forum->id}
                 {Html->hidden name='topic_id' value=$topic->id}
+                {Html->hidden name=$token.name value=$token.value}
                 {if $request.article_id}
                     {Html->hidden name='article_id' value=$article->id}
                 {/if}

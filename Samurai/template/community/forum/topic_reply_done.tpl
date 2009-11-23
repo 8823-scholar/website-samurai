@@ -20,7 +20,7 @@
         <li class='delimiter'>&gt;</li>
         <li>{Html->a href="/community/forum/`$forum->id`/topic/`$topic->id`" value=$topic->subject}</li>
         <li class='delimiter'>&gt;</li>
-        <li class='selected'>返信(確認)</li>
+        <li class='selected'>返信(完了)</li>
         <li class='clear'></li>
     </ul>
 
@@ -36,6 +36,10 @@
         <div class='done column'>
             <h3>{$topic->subject|escape:'html'}</h3>
             
+            <p>
+                返信を完了しました。
+            </p>
+
             <ul class='menu'>
                 <li>{Html->a href="/community/forum/`$forum->id`/topic/`$topic->id`" value='戻る'}</li>
                 <li>{Html->a href="/community/forum/`$forum->id`" value="フォーラム「`$forum->title`」へ戻る"}</li>

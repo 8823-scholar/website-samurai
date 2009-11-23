@@ -66,23 +66,6 @@
                     </tr>
                 {/foreach}
             </table>
-
-            <h4>最新の書き込み</h4>
-            <table class='list nearly'>
-                <tr>
-                    <th class='subject'>件名</th><th class='forum'>フォーラム</th><th class='date'>投稿時間</th>
-                </tr>
-                {section loop=10 name='forums'}
-                    <tr> 
-                        <td class='subject'>
-                            {Html->a href="/community/forum/1/article/1" value='インストールできません。'}
-                            <span class='user'>(by hayabusa)</span>
-                        </td>
-                        <td class='forum'>{Html->a href="/community/forum/1" value='Q&A'}</td>
-                        <td class='date'>2009-11-15 11:55 </td>
-                    </tr>
-                {/section}
-            </table>
         </div>
     </div>
 {include file='_footer.tpl'}
