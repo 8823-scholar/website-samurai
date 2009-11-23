@@ -103,25 +103,24 @@
     /** pager **/
     #samurai #contents #main .pager
     {
+        clear : both;
         text-align : right;
     }
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    #bokumachi #contents #main .column_half
+    /** エラー **/
+    #samurai #contents #main table.form td.input .error
     {
-        width : 280px;
-        margin-bottom : 15px;
-        line-height : 1.5;
+        padding : 5px;
+        padding-left : 27px;
+        margin-bottom : 5px;
+        color : #990000;
+        background : #FEE1E1 url('../../image/icon/error.png') 5px 5px no-repeat;
+        text-align : left;
     }
-    
+
+
+
+
+
 /********************
   ボックス
 ********************/
@@ -420,49 +419,4 @@
     {
         padding : 5px;
         color : #777777;
-    }
-    
-    
-/********************
-  pager
-********************/
-    #bokumachi #contents #main .pager
-    {
-        padding : 10px;
-        text-align : center;
-    }
-    #bokumachi #contents #main .pager .now
-    {
-        padding : 5px;
-        margin-left : 3px;
-        margin-right : 3px;
-        background : #FFFFFF;
-        border : 1px solid #CCCCCC;
-        font-weight : bold;
-    }
-    #bokumachi #contents #main .pager .page
-    {
-        margin-left : 3px;
-        margin-right : 3px;
-        border : 1px solid #CCCCCC;
-    }
-    #bokumachi #contents #main .pager .prev
-    {
-        margin-right : 7px;
-        border : 1px solid #CCCCCC;
-    }
-    #bokumachi #contents #main .pager .next
-    {
-        margin-left : 7px;
-        border : 1px solid #CCCCCC;
-    }
-    #bokumachi #contents #main .pager A
-    {
-        padding : 5px;
-        background : #EEEEEE;
-    }
-    #bokumachi #contents #main .pager A:hover
-    {
-        background : #FFFFFF;
-        color : #333333;
     }

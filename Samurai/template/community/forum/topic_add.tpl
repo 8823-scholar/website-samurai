@@ -33,6 +33,7 @@
         <div class='form-add column'>
             <h3>トピックの作成</h3>
 
+            {ErrorList->getMessages withkey=true assign='errors'}
             {Html->form action='/community/forum/topic/add/confirm'}
                 {Html->hidden name='forum_id' value=$forum->id}
                 <table class='form'>
@@ -40,12 +41,14 @@
                         <tr>
                             <th class='required'>名前</th>
                             <td class='input'>
+                                {if $errors.name} <div class='error'>{$errors.name}</div> {/if}
                                 {Html->text name='name' value=$request.name|default:$default.name}
                             </td>
                         </tr>
                         <tr>
                             <th class='required'>メールアドレス</th>
                             <td class='input'>
+                                {if $errors.mail} <div class='error'>{$errors.mail}</div> {/if}
                                 {Html->text name='mail' value=$request.mail|default:$default.mail}<br />
                                 {Html->checkbox name='mail_inform' value='1' label='返信があった時にメールで通知する' selected=$request.mail_inform} /
                                 {Html->checkbox name='mail_display' value='1' label='メールアドレスを公開する' selected=$request.mail_display}
@@ -55,12 +58,14 @@
                     <tr>
                         <th class='required'>件名</th>
                         <td class='input'>
+                            {if $errors.subject} <div class='error'>{$errors.subject}</div> {/if}
                             {Html->text name='subject' value=$request.subject}
                         </td>
                     </tr>
                     <tr>
                         <th class='required'>本文</th>
                         <td class='input'>
+                            {if $errors.body} <div class='error'>{$errors.body}</div> {/if}
                             {Html->textarea name='body' value=$request.body}
                         </td>
                     </tr>

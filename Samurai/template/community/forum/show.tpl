@@ -33,6 +33,7 @@
             <ul class='menu'>
                 <li>{Html->a href="/community/forum/topic/add?forum_id=`$forum->id`" value='トピックの作成'}</li>
             </ul>
+            {include file='_pager.tpl'}
             
             <table class='list clear'>
                 <tr>
@@ -74,6 +75,8 @@
                     </tr>
                 {/foreach}
             </table>
+
+            {include file='_pager.tpl'}
         </div>
 
     </div>

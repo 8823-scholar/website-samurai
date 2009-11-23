@@ -32,6 +32,7 @@ class Action_Community_Forum_Show extends Web_Action_Forum
         $condition->setOffset($this->Request->get('page', 1));
         $condition->where->parent_id = NULL;
         $topics = $this->ForumManager->getArticles($this->forum->id, $condition);
+        $this->Pager->init($topics, $condition);
 
         //最新の返信記事を取得
         foreach($topics as $topic){

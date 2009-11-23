@@ -1,5 +1,8 @@
 ###
  # community - forum - topic - add - done.yml
  #/
+Token:
+    mode : check,remove
+
 View:
     success : 'community/forum/topic_add_done.tpl'

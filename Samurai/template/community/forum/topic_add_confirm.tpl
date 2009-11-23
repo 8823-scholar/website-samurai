@@ -35,6 +35,7 @@
 
             {Html->form action='/community/forum/topic/add/done'}
                 {Html->hidden name='forum_id' value=$forum->id}
+                {Html->hidden name=$token.name value=$token.value}
                 <table class='form'>
                     {if !$User->logined}
                         <tr>
