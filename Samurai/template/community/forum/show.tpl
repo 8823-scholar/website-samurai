@@ -31,7 +31,7 @@
             <h3>トピック一覧</h3>
             
             <ul class='menu'>
-                <li>{Html->a href='/community/forum/topic/add' value='トピックの作成'}</li>
+                <li>{Html->a href="/community/forum/topic/add?forum_id=`$forum->id`" value='トピックの作成'}</li>
             </ul>
             
             <table class='list clear'>
@@ -69,7 +69,9 @@
                         </td>
                     </tr>
                 {foreachelse}
-                    nothing...
+                    <tr>
+                        <td class='none' colspan='3'>まだありません。</td>
+                    </tr>
                 {/foreach}
             </table>
         </div>

@@ -67,6 +67,29 @@
 
 
 /********************
+ * トピック作成
+ *******************/
+    #samurai #contents.community.forum.topic.add #main .form-add table.form td.input .name
+    {
+        width : 300px;
+    }
+    #samurai #contents.community.forum.topic.add #main .form-add table.form td.input .mail
+    {
+        width : 300px;
+        margin-bottom : 5px;
+    }
+    #samurai #contents.community.forum.topic.add #main .form-add table.form td.input .subject
+    {
+        width : 500px;
+    }
+    #samurai #contents.community.forum.topic.add #main .form-add table.form td.input .body
+    {
+        width : 550px;
+        height : 300px;
+    }
+
+
+/********************
  * トピック詳細
  *******************/
     /** 記事一覧 **/

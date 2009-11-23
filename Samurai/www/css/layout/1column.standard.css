@@ -68,6 +68,11 @@
         margin-left : 0px;
         margin-right : 0px;
     }
+    #samurai #contents #main table.list td.none
+    {
+        text-align : right;
+        background : #FFFFFF !important;
+    }
     #samurai #contents #main table.form
     {
         width : 100%;

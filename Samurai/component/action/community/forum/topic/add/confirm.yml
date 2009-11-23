@@ -1,0 +1,5 @@
+###
+ # community - forum - topic - add - confirm.yml
+ #/
+View:
+    success : 'community/forum/topic_add_confirm.tpl'
