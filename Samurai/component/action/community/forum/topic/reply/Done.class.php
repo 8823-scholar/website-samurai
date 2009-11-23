@@ -40,9 +40,14 @@ class Action_Community_Forum_Topic_Reply_Done extends Web_Action_Forum
         $dto = $this->Request->get('dto');
         $dto->name = $this->Request->get('name');
         $dto->mail = $this->Request->get('mail');
-        $dto->mail_inform = $this->Request->get('mail_inform', '0');
         $dto->mail_display = $this->Request->get('mail_display', '0');
         $this->ForumManager->reply($this->article, $dto);
+
+        //解決
+        if($this->Request->get('resolved')){
+            $this->topic->resolved = '1';
+            $this->ForumManager->saveArticle($this->topic);
+        }
 
         //cookieに情報を保存
         if(!$this->User->logined){

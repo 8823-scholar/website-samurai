@@ -119,6 +119,12 @@
                         </td>
                     </tr>
                     <tr>
+                        <th>解決</th>
+                        <td class='input'>
+                            <span class='red'>{Html->checkbox name='resolved' value='1' label='解決(解決したらチェックしてください)' selected=$request.resolved}</span>
+                        </td>
+                    </tr>
+                    <tr>
                         <td class='submit' colspan='2'>
                             {Html->submit value='確認画面'}
                         </td>

@@ -9,15 +9,16 @@ Validate:
     subject.required : '入力してください。'
     subject.maxlength : '入力内容が長すぎます。,255'
     body.required : '入力してください。'
-    body.maxlength : '入力内容が長すぎます。,5120'
-    mail.mail : 'メールアドレスが正しくありません。'
-    mail.maxlength : '入力内容が長すぎます。,128'
+    body.maxlength : '入力内容が長すぎます。,5120' 
     mail_inform.whitelist : '入力内容が正しくありません。,0,1'
-    mail_display.whitelist : '入力内容が正しくありません。,0,1'
+    resolved.whitelist : '入力内容が正しくありません。,0,1'
 
 ValidateIfUnlogined:
     name.required : '入力してください。'
     name.maxlength : '入力内容が長すぎます。,64'
+    mail.mail : 'メールアドレスが正しくありません。'
+    mail.maxlength : '入力内容が長すぎます。,128'
+    mail_display.whitelist : '入力内容が正しくありません。,0,1'
 
 Token:
     name : 'token_community_forum_topic_add'

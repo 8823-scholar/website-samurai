@@ -112,6 +112,15 @@
                             {$request.body|escape:'html'|nl2br}
                         </td>
                     </tr>
+                    {Html->hidden name='resolved' value=$request.resolved|default:'0'}
+                    {if $request.resolved}
+                        <tr>
+                            <th>解決</th>
+                            <td class='input'>
+                                <span class='red'>解決にする</span>
+                            </td>
+                        </tr>
+                    {/if}
                     <tr>
                         <td class='submit' colspan='2'>
                             {if $request.article_id}
