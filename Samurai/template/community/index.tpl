@@ -67,5 +67,50 @@
                 {/foreach}
             </table>
         </div>
+
+
+        {** イベント **}
+        <div class='event column'>
+            <h3>イベント</h3>
+            <p>
+                Samurai Frameworkに関するイベントはコチラ！
+            </p>
+
+            <h4>最新のイベント</h4>
+            <table class='list'>
+                {foreach from=$events item='event'}
+                    <tr>
+                    </tr>
+                {foreachelse}
+                    <tr>
+                        <td class='none' colspan='2'>まだありません。</td>
+                    </tr>
+                {/foreach}
+            </table>
+        </div>
+
+
+        {** その他 **}
+        <div class='other column'>
+            <h3>その他</h3>
+
+            <h4>メーリングリスト</h4>
+            <ul>
+                <li>
+                    <a href='http://lists.sourceforge.jp/mailman/listinfo/samurai-user'>samurai-user@lists.sourceforge.jp</a>
+                    <p>
+                        ユーザー用メーリングリストです。<br />
+                        ユーザー同士での助け合いや、コミュニティにご活用ください。
+                    </p>
+                </li>
+                <li>
+                    <a href='http://lists.sourceforge.jp/mailman/listinfo/samurai-dev'>samurai-dev@lists.sourceforge.jp</a>
+                    <p>
+                        開発者用メーリングリストです。<br />
+                        開発に関する内容はコチラに投稿ください。
+                    </p>
+                </li>
+            </ul>
+        </div>
     </div>
 {include file='_footer.tpl'}

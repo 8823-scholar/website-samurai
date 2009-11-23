@@ -300,4 +300,27 @@ class Web_Forum_Manager extends Samurai_Model
         $this->AG->executeUpdate($sql, $params);
         return $article;
     }
+
+
+
+
+
+    /**
+     * メール通知してほしい人を取得
+     * @access     public
+     * @param      int      $forum_id
+     * @param      int      $topic_id
+     * @return     object   ActiveGatewayRecords
+     */
+    public function getUsersWannaInform($forum_id, $topic_id)
+    {
+        $sql = "SELECT f.id, f.forum_id, f.root_id, f.parent_id, f.user_id,
+                    COALESCE(u.name, f.name) AS name, COALESCE(u.mail, f.mail) AS mail
+                FROM forum_articles AS f LEFT JOIN user AS u ON u.id = f.user_id
+                WHERE (f.id = :topic_id OR f.root_id = :topic_id) AND f.forum_id = :forum_id AND f.mail_inform = '1'
+                GROUP BY `mail`
+                HAVING mail != ''";
+        $params = array(':forum_id' => $forum_id, ':topic_id' => $topic_id);
+        return $this->AG->findAllSql($this->_table_articles, $sql, $params);
+    }
 }

@@ -71,6 +71,7 @@
     #samurai #contents #main table.list td.none
     {
         text-align : right;
+        border : none;
         background : #FFFFFF !important;
     }
     #samurai #contents #main table.form
