@@ -4,10 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head><?cs
  if:project.name_encoded ?>
- <title><?cs if:title ?><?cs var:title ?> - <?cs /if ?><?cs
-   var:project.name_encoded ?> - Trac</title><?cs
+ <title><?cs if:title ?><?cs var:title ?> - <?cs /if ?> Samurai Framework</title><?cs
  else ?>
- <title>Trac: <?cs var:title ?></title><?cs
+ <title><?cs var:title ?> - Samurai Framework</title><?cs
  /if ?><?cs
  if:html.norobots ?>
  <meta name="ROBOTS" content="NOINDEX, NOFOLLOW" /><?cs
