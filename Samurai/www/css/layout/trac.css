@@ -69,6 +69,11 @@
     {
         height : auto;
         border-top : none;
+        font-size : 12px;
+    }
+    #samurai #footer p
+    {
+        margin : 0px;
     }
     #samurai #footer ul.abouts
     {
@@ -201,4 +206,14 @@
     #samurai #contents #content.ticket
     {
         width : 100%;
+    }
+
+
+
+/********************
+ * マイルストーン
+ *******************/
+    #samurai #contents #content.milestone table.progress
+    {
+        margin : 3px 4px 3px 0px;
     }
