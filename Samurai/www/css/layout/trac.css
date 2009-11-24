@@ -64,19 +64,23 @@
         width : 780px;
         padding : 10px;
     }
+    /** footer **/
+    #samurai #footer
+    {
+        border-top : none;
+    }
 
 
 
 /********************
  * main
  *******************/
-    #samurai #contents #main .column
-    {
-        clear : both;
-        margin-bottom : 15px;
-    }
     /** 見出し **/
-    #samurai #contents #main h2
+    #samurai #contents h1
+    {
+        margin : 0px;
+    }
+    #samurai #contents #main h1
     {
         padding : 5px 2px;
         color : #555555;
@@ -84,8 +88,14 @@
         font-weight : bold;
         border-bottom : 1px solid #999999;
         margin-bottom : 10px;
+        background : none;
+        letter-spacing : 0px;
     }
-    #samurai #contents #main h3
+    #samurai #contents #main .wikipage h1
+    {
+        margin-left : -18px;
+    }
+    #samurai #contents #main h2
     {
         padding : 2px 5px;
         color : #555555;
@@ -94,7 +104,7 @@
         border-left : 8px solid #669966;
         margin-bottom : 10px;
     }
-    #samurai #contents #main h4
+    #samurai #contents #main .wikipage h3
     {
         padding : 2px 5px;
         color : #555555;
@@ -104,96 +114,67 @@
         margin-left : 2px;
         margin-bottom : 10px;
     }
-
-    /** テーブル **/
-    #samurai #contents #main table.list
+    /** table **/
+    #samurai #contents #main table
     {
-        width : 100%;
         margin-left : 0px;
         margin-right : 0px;
     }
-    #samurai #contents #main table.list td.none
+    #samurai #contents #main fieldset table td,
+    #samurai #contents #main fieldset table th
     {
-        text-align : right;
+        padding : 1px;
         border : none;
-        background : #FFFFFF !important;
     }
-    #samurai #contents #main table.form
-    {
-        width : 100%;
-        margin-left : 0px;
-        margin-right : 0px;
-    }
-    #samurai #contents #main table.form th
-    {
-        width : 150px;
-        background : #F0F0F0;
-        padding : 5px;
-        text-align : left;
-        vertical-align : top;
-    }
-    #samurai #contents #main table.form td
-    {
-        padding : 5px;
-    }
-    #samurai #contents #main table.form td.submit
-    {
-        padding : 10px;
-        text-align : right;
-    }
-    #samurai #contents #main table.form td.submit input
-    {
-        margin : 0px 5px;
-    }
-    /** pager **/
-    #samurai #contents #main .pager
-    {
-        clear : both;
-        text-align : right;
-    }
-    /** エラー **/
-    #samurai #contents #main table.form td.input .error
-    {
-        padding : 5px;
-        padding-left : 27px;
-        margin-bottom : 5px;
-        color : #990000;
-        background : #FEE1E1 url('../../image/icon/error.png') 5px 5px no-repeat;
-        text-align : left;
-    }
-
-
 
 
 
 /********************
-  ボックス
-********************/
-    #bokumachi #contents #main .column .box
+ * ソースブラウザ
+ *******************/
+    #samurai #contents #content.browser table.listing
     {
-        
+        margin-left : 0px;
+        margin-right : 0px;
     }
-    #bokumachi #contents #main .column .box UL.menu
+    #samurai #contents #content.browser table.listing th
     {
-        margin : 10px 0px;
+        padding : 2px 0.5em;
     }
-    
-    
-    
-    
-    
-    #bokumachi #contents #main TABLE.form TH
+    #samurai #contents #content.browser table td
     {
-        width : 115px;
         padding : 5px;
-        padding-left : 10px;
-        text-align : left;
-        vertical-align : top;
-        color : #666666;
         border : 1px solid #CCCCCC;
-        background : #F5F5F5 url('../../image/layout/form.th.optional.png') left repeat-y;
+        vertical-align : top;
     }
-    #bokumachi #contents #main TABLE.form TH.required
+    #samurai #contents #content.browser table td.name
     {
-        background : #F5F5F5 url('../../image/layout/form.th.required.png') left repeat-y;
+        width : 300px;
+    }
+    #samurai #contents #content.browser table td.change
+    {
+        width : 300px;
+        white-space : normal;
+    }
+    #samurai #contents #content.browser table.code th
+    {
+        padding : 0px;
+    }
+    #samurai #contents #content.browser table.code td
+    {
+        padding : 0px;
+        border : none;
+    }
+    #samurai #contents #content.changeset table
+    {
+        border-collapse : collapse;
+    }
+    #samurai #contents #content.changeset table th
+    {
+        padding : 0px;
+    }
+    #samurai #contents #content.changeset table td
+    {
+        padding : 0px;
+        border : none;
     }
