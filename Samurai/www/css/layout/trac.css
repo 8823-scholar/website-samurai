@@ -67,7 +67,12 @@
     /** footer **/
     #samurai #footer
     {
+        height : auto;
         border-top : none;
+    }
+    #samurai #footer ul.abouts
+    {
+        clear : right;
     }
 
 
@@ -177,4 +182,19 @@
     {
         padding : 0px;
         border : none;
+    }
+
+
+
+/********************
+ * チケット
+ *******************/
+    #samurai #contents #content.report table.reports td.report
+    {
+        width : 50px;
+        text-align : center;
+    }
+    #samurai #contents #content.report table.reports td.title
+    {
+        width : auto;
     }
