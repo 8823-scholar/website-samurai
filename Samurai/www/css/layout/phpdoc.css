@@ -1,0 +1,237 @@
+/**
+ * css/layout/phpdoc.css
+ * 
+ * レイアウト - phpdoc
+ * 
+ * @package     Samurai
+ * @subpackage  www.css
+ * @copyright   BEFOOL,Inc.
+ * @author      Hayabusa <scholar@hayabusa-lab.jp>
+ */
+/** インポート **/
+@import url('./standard.css');
+
+
+/********************
+ * layout
+ *******************/
+    body
+    {
+        margin : 0px;
+        padding : 0px;
+    }
+    #samurai a
+    {
+        color : #669933 !important;
+        text-decoration : none;
+    }
+    #samurai a:hover
+    {
+        text-decoration : underline;
+    }
+    /** header **/
+    #samurai #header ul
+    {
+        margin : 0px;
+        padding : 0px;
+    }
+    #samurai #header ul li
+    {
+        margin : 0px;
+        padding : 0px;
+        list-style : none;
+    }
+    #samurai #header ul li a.samurai
+    {
+        color : #333333 !important;
+    }
+    /** main **/
+    #samurai #contents ul.breads
+    {
+        margin : 0px;
+    }
+    #samurai #contents ul.breads li
+    {
+        list-style : none;
+    }
+    #samurai #contents #mainnav
+    {
+        margin : 0px;
+        border-width : 0px 0px 1px 0px;
+    }
+    #samurai #contents #mainnav li a
+    {
+        color : #333333 !important;
+    }
+    #samurai #contents #mainnav li.active a
+    {
+        color : #FFFFFF !important;
+    }
+    #samurai #contents #main
+    {
+        width : 780px;
+        padding : 10px;
+    }
+    /** footer **/
+    #samurai #footer ul
+    {
+        margin : 0px;
+        padding : 0px;
+    }
+
+
+
+/********************
+ * main
+ *******************/
+    /** 見出し **/
+    #samurai #contents h1
+    {
+        margin : 0px;
+    }
+    #samurai #contents #main h1
+    {
+        padding : 5px 2px;
+        color : #555555;
+        font-size : 14px;
+        font-weight : bold;
+        border-bottom : 1px solid #999999;
+        margin-bottom : 10px;
+        background : none;
+        letter-spacing : 0px;
+    }
+    #samurai #contents #main .wikipage h1
+    {
+        margin-left : -18px;
+    }
+    #samurai #contents #main h2
+    {
+        padding : 2px 5px;
+        color : #555555;
+        font-size : 14px;
+        font-weight : bold;
+        border-left : 8px solid #669966;
+        margin-bottom : 10px;
+    }
+    #samurai #contents #main .wikipage h3
+    {
+        padding : 2px 5px;
+        color : #555555;
+        font-size : 12px;
+        font-weight : bold;
+        border-left : 5px solid #666666;
+        margin-left : 2px;
+        margin-bottom : 10px;
+    }
+    /** table **/
+    #samurai #contents table.top
+    {
+        margin : 0px;
+    }
+    #samurai #contents table.top td.header_menu
+    {
+        padding : 0px;
+        color : inherit;
+        background : none;
+    }
+    #samurai #contents table.main
+    {
+        margin : 0px;
+    }
+    #samurai #contents table.top td,
+    #samurai #contents table.main td
+    {
+        border : none;
+    }
+    #samurai #contents #main table
+    {
+        margin-left : 0px;
+        margin-right : 0px;
+    }
+    #samurai #contents #main fieldset table td,
+    #samurai #contents #main fieldset table th
+    {
+        padding : 1px;
+        border : none;
+    }
+
+
+
+/********************
+ * ソースブラウザ
+ *******************/
+    #samurai #contents #content.browser table.listing
+    {
+        margin-left : 0px;
+        margin-right : 0px;
+    }
+    #samurai #contents #content.browser table.listing th
+    {
+        padding : 2px 0.5em;
+    }
+    #samurai #contents #content.browser table td
+    {
+        padding : 5px;
+        border : 1px solid #CCCCCC;
+        vertical-align : top;
+    }
+    #samurai #contents #content.browser table td.name
+    {
+        width : 300px;
+    }
+    #samurai #contents #content.browser table td.change
+    {
+        width : 300px;
+        white-space : normal;
+    }
+    #samurai #contents #content.browser table.code th
+    {
+        padding : 0px;
+    }
+    #samurai #contents #content.browser table.code td
+    {
+        padding : 0px;
+        border : none;
+    }
+    #samurai #contents #content.changeset table
+    {
+        border-collapse : collapse;
+    }
+    #samurai #contents #content.changeset table th
+    {
+        padding : 0px;
+    }
+    #samurai #contents #content.changeset table td
+    {
+        padding : 0px;
+        border : none;
+    }
+
+
+
+/********************
+ * チケット
+ *******************/
+    #samurai #contents #content.report table.reports td.report
+    {
+        width : 50px;
+        text-align : center;
+    }
+    #samurai #contents #content.report table.reports td.title
+    {
+        width : auto;
+    }
+    #samurai #contents #content.ticket
+    {
+        width : 100%;
+    }
+
+
+
+/********************
+ * マイルストーン
+ *******************/
+    #samurai #contents #content.milestone table.progress
+    {
+        margin : 3px 4px 3px 0px;
+    }
