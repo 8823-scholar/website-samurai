@@ -62,6 +62,7 @@
                         <td class='contents'>
                             <div class='subject'>
                                 {Html->a href="/community/forum/`$article.forum_id`/topic/`$topic->id`#article:`$article.id`" value=$article.subject}
+                                {if $article.resolved} <span class='red'>[解決しました]</span> {/if}
                             </div>
                             <ul class='menu'>
                                 <li>

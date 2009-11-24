@@ -44,6 +44,7 @@
                         <td class='topic'>
                             <span class='subject'>
                                 {Html->a href="/community/forum/`$topic.forum_id`/topic/`$topic.id`" value=$topic.subject}
+                                {if $topic.resolved} <span class='red'>[解決しました]</span> {/if}
                             </span><br />
                             <span class='body'>{$topic.body|truncate:64|escape:'html'}</span>
                             <div class='by at text-right'>
