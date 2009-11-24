@@ -198,3 +198,7 @@
     {
         width : auto;
     }
+    #samurai #contents #content.ticket
+    {
+        width : 100%;
+    }
