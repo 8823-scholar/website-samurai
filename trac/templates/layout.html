@@ -25,6 +25,9 @@
     <script type="text/javascript" src="${chrome.htdocs_location}js/ie_pre7_hacks.js"></script>
     ${Markup('&lt;![endif]--&gt;')}
     ${select("*[local-name() != 'title']")}
+    <link rel="stylesheet" href="/css/base.css" type="text/css" />
+    <link rel="stylesheet" href="/css/common.css" type="text/css" />
+    <link rel="stylesheet" href="/css/layout/trac.css" type="text/css" />
   </head></py:match>
 
   <py:match path="body" once="true" buffer="false"><body>
