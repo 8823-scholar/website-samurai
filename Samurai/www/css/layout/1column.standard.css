@@ -92,6 +92,10 @@
     {
         padding : 5px;
     }
+    #samurai #contents #main table.form td.input img.antispam
+    {
+        margin-bottom : 5px;
+    }
     #samurai #contents #main table.form td.submit
     {
         padding : 10px;

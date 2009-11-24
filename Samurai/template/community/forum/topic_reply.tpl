@@ -118,6 +118,16 @@
                             {Html->textarea name='body' value=$request.body}
                         </td>
                     </tr>
+                    {if !$User->logined}
+                        <tr>
+                            <th class='required'>認証</th>
+                            <td class='input'>
+                                {if $errors.antispam} <div class='error'>{$errors.antispam}</div> {/if}
+                                <img src='/etc/antispam?space=forum_topic_reply' class='antispam' /><br />
+                                {Html->text name='antispam'}
+                            </td>
+                        </tr>
+                    {/if}
                     <tr>
                         <th>解決</th>
                         <td class='input'>

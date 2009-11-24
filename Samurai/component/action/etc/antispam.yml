@@ -1,0 +1,7 @@
+###
+ # etc - antispam.yml
+ #/
+Debug:
+    debug_console : false
+    
+View:
