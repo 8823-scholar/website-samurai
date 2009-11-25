@@ -16,7 +16,7 @@
                 <li><a href='/' class='with-icon samurai'>SamuraiFW</a></li>
                 <li><a href='/about/samurai'>概要</a></li>
                 <li><a href='/downloads/index'>ダウンロード</a></li>
-                <li><a href='/source/api'>API</a></li>
+                <li><a href='/source/api/2.0/'>API</a></li>
                 <li><a href='/documents/ja/FrontPage'>ドキュメント</a></li>
                 <li><a href='/development/'>開発</a></li>
                 <li><a href='/community/index'>コミュニティ</a></li>
