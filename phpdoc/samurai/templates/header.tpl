@@ -3,7 +3,7 @@
 <html xmlns='http://www.w3.org/1999/xhtml' xml:lang='ja' dir='ltr'>
 <head>
 <meta http-equiv='content-type' content='text/html; charset=UTF-8' />
-<title>{$title}</title>
+<title>{$title} | Samurai Framework</title>
 <link rel="stylesheet" type="text/css" href="{$subdir}media/style.css">
 <link rel='stylesheet' type='text/css' href='/css/base.css'>
 <link rel='stylesheet' type='text/css' href='/css/common.css'>
@@ -128,7 +128,7 @@
       {/if}
       {/if}
     </td>
-    <td>
+    <td class='content'>
       <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
 
 {if !$hasel}{assign var="hasel" value=false}{/if}

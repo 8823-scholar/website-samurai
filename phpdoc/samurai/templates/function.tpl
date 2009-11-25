@@ -6,7 +6,7 @@ function {$functions[func].id}, {$functions[func].sdesc}<br />
 	<a name="{$functions[func].function_dest}"></a>
 	<h3>{$functions[func].function_name} <span class="smalllinenumber">[line {if $functions[func].slink}{$functions[func].slink}{else}{$functions[func].line_number}{/if}]</span></h3>
 	<div class="function">
-    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code_border">
     <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
 		<code>{$functions[func].function_return} {if $functions[func].ifunction_call.returnsref}&amp;{/if}{$functions[func].function_name}(
 {if count($functions[func].ifunction_call.params)}

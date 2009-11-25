@@ -8,7 +8,7 @@
 	{/if}
 {* original <div class="warning">{$conflicts</div> *}
 
-<table width="100%" border="0">
+<table width="100%" border="0" class='overview'>
 <tr><td valign="top">
 
 <h3><a href="#class_details">{if $is_interface}Interface{else}Class{/if} Overview</a></h3>
@@ -101,7 +101,6 @@
 {/if}
 
 </tr></table>
-<hr />
 
 <table width="100%" border="0"><tr>
 
@@ -113,6 +112,7 @@
 
 {if $children}
 <td valign="top">
+<hr />
 <h3>Child classes:</h3>
 <div class="tags">
 {section name=kids loop=$children}
