@@ -1,2 +1,4 @@
 RemoveHandler .php
 RemoveType .php
+
+RewriteEngine off
