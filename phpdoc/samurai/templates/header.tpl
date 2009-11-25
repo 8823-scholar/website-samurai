@@ -36,12 +36,14 @@
             </div>
 
             <div class='middle'>
-                <h1>API</h1>
+                <h1>API - 2.0</h1>
 
                 <ul class='breads'>
                     <li><a href='/'>ホーム</a></li>
                     <li class='delimiter'>&gt;</li>
-                    <li><a href='/source/api/'>API</a><li>
+                    <li>API<li>
+                    <li class='delimiter'>&gt;</li>
+                    <li><a href='/source/api/index/2.0/'>2.0</a><li>
                     {if $package}
                         <li class='delimiter'>&gt;</li>
                         <li class='selected'>{$package}</li>
