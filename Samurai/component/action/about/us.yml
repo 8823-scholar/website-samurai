@@ -1,0 +1,5 @@
+###
+ # about - us.yml
+ #/
+View:
+    success : 'about/us.tpl'

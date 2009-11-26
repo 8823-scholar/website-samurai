@@ -27,7 +27,7 @@
         <div id='header'>
             <ul class='menu left'>
                 <li>{Html->a href='/' value='SamuraiFW' class='with-icon samurai'}</li>
-                <li>{Html->a href='/about/samurai' value='概要'}</li>
+                <li>{Html->a href='/about/samuraifw' value='概要'}</li>
                 <li>{Html->a href='/downloads/index' value='ダウンロード'}</li>
                 <li>{Html->a href='/source/api/2.0/' value='API'}</li>
                 <li>{Html->a href='/documents/ja/FrontPage' value='ドキュメント'}</li>

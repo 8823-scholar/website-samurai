@@ -40,6 +40,10 @@
         top : 70px;
         left : 545px;
     }
+    #samurai #contents.index #topimage ul li
+    {
+        line-height : 1;
+    }
     #samurai #contents.index #topimage ul.main li a
     {
         display : block;

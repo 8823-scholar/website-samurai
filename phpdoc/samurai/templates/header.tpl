@@ -43,7 +43,7 @@
                     <li class='delimiter'>&gt;</li>
                     <li>API<li>
                     <li class='delimiter'>&gt;</li>
-                    <li><a href='/source/api/index/2.0/'>2.0</a><li>
+                    <li><a href='/source/api/2.0/'>2.0</a><li>
                     {if $package}
                         <li class='delimiter'>&gt;</li>
                         <li class='selected'>{$package}</li>

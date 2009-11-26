@@ -140,6 +140,7 @@
     {
         clear : right;
         float : right;
+        margin-top : 5px;
     }
     /** Built on Samurai **/
     #samurai #footer .built_on_samurai
@@ -154,52 +155,4 @@
         margin-left : 10px;
         margin-bottom : 3px;
         background : url('../../image/icon/li.li.li.png') no-repeat 0px 3px;
-    }
-
-
-
-
-
-
-/********************
-  その他
-********************/
-    #bokumachi DIV.hr_dashed
-    {
-        height : 1px;
-        background : url('../../image/layout/tag.hr.dashed.png') repeat-x;
-    }
-    
-    #bokumachi DIV.error
-    {
-        margin : 5px 0px;
-        padding : 7px;
-        padding-left : 30px;
-        color : #990000;
-        background : #FEE1E1 url('../../image/icon/error.png') 5px 8px no-repeat;
-        text-align : left;
-    }
-    #bokumachi UL.error
-    {
-        margin : 5px 0px;
-        background : #FEE1E1;
-    }
-    #bokumachi UL.error LI
-    {
-        padding : 7px;
-        padding-left : 30px;
-        color : #990000;
-        background : url('../../image/icon/error.png') 5px 8px no-repeat;
-    }
-    
-    #bokumachi DIV.message
-    {
-        margin : 10px 0px;
-        padding : 10px;
-        border : 1px solid #CCCCCC;
-    }
-    #bokumachi DIV.message.attention
-    {
-        color : #990000;
-        background : #FEE1E1;
     }

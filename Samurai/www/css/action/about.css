@@ -1,0 +1,21 @@
+/**
+ * css/action/about.css
+ * 
+ * アクション - about
+ * 
+ * @package     Samurai
+ * @subpackage  www.css
+ * @copyright   BEFOOL,Inc.
+ * @author      hayabusa <scholar@hayabusa-lab.jp>
+ */
+/********************
+ * 概要
+ *******************/
+    #samurai #contents.about.samuraifw #main ul ul li
+    {
+        padding : 2px 2px 3px 22px;
+        line-height : 1.3;
+        background : url('../../image/icon/li.li.png') no-repeat 0px 0px;
+        margin-left : 10px;
+        margin-bottom : 10px;
+    }
