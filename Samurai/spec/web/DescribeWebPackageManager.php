@@ -45,7 +45,7 @@ class DescribeWebPackageManager extends PHPSpec_Context
          * $PackageManager->deleteRelease($package_id, $release_id);
          * $PackageManager->deleteReleaseFile($package_id, $release_id, $file_id);
          * $PackageManager->deleteMaintener($package_id, $maintener_id);
-         * $PackageManager->downloaded($package_id, $release_id, $file_id);
+         * $PackageManager->downloaded($file);
          */
     }
 
@@ -104,40 +104,60 @@ class DescribeWebPackageManager extends PHPSpec_Context
         $files = $this->PackageManager->getReleaseFiles(1, 1, $condition);
         $this->spec($files->getSize())->should->be(1);
     }
-    /*
+
+    public function itメンテナーの取得()
+    {
+        $maintener = $this->PackageManager->getMaintener(1, 2);
+        $this->spec($maintener)->shouldNot->beNull();
+        $this->spec($maintener->id)->should->be(2);
+        $this->spec($maintener->package_id)->should->be(1);
+        //第二引数はconditionも可能
+        $condition = $this->PackageManager->getCondition();
+        $condition->where->id = 3;
+        $maintener = $this->PackageManager->getMaintener(1, $condition);
+        $this->spec($maintener->id)->should->be(3);
+    }
+    public function itメンテナーの取得：複数()
+    {
+        $condition = $this->PackageManager->getCondition();
+        $condition->setLimit(2);
+        $mainteners = $this->PackageManager->getMainteners(1, $condition);
+        $this->spec($mainteners->getSize())->should->be(2);
+    }
 
     //操作系
     public function it追加()
     {
         $dto = new stdClass();
-        $dto->title = '追加しますたよ';
-        $dto->description = 'うっほうっほうほほほほほ。';
+        $dto->name = 'Bushi Framework';
+        $dto->description = '腹を切らせていただく！';
         $package = $this->PackageManager->add($dto);
-        $this->spec($package->title)->should->be('追加しますたよ');
-        $this->spec($package->description)->should->be('うっほうっほうほほほほほ。');
+        $this->spec($package->name)->should->be('Bushi Framework');
+        $this->spec($package->description)->should->be('腹を切らせていただく！');
+        $this->PackageManager->add($dto);
     }
     public function it保存()
     {
         $package = $this->PackageManager->get(2);
-        $package->title = 'このフォーラムはすでに編集されている。';
-        $package->description = 'ID:2のフォーラムを編集しましたが、なにか？';
+        $package->name = 'Nobushi Framework';
+        $package->description = '落ちますた。';
         $this->PackageManager->save($package);
         $package = $this->PackageManager->get(2);
-        $this->spec($package->title)->should->be('このフォーラムはすでに編集されている。');
-        $this->spec($package->description)->should->be('ID:2のフォーラムを編集しましたが、なにか？');
+        $this->spec($package->name)->should->be('Nobushi Framework');
+        $this->spec($package->description)->should->be('落ちますた。');
     }
     public function it編集()
     {
-        $this->PackageManager->edit(2, array('title' => 'editしますた'));
+        $this->PackageManager->edit(2, array('name' => 'Ochimusya'));
         $package = $this->PackageManager->get(2);
-        $this->spec($package->title)->should->be('editしますた');
+        $this->spec($package->name)->should->be('Ochimusya');
     }
     public function it破壊()
     {
-        $package = $this->PackageManager->get(4);
+        $package = $this->PackageManager->get(2);
         $this->spec($package)->shouldNot->beNull();
         $this->PackageManager->destroy($package);
-        $package = $this->PackageManager->get(4);
+        $package = $this->PackageManager->get(2);
         $this->spec($package)->should->beNull();
     }
     public function it削除()
@@ -149,56 +169,149 @@ class DescribeWebPackageManager extends PHPSpec_Context
         $this->spec($package)->should->beNull();
     }
 
-    public function it記事の追加()
+    public function itリリースの追加()
     {
         $dto = new stdClass();
-        $dto->name = 'hayabusa';
-        $dto->mail = 'hayabusa@samurai-fw.org';
-        $dto->subject = '記事の追加です';
-        $dto->body = '記事の追加なんてほんとにできるの？';
-        $article = $this->PackageManager->addArticle(4, $dto);
-        $this->spec($article->package_id)->should->be(4);
-        $this->spec($article->name)->should->be('hayabusa');
-        $this->spec($article->mail)->should->be('hayabusa@samurai-fw.org');
-        $this->spec($article->subject)->should->be('記事の追加です');
-        $this->spec($article->body)->should->be('記事の追加なんてほんとにできるの？');
+        $dto->version = '2.0.1';
+        $dto->stability = 'stable';
+        $dto->datetime = '2009-12-11 12:34:56';
+        $release = $this->PackageManager->addRelease(1, $dto);
+        $this->spec($release->package_id)->should->be(1);
+        $this->spec($release->version)->should->be('2.0.1');
+        $this->spec($release->stability)->should->be('stable');
+        $this->spec($release->datetime)->should->be('2009-12-11 12:34:56');
+        $release = $this->PackageManager->addRelease(1, $dto);
     }
-    public function it記事の保存()
+    public function itリリースの保存()
     {
-        $article = $this->PackageManager->getArticle(1, 2);
-        $article->subject = '編集しますた';
-        $article->body = 'package:1, id:2 の記事を編集しましたが、なにか？';
-        $this->PackageManager->saveArticle($article);
-        $article = $this->PackageManager->getArticle(1, 2);
-        $this->spec($article->subject)->should->be('編集しますた');
-        $this->spec($article->body)->should->be('package:1, id:2 の記事を編集しましたが、なにか？');
+        $release = $this->PackageManager->getRelease(1, 2);
+        $release->stability = 'alpha';
+        $this->PackageManager->saveRelease($release);
+        $release = $this->PackageManager->getRelease(1, 2);
+        $this->spec($release->stability)->should->be('alpha');
 
     }
-    public function it記事の編集()
+    public function itリリースの編集()
     {
-        $this->PackageManager->editArticle(1, 3, array('subject'=>'1:3,edited', 'body'=>'1:3,edited'));
-        $article = $this->PackageManager->getArticle(1, 3);
-        $this->spec($article->subject)->should->be('1:3,edited');
-        $this->spec($article->body)->should->be('1:3,edited');
+        $this->PackageManager->editRelease(1, 2, array('version' => '2.0.2', 'stability' => 'beta'));
+        $release = $this->PackageManager->getRelease(1, 2);
+        $this->spec($release->version)->should->be('2.0.2');
+        $this->spec($release->stability)->should->be('beta');
     }
-    public function it記事の破壊()
+    public function itリリースの破壊()
     {
-        $article = $this->PackageManager->getArticle(4, 8);
-        $this->spec($article)->shouldNot->beNull();
-        $this->PackageManager->destroyArticle($article);
-        $article = $this->PackageManager->getArticle(4, 8);
-        $this->spec($article)->should->beNull();
+        $release = $this->PackageManager->getRelease(1, 2);
+        $this->spec($release)->shouldNot->beNull();
+        $this->PackageManager->destroyRelease($release);
+        $release = $this->PackageManager->getRelease(1, 2);
+        $this->spec($release)->should->beNull();
     }
-    public function it記事の削除()
+    public function itリリースの削除()
     {
-        $article = $this->PackageManager->getArticle(1, 3);
-        $this->spec($article)->shouldNot->beNull();
-        $this->PackageManager->deleteArticle($article->package_id, $article->id);
-        $article = $this->PackageManager->getArticle(1, 3);
-        $this->spec($article)->should->beNull();
+        $release = $this->PackageManager->getRelease(1, 3);
+        $this->spec($release)->shouldNot->beNull();
+        $this->PackageManager->deleteRelease($release->package_id, $release->id);
+        $release = $this->PackageManager->getRelease(1, 3);
+        $this->spec($release)->should->beNull();
     }
-    */
 
+    public function itリリースファイルの追加()
+    {
+        $dto = new stdClass();
+        $dto->filename = 'Samurai-2.0.2-stable.tgz';
+        $dto->size = 123456;
+        $file = $this->PackageManager->addReleaseiFile(1, 1, $dto);
+        $this->spec($file->package_id)->should->be(1);
+        $this->spec($file->release_id)->should->be(1);
+        $this->spec($file->filename)->should->be('Samurai-2.0.2-stable.tgz');
+        $this->spec($file->size)->should->be(123456);
+        $file = $this->PackageManager->addReleaseiFile(1, 1, $dto);
+    }
+    public function itリリースファイルの保存()
+    {
+        $file = $this->PackageManager->getReleaseFile(1, 1, 1);
+        $file->size = 200000;
+        $this->PackageManager->saveReleaseFile($file);
+        $file = $this->PackageManager->getReleaseFile(1, 1, 1);
+        $this->spec($file->size)->should->be(200000);
+    }
+    public function itリリースファイルの編集()
+    {
+        $this->PackageManager->editReleaseFile(1, 1, 1, array('size' => 987654));
+        $file = $this->PackageManager->getReleaseFile(1, 1, 1);
+        $this->spec($file->size)->should->be(987654);
+    }
+    public function itリリースファイルの破壊()
+    {
+        $file = $this->PackageManager->getReleaseFile(1, 1, 1);
+        $this->spec($file)->shouldNot->beNull();
+        $this->PackageManager->destroyReleaseFile($file);
+        $file = $this->PackageManager->getReleaseFile(1, 1, 1);
+        $this->spec($file)->should->beNull();
+    }
+    public function itリリースファイルの削除()
+    {
+        $file = $this->PackageManager->getReleaseFile(1, 1, 2);
+        $this->spec($file)->shouldNot->beNull();
+        $this->PackageManager->deleteReleaseFile($file->package_id, $file->release_id, $file->id);
+        $file = $this->PackageManager->getReleaseFile(1, 1, 2);
+        $this->spec($file)->should->beNull();
+    }
+
+    public function itメンテナーの追加()
+    {
+        $dto = new stdClass();
+        $dto->name = 'falcon';
+        $dto->mail = 'falcon@samurai-fw.org';
+        $dto->role = 'developer';
+        $maintener = $this->PackageManager->addMaintener(1, $dto);
+        $this->spec($maintener->package_id)->should->be(1);
+        $this->spec($maintener->name)->should->be('falcon');
+        $this->spec($maintener->mail)->should->be('falcon@samurai-fw.org');
+        $this->spec($maintener->role)->should->be('developer');
+        $maintener = $this->PackageManager->addMaintener(1, $dto);
+    }
+    public function itメンテナーの保存()
+    {
+        $maintener = $this->PackageManager->getMaintener(1, 3);
+        $maintener->name = 'kiuchi';
+        $this->PackageManager->saveMaintener($maintener);
+        $maintener = $this->PackageManager->getMaintener(1, 3);
+        $this->spec($maintener->name)->should->be('kiuchi');
+
+    }
+    public function itメンテナーの編集()
+    {
+        $this->PackageManager->editMaintener(1, 3, array('name' => 'satoshi', 'mail' => 'satoshi@kiuchi.jp'));
+        $maintener = $this->PackageManager->getMaintener(1, 3);
+        $this->spec($maintener->name)->should->be('satoshi');
+        $this->spec($maintener->mail)->should->be('satoshi@kiuchi.jp');
+    }
+    public function itメンテナーの破壊()
+    {
+        $maintener = $this->PackageManager->getMaintener(1, 3);
+        $this->spec($maintener)->shouldNot->beNull();
+        $this->PackageManager->destroyMaintener($maintener);
+        $maintener = $this->PackageManager->getMaintener(1, 3);
+        $this->spec($maintener)->should->beNull();
+    }
+    public function itメンテナーの削除()
+    {
+        $maintener = $this->PackageManager->getMaintener(1, 4);
+        $this->spec($maintener)->shouldNot->beNull();
+        $this->PackageManager->deleteMaintener($maintener->package_id, $maintener->id);
+        $maintener = $this->PackageManager->getMaintener(1, 4);
+        $this->spec($maintener)->should->beNull();
+    }
+
+    //その他
+    public function itダウンロードされた()
+    {
+        $file = $this->PackageManager->getReleaseFile(1, 1, 3);
+        $this->PackageManager->downloaded($file);
+        $file = $this->PackageManager->getReleaseFile(1, 1, 3);
+        $this->spec($file->downloaded_counted)->should->be(1);
+    }
 
 
 

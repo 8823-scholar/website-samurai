@@ -128,6 +128,40 @@ class Web_Package_Manager extends Samurai_Model
         return $this->AG->findAllDetail($this->_table_releases_files, $condition);
     }
 
+    /**
+     * メンテナーの取得
+     * @access     public
+     * @param      int      $package_id
+     * @param      mixed    $id
+     * @return     object   ActiveGatewayRecord
+     */
+    public function getMaintener($package_id, $id)
+    {
+        if(is_object($id) && $id instanceof ActiveGatewayCondition){
+            $condition = $id;
+        } else {
+            $this->_initAGCondition($condition);
+            $condition->where->id = $id;
+        }
+        $condition->where->package_id = $package_id;
+        return $this->AG->findDetail($this->_table_mainteners, $condition);
+    }
+
+    /**
+     * メンテナーの複数取得
+     * @access     public
+     * @param      int      $package_id
+     * @param      object   $condition   ActiveGatewayCondition
+     * @return     object   ActiveGatewayRecords
+     */
+    public function getMainteners($package_id, $condition=NULL)
+    {
+        $this->_initAGCondition($condition);
+        $condition->where->package_id = $package_id;
+        if(!$condition->order) $condition->order->role = 'ASC';
+        return $this->AG->findAllDetail($this->_table_mainteners, $condition);
+    }
+
 
 
 
@@ -145,57 +179,102 @@ class Web_Package_Manager extends Samurai_Model
     }
 
     /**
-     * 記事の追加
+     * リリースの追加
      * @access     public
-     * @param      int      $forum_id
+     * @param      int      $package_id
      * @param      mixed    $dto
-     * @param      object   $User       Web_User
      * @return     object   ActiveGatewayRecord
      */
-    public function addArticle($forum_id, $dto, Web_User $User=NULL)
+    public function addRelease($package_id, $dto)
     {
         $dto = (object)$dto;
-        $dto->forum_id = $forum_id;
-        if($User){
-            $dto->user_id = $User->id;
-            $dto->user_role = $User->role;
-        }
-        $article = $this->AG->create($this->_table_articles, $dto);
-        //フォーラムの更新
-        $sql = 'UPDATE `' . $this->_table . '`
-                SET `last_posted_id` = :posted_id, `last_posted_at` = :posted_at,
-                    `topic_count` = `topic_count` + :topic_up, `article_count` = `article_count` + :article_up
-                WHERE `id` = :forum_id';
-        $topic_up = isset($article->root_id) && $article->root_id ? 0 : 1 ;
-        $article_up = isset($article->root_id) && $article->root_id ? 1 : 0 ;
-        $params = array(':posted_id' => $article->id, ':posted_at' => $article->created_at, ':topic_up' => $topic_up, ':article_up' => $article_up, ':forum_id' => $forum_id);
-        $this->AG->executeUpdate($sql, $params);
-        return $article;
+        $dto->package_id = $package_id;
+        $release = $this->AG->create($this->_table_releases, $dto);
+        return $release;
     }
+
+    /**
+     * リリースファイルの追加
+     * @access     public
+     * @param      int      $package_id
+     * @param      int      $release_id
+     * @param      mixed    $dto
+     * @return     object   ActiveGatewayRecord
+     */
+    public function addReleaseiFile($package_id, $release_id, $dto)
+    {
+        $dto = (object)$dto;
+        $dto->package_id = $package_id;
+        $dto->release_id = $release_id;
+        $file = $this->AG->create($this->_table_releases_files, $dto);
+        return $file;
+    }
+
+    /**
+     * メンテナーの追加
+     * @access     public
+     * @param      int      $package_id
+     * @param      mixed    $dto
+     * @return     object   ActiveGatewayRecord
+     */
+    public function addMaintener($package_id, $dto)
+    {
+        $dto = (object)$dto;
+        $dto->package_id = $package_id;
+        return $this->AG->create($this->_table_mainteners, $dto);
+    }
+
+
 
     /**
      * 保存
      * @access     public
-     * @param      object   $forum        ActiveGatewayRecord
+     * @param      object   $package      ActiveGatewayRecord
      * @param      mixed    $attributes   上書き値
      */
-    public function save($forum, $attributes=array())
+    public function save($package, $attributes=array())
     {
-        foreach($attributes as $_key => $_val) $forum->$_key = $_val;
-        $this->AG->save($forum);
+        foreach($attributes as $_key => $_val) $package->$_key = $_val;
+        $this->AG->save($package);
     }
 
     /**
-     * 記事の保存
+     * リリースの保存
      * @access     public
-     * @param      object   $article      ActiveGatewayRecord
+     * @param      object   $release      ActiveGatewayRecord
      * @param      mixed    $attributes   上書き値
      */
-    public function saveArticle($article, $attributes=array())
+    public function saveRelease($release, $attributes=array())
     {
-        foreach($attributes as $_key => $_val) $article->$_key = $_val;
-        $this->AG->save($article);
+        foreach($attributes as $_key => $_val) $release->$_key = $_val;
+        $this->AG->save($release);
     }
+
+    /**
+     * リリースファイルの保存
+     * @access     public
+     * @param      object   $file         ActiveGatewayRecord
+     * @param      mixed    $attributes   上書き値
+     */
+    public function saveReleaseFile($file, $attributes=array())
+    {
+        foreach($attributes as $_key => $_val) $file->$_key = $_val;
+        $this->AG->save($file);
+    }
+
+    /**
+     * メンテナーの保存
+     * @access     public
+     * @param      object   $maintener    ActiveGatewayRecord
+     * @param      mixed    $attributes   上書き値
+     */
+    public function saveMaintener($maintener, $attributes=array())
+    {
+        foreach($attributes as $_key => $_val) $maintener->$_key = $_val;
+        $this->AG->save($maintener);
+    }
+
+
 
     /**
      * 編集
@@ -213,13 +292,13 @@ class Web_Package_Manager extends Samurai_Model
     }
 
     /**
-     * 記事の編集
+     * リリースの編集
      * @access     public
-     * @param      int      $forum_id
+     * @param      int      $package_id
      * @param      mixed    $id
      * @param      mixed    $attributes
      */
-    public function editArticle($forum_id, $id, $attributes=array())
+    public function editRelease($package_id, $id, $attributes=array())
     {
         if(is_object($id) && $id instanceof ActiveGatewayCondition){
             $condition = $id;
@@ -227,33 +306,93 @@ class Web_Package_Manager extends Samurai_Model
             $this->_initAGCondition($condition);
             $condition->where->id = $id;
         }
-        $condition->where->forum_id = $forum_id;
-        $this->AG->updateDetail($this->_table_articles, $attributes, $condition);
+        $condition->where->package_id = $package_id;
+        $this->AG->updateDetail($this->_table_releases, $attributes, $condition);
     }
+
+    /**
+     * リリースファイルの編集
+     * @access     public
+     * @param      int      $package_id
+     * @param      int      $release_id
+     * @param      mixed    $id
+     * @param      mixed    $attributes
+     */
+    public function editReleaseFile($package_id, $release_id, $id, $attributes=array())
+    {
+        if(is_object($id) && $id instanceof ActiveGatewayCondition){
+            $condition = $id;
+        } else {
+            $this->_initAGCondition($condition);
+            $condition->where->id = $id;
+        }
+        $condition->where->package_id = $package_id;
+        $condition->where->release_id = $release_id;
+        $this->AG->updateDetail($this->_table_releases_files, $attributes, $condition);
+    }
+
+    /**
+     * メンテナーの編集
+     * @access     public
+     * @param      int      $package_id
+     * @param      mixed    $id
+     * @param      mixed    $attributes
+     */
+    public function editMaintener($package_id, $id, $attributes=array())
+    {
+        if(is_object($id) && $id instanceof ActiveGatewayCondition){
+            $condition = $id;
+        } else {
+            $this->_initAGCondition($condition);
+            $condition->where->id = $id;
+        }
+        $condition->where->package_id = $package_id;
+        $this->AG->updateDetail($this->_table_mainteners, $attributes, $condition);
+    }
+
 
 
     /**
      * 破壊
      * @access     public
-     * @param      object   $forum
+     * @param      object   $package
      */
-    public function destroy($forum)
+    public function destroy($package)
     {
-        $condition = $this->getCondition();
-        $condition->where->forum_id = $forum->id;
-        $this->AG->deleteAllDetail($this->_table_articles, $condition);
-        $this->AG->destroy($forum);
+        $this->AG->destroy($package);
     }
 
     /**
-     * 記事の破壊
+     * リリースの破壊
      * @access     public
-     * @param      object   $article
+     * @param      object   $release
      */
-    public function destroyArticle($article)
+    public function destroyRelease($release)
     {
-        $this->AG->destroy($article);
+        $this->AG->destroy($release);
     }
+
+    /**
+     * リリースファイルの破壊
+     * @access     public
+     * @param      object   $file
+     */
+    public function destroyReleaseFile($file)
+    {
+        $this->AG->destroy($file);
+    }
+
+    /**
+     * メンテナーの破壊
+     * @access     public
+     * @param      object   $maintener
+     */
+    public function destroyMaintener($maintener)
+    {
+        $this->AG->destroy($maintener);
+    }
+
+
 
     /**
      * 削除
@@ -262,18 +401,22 @@ class Web_Package_Manager extends Samurai_Model
      */
     public function delete($id)
     {
-        //記事の削除が絡むのでdestroyで統一
-        $forum = $this->get($id);
-        $this->destroy($forum);
+        if(is_object($id) && $id instanceof ActiveGatewayCondition){
+            $condition = $id;
+        } else {
+            $this->_initAGCondition($condition);
+            $condition->where->id = $id;
+        }
+        $this->AG->deleteDetail($this->_table, $condition);
     }
 
     /**
-     * 記事の削除
+     * リリースの削除
      * @access     public
-     * @param      int      $forum_id
+     * @param      int      $package_id
      * @param      mixed    $id
      */
-    public function deleteArticle($forum_id, $id)
+    public function deleteRelease($package_id, $id)
     {
         if(is_object($id) && $id instanceof ActiveGatewayCondition){
             $condition = $id;
@@ -281,54 +424,75 @@ class Web_Package_Manager extends Samurai_Model
             $this->_initAGCondition($condition);
             $condition->where->id = $id;
         }
-        $condition->where->forum_id = $forum_id;
-        $this->AG->deleteDetail($this->_table_articles, $condition);
+        $condition->where->package_id = $package_id;
+        $this->AG->deleteDetail($this->_table_releases, $condition);
     }
 
-
-
     /**
-     * 返信
-     * @access    public
-     * @param     object   $parent   ActiveGatewayRecord
-     * @param     object   $dto
-     * @return    object   ActiveGatewayRecord
-     */
-    public function reply(ActiveGatewayRecord $parent, $dto)
-    {
-        $dto->root_id = $parent->root_id ? $parent->root_id : $parent->id ;
-        $dto->parent_id = $parent->id;
-        $article = $this->addArticle($parent->forum_id, $dto);
-        //トピックの更新
-        $topic = $parent->root_id ? $this->getArticle($parent->forum_id, $parent->root_id) : $parent ;
-        $sql = 'UPDATE `' . $this->_table_articles . '`
-                SET `reply_count` = `reply_count` + 1, `last_replied_id` = :replied_id, `last_replied_at` = :replied_at, `updated_at` = :updated_at
-                WHERE `id` = :id';
-        $params = array(':replied_id' => $article->id, ':replied_at' => $article->created_at, ':updated_at' => time(), ':id' => $topic->id);
-        $this->AG->executeUpdate($sql, $params);
-        return $article;
-    }
-
-
-
-
-
-    /**
-     * メール通知してほしい人を取得
+     * リリースファイルの削除
      * @access     public
-     * @param      int      $forum_id
-     * @param      int      $topic_id
-     * @return     object   ActiveGatewayRecords
+     * @param      int      $package_id
+     * @param      int      $release_id
+     * @param      mixed    $id
      */
-    public function getUsersWannaInform($forum_id, $topic_id)
+    public function deleteReleaseFile($package_id, $release_id, $id)
     {
-        $sql = "SELECT f.id, f.forum_id, f.root_id, f.parent_id, f.user_id,
-                    COALESCE(u.name, f.name) AS name, COALESCE(u.mail, f.mail) AS mail
-                FROM forum_articles AS f LEFT JOIN user AS u ON u.id = f.user_id
-                WHERE (f.id = :topic_id OR f.root_id = :topic_id) AND f.forum_id = :forum_id AND f.mail_inform = '1'
-                GROUP BY `mail`
-                HAVING mail != ''";
-        $params = array(':forum_id' => $forum_id, ':topic_id' => $topic_id);
-        return $this->AG->findAllSql($this->_table_articles, $sql, $params);
+        if(is_object($id) && $id instanceof ActiveGatewayCondition){
+            $condition = $id;
+        } else {
+            $this->_initAGCondition($condition);
+            $condition->where->id = $id;
+        }
+        $condition->where->package_id = $package_id;
+        $condition->where->release_id = $release_id;
+        $this->AG->deleteDetail($this->_table_releases_files, $condition);
+    }
+
+    /**
+     * メンテナーの削除
+     * @access     public
+     * @param      int      $package_id
+     * @param      mixed    $id
+     */
+    public function deleteMaintener($package_id, $id)
+    {
+        if(is_object($id) && $id instanceof ActiveGatewayCondition){
+            $condition = $id;
+        } else {
+            $this->_initAGCondition($condition);
+            $condition->where->id = $id;
+        }
+        $condition->where->package_id = $package_id;
+        $this->AG->deleteDetail($this->_table_mainteners, $condition);
+    }
+
+
+
+
+
+    /**
+     * ダウンロードされた
+     * @access    public
+     * @param     object   $file   ActiveGatewayRecord
+     */
+    public function downloaded(ActiveGatewayRecord $file)
+    {
+        $sql = "UPDATE " . $this->_table_releases_files . "
+                SET downloaded_counted = downloaded_counted + 1, updated_at = :time
+                WHERE id = :id AND package_id = :package_id AND release_id = :release_id";
+        $params = array(':time' => time(), ':id' => $file->id, ':package_id' => $file->package_id, ':release_id' => $file->release_id);
+        $this->AG->executeUpdate($sql, $params);
+        
+        $sql = "UPDATE " . $this->_table_releases . "
+                SET downloaded_counted = downloaded_counted + 1, updated_at = :time
+                WHERE id = :id AND package_id = :package_id";
+        $params = array(':time' => time(), ':id' => $file->release_id, ':package_id' => $file->package_id);
+        $this->AG->executeUpdate($sql, $params);
+
+        $sql = "UPDATE " . $this->_table . "
+                SET downloaded_counted = downloaded_counted + 1, updated_at = :time
+                WHERE id = :id";
+        $params = array(':time' => time(), ':id' => $file->package_id);
+        $this->AG->executeUpdate($sql, $params);
     }
 }
