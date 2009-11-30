@@ -9,7 +9,7 @@
  * @copyright  Samurai Framework Project
  * @author     hayabusa <scholar@hayabusa-lab.jp>
  */
-class Web_Package_Manage extends Samurai_Model
+class Web_Package_Manager extends Samurai_Model
 {
     protected
         $_table = 'package',
@@ -52,18 +52,18 @@ class Web_Package_Manage extends Samurai_Model
     public function gets($condition=NULL)
     {
         $this->_initAGCondition($condition);
-        if(!$condition->order) $condition->order->updated_at = 'DESC';
+        if(!$condition->order) $condition->order->id = 'ASC';
         return $this->AG->findAllDetail($this->_table, $condition);
     }
 
     /**
-     * 記事の取得
+     * リリースの取得
      * @access     public
-     * @param      int      $forum_id
+     * @param      int      $package_id
      * @param      mixed    $id
      * @return     object   ActiveGatewayRecord
      */
-    public function getArticle($forum_id, $id)
+    public function getRelease($package_id, $id)
     {
         if(is_object($id) && $id instanceof ActiveGatewayCondition){
             $condition = $id;
@@ -71,58 +71,64 @@ class Web_Package_Manage extends Samurai_Model
             $this->_initAGCondition($condition);
             $condition->where->id = $id;
         }
-        $condition->where->forum_id = $forum_id;
-        return $this->AG->findDetail($this->_table_articles, $condition);
+        $condition->where->package_id = $package_id;
+        return $this->AG->findDetail($this->_table_releases, $condition);
     }
 
     /**
-     * 記事の複数取得
+     * リリースの複数取得
      * @access     public
-     * @param      int      $forum_id
+     * @param      int      $package_id
      * @param      object   $condition   ActiveGatewayCondition
      * @return     object   ActiveGatewayRecords
      */
-    public function getArticles($forum_id, $condition=NULL)
+    public function getReleases($package_id, $condition=NULL)
     {
         $this->_initAGCondition($condition);
-        $condition->where->forum_id = $forum_id;
-        if(!$condition->order) $condition->order->updated_at = 'DESC';
-        return $this->AG->findAllDetail($this->_table_articles, $condition);
+        $condition->where->package_id = $package_id;
+        if(!$condition->order) $condition->order->datetime = 'DESC';
+        return $this->AG->findAllDetail($this->_table_releases, $condition);
     }
 
     /**
-     * 記事の再帰的取得
+     * リリースファイルの取得
      * @access     public
-     * @param      int      $forum_id
-     * @param      int      $article_id
+     * @param      int      $package_id
+     * @param      int      $release_id
+     * @param      mixed    $id
      * @return     object   ActiveGatewayRecord
      */
-    public function getArticlesReflexive($forum_id, $article_id)
+    public function getReleaseFile($package_id, $release_id, $id)
     {
-        $article = $this->getArticle($forum_id, $article_id);
-        if($article){
-            $this->appendChildren($article);
+        if(is_object($id) && $id instanceof ActiveGatewayCondition){
+            $condition = $id;
+        } else {
+            $this->_initAGCondition($condition);
+            $condition->where->id = $id;
         }
-        return $article;
+        $condition->where->package_id = $package_id;
+        $condition->where->release_id = $release_id;
+        return $this->AG->findDetail($this->_table_releases_files, $condition);
     }
 
     /**
-     * 子記事をアペンドする
+     * リリースファイルの複数取得
      * @access     public
-     * @param      object   ActiveGatewayRecord
-     * @return     void
+     * @param      int      $package_id
+     * @param      int      $release_id
+     * @param      object   $condition   ActiveGatewayCondition
+     * @return     object   ActiveGatewayRecords
      */
-    public function appendChildren(ActiveGatewayRecord $article)
+    public function getReleaseFiles($package_id, $release_id, $condition=NULL)
     {
-        //子記事の取得
-        $condition = $this->_initAGCondition($condition);
-        $condition->where->parent_id = $article->id;
-        $condition->order->created_at = 'ASC';
-        $article->children = $this->getArticles($article->forum_id, $condition);
-        foreach($article->children as $child){
-            $this->appendChildren($child);
-        }
+        $this->_initAGCondition($condition);
+        $condition->where->package_id = $package_id;
+        $condition->where->release_id = $release_id;
+        if(!$condition->order) $condition->order->sort = 'ASC';
+        return $this->AG->findAllDetail($this->_table_releases_files, $condition);
     }
+
+
 
 
 
