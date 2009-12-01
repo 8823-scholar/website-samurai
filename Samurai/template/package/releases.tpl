@@ -71,5 +71,20 @@
             </table>
         </div>
 
+        {** レポジトリ **}
+        <div class='repositries column'>
+            <h3>レポジトリ</h3>
+            <p>
+                Samurai FrameworkはSubversionというバージョン管理システムを利用しています。<br />
+                最新版は常にtrunkで開発され、リリースのタイミングでtagを切り、メージャーバージョンアップの様に大きな変更を必要とする場合branchesを切って対応を分離しています。<br />
+                過去のSamurai、あるいは開発途中の最新のSamuraiの確認はこちらからどうぞ！<br />
+                <br />
+                <ul>
+                    <li>[svn] {Html->a href='/source/svn/' value="`$smarty.const.BASE_URL`/source/svn"}</li>
+                    <li>[svn:trunk] {Html->a href='/source/svn/trunk' value="`$smarty.const.BASE_URL`/source/svn/trunk"}</li>
+                </ul>
+            </p>
+        </div>
+
     </div>
 {include file='_footer.tpl'}
