@@ -6,6 +6,9 @@
 <html xmlns='http://www.w3.org/1999/xhtml' xml:lang='ja' dir='ltr'>
     <head>
         <meta http-equiv='content-type' content='application/xhtml+xml; charset=UTF-8' />
+        {foreach from=$html.metas item='meta'}
+            <meta http-equiv='{$meta.key|escape:"html"}' content='{$meta.value|escape:"html"}' />
+        {/foreach}
         
         {Html->load type='css' file='/css/reset.css'}
         {Html->load type='css' file='/css/base.css'}

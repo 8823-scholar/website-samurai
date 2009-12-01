@@ -310,7 +310,7 @@ class DescribeWebPackageManager extends PHPSpec_Context
         $file = $this->PackageManager->getReleaseFile(1, 1, 3);
         $this->PackageManager->downloaded($file);
         $file = $this->PackageManager->getReleaseFile(1, 1, 3);
-        $this->spec($file->downloaded_counted)->should->be(1);
+        $this->spec($file->downloaded_count)->should->be(1);
     }
 
 
@@ -330,7 +330,7 @@ class DescribeWebPackageManager extends PHPSpec_Context
                 `description` text COLLATE utf8_unicode_ci NOT NULL COMMENT '説明文',
                 `natural_locale` varchar(3) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'ja' COMMENT 'メインの言語',
                 `required_os` varchar(16) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'independent' COMMENT '依存OS',
-                `downloaded_counted` int(11) NOT NULL DEFAULT '0' COMMENT 'ダウンロード数',
+                `downloaded_count` int(11) NOT NULL DEFAULT '0' COMMENT 'ダウンロード数',
                 `created_at` int(11) NOT NULL DEFAULT '0',
                 `updated_at` int(11) NOT NULL DEFAULT '0',
                 `deleted_at` int(11) NOT NULL DEFAULT '0',
@@ -359,7 +359,7 @@ class DescribeWebPackageManager extends PHPSpec_Context
                 `version` varchar(16) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0.0.0' COMMENT 'バージョン',
                 `stability` enum('stable','beta','alpha') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'alpha' COMMENT '状態',
                 `datetime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'リリース日',
-                `downloaded_counted` int(11) NOT NULL DEFAULT '0' COMMENT 'ダウンロード数',
+                `downloaded_count` int(11) NOT NULL DEFAULT '0' COMMENT 'ダウンロード数',
                 `created_at` int(11) NOT NULL DEFAULT '0',
                 `updated_at` int(11) NOT NULL DEFAULT '0',
                 `deleted_at` int(11) NOT NULL DEFAULT '0',
@@ -374,7 +374,7 @@ class DescribeWebPackageManager extends PHPSpec_Context
                 `release_id` int(11) NOT NULL DEFAULT '0' COMMENT '=package_releases.id',
                 `filename` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT 'ファイル名',
                 `size` int(11) NOT NULL DEFAULT '0' COMMENT 'ファイルサイズ',
-                `downloaded_counted` int(11) NOT NULL DEFAULT '0' COMMENT 'ダウンロード数',
+                `downloaded_count` int(11) NOT NULL DEFAULT '0' COMMENT 'ダウンロード数',
                 `sort` int(2) NOT NULL DEFAULT '99' COMMENT '並び順',
                 `created_at` int(11) NOT NULL DEFAULT '0',
                 `updated_at` int(11) NOT NULL DEFAULT '0',

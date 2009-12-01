@@ -44,6 +44,17 @@ class Web_Package_Manager extends Samurai_Model
     }
 
     /**
+     * aliasから取得
+     * @access     public
+     * @param      string   $alias
+     * @return     object   ActiveGatewayRecord
+     */
+    public function getByAlias($alias)
+    {
+        return $this->AG->findBy($this->_table, 'alias', $alias);
+    }
+
+    /**
      * 複数取得
      * @access     public
      * @param      object   $condition   ActiveGatewayCondition
@@ -478,19 +489,19 @@ class Web_Package_Manager extends Samurai_Model
     public function downloaded(ActiveGatewayRecord $file)
     {
         $sql = "UPDATE " . $this->_table_releases_files . "
-                SET downloaded_counted = downloaded_counted + 1, updated_at = :time
+                SET downloaded_count = downloaded_count + 1, updated_at = :time
                 WHERE id = :id AND package_id = :package_id AND release_id = :release_id";
         $params = array(':time' => time(), ':id' => $file->id, ':package_id' => $file->package_id, ':release_id' => $file->release_id);
         $this->AG->executeUpdate($sql, $params);
         
         $sql = "UPDATE " . $this->_table_releases . "
-                SET downloaded_counted = downloaded_counted + 1, updated_at = :time
+                SET downloaded_count = downloaded_count + 1, updated_at = :time
                 WHERE id = :id AND package_id = :package_id";
         $params = array(':time' => time(), ':id' => $file->release_id, ':package_id' => $file->package_id);
         $this->AG->executeUpdate($sql, $params);
 
         $sql = "UPDATE " . $this->_table . "
-                SET downloaded_counted = downloaded_counted + 1, updated_at = :time
+                SET downloaded_count = downloaded_count + 1, updated_at = :time
                 WHERE id = :id";
         $params = array(':time' => time(), ':id' => $file->package_id);
         $this->AG->executeUpdate($sql, $params);

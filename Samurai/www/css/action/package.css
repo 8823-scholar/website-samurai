@@ -50,6 +50,7 @@
     }
     #samurai #contents.package.releases #main .packages table.list td.datetime
     {
+        color : #777777;
         text-align : right;
         background : #F9F9F9;
         border-left : none;
@@ -62,6 +63,7 @@
     #samurai #contents.package.releases #main .packages table.list td.size
     {
         border : none;
+        text-align : center;
     }
     #samurai #contents.package.releases #main .packages table.list td.downloaded_count
     {

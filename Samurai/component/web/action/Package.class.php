@@ -35,27 +35,27 @@ class Web_Action_Package extends Web_Action
      */
     protected function _setPackage()
     {
-        $this->package = $this->PackageManager->get($this->Request->get('package_alias', $this->Request->get('package_id')));
+        $this->package = $this->PackageManager->getByAlias($this->Request->get('package_alias'));
         if(!$this->package) throw new Web_Exception('No such package.');
     }
 
     /**
-     * トピックをセットする
+     * リリースをセットする
      * @access     protected
      */
-    protected function _setTopic()
+    protected function _setRelease()
     {
-        $this->topic = $this->ForumManager->getArticle($this->forum->id, $this->Request->get('topic_id'));
-        if(!$this->topic) throw new Web_Exception('No such topic.');
+        $this->release = $this->PackageManager->getRelease($this->package->id, $this->Request->get('release_id'));
+        if(!$this->release) throw new Web_Exception('No such release.');
     }
 
     /**
-     * 記事をセットする
+     * リリースファイルをセットする
      * @access     protected
      */
-    protected function _setArticle()
+    protected function _setFile()
     {
-        $this->article = $this->ForumManager->getArticle($this->forum->id, $this->Request->get('article_id'));
-        if(!$this->article) throw new Web_Exception('No such article.');
+        $this->file = $this->PackageManager->getReleaseFile($this->package->id, $this->release->id, $this->Request->get('file_id'));
+        if(!$this->file) throw new Web_Exception('No such file.');
     }
 }

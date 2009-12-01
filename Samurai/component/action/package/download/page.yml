@@ -1,0 +1,5 @@
+###
+ # package - download - page.yml
+ #/
+View:
+    success : 'package/download/page.tpl'
