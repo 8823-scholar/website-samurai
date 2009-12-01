@@ -1,0 +1,63 @@
+/**
+ * css/action/package.css
+ * 
+ * アクション - package
+ * 
+ * @package     Samurai
+ * @subpackage  www.css
+ * @copyright   BEFOOL,Inc.
+ * @author      Satoshi Kiuchi <satoshi.kiuchi@befool.co.jp>
+ */
+/********************
+  パッケージ一覧
+********************/
+    #samurai #contents.package.releases #main .packages table.list
+    {
+        border : 1px solid #CCCCCC;
+    }
+    #samurai #contents.package.releases #main .packages table.list th.name
+    {
+        padding: 10px;
+        text-align : left;
+        border-width : 1px 0px 1px 1px;
+        font-size : 14px;
+        font-weight : bold;
+    }
+    #samurai #contents.package.releases #main .packages table.list th.size
+    {
+        width : 100px;
+        color : #999999;
+        border-width : 1px 0px 1px 0px;
+        font-size : 10px;
+    }
+    #samurai #contents.package.releases #main .packages table.list th.downloaded_count
+    {
+        width : 100px;
+        color : #999999;
+        border-width : 1px 1px 1px 0px;
+        font-size : 10px;
+    }
+    #samurai #contents.package.releases #main .packages table.list td
+    {
+        padding : 7px;
+    }
+    #samurai #contents.package.releases #main .packages table.list td.version
+    {
+        padding-left : 10px;
+        font-weight : bold;
+        background : #F9F9F9;
+    }
+    #samurai #contents.package.releases #main .packages table.list td.filename
+    {
+        padding-left : 30px;
+        border : none;
+    }
+    #samurai #contents.package.releases #main .packages table.list td.size
+    {
+        border : none;
+    }
+    #samurai #contents.package.releases #main .packages table.list td.downloaded_count
+    {
+        border : none;
+        text-align : center;
+    }

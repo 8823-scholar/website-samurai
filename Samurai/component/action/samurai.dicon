@@ -10,6 +10,8 @@ AG:
 ## Main
 ForumManager:
     class : Web_Forum_Manager
+PackageManager:
+    class : Web_Package_Manager
 
 
 ## Other

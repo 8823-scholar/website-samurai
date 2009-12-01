@@ -1,0 +1,8 @@
+###
+ # package - *.yml
+ #/
+#Convert:
+#    * : 'trim'
+#    
+#Validate:
+#    
