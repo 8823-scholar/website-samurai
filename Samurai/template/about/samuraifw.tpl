@@ -43,5 +43,18 @@
                 </ul>
             </ul>
         </div>
+
+        <h2>謝辞</h2>
+        <div class='thank column'>
+            <p>
+                Samurai Frameworkは、PHPフレームワークMapleを強くリスペクトしています。<br />
+                全体的な構造、DIContainerという要素または仕組み、ActiveGatewayという同名のO/Rマッパーなど、Mapleとの共通点は数えきれないほど存在しています。<br />
+                これは、メインの開発者である木内智史之介(hayabusa)が元Mapleのコミッタであったという事実に由来しています。<br />
+                <br />
+                木内智史之介がMapleに出会わなければ、また、Mapleのコミッタとして開発に参加していなければ、Samurai Frameworkは誕生しなかったでしょう。<br />
+                <br />
+                Mapleへの心からの感謝の意と、尊敬の意をここに表します。<br />
+            </p>
+        </div>
     </div>
 {include file='_footer.tpl'}
