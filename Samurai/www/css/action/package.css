@@ -46,6 +46,13 @@
         padding-left : 10px;
         font-weight : bold;
         background : #F9F9F9;
+        border-right : none;
+    }
+    #samurai #contents.package.releases #main .packages table.list td.datetime
+    {
+        text-align : right;
+        background : #F9F9F9;
+        border-left : none;
     }
     #samurai #contents.package.releases #main .packages table.list td.filename
     {

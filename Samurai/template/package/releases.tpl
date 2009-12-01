@@ -28,8 +28,11 @@
                 {** stable **}
                 {if $package.stable}
                     <tr class='stable'>
-                        <td class='version stability' colspan='3'>
+                        <td class='version stability'>
                             {$package.stable.version}-{$package.stable.stability}
+                        </td>
+                        <td class='datetime' colspan='2'>
+                            {$package.stable.datetime|date_format:'%Y年%m月%d日 %H:%I'}
                         </td>
                     </tr>
                     {foreach from=$package.stable.files item='file'}
@@ -46,8 +49,11 @@
                 {** unstable **}
                 {if $package.unstable}
                     <tr class='unstable'>
-                        <td class='version stability' colspan='3'>
+                        <td class='version stability'>
                             {$package.unstable.version}-{$package.unstable.stability}
+                        </td>
+                        <td class='datetime' colspan='2'>
+                            {$package.unstable.datetime|date_format:'%Y年%m月%d日 %H:%I'}
                         </td>
                     </tr>
                     {foreach from=$package.unstable.files item='file'}
