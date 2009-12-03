@@ -50,6 +50,7 @@ class DescribeWebWikiManager extends PHPSpec_Context
         $this->spec($this->WikiManager->locale)->should->be('ja');
         $this->WikiManager->setLocale('en');
         $this->spec($this->WikiManager->locale)->should->be('en');
+        $this->WikiManager->setLocale('ja');
     }
     public function itデフォルトの言語を設定する()
     {
@@ -326,74 +327,63 @@ class DescribeWebWikiManager extends PHPSpec_Context
         //DB作成
         $this->WikiManager->AG->executeQuery("
             CREATE TEMPORARY TABLE IF NOT EXISTS `wiki` (
-                `id` int(11) NOT NULL AUTO_INCREMENT,
-                `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL COMMENT '名前',
-                `description` text COLLATE utf8_unicode_ci NOT NULL COMMENT '説明文',
-                `natural_locale` varchar(3) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'ja' COMMENT 'メインの言語',
-                `required_os` varchar(16) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'independent' COMMENT '依存OS',
-                `downloaded_count` int(11) NOT NULL DEFAULT '0' COMMENT 'ダウンロード数',
-                `created_at` int(11) NOT NULL DEFAULT '0',
-                `updated_at` int(11) NOT NULL DEFAULT '0',
-                `deleted_at` int(11) NOT NULL DEFAULT '0',
-                `active` enum('0','1') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
-                PRIMARY KEY (`id`)
-            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='パッケージ';            
+                `id` int(11) NOT NULL auto_increment,
+                `name` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT 'ページ名',
+                `content` text collate utf8_unicode_ci NOT NULL COMMENT '内容',
+                `locale` varchar(3) collate utf8_unicode_ci NOT NULL default 'ja' COMMENT '言語',
+                `localized_for` int(11) default NULL COMMENT 'あるWIKI翻訳の場合(=wiki.id)',
+                `revision` int(11) NOT NULL default '1' COMMENT 'リビジョン番号',
+                `created_by` int(11) NOT NULL default '0' COMMENT '=user.id',
+                `updated_by` int(11) NOT NULL default '0' COMMENT '=user.id',
+                `created_at` int(11) NOT NULL default '0',
+                `updated_at` int(11) NOT NULL default '0',
+                `deleted_at` int(11) NOT NULL default '0',
+                `active` enum('0','1') collate utf8_unicode_ci NOT NULL default '1',
+                PRIMARY KEY  (`id`),
+                KEY `name` (`name`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='WIKI';
         ");
         $this->WikiManager->AG->executeQuery("
-            CREATE TEMPORARY TABLE IF NOT EXISTS `wiki_mainteners` (
-                `id` int(11) NOT NULL AUTO_INCREMENT,
-                `wiki_id` int(11) NOT NULL DEFAULT '0' COMMENT '=wiki.id',
-                `name` varchar(128) COLLATE utf8_unicode_ci NOT NULL COMMENT '名前',
-                `mail` varchar(128) COLLATE utf8_unicode_ci NOT NULL COMMENT 'メール',
-                `role` enum('lead','developer','contributor','helper','other') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'other' COMMENT '役割',
-                `created_at` int(11) NOT NULL DEFAULT '0',
-                `updated_at` int(11) NOT NULL DEFAULT '0',
-                `deleted_at` int(11) NOT NULL DEFAULT '0',
-                `active` enum('0','1') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
-                PRIMARY KEY (`id`)
-            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='パッケージ：メンテナー';
+            CREATE TEMPORARY TABLE IF NOT EXISTS `wiki_comments` (
+                `id` int(11) NOT NULL auto_increment,
+                `wiki_id` int(11) NOT NULL default '0' COMMENT '=wiki.id',
+                `user_id` int(11) default NULL COMMENT '=user.id',
+                `name` varchar(128) collate utf8_unicode_ci default NULL COMMENT '名前（未ログインの場合に限る）',
+                `comment` text collate utf8_unicode_ci NOT NULL COMMENT 'コメント',
+                `created_at` int(11) NOT NULL default '0',
+                `updated_at` int(11) NOT NULL default '0',
+                `deleted_at` int(11) NOT NULL default '0',
+                `active` enum('0','1') collate utf8_unicode_ci NOT NULL default '1',
+                PRIMARY KEY  (`id`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='WIKIへのコメント';
         ");
         $this->WikiManager->AG->executeQuery("
-            CREATE TEMPORARY TABLE IF NOT EXISTS `wiki_releases` (
-                `id` int(11) NOT NULL AUTO_INCREMENT,
-                `wiki_id` int(11) NOT NULL DEFAULT '0' COMMENT '=wiki.id',
-                `version` varchar(16) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0.0.0' COMMENT 'バージョン',
-                `stability` enum('stable','beta','alpha') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'alpha' COMMENT '状態',
-                `datetime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'リリース日',
-                `downloaded_count` int(11) NOT NULL DEFAULT '0' COMMENT 'ダウンロード数',
-                `created_at` int(11) NOT NULL DEFAULT '0',
-                `updated_at` int(11) NOT NULL DEFAULT '0',
-                `deleted_at` int(11) NOT NULL DEFAULT '0',
-                `active` enum('0','1') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
-                PRIMARY KEY (`id`)
-            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='パッケージのリリース';
-        ");
-        $this->WikiManager->AG->executeQuery("
-            CREATE TEMPORARY TABLE IF NOT EXISTS `wiki_releases_files` (
-                `id` int(11) NOT NULL AUTO_INCREMENT,
-                `wiki_id` int(11) NOT NULL DEFAULT '0' COMMENT '=wiki.id',
-                `release_id` int(11) NOT NULL DEFAULT '0' COMMENT '=wiki_releases.id',
-                `filename` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT 'ファイル名',
-                `size` int(11) NOT NULL DEFAULT '0' COMMENT 'ファイルサイズ',
-                `downloaded_count` int(11) NOT NULL DEFAULT '0' COMMENT 'ダウンロード数',
-                `sort` int(2) NOT NULL DEFAULT '99' COMMENT '並び順',
-                `created_at` int(11) NOT NULL DEFAULT '0',
-                `updated_at` int(11) NOT NULL DEFAULT '0',
-                `deleted_at` int(11) NOT NULL DEFAULT '0',
-                `active` enum('0','1') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
-                PRIMARY KEY (`id`)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='パッケージ：リリース：ファイル';
+            CREATE TEMPORARY TABLE IF NOT EXISTS `wiki_histories` (
+                `id` int(11) NOT NULL auto_increment,
+                `wiki_id` int(11) NOT NULL default '0' COMMENT '=wiki.id',
+                `name` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT '名前',
+                `content` text collate utf8_unicode_ci NOT NULL COMMENT '内容',
+                `revision` int(11) NOT NULL default '1' COMMENT 'リビジョン番号',
+                `updated_by` int(11) NOT NULL default '0' COMMENT '=user.id(このバージョンにおける更新者)',
+                `created_at` int(11) NOT NULL default '0',
+                `updated_at` int(11) NOT NULL default '0',
+                `deleted_at` int(11) NOT NULL default '0',
+                `active` enum('0','1') collate utf8_unicode_ci NOT NULL default '1',
+                PRIMARY KEY  (`id`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='WIKIの編集履歴';
         ");
         //データ挿入
         $datas = array(
-            array('name' => 'Samurai Framework', 'description' => 'SamuraiFWはうんたら。'),
+            array('name' => 'FrontPage', 'content' => '[ja] FrontPageのcontentです。', 'locale' => 'ja', 'revision' => 3),
+            array('name' => 'FrontPage', 'content' => '[en] This is content of FrontPage.', 'locale' => 'en', 'localized_for' => 1),
+            array('name' => 'directory/page', 'content' => 'このページにはまだ翻訳版がありません。', 'local' => 'ja')
         );
         foreach($datas as $data){
             $this->WikiManager->AG->create('wiki', $data);
         }
 
         $datas = array(
-            array('wiki_id' => 1, 'name' => 'メンテナー１', 'mail' => 'maintener1@samurai-fw.org', 'role' => 'lead'),
+            array('wiki_id' => 1, 'name' => 'FrontPage', 'mail' => 'maintener1@samurai-fw.org', 'role' => 'lead'),
             array('wiki_id' => 1, 'name' => 'メンテナー２', 'mail' => 'maintener2@samurai-fw.org', 'role' => 'developer'),
             array('wiki_id' => 1, 'name' => 'メンテナー３', 'mail' => 'maintener3@samurai-fw.org', 'role' => 'contributor'),
         );
