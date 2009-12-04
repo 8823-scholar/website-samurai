@@ -68,7 +68,7 @@ class DescribeWebWikiManager extends PHPSpec_Context
         $this->spec($wiki->id)->should->be(1);
         //引数には$conditionも可能
         $condition = $this->WikiManager->getCondition();
-        $condition->where->id = 3;
+        $condition->where->id = 10;
         $wiki = $this->WikiManager->get($condition);
         $this->spec($wiki)->should->beNull();
     }
@@ -80,88 +80,56 @@ class DescribeWebWikiManager extends PHPSpec_Context
         $this->spec($wikis->getSize())->should->be(1);
     }
 
-    public function itリリースの取得()
+    public function itコメントの取得()
     {
-        $release = $this->WikiManager->getRelease(1, 1);
-        $this->spec($release)->shouldNot->beNull();
-        $this->spec($release->id)->should->be(1);
-        $this->spec($release->wiki_id)->should->be(1);
+        $comment = $this->WikiManager->getComment(1, 1);
+        $this->spec($comment)->shouldNot->beNull();
+        $this->spec($comment->id)->should->be(1);
+        $this->spec($comment->wiki_id)->should->be(1);
         //第二引数はconditionも可能
         $condition = $this->WikiManager->getCondition();
-        $condition->where->version = '3.0.0';
-        $release = $this->WikiManager->getRelease(1, $condition);
-        $this->spec($release)->should->beNull();
+        $condition->where->id = 2;
+        $comment = $this->WikiManager->getComment(1, $condition);
+        $this->spec($comment)->shouldNot->beNull();
+        $this->spec($comment->id)->should->be(2);
     }
-    public function itリリースの取得：複数()
+    public function itコメントの取得：複数()
     {
         $condition = $this->WikiManager->getCondition();
         $condition->setLimit(1);
-        $releases = $this->WikiManager->getReleases(1, $condition);
-        $this->spec($releases->getSize())->should->be(1);
-    }
-    public function itリリースファイルの取得()
-    {
-        $file = $this->WikiManager->getReleaseFile(1, 1, 2);
-        $this->spec($file)->shouldNot->beNull();
-        $this->spec($file->id)->should->be(2);
-        $this->spec($file->wiki_id)->should->be(1);
-        $this->spec($file->release_id)->should->be(1);
-    }
-    public function itリリースファイルの取得：複数()
-    {
-        $condition = $this->WikiManager->getCondition();
-        $condition->setLimit(1);
-        $files = $this->WikiManager->getReleaseFiles(1, 1, $condition);
-        $this->spec($files->getSize())->should->be(1);
+        $comments = $this->WikiManager->getComments(1, $condition);
+        $this->spec($comments->getSize())->should->be(1);
     }
 
-    public function itメンテナーの取得()
-    {
-        $maintener = $this->WikiManager->getMaintener(1, 2);
-        $this->spec($maintener)->shouldNot->beNull();
-        $this->spec($maintener->id)->should->be(2);
-        $this->spec($maintener->wiki_id)->should->be(1);
-        //第二引数はconditionも可能
-        $condition = $this->WikiManager->getCondition();
-        $condition->where->id = 3;
-        $maintener = $this->WikiManager->getMaintener(1, $condition);
-        $this->spec($maintener->id)->should->be(3);
-    }
-    public function itメンテナーの取得：複数()
-    {
-        $condition = $this->WikiManager->getCondition();
-        $condition->setLimit(2);
-        $mainteners = $this->WikiManager->getMainteners(1, $condition);
-        $this->spec($mainteners->getSize())->should->be(2);
-    }
 
     //操作系
     public function it追加()
     {
         $dto = new stdClass();
-        $dto->name = 'Bushi Framework';
-        $dto->description = '腹を切らせていただく！';
+        $dto->name = 'spec/example1';
+        $dto->content = 'うんたらかんたら';
         $wiki = $this->WikiManager->add($dto);
-        $this->spec($wiki->name)->should->be('Bushi Framework');
-        $this->spec($wiki->description)->should->be('腹を切らせていただく！');
+        $this->spec($wiki->name)->should->be('spec/example1');
+        $this->spec($wiki->content)->should->be('うんたらかんたら');
         $this->WikiManager->add($dto);
     }
     public function it保存()
     {
-        $wiki = $this->WikiManager->get(2);
-        $wiki->name = 'Nobushi Framework';
-        $wiki->description = '落ちますた。';
+        $wiki = $this->WikiManager->get(3);
+        $wiki->name = 'spec/example2';
+        $wiki->content = '編集しますた。';
         $this->WikiManager->save($wiki);
-        $wiki = $this->WikiManager->get(2);
-        $this->spec($wiki->name)->should->be('Nobushi Framework');
-        $this->spec($wiki->description)->should->be('落ちますた。');
+        $wiki = $this->WikiManager->get(3);
+        $this->spec($wiki->name)->should->be('spec/example2');
+        $this->spec($wiki->content)->should->be('編集しますた。');
     }
     public function it編集()
     {
-        $this->WikiManager->edit(2, array('name' => 'Ochimusya'));
-        $wiki = $this->WikiManager->get(2);
-        $this->spec($wiki->name)->should->be('Ochimusya');
+        $this->WikiManager->edit(3, array('name' => 'spec/example2:edited'));
+        $wiki = $this->WikiManager->get(3);
+        $this->spec($wiki->name)->should->be('spec/example2:edited');
     }
+    /*
     public function it破壊()
     {
         $wiki = $this->WikiManager->get(2);
@@ -313,6 +281,8 @@ class DescribeWebWikiManager extends PHPSpec_Context
         $maintener = $this->WikiManager->getMaintener(1, 4);
         $this->spec($maintener)->should->beNull();
     }
+     */
+    /* }}} */
 
 
 
@@ -322,7 +292,7 @@ class DescribeWebWikiManager extends PHPSpec_Context
     public function beforeAll()
     {
         //コンポーネント準備
-        $this->WikiManager = new Web_Package_Manager();
+        $this->WikiManager = new Web_Wiki_Manager();
         $this->WikiManager->AG = ActiveGatewayManager::getActiveGateway('sandbox');
         //DB作成
         $this->WikiManager->AG->executeQuery("
@@ -376,35 +346,19 @@ class DescribeWebWikiManager extends PHPSpec_Context
         $datas = array(
             array('name' => 'FrontPage', 'content' => '[ja] FrontPageのcontentです。', 'locale' => 'ja', 'revision' => 3),
             array('name' => 'FrontPage', 'content' => '[en] This is content of FrontPage.', 'locale' => 'en', 'localized_for' => 1),
-            array('name' => 'directory/page', 'content' => 'このページにはまだ翻訳版がありません。', 'local' => 'ja')
+            array('name' => 'directory/page', 'content' => 'このページにはまだ翻訳版がありません。', 'locale' => 'ja')
         );
         foreach($datas as $data){
             $this->WikiManager->AG->create('wiki', $data);
         }
 
         $datas = array(
-            array('wiki_id' => 1, 'name' => 'FrontPage', 'mail' => 'maintener1@samurai-fw.org', 'role' => 'lead'),
-            array('wiki_id' => 1, 'name' => 'メンテナー２', 'mail' => 'maintener2@samurai-fw.org', 'role' => 'developer'),
-            array('wiki_id' => 1, 'name' => 'メンテナー３', 'mail' => 'maintener3@samurai-fw.org', 'role' => 'contributor'),
+            array('wiki_id' => 1, 'user_id' => 1, 'name' => NULL, 'comment' => 'comment1'),
+            array('wiki_id' => 1, 'user_id' => NULL, 'name' => 'falcon', 'comment' => 'comment2'),
+            array('wiki_id' => 2, 'user_id' => 1, 'name' => 'falcon', 'comment' => 'comment3'),
         );
         foreach($datas as $data){
-            $this->WikiManager->AG->create('wiki_mainteners', $data);
+            $this->WikiManager->AG->create('wiki_comments', $data);
         }
-
-        $datas = array(
-            array('wiki_id' => 1, 'version' => '2.0.0', 'stability' => 'alpha', 'datetime' => '2009-11-30 12:00:00'),
-        );
-        foreach($datas as $data){
-            $this->WikiManager->AG->create('wiki_releases', $data);
-        }
-
-        $datas = array(
-            array('wiki_id' => 1, 'release_id' => 1, 'filename' => 'Samurai-2.0.0-stable.tgz', 'size' => 1234),
-            array('wiki_id' => 1, 'release_id' => 1, 'filename' => 'Samurai-2.0.0-stable.zip', 'size' => 5678),
-        );
-        foreach($datas as $data){
-            $this->WikiManager->AG->create('wiki_releases_files', $data);
-        }
-
     }
 }
