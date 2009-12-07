@@ -101,6 +101,28 @@ class DescribeWebWikiManager extends PHPSpec_Context
         $this->spec($comments->getSize())->should->be(1);
     }
 
+    public function it履歴の取得()
+    {
+        $history = $this->WikiManager->getHistory(1, 1);
+        $this->spec($history)->shouldNot->beNull();
+        $this->spec($history->id)->should->be(1);
+        $this->spec($history->wiki_id)->should->be(1);
+        //第二引数はconditionも可能
+        $condition = $this->WikiManager->getCondition();
+        $condition->where->id = 2;
+        $history = $this->WikiManager->getHistory(1, $condition);
+        $this->spec($history)->shouldNot->beNull();
+        $this->spec($history->id)->should->be(2);
+        $this->spec($history->wiki_id)->should->be(1);
+    }
+    public function it履歴の取得：複数()
+    {
+        $condition = $this->WikiManager->getCondition();
+        $condition->setLimit(1);
+        $history = $this->WikiManager->getHistories(1, $condition);
+        $this->spec($history->getSize())->should->be(1);
+    }
+
 
     //操作系
     public function it追加()
@@ -115,11 +137,11 @@ class DescribeWebWikiManager extends PHPSpec_Context
     }
     public function it保存()
     {
-        $wiki = $this->WikiManager->get(3);
+        $wiki = $this->WikiManager->get(4);
         $wiki->name = 'spec/example2';
         $wiki->content = '編集しますた。';
         $this->WikiManager->save($wiki);
-        $wiki = $this->WikiManager->get(3);
+        $wiki = $this->WikiManager->get(4);
         $this->spec($wiki->name)->should->be('spec/example2');
         $this->spec($wiki->content)->should->be('編集しますた。');
     }
@@ -129,166 +151,150 @@ class DescribeWebWikiManager extends PHPSpec_Context
         $wiki = $this->WikiManager->get(3);
         $this->spec($wiki->name)->should->be('spec/example2:edited');
     }
-    /*
     public function it破壊()
     {
-        $wiki = $this->WikiManager->get(2);
+        $wiki = $this->WikiManager->get(4);
         $this->spec($wiki)->shouldNot->beNull();
         $this->WikiManager->destroy($wiki);
-        $wiki = $this->WikiManager->get(2);
+        $wiki = $this->WikiManager->get(4);
         $this->spec($wiki)->should->beNull();
     }
     public function it削除()
     {
-        $wiki = $this->WikiManager->get(3);
+        $wiki = $this->WikiManager->get(5);
         $this->spec($wiki)->shouldNot->beNull();
         $this->WikiManager->delete($wiki->id);
-        $wiki = $this->WikiManager->get(3);
+        $wiki = $this->WikiManager->get($wiki->id);
         $this->spec($wiki)->should->beNull();
     }
 
-    public function itリリースの追加()
+    public function itコメントの追加()
     {
         $dto = new stdClass();
-        $dto->version = '2.0.1';
-        $dto->stability = 'stable';
-        $dto->datetime = '2009-12-11 12:34:56';
-        $release = $this->WikiManager->addRelease(1, $dto);
-        $this->spec($release->wiki_id)->should->be(1);
-        $this->spec($release->version)->should->be('2.0.1');
-        $this->spec($release->stability)->should->be('stable');
-        $this->spec($release->datetime)->should->be('2009-12-11 12:34:56');
-        $release = $this->WikiManager->addRelease(1, $dto);
+        $dto->name = 'hayabusa';
+        $dto->comment = 'watashi ha hayabusa desu.';
+        $comment = $this->WikiManager->addComment(2, $dto);
+        $this->spec($comment->wiki_id)->should->be(2);
+        $this->spec($comment->name)->should->be('hayabusa');
+        $this->spec($comment->comment)->should->be('watashi ha hayabusa desu.');
+        $this->WikiManager->addComment(2, $dto);
     }
-    public function itリリースの保存()
+    public function itコメントの保存()
     {
-        $release = $this->WikiManager->getRelease(1, 2);
-        $release->stability = 'alpha';
-        $this->WikiManager->saveRelease($release);
-        $release = $this->WikiManager->getRelease(1, 2);
-        $this->spec($release->stability)->should->be('alpha');
+        $comment = $this->WikiManager->getComment(2, 4);
+        $comment->name = 'falcon';
+        $comment->comment = 'watashi ha falcon desu.';
+        $this->WikiManager->saveComment($comment);
+        $comment = $this->WikiManager->getComment(2, 4);
+        $this->spec($comment->name)->should->be('falcon');
+        $this->spec($comment->comment)->should->be('watashi ha falcon desu.');
+    }
+    public function itコメントの編集()
+    {
+        $this->WikiManager->editComment(2, 4, array('name' => 'kiuchi', 'comment' => 'watashi ha kiuchi desu.'));
+        $comment = $this->WikiManager->getComment(2, 4);
+        $this->spec($comment->name)->should->be('kiuchi');
+        $this->spec($comment->comment)->should->be('watashi ha kiuchi desu.');
+    }
+    public function itコメントの破壊()
+    {
+        $comment = $this->WikiManager->getComment(2, 4);
+        $this->spec($comment)->shouldNot->beNull();
+        $this->WikiManager->destroyComment($comment);
+        $comment = $this->WikiManager->getComment(2, 4);
+        $this->spec($comment)->should->beNull();
+    }
+    public function itコメントの削除()
+    {
+        $comment = $this->WikiManager->getComment(2, 5);
+        $this->spec($comment)->shouldNot->beNull();
+        $this->WikiManager->deleteComment($comment->wiki_id, $comment->id);
+        $comment = $this->WikiManager->getComment(2, 5);
+        $this->spec($comment)->should->beNull();
+    }
 
-    }
-    public function itリリースの編集()
-    {
-        $this->WikiManager->editRelease(1, 2, array('version' => '2.0.2', 'stability' => 'beta'));
-        $release = $this->WikiManager->getRelease(1, 2);
-        $this->spec($release->version)->should->be('2.0.2');
-        $this->spec($release->stability)->should->be('beta');
-    }
-    public function itリリースの破壊()
-    {
-        $release = $this->WikiManager->getRelease(1, 2);
-        $this->spec($release)->shouldNot->beNull();
-        $this->WikiManager->destroyRelease($release);
-        $release = $this->WikiManager->getRelease(1, 2);
-        $this->spec($release)->should->beNull();
-    }
-    public function itリリースの削除()
-    {
-        $release = $this->WikiManager->getRelease(1, 3);
-        $this->spec($release)->shouldNot->beNull();
-        $this->WikiManager->deleteRelease($release->wiki_id, $release->id);
-        $release = $this->WikiManager->getRelease(1, 3);
-        $this->spec($release)->should->beNull();
-    }
-
-    public function itリリースファイルの追加()
+    public function it履歴の追加()
     {
         $dto = new stdClass();
-        $dto->filename = 'Samurai-2.0.2-stable.tgz';
-        $dto->size = 123456;
-        $file = $this->WikiManager->addReleaseiFile(1, 1, $dto);
-        $this->spec($file->wiki_id)->should->be(1);
-        $this->spec($file->release_id)->should->be(1);
-        $this->spec($file->filename)->should->be('Samurai-2.0.2-stable.tgz');
-        $this->spec($file->size)->should->be(123456);
-        $file = $this->WikiManager->addReleaseiFile(1, 1, $dto);
+        $dto->name = 'spec/example2';
+        $dto->content = 'history of edited.';
+        $history = $this->WikiManager->addHistory(2, $dto);
+        $this->spec($history->wiki_id)->should->be(2);
+        $this->spec($history->name)->should->be('spec/example2');
+        $this->spec($history->content)->should->be('history of edited.');
+        $history = $this->WikiManager->addHistory(2, $dto);
     }
-    public function itリリースファイルの保存()
+    public function it履歴の保存()
     {
-        $file = $this->WikiManager->getReleaseFile(1, 1, 1);
-        $file->size = 200000;
-        $this->WikiManager->saveReleaseFile($file);
-        $file = $this->WikiManager->getReleaseFile(1, 1, 1);
-        $this->spec($file->size)->should->be(200000);
+        $history = $this->WikiManager->getHistory(2, 3);
+        $history->content = 'history of edited.:saved';
+        $this->WikiManager->saveHistory($history);
+        $history = $this->WikiManager->getHistory(2, 3);
+        $this->spec($history->content)->should->be('history of edited.:saved');
     }
-    public function itリリースファイルの編集()
+    public function it履歴の編集()
     {
-        $this->WikiManager->editReleaseFile(1, 1, 1, array('size' => 987654));
-        $file = $this->WikiManager->getReleaseFile(1, 1, 1);
-        $this->spec($file->size)->should->be(987654);
+        $this->WikiManager->editHistory(2, 3, array('content' => 'history of edited.:saved:edited'));
+        $history = $this->WikiManager->getHistory(2, 3);
+        $this->spec($history->content)->should->be('history of edited.:saved:edited');
     }
-    public function itリリースファイルの破壊()
+    public function it履歴の破壊()
     {
-        $file = $this->WikiManager->getReleaseFile(1, 1, 1);
-        $this->spec($file)->shouldNot->beNull();
-        $this->WikiManager->destroyReleaseFile($file);
-        $file = $this->WikiManager->getReleaseFile(1, 1, 1);
-        $this->spec($file)->should->beNull();
+        $history = $this->WikiManager->getHistory(2, 3);
+        $this->spec($history)->shouldNot->beNull();
+        $this->WikiManager->destroyHistory($history);
+        $history = $this->WikiManager->getHistory(2, 3);
+        $this->spec($history)->should->beNull();
     }
-    public function itリリースファイルの削除()
+    public function it履歴の削除()
     {
-        $file = $this->WikiManager->getReleaseFile(1, 1, 2);
-        $this->spec($file)->shouldNot->beNull();
-        $this->WikiManager->deleteReleaseFile($file->wiki_id, $file->release_id, $file->id);
-        $file = $this->WikiManager->getReleaseFile(1, 1, 2);
-        $this->spec($file)->should->beNull();
+        $history = $this->WikiManager->getHistory(2, 4);
+        $this->spec($history)->shouldNot->beNull();
+        $this->WikiManager->deleteHistory($history->wiki_id, $history->id);
+        $history = $this->WikiManager->getHistory(2, 4);
+        $this->spec($history)->should->beNull();
     }
-
-    public function itメンテナーの追加()
+    public function it編集時に自動的に履歴が追加されるかどうか？()
     {
+        //まずはwikiの作成
+        $this->WikiManager->auto_history_add = true;
+        $this->WikiManager->auto_revision_up = true;
         $dto = new stdClass();
-        $dto->name = 'falcon';
-        $dto->mail = 'falcon@samurai-fw.org';
-        $dto->role = 'developer';
-        $maintener = $this->WikiManager->addMaintener(1, $dto);
-        $this->spec($maintener->wiki_id)->should->be(1);
-        $this->spec($maintener->name)->should->be('falcon');
-        $this->spec($maintener->mail)->should->be('falcon@samurai-fw.org');
-        $this->spec($maintener->role)->should->be('developer');
-        $maintener = $this->WikiManager->addMaintener(1, $dto);
+        $dto->name = 'spec/example3';
+        $dto->content = 'auto add to history ?';
+        $dto->created_by = 1;
+        $wiki = $this->WikiManager->add($dto);
+        //履歴は格納されているか？
+        $history = $this->WikiManager->getHistories($wiki->id)->getFirstRecord();
+        $this->spec($history)->shouldNot->beNull();
+        $this->spec($history->name)->should->be('spec/example3');
+        $this->spec($history->content)->should->be('auto add to history ?');
+        $this->spec($history->revision)->should->be(1);
+        $this->spec($history->created_by)->should->be(1);
+        
+        //wikiを編集する
+        $wiki->content = 'auto add to history ? :saved';
+        $wiki->updated_by = 2;
+        $this->WikiManager->save($wiki);
+        //履歴は格納されているか？
+        $history = $this->WikiManager->getHistories($wiki->id)->getFirstRecord();
+        $this->spec($history)->shouldNot->beNull();
+        $this->spec($history->name)->should->be('spec/example3');
+        $this->spec($history->content)->should->be('auto add to history ? :saved');
+        $this->spec($history->revision)->should->be(2);
+        $this->spec($history->created_by)->should->be(2);
     }
-    public function itメンテナーの保存()
-    {
-        $maintener = $this->WikiManager->getMaintener(1, 3);
-        $maintener->name = 'kiuchi';
-        $this->WikiManager->saveMaintener($maintener);
-        $maintener = $this->WikiManager->getMaintener(1, 3);
-        $this->spec($maintener->name)->should->be('kiuchi');
-
-    }
-    public function itメンテナーの編集()
-    {
-        $this->WikiManager->editMaintener(1, 3, array('name' => 'satoshi', 'mail' => 'satoshi@kiuchi.jp'));
-        $maintener = $this->WikiManager->getMaintener(1, 3);
-        $this->spec($maintener->name)->should->be('satoshi');
-        $this->spec($maintener->mail)->should->be('satoshi@kiuchi.jp');
-    }
-    public function itメンテナーの破壊()
-    {
-        $maintener = $this->WikiManager->getMaintener(1, 3);
-        $this->spec($maintener)->shouldNot->beNull();
-        $this->WikiManager->destroyMaintener($maintener);
-        $maintener = $this->WikiManager->getMaintener(1, 3);
-        $this->spec($maintener)->should->beNull();
-    }
-    public function itメンテナーの削除()
-    {
-        $maintener = $this->WikiManager->getMaintener(1, 4);
-        $this->spec($maintener)->shouldNot->beNull();
-        $this->WikiManager->deleteMaintener($maintener->wiki_id, $maintener->id);
-        $maintener = $this->WikiManager->getMaintener(1, 4);
-        $this->spec($maintener)->should->beNull();
-    }
-     */
-    /* }}} */
 
 
 
 
 
     //準備
+    public function before()
+    {
+        $this->WikiManager->auto_history_add = false;
+        $this->WikiManager->auto_revision_up = false;
+    }
     public function beforeAll()
     {
         //コンポーネント準備
@@ -329,18 +335,22 @@ class DescribeWebWikiManager extends PHPSpec_Context
         ");
         $this->WikiManager->AG->executeQuery("
             CREATE TEMPORARY TABLE IF NOT EXISTS `wiki_histories` (
-                `id` int(11) NOT NULL auto_increment,
-                `wiki_id` int(11) NOT NULL default '0' COMMENT '=wiki.id',
-                `name` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT '名前',
-                `content` text collate utf8_unicode_ci NOT NULL COMMENT '内容',
-                `revision` int(11) NOT NULL default '1' COMMENT 'リビジョン番号',
-                `updated_by` int(11) NOT NULL default '0' COMMENT '=user.id(このバージョンにおける更新者)',
-                `created_at` int(11) NOT NULL default '0',
-                `updated_at` int(11) NOT NULL default '0',
-                `deleted_at` int(11) NOT NULL default '0',
-                `active` enum('0','1') collate utf8_unicode_ci NOT NULL default '1',
-                PRIMARY KEY  (`id`)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='WIKIの編集履歴';
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `wiki_id` int(11) NOT NULL DEFAULT '0' COMMENT '=wiki.id',
+                `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'ページ名',
+                `content` text COLLATE utf8_unicode_ci NOT NULL COMMENT '内容',
+                `locale` varchar(3) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'ja' COMMENT '言語',
+                `localized_for` int(11) DEFAULT NULL COMMENT 'あるWIKI翻訳の場合(=wiki.id)',
+                `revision` int(11) NOT NULL DEFAULT '1' COMMENT 'リビジョン番号',
+                `created_by` int(11) NOT NULL DEFAULT '0' COMMENT '=user.id',
+                `updated_by` int(11) NOT NULL DEFAULT '0' COMMENT '=user.id',
+                `created_at` int(11) NOT NULL DEFAULT '0',
+                `updated_at` int(11) NOT NULL DEFAULT '0',
+                `deleted_at` int(11) NOT NULL DEFAULT '0',
+                `active` enum('0','1') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1',
+                PRIMARY KEY (`id`),
+                KEY `wiki_id` (`wiki_id`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='WIKIの変更履歴';
         ");
         //データ挿入
         $datas = array(
@@ -359,6 +369,14 @@ class DescribeWebWikiManager extends PHPSpec_Context
         );
         foreach($datas as $data){
             $this->WikiManager->AG->create('wiki_comments', $data);
+        }
+
+        $datas = array(
+            array( 'wiki_id' => 1, 'name' => 'FrontPage', 'content' => '111111', 'revision' => 1, 'updated_by' => 1),
+            array( 'wiki_id' => 1, 'name' => 'FrontPage', 'content' => '222222', 'revision' => 2, 'updated_by' => 1),
+        );
+        foreach($datas as $data){
+            $this->WikiManager->AG->create('wiki_histories', $data);
         }
     }
 }
