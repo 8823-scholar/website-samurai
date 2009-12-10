@@ -19,6 +19,10 @@ forum_topic:
     param : { action : community_forum_topic_show }
     requirements : { forum_id : '^\d+$', topic_id : '^\d+$' }
 
+wiki:
+    url   : '/documents/:locale/:name'
+    param : { action : documents_wiki_show }
+
 download:
     url   : '/package/:package_alias/:release_id/:file_id/:file_name/download'
     param : { action : package_download_page }

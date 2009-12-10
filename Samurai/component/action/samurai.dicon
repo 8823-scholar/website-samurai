@@ -12,6 +12,8 @@ ForumManager:
     class : Web_Forum_Manager
 PackageManager:
     class : Web_Package_Manager
+WikiManager:
+    class : Web_Wiki_Manager
 
 
 ## Other

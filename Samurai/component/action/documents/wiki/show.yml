@@ -1,0 +1,5 @@
+###
+ # documents - wiki - show.yml
+ #/
+View:
+    success : 'documents/wiki/show.tpl'

@@ -1,12 +1,12 @@
 <?
 /**
- * Web_Wiki_Manager
+ * WIKIマネージャー
  * 
- * Wiki管理クラス
- * wiki構文の解釈は行わないで、別途wickeyに任せる
+ * wikiのデータ操作を担当。
+ * wiki構文の解釈は行わないで、別途wickeyに任せる。
  * 
  * @package    SamuraiWEB
- * @subpackage component.web
+ * @subpackage wiki
  * @copyright  2007-2009 Samurai Framework Project
  * @author     hayabusa <scholar@hayabusa-lab.jp>
  */
@@ -94,6 +94,27 @@ class Web_Wiki_Manager extends Web_Model
     {
         $condition = $this->_toAGCondition($id, $this->_table);
         return $this->AG->findDetail($this->_table, $condition);
+    }
+
+    /**
+     * 名前から取得
+     * また、その際ロケールが考慮される
+     *
+     * @access     public
+     * @param      string   $name
+     * @return     object   ActiveGatewayRecord
+     */
+    public function getByName($name)
+    {
+        $condition = $this->getCondition();
+        $condition->where->name = $name;
+        $condition->where->locale = $this->locale;
+        $wiki = $this->AG->findDetail($this->_table, $condition);
+        if(!$wiki){
+            $condition->where->locale = $this->default_locale;
+            $wiki = $this->AG->findDetail($this->_table, $condition);
+        }
+        return $wiki;
     }
 
     /**
