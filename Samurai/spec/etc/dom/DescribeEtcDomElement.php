@@ -66,7 +66,7 @@ class DescribeEtcDomElement extends PHPSpec_Context
         $span1->appendChild(new Etc_Dom_Text('白い文字です'));
         $span2->appendChild(new Etc_Dom_Text('黒い文字です'));
         $this->spec($this->Node->innerHTML())->should->be(
-            '<span style="color:#FFFFFF;">白い文字です</SPAN><SPAN style="color:#000000;">黒い文字です</span>テキストですよ'
+            '<span style="color:#FFFFFF;">白い文字です</span><span style="color:#000000;">黒い文字です</span>テキストですよ'
         );
     }
     

@@ -212,7 +212,7 @@ class DescribeEtcWickeyModifier extends PHPSpec_Context
      */
     public function beforeAll()
     {
-        Samurai_Loader::loadByClass('Befool_Wickey');
-        $this->Wickey = new Befool_Wickey();
+        Samurai_Loader::loadByClass('Etc_Wickey');
+        $this->Wickey = new Etc_Wickey();
     }
 }

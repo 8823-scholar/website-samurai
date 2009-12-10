@@ -23,7 +23,7 @@ class DescribeEtcDomComment extends PHPSpec_Context
     //specs
     public function itプロパティチェック()
     {
-        $this->spec($this->Node->nodeType)->should->be(BF_DOM_NODE_COMMENT);
+        $this->spec($this->Node->nodeType)->should->be(ETC_DOM_NODE_COMMENT);
     }
     
     public function itデータの追加()

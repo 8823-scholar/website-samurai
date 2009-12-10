@@ -1,16 +1,16 @@
-<?
+<?php
 /**
- * Befool_Wickey_Parser
- * 
+ * スタンダードなWIKI表記を解釈するパーサー
+ *
  * DOMベースではなく、簡易記述で実現可能な表記への対応。
  * DOMでコンバートされた後にこちらが動作するので、注意が必要。
  * 
- * @package    Befool
+ * @package    Etc
  * @subpackage Wickey
- * @copyright  BEFOOL,Inc.
- * @author     Satoshi Kiuchi <satoshi.kiuchi@befool.co.jp>
+ * @copyright  2007-2009 Samurai Framework Project
+ * @author     hayabusa <scholar@hayabusa-lab.jp>
  */
-class Befool_Wickey_Parser
+class Etc_Wickey_Parser
 {
     public
         $Device;
@@ -19,17 +19,19 @@ class Befool_Wickey_Parser
     
     
     /**
-     * コンストラクタ。
+     * コンストラクタ
+     *
      * @access     public
      */
     public function __construct()
     {
         
     }
-    
-    
+
+
     /**
      * wiki表記をパースし、かつ解釈する
+     *
      * @access     public
      * @param      string  $text   対象テキスト
      * @return     string
@@ -40,10 +42,11 @@ class Befool_Wickey_Parser
         $html   = $this->render($blocks);
         return $html;
     }
-    
-    
+
+
     /**
      * パースする
+     *
      * @access     public
      * @param      string  $text   対象テキスト
      * @return     array   パースされてブロックに分割されたブロック群
@@ -103,10 +106,11 @@ class Befool_Wickey_Parser
         
         return $blocks;
     }
-    
-    
+
+
     /**
      * ブロックの種類を取得する
+     *
      * @access     private
      * @param      string  $line
      * @param      object  $option
@@ -140,10 +144,11 @@ class Befool_Wickey_Parser
                 break;
         }
     }
-    
-    
+
+
     /**
      * 階層の深さを調べる
+     *
      * @access     private
      * @param      string  $line
      */
@@ -160,10 +165,11 @@ class Befool_Wickey_Parser
         $line = trim(substr($line, 1));
         return 1;
     }
-    
-    
+
+
     /**
      * ブロックを追加する
+     *
      * @access     private
      * @param      string  $el
      * @param      string  $line
@@ -181,10 +187,11 @@ class Befool_Wickey_Parser
         $content->option = $option;
         return $block;
     }
-    
-    
+
+
     /**
      * ブロックを最後の要素に追加する
+     *
      * @access     private
      * @param      array   $blocks
      * @param      string  $el
@@ -201,10 +208,11 @@ class Befool_Wickey_Parser
         $block->contents[] = $content;
         array_push($blocks, $block);
     }
-    
-    
+
+
     /**
      * 指定の文字列までを取り込む
+     *
      * @access     private
      * @param      array   $text
      * @param      string  $eob
@@ -228,13 +236,14 @@ class Befool_Wickey_Parser
         }
         return $cutted;
     }
-    
-    
-    
-    
-    
+
+
+
+
+
     /**
      * パースされたブロック群から、HTMLを生成する
+     *
      * @access     public
      * @param      array   $blocks
      * @return     string
@@ -247,10 +256,11 @@ class Befool_Wickey_Parser
         }
         return $html;
     }
-    
-    
+
+
     /**
      * ブロック要素を解釈する
+     *
      * @access     private
      * @param      object  $block
      * @return     string
@@ -268,7 +278,7 @@ class Befool_Wickey_Parser
                 } else {
                     $id = uniqid();
                 }
-                $html = sprintf('<H%d id="%s"><A href="#%s">%s</A></H%d>', $level, $id, $id, $line, $level);
+                $html = sprintf('<h%d id="%s"><a href="#%s">%s</a></h%d>', $level, $id, $id, $line, $level);
                 break;
             case 'ul':
                 $now_level = 0;
@@ -288,10 +298,10 @@ class Befool_Wickey_Parser
                 foreach($block->contents as $_key => $content){
                     $html .= $content->line . "\n";
                 }
-                $html = '<P>' . $html . '</P>';
+                $html = '<p>' . $html . '</p>';
                 break;
             case 'hr':
-                $html = '<HR />';
+                $html = '<hr />';
                 break;
             case 'noneparse':
                 $html = $block->contents[0]->line;
@@ -302,10 +312,11 @@ class Befool_Wickey_Parser
         }
         return $html;
     }
-    
-    
+
+
     /**
      * リストを解釈する
+     *
      * @access     private
      * @param      string  $el
      * @param      string  $line
@@ -332,32 +343,34 @@ class Befool_Wickey_Parser
         
         if($line != ''){
             $line = preg_replace('|<br />$|i', '', $line);
-            $html .= sprintf('<LI>%s</LI>', $line) . "\n";
+            $html .= sprintf('<li>%s</li>', $line) . "\n";
         }
         
         return $html;
     }
-    
-    
-    
-    
-    
+
+
+
+
+
     /**
      * 直後のeobを取り除く
+     *
      * @access     private
      * @param      array   $text
      */
     private function _removeNextEob(&$text)
     {
         $line = array_shift($text);
-        if(is_string($line) && strtoupper($line) !== '<BR />'){
+        if(is_string($line) && strtoupper($line) !== '<br />'){
             array_unshift($text, $line);
         }
     }
-    
-    
+
+
     /**
      * 直前ののeobを取り除く
+     *
      * @access     private
      * @param      array   $text
      */
@@ -370,14 +383,15 @@ class Befool_Wickey_Parser
             }
         }
     }
-    
-    
-    
-    
-    
+
+
+
+
+
     /**
      * 見出しにIDを振ったりなど
      * ユーザー入力の補完を行う
+     *
      * @access     public
      * @param      string  $text
      * @return     string
