@@ -90,14 +90,20 @@ class Etc_Wickey
     public function render($text, $option=NULL)
     {
         try {
+            //準備
+            $text = rtrim($text);
             $dom = new Etc_Dom_Document();
             $option = (object)$option;
-            $text = $this->_prepareText($text);
+
+            //スタンダードWIKI表記解釈
+            $text = $this->Parser->parseAndRender($text);
+
+            //DOM型WIKI変換
             $dom->load($text);
             $option->root = $dom;
             $this->_nodeTransform($dom, $option);
-            $sections = $this->_divideSections($dom);
-            $dom = $this->_sections2Dom($sections);
+            //$sections = $this->_divideSections($dom);
+            //$dom = $this->_sections2Dom($sections);
             if(isset($option->width) && $option->width){
                 $dom->firstChild->setAttribute('style', 'width:' . $option->width . ';');
             }
@@ -176,12 +182,12 @@ class Etc_Wickey
     private function _nodeConvert($node, $option)
     {
         try {
-            $Converter = $this->_getNodeConverter($node->tagName, $option);
+            $converter = $this->_getNodeConverter($node->tagName, $option);
         }
         catch(Exception $E){
-            $Converter = $this->_getNodeConverter('ignore', $option);
+            $converter = $this->_getNodeConverter('ignore', $option);
         }
-        return $Converter->convert($node, $option);
+        return $converter->convert($node, $option);
     }
     
     
@@ -276,23 +282,19 @@ class Etc_Wickey
     }
 
 
+
     /**
-     * 準備
+     * 許可されているタグを復活させる
      *
      * @access     private
      * @param      string  $text
-     * @return     string  タグが補完されたテキスト
+     * @return     string  タグが復活されたテキスト
      */
-    private function _prepareText($text)
+    private function _revivalAllowedTags($text)
     {
-        //基本エスケープ
-        $text = rtrim($text);
-        $text = htmlspecialchars($text, ENT_NOQUOTES);
-        //許容タグだけ復活
         foreach($this->_tags as $tag => $tmp){
             $text = preg_replace(array('/&lt;('.$tag.')(.*?)&gt;/i', '/&lt;\/('.$tag.')&gt;/i'), array('<\\1\\2>', '</\\1>'), $text);
         }
-        //$text = nl2br($text);
         return $text;
     }
 

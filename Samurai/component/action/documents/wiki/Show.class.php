@@ -3,7 +3,7 @@
  * ドキュメント / WIKI
  * 
  * @package    SamuraiWEB
- * @subpackage Action.
+ * @subpackage action.documents.wiki
  * @copyright  2007-2009 Samurai Framework Project
  * @author     hayabusa <scholar@hayabusa-lab.jp>
  */

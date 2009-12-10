@@ -2,8 +2,8 @@
 /**
  * スタンダードなWIKI表記を解釈するパーサー
  *
- * DOMベースではなく、簡易記述で実現可能な表記への対応。
- * DOMでコンバートされた後にこちらが動作するので、注意が必要。
+ * DOMベースではなく、一般的なWIKI表記実現する。
+ * DOMでコンバートするまえにこちらに通される。
  * 
  * @package    Etc
  * @subpackage Wickey
@@ -12,12 +12,23 @@
  */
 class Etc_Wickey_Parser
 {
-    public
-        $Device;
-    private
-        $_h_start = 3;
-    
-    
+    /**
+     * Deviceコンポーネント
+     *
+     * @access   public
+     * @var      object   Etc_Device
+     */
+    public $Device;
+
+    /**
+     * Hがスタートするレベル
+     *
+     * @access   private
+     * @var      int
+     */
+    private $_h_start = 3;
+
+
     /**
      * コンストラクタ
      *
@@ -75,6 +86,7 @@ class Etc_Wickey_Parser
                     break;
                 case 'ul':
                 case 'ol':
+                case 'quote':
                     $level = $this->_checkLevel($line);
                     if($el == $last_el){
                         $this->_addBlockToLast($blocks, $el, $line, $level);
@@ -132,11 +144,13 @@ class Etc_Wickey_Parser
             case $line[0] == '+':
                 return 'ol';
                 break;
+            case $line[0] == '>':
+                return 'quote';
+                break;
             case $line[0] == '{' && strpos($line, '{{{') === 0:
                 return 'noneparse';
                 break;
             case rtrim($line) == '':
-            //case rtrim(strtoupper($line)) == '<BR />':
                 return 'eob';
                 break;
             default:
@@ -271,22 +285,16 @@ class Etc_Wickey_Parser
         switch($block->element){
             case 'h':
                 $level = $block->contents[0]->level + $this->_h_start -1;
-                $line  = preg_replace('|<br />$|i', '', $block->contents[0]->line);
+                $line  = $block->contents[0]->line;
                 if(preg_match('/^([a-z0-9]+)\*(.*)/', $line, $matches)){
                     $id = $matches[1];
                     $line = $matches[2];
                 } else {
                     $id = uniqid();
                 }
-                $html = sprintf('<h%d id="%s"><a href="#%s">%s</a></h%d>', $level, $id, $id, $line, $level);
+                $html = sprintf('<h%d id="%s"><a href="#%s">%s</a></h%d>', $level, $id, $id, htmlspecialchars($line), $level);
                 break;
             case 'ul':
-                $now_level = 0;
-                foreach($block->contents as $content){
-                    $html .= $this->_renderList($block->element, $content->line, $content->level, $now_level);
-                }
-                $html .= $this->_renderList($block->element, '', 0, $now_level);
-                break;
             case 'ol':
                 $now_level = 0;
                 foreach($block->contents as $content){
@@ -294,9 +302,16 @@ class Etc_Wickey_Parser
                 }
                 $html .= $this->_renderList($block->element, '', 0, $now_level);
                 break;
+            case 'quote':
+                $now_level = 0;
+                foreach($block->contents as $content){
+                    $html .= $this->_renderQuote($content->line, $content->level, $now_level);
+                }
+                $html .= $this->_renderQuote('', 0, $now_level);
+                break;
             case 'p':
                 foreach($block->contents as $_key => $content){
-                    $html .= $content->line . "\n";
+                    $html .= htmlspecialchars($content->line, ENT_NOQUOTES) . "<br />\n";
                 }
                 $html = '<p>' . $html . '</p>';
                 break;
@@ -304,7 +319,7 @@ class Etc_Wickey_Parser
                 $html = '<hr />';
                 break;
             case 'noneparse':
-                $html = $block->contents[0]->line;
+                $html = '<np>' . htmlspecialchars($block->contents[0]->line) . '</np>';
                 break;
             case 'eob':
                 $html = '';
@@ -342,13 +357,40 @@ class Etc_Wickey_Parser
         $now_level = $level;
         
         if($line != ''){
-            $line = preg_replace('|<br />$|i', '', $line);
-            $html .= sprintf('<li>%s</li>', $line) . "\n";
+            $html .= sprintf('<li>%s</li>', htmlspecialchars($line)) . "\n";
         }
         
         return $html;
     }
 
+    /**
+     * 引用を解釈する
+     *
+     * @access     private
+     * @param      string  $line
+     * @return     int     $level
+     * @param      int     $now_level
+     * @return     string
+     */
+    private function _renderQuote($line, $level, &$now_level=0)
+    {
+        $html = '';
+        if($level == $now_level){
+            
+        } elseif($level > $now_level){
+            for($i = $now_level; $i < $level; $i++){
+                $html .= '<blockquote>' . "\n";
+            }
+        } elseif($level < $now_level){
+            for($i = $now_level; $i > $level; $i--){
+                $html .= '</blockquote>' . "\n";
+            }
+        }
+        
+        $now_level = $level;
+        $html .= htmlspecialchars($line) . "\n";
+        return $html;
+    }
 
 
 
@@ -415,6 +457,11 @@ class Etc_Wickey_Parser
                         $line = mb_ereg_replace('^(\*+)(.*)', sprintf('\\1%s*\\2', uniqid()), $line);
                     }
                     $blocks[] = $line;
+                    break;
+                case 'noneparse':
+                    $line = $this->_cutTo($text, '}}}');
+                    $blocks[] = '{{{';
+                    $blocks[] = $line . '}}}';
                     break;
                 default:
                     $blocks[] = $line;
