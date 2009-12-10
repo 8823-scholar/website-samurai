@@ -17,6 +17,8 @@ WikiManager:
 
 
 ## Other
+Wickey:
+    class : Etc_Wickey
 Pager:
     class : Etc_Helper_Pager_Activegateway
 Mail:

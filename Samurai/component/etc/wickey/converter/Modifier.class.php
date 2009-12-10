@@ -45,7 +45,7 @@ class Etc_Wickey_Converter_Modifier extends Etc_Wickey_Converter
                 if($replacement){
                     $new_node = $replacement;
                 }
-                if($new_node->no_conbination) break;
+                if(isset($new_node->no_conbination)) break;
             }
         }
         

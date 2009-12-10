@@ -331,11 +331,11 @@ class Etc_Wickey_Parser
             
         } elseif($level > $now_level){
             for($i = $now_level; $i < $level; $i++){
-                $html .= sprintf('<%s>', strtoupper($el)) . "\n";
+                $html .= sprintf('<%s>', strtolower($el)) . "\n";
             }
         } elseif($level < $now_level){
             for($i = $now_level; $i > $level; $i--){
-                $html .= sprintf('</%s>', strtoupper($el)) . "\n";
+                $html .= sprintf('</%s>', strtolower($el)) . "\n";
             }
         }
         

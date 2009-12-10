@@ -1,8 +1,8 @@
-<?
+<?php
 /**
  * WIKIエンジン
  *
- * Wickeyと名付けられたWIKIエンジンです。
+ * Wickeyと名付けられたWIKIエンジン。
  * 基本は独自タグベースのWIKI表記になりますが、スタンダードなWIKI表記もサポートしていきます。
  * 
  * @package    Etc
@@ -13,17 +13,52 @@
 Samurai_Loader::loadByClass('Etc_Dom_Document');
 class Etc_Wickey
 {
-    public
-        $headings = array();
-    protected
-        $_converters = array(),
-        $_depths = array(),
-        $_tags = array();
-    private
-        $Parser,
-        $Inliner;
-    
-    
+    /**
+     * 見出しリスト
+     * コンテンツメニューを生成するために、見出しの一覧を保管しておく
+     *
+     * @access   public
+     * @var      array
+     */
+    public $headings = array();
+
+    /**
+     * コンバーターキャッシュ
+     * (コンバーターは一つあれば十分なので)
+     *
+     * @access   protected
+     * @var      array
+     */
+    protected $_converters = array();
+
+    /**
+     * 使用許可されたタグリスト
+     *
+     * @access   protected
+     * @var      array
+     */
+    protected $_tags = array();
+
+    /**
+     * 標準WIKIパーサー
+     *
+     * @access   private
+     * @var      object   Etc_Wickey_Parser
+     */
+    private $Parser;
+
+    /**
+     * インライン表記のパーサー
+     *
+     * @access   private
+     * @var      object   Etc_Wickey_Inliner
+     */
+    private $Inliner;
+
+
+
+
+
     /**
      * コンストラクタ
      *
@@ -41,9 +76,9 @@ class Etc_Wickey
         Samurai::getContainer()->injectDependency($this->Parser);
         Samurai::getContainer()->injectDependency($this->Inliner);
     }
-    
-    
-    
+
+
+
     /**
      * 変換トリガー
      *
@@ -84,8 +119,8 @@ class Etc_Wickey
         }
         return $text;
     }
-    
-    
+
+
     /**
      * nodeを変換する
      * 子ノードを保持している場合、子ノードも再帰的に変換する
@@ -96,14 +131,19 @@ class Etc_Wickey
      */
     public function _nodeTransform($node, $option)
     {
-        if($node->nodeType === XML_ELEMENT_NODE || $node->nodeType === XML_DOCUMENT_NODE){
+        if($node->nodeType === XML_DOCUMENT_NODE){
+            for($i = 0; $i < $node->childNodes->length; $i++){
+                $child = $node->childNodes->item($i);
+                $this->_nodeTransform($child, $option);
+            }
+        } elseif($node->nodeType === XML_ELEMENT_NODE){
             $new_node = $this->_nodeConvert($node, $option);
             if(!$node->isSameNode($new_node)){
                 $node->parentNode->replaceChild($new_node, $node);
             }
             //子ノードも再帰的に
             if(strtoupper($new_node->tagName) == 'a') $option->in_a = true;
-            if(!$new_node->no_child_convert && $new_node->hasChildNodes()){
+            if(!isset($new_node->no_child_convert) && $new_node->hasChildNodes()){
                 for($i = 0; $i < $new_node->childNodes->length; $i++){
                     $child = $new_node->childNodes->item($i);
                     $this->_nodeTransform($child, $option);
@@ -123,8 +163,8 @@ class Etc_Wickey
             }
         }
     }
-    
-    
+
+
     /**
      * nodeを変換する
      *
@@ -234,8 +274,8 @@ class Etc_Wickey
         }
         return $dom;
     }
-    
-    
+
+
     /**
      * 準備
      *
@@ -252,8 +292,7 @@ class Etc_Wickey
         foreach($this->_tags as $tag => $tmp){
             $text = preg_replace(array('/&lt;('.$tag.')(.*?)&gt;/i', '/&lt;\/('.$tag.')&gt;/i'), array('<\\1\\2>', '</\\1>'), $text);
         }
-        //改行もここで解釈
-        $text = nl2br($text);
+        //$text = nl2br($text);
         return $text;
     }
 

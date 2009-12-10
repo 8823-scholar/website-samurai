@@ -1,0 +1,14 @@
+* インストールの仕方
+
++ うんこ
+++ だべべべべ
++ うんこ
+++ だべべべべ
+-- いやほーい
+- うっほ
+
+http://example.jp
+<modifier href='http://example.jp'>aaaaaa</modifier>
+
+[[AIUEO]]
+[[AIUEO|KAKIKUKEKO]
