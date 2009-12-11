@@ -2,7 +2,7 @@
 /**
  * MODIFIERノードのコンバーター
  *
- * おもに、見た目の装飾に用いられるWickeyタグです。
+ * おもに、見た目の装飾に用いられるWickeyタグです
  * 
  * @package    Etc
  * @subpackage Wickey
@@ -11,8 +11,13 @@
  */
 class Etc_Wickey_Converter_Modifier extends Etc_Wickey_Converter
 {
-    private
-        $geshi;
+    /**
+     * GeShiハイライター
+     *
+     * @access   private
+     * @var      object
+     */
+    private $geshi;
 
 
     /**
@@ -22,7 +27,7 @@ class Etc_Wickey_Converter_Modifier extends Etc_Wickey_Converter
      */
     public function __construct()
     {
-        
+        parent::__construct();
     }
 
 
@@ -210,6 +215,20 @@ class Etc_Wickey_Converter_Modifier extends Etc_Wickey_Converter
 
 
     /**
+     * 引用
+     *
+     * @access     protected
+     */
+    protected function _doBlockquote(Etc_Dom_Node $new_node, $attr, $node=NULL)
+    {
+        $new_node = $this->option->root->createElement('blockquote');
+        //$this->_trimBR($node);
+        //$this->_removeNextBR($node);
+        return $new_node;
+    }
+
+
+    /**
      * code属性の解決
      * code属性は他の属性との同居はサポートしない
      *
@@ -241,28 +260,9 @@ class Etc_Wickey_Converter_Modifier extends Etc_Wickey_Converter
             $new_node->appendChild($root->createTextNode($source));
         }
         //後方の改行は無視
-        $this->_removeNextBR($node);
+        //$this->_removeNextBR($node);
         return $new_node;
-    }
-
-
-    /**
-     * 引用
-     * 他属性との同居をサポートしない
-     *
-     * @access     protected
-     */
-    protected function _doBlockquote(Etc_Dom_Node $new_node, $attr, $node=NULL)
-    {
-        $new_node = $this->option->root->createElement('blockquote');
-        $new_node->no_conbination = true;
-        $this->_trimBR($node);
-        $this->_removeNextBR($node);
-        return $new_node;
-    }
-
-
-
+    }    
 
 
     /**

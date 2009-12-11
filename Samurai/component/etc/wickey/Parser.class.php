@@ -86,8 +86,15 @@ class Etc_Wickey_Parser
                     break;
                 case 'ul':
                 case 'ol':
-                case 'quote':
                     $level = $this->_checkLevel($line);
+                    if($el == $last_el){
+                        $this->_addBlockToLast($blocks, $el, $line, $level);
+                    } else {
+                        $blocks[] = $this->_addBlock($el, $line, $level);
+                    }
+                    break;
+                case 'quote':
+                    $level = $this->_checkLevel($line, 4);
                     if($el == $last_el){
                         $this->_addBlockToLast($blocks, $el, $line, $level);
                     } else {
@@ -144,7 +151,7 @@ class Etc_Wickey_Parser
             case $line[0] == '+':
                 return 'ol';
                 break;
-            case $line[0] == '>':
+            case $line[0] == '&' && strpos($line, '&gt;') === 0:
                 return 'quote';
                 break;
             case $line[0] == '{' && strpos($line, '{{{') === 0:
@@ -165,19 +172,19 @@ class Etc_Wickey_Parser
      *
      * @access     private
      * @param      string  $line
+     * @param      int     $length   チェックする文字列の長さ
+     * @return     int
      */
-    private function _checkLevel(&$line)
+    private function _checkLevel(&$line, $length=1)
     {
-        if($line[0] == $line[1]){
-            if($line[0] == $line[2]){
-                $line = trim(substr($line, 3));
-                return 3;
+        $char = substr($line, 0, $length);
+        for($i = 0; $i < 3; $i++){
+            if($char != substr($line, $length * $i, $length)){
+                break;
             }
-            $line = trim(substr($line, 2));
-            return 2;
         }
-        $line = trim(substr($line, 1));
-        return 1;
+        $line = trim(substr($line, $length * $i));
+        return $i;
     }
 
 
@@ -292,7 +299,7 @@ class Etc_Wickey_Parser
                 } else {
                     $id = uniqid();
                 }
-                $html = sprintf('<h%d id="%s"><a href="#%s">%s</a></h%d>', $level, $id, $id, htmlspecialchars($line), $level);
+                $html = sprintf('<h%d id="%s"><a href="#%s">%s</a></h%d>', $level, $id, $id, $line, $level);
                 break;
             case 'ul':
             case 'ol':
@@ -311,7 +318,7 @@ class Etc_Wickey_Parser
                 break;
             case 'p':
                 foreach($block->contents as $_key => $content){
-                    $html .= htmlspecialchars($content->line, ENT_NOQUOTES) . "<br />\n";
+                    $html .= $content->line . "<br />\n";
                 }
                 $html = '<p>' . $html . '</p>';
                 break;
@@ -319,7 +326,7 @@ class Etc_Wickey_Parser
                 $html = '<hr />';
                 break;
             case 'noneparse':
-                $html = '<np>' . htmlspecialchars($block->contents[0]->line) . '</np>';
+                $html = '<noparse>' . $block->contents[0]->line . '</noparse>';
                 break;
             case 'eob':
                 $html = '';
@@ -357,7 +364,7 @@ class Etc_Wickey_Parser
         $now_level = $level;
         
         if($line != ''){
-            $html .= sprintf('<li>%s</li>', htmlspecialchars($line)) . "\n";
+            $html .= sprintf('<li>%s</li>', $line) . "\n";
         }
         
         return $html;
@@ -388,7 +395,7 @@ class Etc_Wickey_Parser
         }
         
         $now_level = $level;
-        $html .= htmlspecialchars($line) . "\n";
+        $html .= $line . "\n";
         return $html;
     }
 

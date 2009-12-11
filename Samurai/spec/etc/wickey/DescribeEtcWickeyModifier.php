@@ -7,12 +7,10 @@ class DescribeEtcWickeyModifier extends PHPSpec_Context
     
     public function itBoldAttribute()
     {
-        //仕様後付のため
-        return;
         $text = "aaaa<modifier bold>aaaa</modifier>aaaa";
         $text = $this->Wickey->render($text);
         $this->spec($text)->should->equal(
-            '<div class="wickey">aaaa<span style="font-weight:bolder;">aaaa</span>aaaa</div>'
+            '<div class="wickey"><p>aaaa<span style="font-weight:bolder;">aaaa</span>aaaa</p></div>'
         );
     }
     public function itItalicAttribute()
@@ -210,9 +208,12 @@ class DescribeEtcWickeyModifier extends PHPSpec_Context
      * 初期化処理
      * @access     public
      */
+    public function before()
+    {
+        $this->Wickey = new Etc_Wickey();
+    }
     public function beforeAll()
     {
         Samurai_Loader::loadByClass('Etc_Wickey');
-        $this->Wickey = new Etc_Wickey();
     }
 }

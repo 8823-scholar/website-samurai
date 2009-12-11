@@ -71,6 +71,7 @@ class Etc_Wickey
         $this->addTag('emoji');
         $this->addTag('tip');
         $this->addTag('ignore');
+        $this->addTag('noparse');
         $this->Parser = new Etc_Wickey_Parser();
         $this->Inliner = new Etc_Wickey_Inliner();
         Samurai::getContainer()->injectDependency($this->Parser);
@@ -91,12 +92,13 @@ class Etc_Wickey
     {
         try {
             //準備
-            $text = rtrim($text);
+            $text = $this->_prepare($text);
             $dom = new Etc_Dom_Document();
             $option = (object)$option;
 
             //スタンダードWIKI表記解釈
             $text = $this->Parser->parseAndRender($text);
+            $text = "<div class='wickey'>" . $text . "</div>";
 
             //DOM型WIKI変換
             $dom->load($text);
@@ -107,12 +109,11 @@ class Etc_Wickey
             if(isset($option->width) && $option->width){
                 $dom->firstChild->setAttribute('style', 'width:' . $option->width . ';');
             }
-            $div = $dom->appendChild($dom->createElement('div'));
-            $div->setAttribute('style', 'clear:both;');
             $text = $dom->render();
         }
         catch(Exception $E) {
-            throw $E;
+            //throw $E;
+            $text = '[failed to parse & render for this text]' . $text;
         }
         
         if($option && isset($option->truncate)){
@@ -125,6 +126,29 @@ class Etc_Wickey
         }
         return $text;
     }
+
+
+    /**
+     * 処理を開始する前に元のテキストの調整を行う
+     * 主な目的はタグのエスケープ＋許可されているタグを復活させることです
+     *
+     * @access     private
+     * @param      string  $text
+     * @return     string
+     */
+    private function _prepare($text)
+    {
+        //エスケープ
+        $text = htmlspecialchars(rtrim($text));
+
+        //許可されているタグの復活
+        foreach($this->_tags as $tag => $tmp){
+            $text = preg_replace(array('/&lt;('.$tag.')(.*?)&gt;/i', '/&lt;\/('.$tag.')&gt;/i'), array('<\\1\\2>', '</\\1>'), $text);
+        }
+
+        return $text;
+    }
+
 
 
     /**
@@ -148,14 +172,14 @@ class Etc_Wickey
                 $node->parentNode->replaceChild($new_node, $node);
             }
             //子ノードも再帰的に
-            if(strtoupper($new_node->tagName) == 'a') $option->in_a = true;
+            if(strtolower($new_node->tagName) == 'a') $option->in_a = true;
             if(!isset($new_node->no_child_convert) && $new_node->hasChildNodes()){
                 for($i = 0; $i < $new_node->childNodes->length; $i++){
                     $child = $new_node->childNodes->item($i);
                     $this->_nodeTransform($child, $option);
                 }
             }
-            if(strtoupper($new_node->tagName) == 'a') $option->in_a = false;
+            if(strtolower($new_node->tagName) == 'a') $option->in_a = false;
         } elseif($node->nodeType === XML_TEXT_NODE){
             $new_value = $this->Inliner->render($node->getValue(), $option);
             if($new_value != $node->nodeValue){
@@ -279,23 +303,6 @@ class Etc_Wickey
             }
         }
         return $dom;
-    }
-
-
-
-    /**
-     * 許可されているタグを復活させる
-     *
-     * @access     private
-     * @param      string  $text
-     * @return     string  タグが復活されたテキスト
-     */
-    private function _revivalAllowedTags($text)
-    {
-        foreach($this->_tags as $tag => $tmp){
-            $text = preg_replace(array('/&lt;('.$tag.')(.*?)&gt;/i', '/&lt;\/('.$tag.')&gt;/i'), array('<\\1\\2>', '</\\1>'), $text);
-        }
-        return $text;
     }
 
 
