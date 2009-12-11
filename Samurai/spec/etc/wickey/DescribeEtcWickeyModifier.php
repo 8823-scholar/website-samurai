@@ -1,156 +1,165 @@
 <?php
+/**
+ * Wickey / Modifierタグ変換のspec
+ *
+ * <code>
+ *     <modifier bold>aaaa</modifier>
+ *     <modifier italic>aaaa</modifier>
+ *     <modifier color='#CCCCCC'>change the color.</modifier>
+ *     <modifier bgcolor='#CCCCCC'>change the background color.</modifier>
+ *     <modifier underline>bbbb</modifier>
+ *     <modifier color='#FFFFFF' bgcolor='#999999'>enable conbinations.</modifier>
+ *     <modifier code='php'>
+ *     <?
+ *         class Foo_Bar_Zoo
+ *         {
+ *             function test()
+ *             {
+ *                 echo 'test';
+ *             }
+ *         }
+ *     ?>
+ *     </modifier>
+ * </code>
+ *
+ * @package    Samurai
+ * @subpackage Wickey
+ * @copyright  2007-2009 Samurai Framework Project
+ * @author     hayabusa <scholar@hayabusa-lab.jp>
+ */
 class DescribeEtcWickeyModifier extends PHPSpec_Context
 {
-    private
-        $Wickey;
-    
-    
-    public function itBoldAttribute()
+    /**
+     * Wickeyコンポーネント
+     *
+     * @access   private
+     * @var      object
+     */
+    private $Wickey;
+
+
+    //装飾系
+    public function itBold()
     {
         $text = "aaaa<modifier bold>aaaa</modifier>aaaa";
         $text = $this->Wickey->render($text);
-        $this->spec($text)->should->equal(
-            '<div class="wickey"><p>aaaa<span style="font-weight:bolder;">aaaa</span>aaaa</p></div>'
+        $this->spec($this->_deleteWhiteSpace($text))->should->equal(
+            '<div class="wickey"><p>aaaa<span style="font-weight:bolder;">aaaa</span>aaaa<br /></p></div>'
         );
     }
-    public function itItalicAttribute()
+    public function itItalic()
     {
-        //仕様後付のため
-        return;
         $text = "aaaa<modifier italic>aaaa</modifier>";
         $text = $this->Wickey->render($text);
-        $this->spec($text)->should->equal(
-            '<div class="wickey">aaaa<span style="font-style:italic;">aaaa</span></div>'
+        $this->spec($this->_deleteWhiteSpace($text))->should->equal(
+            '<div class="wickey"><p>aaaa<span style="font-style:italic;">aaaa</span><br /></p></div>'
         );
     }
-    
-    
-    public function itUnderlineAttribute()
+
+    public function itUnderline()
     {
-        //仕様後付のため
-        return;
         $text = "aaaa<modifier underline>aaaa</modifier>";
         $text = $this->Wickey->render($text);
-        $this->spec($text)->should->equal(
-            '<div class="wickey">aaaa<span style="text-decoration:underline;">aaaa</span></div>'
+        $this->spec($this->_deleteWhiteSpace($text))->should->equal(
+            '<div class="wickey"><p>aaaa<span style="text-decoration:underline;">aaaa</span><br /></p></div>'
         );
     }
-    public function itOverlineAttribute()
+    public function itOverline()
     {
-        //仕様後付のため
-        return;
         $text = "aaaa<modifier overline>aaaa</modifier>";
         $text = $this->Wickey->render($text);
-        $this->spec($text)->should->equal(
-            '<div class="wickey">aaaa<span style="text-decoration:overline;">aaaa</span></div>'
+        $this->spec($this->_deleteWhiteSpace($text))->should->equal(
+            '<div class="wickey"><p>aaaa<span style="text-decoration:overline;">aaaa</span><br /></p></div>'
         );
     }
-    public function itDeleteAttribute()
+    public function itDelete()
     {
-        //仕様後付のため
-        return;
         $text = "aaaa<modifier delete>aaaa</modifier>";
         $text = $this->Wickey->render($text);
-        $this->spec($text)->should->equal(
-            '<div class="wickey">aaaa<span style="text-decoration:line-through;">aaaa</span></div>'
+        $this->spec($this->_deleteWhiteSpace($text))->should->equal(
+            '<div class="wickey"><p>aaaa<span style="text-decoration:line-through;">aaaa</span><br /></p></div>'
         );
     }
     public function itTextDecoration複合()
     {
-        //仕様後付のため
-        return;
-        $text = "aaaa<modifier delete underline overline>aaaa</modifier>";
+        $text = "aaaa<modifier delete underline overline>bbbb</modifier>";
         $text = $this->Wickey->render($text);
-        $this->spec($text)->should->equal(
-            '<div class="wickey">aaaa<span style="text-decoration:line-through underline overline;">aaaa</span></div>'
+        $this->spec($this->_deleteWhiteSpace($text))->should->equal(
+            '<div class="wickey"><p>aaaa<span style="text-decoration:line-through underline overline;">bbbb</span><br /></p></div>'
         );
     }
-    
-    
-    public function itColorAttribute()
+
+    public function itColor()
     {
-        //仕様後付のため
-        return;
         $text = "aaaa<modifier color='#666666'>aaaa</modifier>";
         $text = $this->Wickey->render($text);
-        $this->spec($text)->should->equal(
-            '<div class="wickey">aaaa<span style="color:#666666;">aaaa</span></div>'
+        $this->spec($this->_deleteWhiteSpace($text))->should->equal(
+            '<div class="wickey"><p>aaaa<span style="color:#666666;">aaaa</span><br /></p></div>'
         );
     }
-    public function itBgcolorAttribute()
+    public function itBgcolor()
     {
-        //仕様後付のため
-        return;
         $text = "aaaa<modifier bgcolor='#666666'>aaaa</modifier>";
         $text = $this->Wickey->render($text);
-        $this->spec($text)->should->equal(
-            '<div class="wickey">aaaa<span style="background-color:#666666;">aaaa</span></div>'
+        $this->spec($this->_deleteWhiteSpace($text))->should->equal(
+            '<div class="wickey"><p>aaaa<span style="background-color:#666666;">aaaa</span><br /></p></div>'
         );
     }
-    public function itHrefAttribute()
+    public function itHref()
     {
-        //仕様後付のため
-        return;
         $text = "aaaa<modifier href='http://befool.co.jp/'>aaaa</modifier>";
         $text = $this->Wickey->render($text);
-        $this->spec($text)->should->equal(
-            '<div class="wickey">aaaa<A href="http://befool.co.jp/" target="_blank">aaaa</A></div>'
+        $this->spec($this->_deleteWhiteSpace($text))->should->equal(
+            '<div class="wickey"><p>aaaa<a href="http://befool.co.jp/" target="_blank">aaaa</a><br /></p></div>'
         );
         $text = "aaaa<modifier href='http://befool.co.jp/' target='test'>aaaa</modifier>";
         $text = $this->Wickey->render($text);
-        $this->spec($text)->should->equal(
-            '<div class="wickey">aaaa<A href="http://befool.co.jp/" target="test">aaaa</A></div>'
+        $this->spec($this->_deleteWhiteSpace($text))->should->equal(
+            '<div class="wickey"><p>aaaa<a href="http://befool.co.jp/" target="test">aaaa</a><br /></p></div>'
         );
-    }
-    
-    
+    } 
+
+
     //位置系
     public function it左寄せ()
     {
-        //仕様後付のため
-        return;
         $text = "<modifier left>aaaa</modifier>";
         $text = $this->Wickey->render($text);
-        $this->spec($text)->should->equal(
-            '<div class="wickey"><div style="text-align:left;">aaaa</div></div>'
+        $this->spec($this->_deleteWhiteSpace($text))->should->equal(
+            '<div class="wickey"><p><div style="text-align:left;">aaaa</div><br /></p></div>'
         );
     }
     public function it右寄せ()
     {
-        //仕様後付のため
-        return;
         $text = "<modifier right>aaaa</modifier>";
         $text = $this->Wickey->render($text);
-        $this->spec($text)->should->equal(
-            '<div class="wickey"><div style="text-align:right;">aaaa</div></div>'
+        $this->spec($this->_deleteWhiteSpace($text))->should->equal(
+            '<div class="wickey"><p><div style="text-align:right;">aaaa</div><br /></p></div>'
         );
     }
     public function it中央寄せ()
     {
-        //仕様後付のため
-        return;
         $text = "<modifier center>aaaa</modifier>";
         $text = $this->Wickey->render($text);
-        $this->spec($text)->should->equal(
-            '<div class="wickey"><div style="text-align:center;">aaaa</div></div>'
+        $this->spec($this->_deleteWhiteSpace($text))->should->equal(
+            '<div class="wickey"><p><div style="text-align:center;">aaaa</div><br /></p></div>'
         );
     }
-    
-    
+
+
+    //その他系
     public function itコード()
     {
-        //仕様後付のため
-        return;
-        $text = "aaaa<modifier code='php'>\$a = '2';</modifier>";
+        $text = "aaaa<modifier code='php'><? \$a = '2'; ?></modifier>";
         $text = $this->Wickey->render($text);
-        $this->spec($text)->should->equal(
-            '<div class="wickey">aaaa<div class="code php">$a&nbsp;=&nbsp;\'2\';</div></div>'
+        $this->spec($this->_deleteWhiteSpace($text))->should->equal(
+            '<div class="wickey"><p>aaaa<div class="code php">$a&nbsp;=&nbsp;\'2\';</div><br /></p></div>'
         );
         //コードは中身を解釈しない
-        $text = "aaaa<modifier code='php'>\$a = '2';<modifier bold>abcdefg</modifier></modifier>";
+        $text = "aaaa<modifier code='php'><? \$a = '2'; ?><modifier bold>abcdefg</modifier></modifier>";
         $text = $this->Wickey->render($text);
-        $this->spec($text)->should->equal(
-            '<div class="wickey">aaaa<div class="code php">$a&nbsp;=&nbsp;\'2\';&lt;modifier&nbsp;bold&gt;abcdefg&lt;/modifier&gt;</div></div>'
+        $this->spec($this->_deleteWhiteSpace($text))->should->equal(
+            '<div class="wickey"><p>aaaa<div class="code php">$a&nbsp;=&nbsp;\'2\';&lt;modifier&nbsp;bold&gt;abcdefg&lt;/modifier&gt;</div><br /></p></div>'
         );
     }
     
@@ -199,11 +208,11 @@ class DescribeEtcWickeyModifier extends PHPSpec_Context
             '<div class="wickey">aaaa<span style="text-decoration:overline;">aaaa<span style="color:#666666;">bbbb</span></span></div>'
         );
     }
-    
-    
-    
-    
-    
+
+
+
+
+
     /**
      * 初期化処理
      * @access     public
@@ -215,5 +224,23 @@ class DescribeEtcWickeyModifier extends PHPSpec_Context
     public function beforeAll()
     {
         Samurai_Loader::loadByClass('Etc_Wickey');
+    }
+
+
+
+
+
+
+    /**
+     * 改行などを取り除く
+     * (expected を記述するのが煩わしいので)
+     *
+     * @access   private
+     * @param    string   $text
+     * @return   string
+     */
+    private function _deleteWhiteSpace($text)
+    {
+        return preg_replace("/[\r\n\t]/", '', $text);
     }
 }

@@ -1,6 +1,10 @@
 <?php
 /**
  * DOMのパーサー
+ *
+ * PHP標準のDOMクラス群では、余計な事をされたり、不便だったりで、
+ * やきもきすることが多かったので、余計なことは一切やらないDOMクラスを作成しました。
+ * DOMの基本的な事はサポートしています。
  * 
  * @package    Etc
  * @subpackage Dom
@@ -219,6 +223,10 @@ class Etc_Dom_Parser
                     elseif($char == '/'){
                         $attributes[$attribute] = NULL;
                         $state = self::ST_TAG_SINGLE;
+                    } else {
+                        $mark = $i;
+                        $attributes[$attribute] = NULL;
+                        $state = self::ST_ATTR_KEY;
                     }
                     break;
                     

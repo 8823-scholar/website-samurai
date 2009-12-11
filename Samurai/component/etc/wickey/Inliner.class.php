@@ -12,14 +12,31 @@
  */
 class Etc_Wickey_Inliner
 {
-    public
-        $Device,
-        $Request;
-    private
-        $_pattern_url = '[a-zA-Z0-9\+]+:\/\/[a-zA-Z0-9%&=\.\/\?\-]+',
-        $_pattern_mail = '[a-zA-Z0-9_\-\.]+@[a-zA-Z]([a-zA-Z0-9\-]+)?\.[a-zA-Z\.]+';
-    
-    
+    /**
+     * Deviceコンポーネント
+     *
+     * @access   public
+     * @var      object
+     */
+    public $Device;
+
+    /**
+     * URLの正規表現
+     *
+     * @access   private
+     * @var      string
+     */
+    private $_pattern_url = '[a-zA-Z0-9\+]+:\/\/[a-zA-Z0-9%&=\.\/\?\-]+';
+
+    /**
+     * メールアドレスの正規表現
+     *
+     * @access   private
+     * @var      string
+     */
+    private $_pattern_mail = '[a-zA-Z0-9_\-\.]+@[a-zA-Z]([a-zA-Z0-9\-]+)?\.[a-zA-Z\.]+';
+
+
     /**
      * コンストラクタ
      *
@@ -39,8 +56,9 @@ class Etc_Wickey_Inliner
      * @param      object  $option
      * @return     string
      */
-    public function render($text, $option)
+    public function render($text, $option = NULL)
     {
+        //オートリンク
         if(!isset($option->in_a) || !$option->in_a){
             $text = $this->_renderLink($text);
         }
@@ -49,7 +67,16 @@ class Etc_Wickey_Inliner
 
 
     /**
-     * リンクを解釈する
+     * リンク文字列を解釈する
+     *
+     * <code>
+     *     [[wikiname]]
+     *     [[alias>wikiname]]
+     *     [[alias>http://example.jp/]]
+     *     [[alias>foo@example.jp]]
+     *     http://example.jp/
+     *     foo@example.jp
+     * </code>
      *
      * @access     private
      * @param      string  $text
@@ -57,33 +84,38 @@ class Etc_Wickey_Inliner
      */
     private function _renderLink($text)
     {
-        //[[pagename]]
-        //[[machi:pagename]]
-        //[[alias>pagename]]
-        //[[alias>machi:pagename]]
         $pattern = '/(\[\[(?:(.+?)&gt;)?(.+?)(?::(?!\/\/)(.+?))?\]\]|(' . $this->_pattern_url . ')|(' . $this->_pattern_mail . '))/i';
         $text = preg_replace_callback($pattern, array($this, '_renderLinkCallback'), $text);
         return $text;
     }
+
+    /**
+     * _renderLinkのコールバック関数
+     *
+     * @access     private
+     * @param      array    $matches   HITした部分
+     * @return     string
+     */
     private function _renderLinkCallback($matches)
     {
         //hitした文字列がURLそのものの場合
-        $text = isset($matches[1]) ? $matches[1] : '' ;
+        $string = isset($matches[1]) ? $matches[1] : '' ;
         $alias = isset($matches[2]) ? $matches[2] : '' ;
-        $pagename = isset($matches[3]) ? $matches[3] : '' ;
+        $wikiname = isset($matches[3]) ? $matches[3] : '' ;
+        
         //URLの場合
-        if(preg_match('/^' . $this->_pattern_url . '$/', $text)
-            || preg_match('/^' . $this->_pattern_url . '$/', $pagename)){
-            $href = $pagename != '' ? $pagename : $text;
-            return sprintf('<a href="%s" target="_blank">%s</a>', $href, $alias != '' ? $alias : $text);
+        if(preg_match('/^' . $this->_pattern_url . '$/', $string)
+            || preg_match('/^' . $this->_pattern_url . '$/', $wikiname)){
+            $href = $wikiname != '' ? $wikiname : $string;
+            return sprintf('<a href="%s" target="_blank">%s</a>', $href, $alias != '' ? $alias : $string);
         //メールアドレスの場合
-        } elseif(preg_match('/^' . $this->_pattern_mail . '$/', $text)
-            || preg_match('/^' . $this->_pattern_mail . '$/', $pagename)){
-            $href = $pagename != '' ? $pagename : $text;
-            return sprintf('<a href="mailto:%s">%s</a>', $href, $alias != '' ? $alias : $text);
+        } elseif(preg_match('/^' . $this->_pattern_mail . '$/', $string)
+            || preg_match('/^' . $this->_pattern_mail . '$/', $wikiname)){
+            $href = $wikiname != '' ? $wikiname : $string;
+            return sprintf('<a href="mailto:%s">%s</a>', $href, $alias != '' ? $alias : $string);
         } else {
-            $href = BASE_URI . '/' . urlencode($pagename);
-            return sprintf('<a href="%s">%s</a>', $href, $alias != '' ? $alias : $pagename);
+            $href = urlencode($wikiname);
+            return sprintf('<a href="%s">%s</a>', $href, $alias != '' ? $alias : $wikiname);
         }
     }
 }

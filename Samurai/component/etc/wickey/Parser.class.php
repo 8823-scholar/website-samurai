@@ -50,7 +50,7 @@ class Etc_Wickey_Parser
     public function parseAndRender($text)
     {
         $blocks = $this->parse($text);
-        $html   = $this->render($blocks);
+        $html = $this->render($blocks);
         return $html;
     }
 
@@ -273,7 +273,7 @@ class Etc_Wickey_Parser
     {
         $html = '';
         foreach($blocks as $block){
-            $html .= $this->_renderBlock($block)."\n";
+            $html .= "\n" . $this->_renderBlock($block) . "\n";
         }
         return $html;
     }

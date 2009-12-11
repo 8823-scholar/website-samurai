@@ -24,7 +24,6 @@ class Etc_Wickey
 
     /**
      * コンバーターキャッシュ
-     * (コンバーターは一つあれば十分なので)
      *
      * @access   protected
      * @var      array
@@ -44,6 +43,7 @@ class Etc_Wickey
      *
      * @access   private
      * @var      object   Etc_Wickey_Parser
+     * @see      Etc_Wickey_Parser
      */
     private $Parser;
 
@@ -52,6 +52,7 @@ class Etc_Wickey
      *
      * @access   private
      * @var      object   Etc_Wickey_Inliner
+     * @see      Etc_Wickey_Inliner
      */
     private $Inliner;
 

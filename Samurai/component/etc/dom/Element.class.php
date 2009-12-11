@@ -2,19 +2,30 @@
 /**
  * エレメントノード
  * 
- * @package    Etc
- * @subpackage Dom
+ * @package    Samurai
+ * @subpackage Etc.Dom
  * @copyright  2007-2009 Samurai Framework Project
  * @author     hayabusa <scholar@hayabusa-lab.jp>
  */
 class Etc_Dom_Element extends Etc_Dom_Node
 {
-    public
-        $tagName;
-    public
-        $single = false;
-    
-    
+    /**
+     * タグ名
+     *
+     * @access   public
+     * @var      string
+     */
+    public $tagName;
+
+    /**
+     * 閉じタグを要するかどうか
+     *
+     * @access   public
+     * @var      boolean
+     */
+    public $single = false;
+
+
     /**
      * コンストラクタ
      *
@@ -44,6 +55,18 @@ class Etc_Dom_Element extends Etc_Dom_Node
     public function getAttribute($name)
     {
         return $this->hasAttribute($name) ? $this->attributes[$name]->value : NULL ;
+    }
+
+    /**
+     * 属性のノードを取得
+     *
+     * @access     public
+     * @param      string   $name
+     * @return     object   Etc_Dom_Attribute
+     */
+    public function getAttributeNode($name)
+    {
+         return $this->hasAttribute($name) ? $this->attributes[$name] : NULL ;
     }
 
 
