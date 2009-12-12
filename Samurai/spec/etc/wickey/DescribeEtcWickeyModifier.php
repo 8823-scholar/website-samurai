@@ -153,59 +153,48 @@ class DescribeEtcWickeyModifier extends PHPSpec_Context
         $text = "aaaa<modifier code='php'><? \$a = '2'; ?></modifier>";
         $text = $this->Wickey->render($text);
         $this->spec($this->_deleteWhiteSpace($text))->should->equal(
-            '<div class="wickey"><p>aaaa<div class="code php">$a&nbsp;=&nbsp;\'2\';</div><br /></p></div>'
+            '<div class="wickey"><p>aaaa<pre class="code php"><span style="color:#000000;font-weight:bold;" title="php/php/start">&lt;?</span> <span style="color:#3333ff;" title="php/php/varstart">$</span><span style="color:#3333ff;" title="php/php/var">a</span> <span style="color:#008000;" title="php/php/symbol">=</span> <span style="color:#ff0000;" title="php/php/single_string/start">\'</span><span style="color:#ff0000;" title="php/php/single_string">2</span><span style="color:#ff0000;" title="php/php/single_string/end">\'</span><span style="color:#008000;" title="php/php/symbol">;</span> <span style="color:#000000;font-weight:bold;" title="php/php/end">?&gt;</span></pre><br /></p></div>'
         );
         //コードは中身を解釈しない
         $text = "aaaa<modifier code='php'><? \$a = '2'; ?><modifier bold>abcdefg</modifier></modifier>";
         $text = $this->Wickey->render($text);
         $this->spec($this->_deleteWhiteSpace($text))->should->equal(
-            '<div class="wickey"><p>aaaa<div class="code php">$a&nbsp;=&nbsp;\'2\';&lt;modifier&nbsp;bold&gt;abcdefg&lt;/modifier&gt;</div><br /></p></div>'
+            '<div class="wickey"><p>aaaa<pre class="code php"><span style="color:#000000;font-weight:bold;" title="php/php/start">&lt;?</span> <span style="color:#3333ff;" title="php/php/varstart">$</span><span style="color:#3333ff;" title="php/php/var">a</span> <span style="color:#008000;" title="php/php/symbol">=</span> <span style="color:#ff0000;" title="php/php/single_string/start">\'</span><span style="color:#ff0000;" title="php/php/single_string">2</span><span style="color:#ff0000;" title="php/php/single_string/end">\'</span><span style="color:#008000;" title="php/php/symbol">;</span> <span style="color:#000000;font-weight:bold;" title="php/php/end">?&gt;</span><span style="color:#000000;font-weight:bold;" title="html/html/tag/start">&lt;modifier</span><span style="color:#008000;" title="html/html/tag"> bold</span><span style="color:#000000;font-weight:bold;" title="html/html/tag/end">&gt;</span><span style="color:#000000;" title="html/html">abcdefg</span><span style="color:#000000;font-weight:bold;" title="html/html/tag/start">&lt;/modifier</span><span style="color:#000000;font-weight:bold;" title="html/html/tag/end">&gt;</span></pre><br /></p></div>'
         );
     }
-    
-    
     public function it引用()
     {
-        //仕様後付のため
-        return;
         $text = "aaaa<modifier blockquote>\$a = '2';</modifier>";
         $text = $this->Wickey->render($text);
-        $this->spec($text)->should->equal(
-            '<div class="wickey">aaaa<div class="blockquote">$a = \'2\';</div></div>'
+        $this->spec($this->_deleteWhiteSpace($text))->should->equal(
+            '<div class="wickey"><p>aaaa<blockquote>$a = \'2\';</blockquote><br /></p></div>'
         );
     }
     
     
-    
+    //挑戦系
     public function it複雑でも耐えられるか？！()
     {
-        //仕様後付のため
-        return;
         $text = "aaaa<modifier italic underline delete color='#666666' bold>\$a = '2';</modifier>";
         $text = $this->Wickey->render($text);
-        $this->spec($text)->should->equal(
-            '<div class="wickey">aaaa<span style="font-style:italic; text-decoration:underline line-through; color:#666666; font-weight:bolder;">'
-                .'$a = \'2\';</span></div>'
+        $this->spec($this->_deleteWhiteSpace($text))->should->equal(
+            '<div class="wickey"><p>aaaa<span style="font-style:italic; text-decoration:underline line-through; color:#666666; font-weight:bolder;">$a = \'2\';</span><br /></p></div>'
         );
     }
     public function itCode属性は他の属性と同居できない()
     {
-        //仕様後付のため
-        return;
         $text = "aaaa<modifier code='php' italic color='#666666' bold>\$a = '2';</modifier>";
         $text = $this->Wickey->render($text);
-        $this->spec($text)->should->equal(
-            '<div class="wickey">aaaa<div class="code php">$a&nbsp;=&nbsp;\'2\';</div></div>'
+        $this->spec($this->_deleteWhiteSpace($text))->should->equal(
+            '<div class="wickey"><p>aaaa<pre class="code php"><span style="color:#000000;" title="html/html">$a = \'2\';</span></pre><br /></p></div>'
         );
     }
     public function it入れ子構造への挑戦()
     {
-        //仕様後付のため
-        return;
         $text = "aaaa<modifier overline>aaaa<modifier color='#666666'>bbbb</modifier></modifier>";
         $text = $this->Wickey->render($text);
-        $this->spec($text)->should->equal(
-            '<div class="wickey">aaaa<span style="text-decoration:overline;">aaaa<span style="color:#666666;">bbbb</span></span></div>'
+        $this->spec($this->_deleteWhiteSpace($text))->should->equal(
+            '<div class="wickey"><p>aaaa<span style="text-decoration:overline;">aaaa<span style="color:#666666;">bbbb</span></span><br /></p></div>'
         );
     }
 

@@ -4,8 +4,8 @@
  *
  * おもに、見た目の装飾に用いられるWickeyタグです
  * 
- * @package    Etc
- * @subpackage Wickey
+ * @package    Samurai
+ * @subpackage Etc.Wickey
  * @copyright  2007-2009 Samurai Framework Project
  * @author     hayabusa <scholar@hayabusa-lab.jp>
  */
