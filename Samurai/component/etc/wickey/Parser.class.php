@@ -28,6 +28,23 @@ class Etc_Wickey_Parser
      */
     private $_h_start = 3;
 
+    /**
+     * セクションの集合
+     * (セクションとはHによって区切られるブロックのさらにブロックである)
+     *
+     * @access   private
+     * @var      array
+     */
+    private $_sections = array();
+
+    /**
+     * ブロックの集合
+     *
+     * @access   private
+     * @var      array
+     */
+    private $_blocks = array();
+
 
     /**
      * コンストラクタ
@@ -49,8 +66,8 @@ class Etc_Wickey_Parser
      */
     public function parseAndRender($text)
     {
-        $blocks = $this->parse($text);
-        $html = $this->render($blocks);
+        $this->parse($text);
+        $html = $this->render();
         return $html;
     }
 
@@ -64,7 +81,8 @@ class Etc_Wickey_Parser
      */
     public function parse($text)
     {
-        $blocks = array();
+        $this->_sections = array();
+        $this->_blocks = array();
         if(!is_array($text)){
             $text = str_replace(array("\r\n", "\r"), "\n", $text);
             $text = explode("\n", $text);
@@ -79,51 +97,58 @@ class Etc_Wickey_Parser
             $el = $this->_checkBlock($line, $option);
             switch($el){
                 case 'h':
-                    $this->_removeBeforeEob($blocks);
+                    //$this->_removeBeforeEob($blocks);
                     $level = $this->_checkLevel($line);
-                    $blocks[] = $this->_addBlock($el, $line, $level);
-                    $this->_removeNextEob($text);
+                    $this->_addBlock($el, $line, $level);
+                    //$this->_removeNextEob($text);
                     break;
                 case 'ul':
                 case 'ol':
                     $level = $this->_checkLevel($line);
                     if($el == $last_el){
-                        $this->_addBlockToLast($blocks, $el, $line, $level);
+                        $this->_addBlockToLast($el, $line, $level);
                     } else {
-                        $blocks[] = $this->_addBlock($el, $line, $level);
+                        $this->_addBlock($el, $line, $level);
+                    }
+                    break;
+                case 'table':
+                    if($el == $last_el){
+                        $this->_addBlockToLast($el, $line);
+                    } else {
+                        $this->_addBlock($el, $line);
                     }
                     break;
                 case 'quote':
                     $level = $this->_checkLevel($line, 4);
                     if($el == $last_el){
-                        $this->_addBlockToLast($blocks, $el, $line, $level);
+                        $this->_addBlockToLast($el, $line, $level);
                     } else {
-                        $blocks[] = $this->_addBlock($el, $line, $level);
+                        $this->_addBlock($el, $line, $level);
                     }
                     break;
                 case 'hr':
-                    $blocks[] = $this->_addBlock($el, $line);
+                    $this->_addBlock($el, $line);
                     break;
                 case 'noneparse':
                     $line = $this->_cutTo($text, '}}}');
-                    $blocks[] = $this->_addBlock($el, $line);
+                    $this->_addBlock($el, $line);
                     break;
                 case 'else':
                     if($el == $last_el){
-                        $this->_addBlockToLast($blocks, 'p', $line);
+                        $this->_addBlockToLast('p', $line);
                     } else {
-                        $blocks[] = $this->_addBlock('p', $line);
+                        $this->_addBlock('p', $line);
                     }
                     break;
                 case 'eob':
-                    $blocks[] = $this->_addBlock($el, $line);
+                    $this->_addBlock($el, $line);
                     break;
             }
             
             $last_el = $el;
         }
-        
-        return $blocks;
+
+        $this->_revolveSection(true);
     }
 
 
@@ -151,6 +176,9 @@ class Etc_Wickey_Parser
             case $line[0] == '+':
                 return 'ol';
                 break;
+            case $line[0] == '|' && preg_match('/^|.*?|$/', $line):
+                return 'table';
+                break;
             case $line[0] == '&' && strpos($line, '&gt;') === 0:
                 return 'quote';
                 break;
@@ -175,7 +203,7 @@ class Etc_Wickey_Parser
      * @param      int     $length   チェックする文字列の長さ
      * @return     int
      */
-    private function _checkLevel(&$line, $length=1)
+    private function _checkLevel(&$line, $length = 1)
     {
         $char = substr($line, 0, $length);
         for($i = 0; $i < 3; $i++){
@@ -185,6 +213,21 @@ class Etc_Wickey_Parser
         }
         $line = trim(substr($line, $length * $i));
         return $i;
+    }
+
+
+    /**
+     * ブロックをセクションに格納し、ブロック自体は空にする
+     *
+     * @access     private
+     * @param      boolean   $force
+     */
+    private function _revolveSection($force = false)
+    {
+        if($force || $this->_blocks){
+            $this->_sections[] = $this->_blocks;
+            $this->_blocks = array();
+        }
     }
 
 
@@ -199,6 +242,9 @@ class Etc_Wickey_Parser
      */
     private function _addBlock($el, $line, $level=0, $option=NULL)
     {
+        if($el == 'h' && $level == 1){
+            $this->_revolveSection();
+        }
         $block = new stdClass();
         $content = new stdClass();
         $block->element = $el;
@@ -206,7 +252,7 @@ class Etc_Wickey_Parser
         $content->line = $line;
         $content->level = $level;
         $content->option = $option;
-        return $block;
+        $this->_blocks[] = $block;
     }
 
 
@@ -214,20 +260,19 @@ class Etc_Wickey_Parser
      * ブロックを最後の要素に追加する
      *
      * @access     private
-     * @param      array   $blocks
      * @param      string  $el
      * @param      string  $line
      * @param      int     $level
      */
-    private function _addBlockToLast(&$blocks, $el, $line, $level=0, $option=NULL)
+    private function _addBlockToLast($el, $line, $level=0, $option=NULL)
     {
-        $block = array_pop($blocks);
+        $block = array_pop($this->_blocks);
         $content = new stdClass();
         $content->line = $line;
         $content->level = $level;
         $content->option = $option;
         $block->contents[] = $content;
-        array_push($blocks, $block);
+        array_push($this->_blocks, $block);
     }
 
 
@@ -269,13 +314,17 @@ class Etc_Wickey_Parser
      * @param      array   $blocks
      * @return     string
      */
-    public function render($blocks)
+    public function render()
     {
-        $html = '';
-        foreach($blocks as $block){
-            $html .= "\n" . $this->_renderBlock($block) . "\n";
+        $html = array();
+        foreach($this->_sections as $section){
+            $html[] = '<div class="section">';
+            foreach($section as $block){
+                $html[] = $this->_renderBlock($block);
+            }
+            $html[] = '</div>';
         }
-        return $html;
+        return join("\n", $html);
     }
 
 
@@ -309,6 +358,13 @@ class Etc_Wickey_Parser
                 }
                 $html .= $this->_renderList($block->element, '', 0, $now_level);
                 break;
+            case 'table':
+                $html .= '<table>';
+                foreach($block->contents as $content){
+                    $html .= $this->_renderTable($content->line);
+                }
+                $html .= '</table>';
+                break;
             case 'quote':
                 $now_level = 0;
                 foreach($block->contents as $content){
@@ -320,13 +376,13 @@ class Etc_Wickey_Parser
                 foreach($block->contents as $_key => $content){
                     $html .= $content->line . "<br />\n";
                 }
-                $html = '<p>' . $html . '</p>';
+                $html = '<div class="paragraph">' . $html . '</div>';
                 break;
             case 'hr':
                 $html = '<hr />';
                 break;
             case 'noneparse':
-                $html = '<noparse>' . $block->contents[0]->line . '</noparse>';
+                $html = '<noparse>' . nl2br($block->contents[0]->line) . '</noparse>';
                 break;
             case 'eob':
                 $html = '';
@@ -337,7 +393,7 @@ class Etc_Wickey_Parser
 
 
     /**
-     * リストを解釈する
+     * リストを描画する
      *
      * @access     private
      * @param      string  $el
@@ -371,7 +427,31 @@ class Etc_Wickey_Parser
     }
 
     /**
-     * 引用を解釈する
+     * テーブルを描画する
+     *
+     * @access     private
+     * @param      string   $line
+     * @return     string
+     */
+    private function _renderTable($line)
+    {
+        $html = '<tr>';
+        $tds = explode('|', $line);
+        array_pop($tds);
+        array_shift($tds);
+        foreach($tds as $td){
+            if(preg_match('/^\*/', $td)){
+                $html .= '<th>' . substr($td, 1) . '</th>';
+            } else {
+                $html .= '<td>' . $td . '</td>';
+            }
+        }
+        $html .= '</tr>';
+        return $html;
+    }
+
+    /**
+     * 引用を描画する
      *
      * @access     private
      * @param      string  $line

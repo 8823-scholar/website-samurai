@@ -3,6 +3,25 @@
  * MODIFIERノードのコンバーター
  *
  * おもに、見た目の装飾に用いられるWickeyタグです
+ * <code>
+ *  <modifier bold>aaaa</modifier>
+ *      <modifier italic>aaaa</modifier>
+ *      <modifier color='#CCCCCC'>change the color.</modifier>
+ *      <modifier bgcolor='#CCCCCC'>change the background color.</modifier>
+ *      <modifier underline>bbbb</modifier>
+ *      <modifier color='#FFFFFF' bgcolor='#999999'>enable conbinations.</modifier>
+ *      <modifier code='php'>
+ *          <?
+ *              class Foo_Bar_Zoo
+ *              {
+ *                  function test()
+ *                  {
+ *                      echo 'test';
+ *                  }
+ *              }
+ *          ?>
+ *  </modifier>
+ * </code>
  * 
  * @package    Samurai
  * @subpackage Etc.Wickey

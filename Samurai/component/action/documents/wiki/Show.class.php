@@ -10,6 +10,8 @@
 class Action_Documents_Wiki_Show extends Web_Action_Wiki
 {
     public
+        $wiki_content = '';
+    public
         $Wickey;
 
 
@@ -22,10 +24,8 @@ class Action_Documents_Wiki_Show extends Web_Action_Wiki
         parent::execute();
         $this->_setWiki();
 
-        $text = file_get_contents(dirname(__FILE__) . '/test.txt');
-        $text = $this->Wickey->render($text);
-        echo nl2br(htmlspecialchars($text));
-        exit;
+        $this->wiki->content = file_get_contents(dirname(__FILE__) . '/test.txt');
+        $this->wiki_content = $this->Wickey->render($this->wiki->content);
 
         return 'success';
     }

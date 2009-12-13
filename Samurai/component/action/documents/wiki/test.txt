@@ -23,6 +23,40 @@ http://example.jp
 </table>
 
 
+** テーブル
+|*見出し1|あああああああああああ|
+|*見出し2|いいいいいいいいいいい|
+
+** コード
+<modifier code='php'>
+<?
+    /**
+     * 例クラス
+     *
+     * @package    Some Package
+     * @subpackage Some Sub Package
+     * @copyright  Some,Inc.
+     * @author     someone <someone@example.jp>
+     */
+    class Example_Foo extends Example
+    {
+        /**
+         * コンストラクタ
+         *
+         * @access     public
+         * @param      string    $arg1
+         * @param      boolean   $arg2
+         */
+        public function __construct($arg1 = 'foo', $arg2 = false)
+        {
+            $this->_arg1 = $arg1;
+            $this->_arg2 = $arg2;
+        }
+    }
+?>
+</modifier>
+
+
 {{{
 <unko>aaaaaaa</unko>
 * みだし
@@ -30,6 +64,7 @@ http://example.jp
 }}}
 <modifier color='#555555'>aiueo</modifier>
 
+* 見出し2
 
 ** 引用
 > うんこ
