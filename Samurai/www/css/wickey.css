@@ -1,22 +1,22 @@
 /**
- * theme/base/css/wickey.css
- * 
- * ぼく街のWickey設定。
- * 
- * @package     Bokumachi
- * @copyright   BEFOOL,Inc.
+ * css/wickey.css
+ *
+ * Wickey用のCSS
+ *
+ * @package     SamuraiWEB
+ * @subpackage  Wickey
+ * @copyright   2007-2009 Samurai Framework Project
+ * @author      hayabusa <scholar@hayabusa-lab.jp>
  */
 /********************
-  基本
-********************/
-    .wickey
+ * 基本
+ *******************/
+    .wickey .section
     {
-        /*
-        padding : 2px 7px;
-        */
+        margin-bottom : 20px !important;
     }
-    
-    
+
+
 /********************
   見出し
 ********************/
@@ -24,12 +24,13 @@
     {
         height : auto !important;
         margin-left : 0px !important;
-        margin-bottom : 10px !important;
-        color : #333333 !important;
-        background-image : none !important;
-        padding : 5px !important;
-        font-size : 15px !important;
+        margin-bottom : 2px !important;
+        color : #999999 !important;
+        /*background : url('../image/layout/tag.hr.dashed.png') repeat-x bottom !important;*/
+        padding : 2px 5px !important;
+        font-size : 14px !important;
         font-weight : bold !important;
+        /*border : none !important;*/
     }
     .wickey H4
     {
@@ -38,7 +39,7 @@
         margin-bottom : 10px !important;
         color : inherit !important;
         background-image : none !important;
-        padding : 3px !important;
+        padding : 2px 5px !important;
         font-size : 13px !important;
         font-weight : bold !important;
     }
@@ -57,7 +58,17 @@
     .wickey H4 A,
     .wickey H5 A
     {
-        color : #333333 !important;
+        color : #555555 !important;
+    }
+    .wickey div.h3-menu
+    {
+        text-align : right;
+        margin-bottom : 5px;
+    }
+    .wickey div.h3-menu img
+    {
+        margin : 0px 2px !important;
+        vertical-align : middle;
     }
     
     
