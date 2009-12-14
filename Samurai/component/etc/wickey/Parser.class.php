@@ -436,14 +436,35 @@ class Etc_Wickey_Parser
     private function _renderTable($line)
     {
         $html = '<tr>';
-        $tds = explode('|', $line);
-        array_pop($tds);
-        array_shift($tds);
-        foreach($tds as $td){
-            if(preg_match('/^\*/', $td)){
-                $html .= '<th>' . substr($td, 1) . '</th>';
+        $cols = explode('|', $line);
+        array_pop($cols);
+        array_shift($cols);
+        foreach($cols as $col){
+            $styles = array();
+            while(preg_match('/^([a-z]+)(\((.+?)\))?:/i', $col, $matches)){
+                $col = substr($col, strlen($matches[0]));
+                switch(strtolower($matches[1])){
+                    case 'width':
+                        if(isset($matches[3])) $styles[] = 'width:' . $matches[3];
+                        break;
+                    case 'color':
+                        if(isset($matches[3])) $styles[] = 'color:' . $matches[3];
+                        break;
+                    case 'bgcolor':
+                        if(isset($matches[3])) $styles[] = 'background-color:' . $matches[3];
+                        break;
+                    case 'left':
+                    case 'center':
+                    case 'right':
+                        $styles[] = 'text-align:' . strtolower($matches[1]);
+                        break;
+                }
+            }
+            $style = $styles ? sprintf(' style="%s"', htmlspecialchars(join(';', $styles))) : '' ;
+            if(preg_match('/^\*/', $col)){
+                $html .= sprintf('<th%s>%s</th>', $style, substr($col, 1));
             } else {
-                $html .= '<td>' . $td . '</td>';
+                $html .= sprintf('<td%s>%s</td>', $style, $col);
             }
         }
         $html .= '</tr>';
