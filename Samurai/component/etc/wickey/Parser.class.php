@@ -475,7 +475,7 @@ class Etc_Wickey_Parser
         }
         
         $now_level = $level;
-        $html .= $line . "\n";
+        $html .= $line . "<br />\n";
         return $html;
     }
 

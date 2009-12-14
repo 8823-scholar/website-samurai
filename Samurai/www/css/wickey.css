@@ -13,26 +13,26 @@
  *******************/
     .wickey .section
     {
+        clear : both;
         margin-bottom : 20px !important;
+        line-height : 1.3;
     }
 
 
 /********************
   見出し
 ********************/
-    .wickey H3
+    .wickey .section h3
     {
         height : auto !important;
         margin-left : 0px !important;
-        margin-bottom : 2px !important;
+        margin-bottom : 5px !important;
         color : #999999 !important;
-        /*background : url('../image/layout/tag.hr.dashed.png') repeat-x bottom !important;*/
         padding : 2px 5px !important;
         font-size : 14px !important;
         font-weight : bold !important;
-        /*border : none !important;*/
     }
-    .wickey H4
+    .wickey .section h4
     {
         height : auto !important;
         margin-left : 5px !important;
@@ -43,7 +43,7 @@
         font-size : 13px !important;
         font-weight : bold !important;
     }
-    .wickey H5
+    .wickey .section h5
     {
         height : auto !important;
         margin-left : 10px !important;
@@ -54,99 +54,112 @@
         font-size : inherit !important;
         font-weight : bold !important;
     }
-    .wickey H3 A,
-    .wickey H4 A,
-    .wickey H5 A
+    .wickey .section h3 a,
+    .wickey .section h4 a,
+    .wickey .section h5 a
     {
         color : #555555 !important;
     }
-    .wickey div.h3-menu
+    .wickey .section div.h3-menu
     {
         text-align : right;
-        margin-bottom : 5px;
+        margin-bottom : 5px !important;
+        padding-top : 5px !important;
+        border-top : 1px dotted #999999;
     }
-    .wickey div.h3-menu img
+    .wickey .section div.h3-menu img
     {
         margin : 0px 2px !important;
         vertical-align : middle;
     }
-    
-    
+
+
 /********************
-  段落
+  ブロック要素
 ********************/
-    .wickey P
+    .wickey .section div.paragraph
     {
         clear : both;
-        margin-left : 10px !important;
-        margin-bottom : 10px !important;
+        margin : 5px 0px 15px 5px !important;
     }
-    .wickey BLOCKQUOTE
+    .wickey .section table
+    {
+        width : 96%;
+        margin : 5px auto 15px !important;
+    }
+    .wickey .section blockquote
     {
         margin-left : 10px !important;
         margin-bottom : 10px !important;
         padding : 5px !important;
-        border-left : 5px solid #B9F9BF !important;
+        color : #777777;
+        border-left : 2px solid #CCCCCC;
+        background-color : #F5F5F5;
     }
-    .wickey BLOCKQUOTE BLOCKQUOTE
+    .wickey .section blockquote blockquote
     {
         margin-top : 5px !important;
-        margin-bottom : 0px !important;
+        margin-bottom : 5px !important;
     }
-    .wickey HR
+    .wickey .section hr
     {
         height : 0px !important;
         border : none;
         border-top : 1px dashed #999999 !important;
         margin-bottom : 15px !important;
     }
-    
-    
+
+
 /********************
   リスト
 ********************/
-    .wickey UL,
-    .wickey OL
+    .wickey .section ul,
+    .wickey .section ol
     {
-        padding-left : 10px !important;
-        padding-bottom : 5px !important;
+        margin-left : 15px;
+        margin-bottom : 15px;
     }
-    .wickey UL LI
+    .wickey .section ul ul,
+    .wickey .section ol ol
+    {
+        margin-bottom : 5px;
+    }
+    .wickey .section ul li
     {
         list-style-type : disc !important;
         list-style-position : inside !important;
         margin-bottom : 3px !important;
     }
-    .wickey UL UL LI
+    .wickey .section ul ul li
     {
         list-style-type : circle !important;
     }
-    .wickey UL UL UL LI
+    .wickey .section ul ul ul li
     {
         list-style-type : square !important;
     }
-    .wickey OL LI
+    .wickey .section ol li
     {
         list-style-type : decimal !important;
         list-style-position : inside !important;
         margin-bottom : 3px !important;
     }
-    .wickey OL OL LI
+    .wickey .section ol ol li
     {
         list-style-type : lower-alpha !important;
     }
-    .wickey OL OL OL LI
+    .wickey .section ol ol ol li
     {
         list-style-type : lower-roman !important;
     }
-    
-    
+
+
 /********************
   PRE
 ********************/
-    .wickey PRE
+    .wickey .section pre
     {
-        width : 94%;
+        width : 95%;
         margin-left : auto !important;
         margin-right : auto !important;
         margin-bottom : 10px !important;
@@ -155,10 +168,10 @@
         font-family : monospace !important;
         overflow-x : auto !important;
     }
-    .wickey PRE.code
+    .wickey .section pre.code
     {
         color : #555555 !important;
-        background-color : #F2F2F2 !important;
+        background-color : #F5F5F5 !important;
         border : 1px solid #CCCCCC !important;
     }
     
@@ -166,7 +179,7 @@
 /********************
   画像
 ********************/
-    .wickey IMG
+    .wickey .section img
     {
         margin : 10px !important;
     }

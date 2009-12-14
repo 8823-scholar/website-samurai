@@ -29,7 +29,7 @@ class Etc_Wickey_Converter_Noparse extends Etc_Wickey_Converter
     public function convert(Etc_Dom_Node $node)
     {
         $node->tagName = 'div';
-        $node->setAttribute('class', 'noparse');
+        $node->setAttribute('class', 'paragraph noparse');
         $node->no_child_convert = true;
         return $node;
     }
