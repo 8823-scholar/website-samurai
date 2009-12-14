@@ -105,11 +105,12 @@ class Etc_Wickey
             $dom->load($text);
             $option->root = $dom;
             $this->_nodeTransform($dom, $option);
-            //$sections = $this->_divideSections($dom);
-            //$dom = $this->_sections2Dom($sections);
             if(isset($option->width) && $option->width){
                 $dom->firstChild->setAttribute('style', 'width:' . $option->width . ';');
             }
+
+            //脚注展開
+            $this->_appendFootnotes($dom);
             $text = $dom->render();
         }
         catch(Exception $E) {
@@ -237,75 +238,31 @@ class Etc_Wickey
         $converter->setOption($option);
         return $converter;
     }
-    
-    
-    /**
-     * コンバートされたDOMをセクションに分割する
-     *
-     * @access     private
-     * @param      object  $dom   Etc_Dom_Document
-     * @return     array
-     */
-    private function _divideSections(Etc_Dom_Document $dom)
-    {
-        $sections = array();
-        $section  = new Etc_Dom_Element('div', array('class'=>'section'));
-        $section->is_block = false;
-        foreach($dom->childNodes as $_key => $child){
-            if($child->nodeType == XML_ELEMENT_NODE
-                && in_array(strtolower($child->tagName), array('div', 'pre', 'object', 'script', 'iframe', 'blockquote'))){
-                
-                if($section->childNodes->length > 0) $sections[] = $section;
-                $section = new Etc_Dom_Element('div', array('class'=>'section'));
-                $section->is_block = true;
-                $section->appendChild($child);
-                $sections[] = $section;
-                $section = new Etc_Dom_Element('div', array('class'=>'section'));
-                $section->is_block = false;
-            } else {
-                $section->appendChild($child);
-                if($_key == $dom->childNodes->length - 1){
-                    $sections[] = $section;
-                }
-            }
-        }
-        return $sections;
-    }
-    
-    
-    /**
-     * セクションに分割されたもので新たにDOMを形成
-     *
-     * @access     private
-     * @param      array   $sections
-     * @return     object  Etc_Dom_Document
-     */
-    private function _sections2Dom(array $sections)
-    {
-        $dom = new Etc_Dom_Document();
-        $wickey = $dom->appendChild($dom->createElement('div', array('class' => 'wickey')));
-        $this->headings = array();
-        foreach($sections as $section){
-            if($section->is_block){
-                $wickey->appendChild($section);
-            } else {
-                $inner_section = $section->innerHTML();
-                $inner_section = $this->Parser->parseAndRender($inner_section);
-                $dom2 = new Etc_Dom_Document();
-                $dom2->load($inner_section);
-                $section->childNodes->clear();
-                foreach($dom2->childNodes as $child){
-                    $section->appendChild($child);
-                    if($child->nodeType == XML_ELEMENT_NODE && in_array($child->tagName, array('h3', 'h4', 'h5'))){
-                        $this->headings[] = $child;
-                    }
-                }
-                $wickey->appendChild($section);
-            }
-        }
-        return $dom;
-    }
 
+
+
+    /**
+     * DOMに脚注をアペンドする
+     *
+     * @access     private
+     * @param      object   $document   Etc_Dom_Document
+     */
+    private function _appendFootnotes(Etc_Dom_Document $document)
+    {
+        $footnotes = $this->Inliner->getFootnotes();
+        if($footnotes){
+            $p = $document->createElement('p', array('class' => 'footnote'));
+            foreach($footnotes as $index => $footnote){
+                $a = $p->appendChild($document->createElement('a'));
+                $a->setAttribute('id', 'footnote:' . $index);
+                $a->setAttribute('href', '#footnote:anchor:' . $index);
+                $a->appendChild($document->createTextNode('*' . $index));
+                $p->appendChild($document->createTextNode(' : ' . $footnote));
+                $p->appendChild($document->createElement('br'));
+            }
+            $document->firstChild->appendChild($p);
+        }
+    }
 
 
 

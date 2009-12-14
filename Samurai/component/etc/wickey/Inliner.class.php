@@ -4,6 +4,10 @@
  *
  * DOMベースではなく、簡易記述で実現可能な表記への対応。
  * リンクの解釈などはここで行われる
+ *
+ *  ・URLのリンク化
+ *  ・メールアドレスのリンク化
+ *  ・脚注
  * 
  * @package    Etc
  * @subpackage Wickey
@@ -19,6 +23,14 @@ class Etc_Wickey_Inliner
      * @var      object
      */
     public $Device;
+
+    /**
+     * 脚注の控え
+     *
+     * @access   private
+     * @var      array
+     */
+    private $_footnotes = array();
 
     /**
      * URLの正規表現
@@ -60,8 +72,12 @@ class Etc_Wickey_Inliner
     {
         //オートリンク
         if(!isset($option->in_a) || !$option->in_a){
-            $text = $this->_renderLink($text);
+            $pattern = '/(\[\[(?:(.+?)&gt;)?(.+?)(?::(?!\/\/)(.+?))?\]\]|(' . $this->_pattern_url . ')|(' . $this->_pattern_mail . '))/i';
+            $text = preg_replace_callback($pattern, array($this, '_renderLinkCallback'), $text);
         }
+        //脚注
+        $pattern = '/(^|[^\(])?\(\(([^\(\)]+?)\)\)([^\)]|$)/';
+        $text = preg_replace_callback($pattern, array($this, '_renderFootnoteCallBack'), $text);
         return $text;
     }
 
@@ -79,24 +95,10 @@ class Etc_Wickey_Inliner
      * </code>
      *
      * @access     private
-     * @param      string  $text
-     * @return     string
-     */
-    private function _renderLink($text)
-    {
-        $pattern = '/(\[\[(?:(.+?)&gt;)?(.+?)(?::(?!\/\/)(.+?))?\]\]|(' . $this->_pattern_url . ')|(' . $this->_pattern_mail . '))/i';
-        $text = preg_replace_callback($pattern, array($this, '_renderLinkCallback'), $text);
-        return $text;
-    }
-
-    /**
-     * _renderLinkのコールバック関数
-     *
-     * @access     private
      * @param      array    $matches   HITした部分
      * @return     string
      */
-    private function _renderLinkCallback($matches)
+    private function _renderLinkCallback(array $matches)
     {
         //hitした文字列がURLそのものの場合
         $string = isset($matches[1]) ? $matches[1] : '' ;
@@ -117,5 +119,35 @@ class Etc_Wickey_Inliner
             $href = urlencode($wikiname);
             return sprintf('<a href="%s">%s</a>', $href, $alias != '' ? $alias : $wikiname);
         }
+    }
+
+
+    /**
+     * 脚注を解釈する
+     *
+     * @access     private
+     * @param      array    $matches   HITした部分
+     * @return     string
+     */
+    private function _renderFootnoteCallBack(array $matches)
+    {
+        $index = count($this->_footnotes) + 1;
+        $this->_footnotes[$index] = $matches[2];
+        return sprintf('%s<a href="#footnote:%d" id="footnote:anchor:%d" class="footnote" title="%s">*%d</a>%s',
+                            $matches[1], $index, $index, htmlspecialchars($matches[2]), $index, $matches[3]);
+    }
+
+
+
+
+    /**
+     * ストックされた脚注を取得する
+     *
+     * @access     public
+     * @return     array
+     */
+    public function getFootnotes()
+    {
+        return $this->_footnotes;
     }
 }
