@@ -1,0 +1,5 @@
+###
+ # documents - wiki - tools - edit - preview.yml
+ #/
+View:
+    success : 'documents/wiki/tools_edit_preview.tpl'

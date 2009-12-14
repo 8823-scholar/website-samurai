@@ -24,4 +24,5 @@
 
 //Helper
 //$this->addHelper('Foo', array('class'=>'Helper_Smarty_Foo'));
-$Helper = $this->addHelper('Html', array('class'=>'Etc_Helper_Smarty_Html'));
+$Helper = $this->addHelper('Html', array('class' => 'Etc_Helper_Smarty_Html'));
+$Helper = $this->addHelper('Wickey', array('class' => 'Etc_Wickey_Helper_Smarty'));

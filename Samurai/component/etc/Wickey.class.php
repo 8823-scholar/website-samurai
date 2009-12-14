@@ -14,31 +14,6 @@ Samurai_Loader::loadByClass('Etc_Dom_Document');
 class Etc_Wickey
 {
     /**
-     * 見出しリスト
-     * コンテンツメニューを生成するために、見出しの一覧を保管しておく
-     *
-     * @access   public
-     * @var      array
-     */
-    public $headings = array();
-
-    /**
-     * コンバーターキャッシュ
-     *
-     * @access   protected
-     * @var      array
-     */
-    protected $_converters = array();
-
-    /**
-     * 使用許可されたタグリスト
-     *
-     * @access   protected
-     * @var      array
-     */
-    protected $_tags = array();
-
-    /**
      * 標準WIKIパーサー
      *
      * @access   private
@@ -55,6 +30,22 @@ class Etc_Wickey
      * @see      Etc_Wickey_Inliner
      */
     private $Inliner;
+
+    /**
+     * コンバーターキャッシュ
+     *
+     * @access   protected
+     * @var      array
+     */
+    protected $_converters = array();
+
+    /**
+     * 使用許可されたタグリスト
+     *
+     * @access   protected
+     * @var      array
+     */
+    protected $_tags = array();
 
 
 
@@ -80,6 +71,23 @@ class Etc_Wickey
     }
 
 
+    /**
+     * 許容タグを追加
+     *
+     * @access     public
+     * @param      string  $tag     タグ名
+     * @param      string  $class   コンバーターのクラス名
+     */
+    public function addTag($tag, $class='')
+    {
+        $tag = strtolower($tag);
+        if($class == ''){
+            $class = 'Etc_Wickey_Converter_' . ucfirst($tag);
+        }
+        $this->_tags[$tag] = $class;
+    }
+
+
 
     /**
      * 変換トリガー
@@ -93,6 +101,8 @@ class Etc_Wickey
     {
         try {
             //準備
+            $this->Parser->clear();
+            $this->Inliner->clear();
             $text = $this->_prepare($text);
             $dom = new Etc_Dom_Document();
             $option = (object)$option;
@@ -277,15 +287,7 @@ class Etc_Wickey
      */
     public function supplement($text)
     {
-        $dom = new Etc_Dom_Document();
-        $dom->load($text);
-        foreach($dom->childNodes as $child){
-            if($child->nodeType == XML_TEXT_NODE){
-                $child->nodeValue = $this->Parser->supplement($child->nodeValue);
-            }
-        }
-        $text = $dom->render();
-        return html_entity_decode($text);
+        return $this->Parser->supplement($text);
     }
     
     
@@ -302,10 +304,10 @@ class Etc_Wickey
     {
         $html = '';
         $depth = 0;
-        foreach($this->headings as $_key => $heading){
-            $h_depth = (int)substr($heading->tagName, 1) - 2;
+        foreach($this->Parser->getHeadings() as $heading){
+            $h_depth = $heading['level'];
             if($depth == 0){
-                $html .= '<ul class="wickey_contents_menu">';
+                $html .= '<ul class="wickey contents_menu">';
             }
             elseif($h_depth > $depth){
                 for($i = $depth; $i < $h_depth; $i++) $html .= '<UL>';
@@ -313,30 +315,10 @@ class Etc_Wickey
             elseif($h_depth < $depth){
                 for($i = $depth; $i > $h_depth; $i--) $html .= '</UL>';
             }
-            $html .= sprintf('<li><a href="#%s">%s</a></li>', $heading->getAttribute('id'), $heading->innerText());
+            $html .= sprintf('<li><a href="#%s">%s</a></li>', $heading['id'], $heading['value']);
             $depth = $h_depth;
         }
         for($i = $depth; $i > 0; $i--) $html .= '</ul>';
         return $html;
-    }
-    
-    
-    
-    
-    
-    /**
-     * 許容タグを追加
-     *
-     * @access     public
-     * @param      string  $tag     タグ名
-     * @param      string  $class   コンバーターのクラス名
-     */
-    public function addTag($tag, $class='')
-    {
-        $tag = strtolower($tag);
-        if($class == ''){
-            $class = 'Etc_Wickey_Converter_' . ucfirst($tag);
-        }
-        $this->_tags[$tag] = $class;
     }
 }

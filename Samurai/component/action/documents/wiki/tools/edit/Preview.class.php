@@ -1,18 +1,14 @@
 <?php
 /**
- * ドキュメント / WIKI
+ * ドキュメント / WIKI / 編集(確認)
  * 
  * @package    SamuraiWEB
- * @subpackage action.documents.wiki
+ * @subpackage Action
  * @copyright  2007-2009 Samurai Framework Project
  * @author     hayabusa <scholar@hayabusa-lab.jp>
  */
-class Action_Documents_Wiki_Show extends Web_Action_Wiki
+class Action_Documents_Wiki_Tools_Edit_Preview extends Web_Action_Wiki
 {
-    public
-        $Wickey;
-
-
     /**
      * 実行トリガー
      *

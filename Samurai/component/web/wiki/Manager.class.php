@@ -435,8 +435,8 @@ class Web_Wiki_Manager extends Web_Model
     public function _insertHistory($wiki_id)
     {
         $sql = "INSERT INTO `" . $this->_table_histories . "`
-                    (`wiki_id`, `name`, `content`, `locale`, `localized_for`, `revision`, `created_by`, `created_at`, `updated_at`)
-                SELECT `id` AS `wiki_id`, `name`, `content`, `locale`, `localized_for`, `revision`,
+                    (`wiki_id`, `name`, `title`, `content`, `locale`, `localized_for`, `revision`, `created_by`, `created_at`, `updated_at`)
+                SELECT `id` AS `wiki_id`, `name`, `title`, `content`, `locale`, `localized_for`, `revision`,
                     CASE
                         WHEN `updated_by` = 0 THEN `created_by`
                         ELSE `updated_by`

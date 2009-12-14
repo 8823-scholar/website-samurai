@@ -21,7 +21,7 @@ class Etc_Wickey_Parser
     public $Device;
 
     /**
-     * Hがスタートするレベル
+     * hがスタートするレベル
      *
      * @access   private
      * @var      int
@@ -44,6 +44,14 @@ class Etc_Wickey_Parser
      * @var      array
      */
     private $_blocks = array();
+
+    /**
+     * 見出し(h)のリスト
+     *
+     * @access   private
+     * @var      array
+     */
+    private $_headings = array();
 
 
     /**
@@ -97,10 +105,8 @@ class Etc_Wickey_Parser
             $el = $this->_checkBlock($line, $option);
             switch($el){
                 case 'h':
-                    //$this->_removeBeforeEob($blocks);
                     $level = $this->_checkLevel($line);
                     $this->_addBlock($el, $line, $level);
-                    //$this->_removeNextEob($text);
                     break;
                 case 'ul':
                 case 'ol':
@@ -349,6 +355,7 @@ class Etc_Wickey_Parser
                     $id = uniqid();
                 }
                 $html = sprintf('<h%d id="%s"><a href="#%s">%s</a></h%d>', $level, $id, $id, $line, $level);
+                $this->_headings[] = array('id' => $id, 'level' => $level, 'value' => $line);
                 break;
             case 'ul':
             case 'ol':
@@ -503,40 +510,6 @@ class Etc_Wickey_Parser
 
 
 
-    /**
-     * 直後のeobを取り除く
-     *
-     * @access     private
-     * @param      array   $text
-     */
-    private function _removeNextEob(&$text)
-    {
-        $line = array_shift($text);
-        if(is_string($line) && strtoupper($line) !== '<br />'){
-            array_unshift($text, $line);
-        }
-    }
-
-
-    /**
-     * 直前ののeobを取り除く
-     *
-     * @access     private
-     * @param      array   $text
-     */
-    private function _removeBeforeEob(&$blocks)
-    {
-        if($blocks){
-            $block = array_pop($blocks);
-            if($block->element != 'eob'){
-                array_push($blocks, $block);
-            }
-        }
-    }
-
-
-
-
 
     /**
      * 見出しにIDを振ったりなど
@@ -548,9 +521,9 @@ class Etc_Wickey_Parser
      */
     public function supplement($text)
     {
+        $blocks = array();
         $text = str_replace(array("\r\n", "\r"), "\n", $text);
         $text = explode("\n", $text);
-        $blocks = array();
         
         //メインループ
         $last_el = '';
@@ -580,5 +553,28 @@ class Etc_Wickey_Parser
         }
         
         return join("\n", $blocks);
+    }
+
+
+    /**
+     * パーサーを初期化する
+     *
+     * @access     public
+     */
+    public function clear()
+    {
+        $this->_headings = array();
+    }
+
+
+    /**
+     * 見出しのリストを取得する
+     *
+     * @access     public
+     * @return     array
+     */
+    public function getHeadings()
+    {
+        return $this->_headings;
     }
 }

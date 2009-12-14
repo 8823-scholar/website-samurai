@@ -3,10 +3,10 @@
  * 
  * レイアウト - 2column
  * 
- * @package     Samurai
+ * @package     SamuraiWEB
  * @subpackage  www.css
- * @copyright   BEFOOL,Inc.
- * @author      Satoshi Kiuchi <satoshi.kiuchi@befool.co.jp>
+ * @copyright   2007-2009 Samurai Framework Project
+ * @author      hayabusa <scholar@hayabusa-lab.jp>
  */
 /** インポート **/
 @import url('./standard.css');
@@ -68,224 +68,59 @@
         margin-bottom : 10px;
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    #bokumachi #contents #main .column_half
-    {
-        width : 280px;
-        margin-bottom : 15px;
-        line-height : 1.5;
-    }
-    
+
+
+
 /********************
-  ボックス
-********************/
-    #bokumachi #contents #main .column .box
+ * フォーム
+ *******************/
+    #samurai #contents #main table.form
     {
-        
+        width : 100%;
+        margin-left : 0px;
+        margin-right : 0px;
     }
-    #bokumachi #contents #main .column .box UL.menu
+    #samurai #contents #main table.form th
     {
-        margin : 10px 0px;
+        width : 120px;
+        background : #F0F0F0;
+        padding : 5px;
+        text-align : left;
+        vertical-align : top;
     }
-    
-    
-    
-    
-    
-/********************
-  メニュー
-********************/
-    #bokumachi #contents #sidebar .menu H4
+    #samurai #contents #main table.form td
     {
-        color : #FFFFFF;
-        font-size : 12px;
-        font-weight : bold;
-        padding-left : 7px;
-        padding-top : 7px;
-        padding-bottom : 6px;
-        padding-right : 5px;
+        padding : 5px;
     }
-    #bokumachi #contents #sidebar .menu UL
-    {
-        border : 1px solid #999999;
-    }
-    #bokumachi #contents #sidebar .menu UL LI
-    {
-        margin-top : -1px;
-        border-top : 1px dashed #999999;
-    }
-    #bokumachi #contents #sidebar .menu UL LI A
-    {
-        display : block;
-        padding : 2px 5px;
-    }
-    #bokumachi #contents #sidebar .menu UL UL
-    {
-        border : none;
-    }
-    #bokumachi #contents #sidebar .menu UL UL LI
-    {
-        padding-left : 15px;
-        background : url('../../image/layout/sidebar.menu.arrow.png') 5px 5px no-repeat;
-    }
-    #bokumachi #contents #sidebar .menu UL UL UL LI
-    {
-        padding-left : 25px;
-        background : url('../../image/layout/sidebar.menu.arrow.png') 15px 5px no-repeat;
-    }
-    
-    
-    
-    
-    
-    
-/********************
-  ログイン
-********************/
-    #bokumachi #contents #sidebar .login .top
-    {
-        width : 200px;
-        height : 5px;
-        background : url('../../image/layout/sidebar.login.background.top.png') no-repeat;
-    }
-    #bokumachi #contents #sidebar .login .middle
-    {
-        width : 186px;
-        padding : 0px 7px 5px;
-        background : url('../../image/layout/sidebar.login.background.middle.png') repeat-y;
-    }
-    #bokumachi #contents #sidebar .login .middle INPUT.user,
-    #bokumachi #contents #sidebar .login .middle INPUT.pass
-    {
-        width : 160px;
-        height : 16px;
-        vertical-align : middle;
-        margin-top : 1px;
-        margin-bottom : 3px;
-        border : 1px solid #999999;
-    }
-    #bokumachi #contents #sidebar .login .middle INPUT.hold
-    {
-        width : 12px;
-        height : 12px;
-        vertical-align : middle;
-        margin : 7px 3px 10px 0px;
-    }
-    #bokumachi #contents #sidebar .login .middle LABEL.hold
-    {
-        font-size : 10px;
-    }
-    #bokumachi #contents #sidebar .login .middle INPUT.submit,
-    #bokumachi #contents #sidebar .login .middle IMG.regist
+    #samurai #contents #main table.form td.input img.antispam
     {
         margin-bottom : 5px;
     }
-    #bokumachi #contents #sidebar .login .middle DIV.hr_dashed
+    #samurai #contents #main table.form td.submit
     {
-        width : 184px;
-        margin : 5px auto 10px;
-    }
-    #bokumachi #contents #sidebar .login .middle UL.menu LI
-    {
+        padding : 10px;
         text-align : right;
-        margin-top : 5px;
     }
-    #bokumachi #contents #sidebar .login .bottom
+    #samurai #contents #main table.form td.submit input
     {
-        width : 200px;
-        height : 5px;
-        background : url('../../image/layout/sidebar.login.background.bottom.png') no-repeat;
+        margin : 0px 5px;
     }
-/********************
-  ユーザー情報
-********************/
-    #bokumachi #contents #sidebar .user .top
+    #samurai #contents #main table.form td.input .error
     {
-        height : 5px;
-        background : url('../../image/layout/sidebar.login.background.top.png') no-repeat;
-        font-size : 0px;
+        padding : 5px;
+        padding-left : 27px;
+        margin-bottom : 5px;
+        color : #990000;
+        background : #FEE1E1 url('../../image/icon/error.png') 5px 5px no-repeat;
+        text-align : left;
     }
-    #bokumachi #contents #sidebar .user .middle
-    {
-        background : url('../../image/layout/sidebar.login.background.middle.png') repeat-y;
-        padding : 0px 7px;
-    }
-    #bokumachi #contents #sidebar .user .bottom
-    {
-        height : 5px;
-        background : url('../../image/layout/sidebar.login.background.bottom.png') no-repeat;
-    }
+
     
-    #bokumachi #contents #sidebar .user .name
-    {
-        text-align : center;
-        font-weight : bold;
-    }
     
-    #bokumachi #contents #sidebar .user .name A
-    {
-        color : #3399CC;
-    }
     
-    #bokumachi #contents #sidebar .user .photo .top
-    {
-        height : 3px;
-        background : url('../../image/action/mypage/sidebar.user.photo.frame.top.png') no-repeat;
-        font-size : 0px;
-    }
-    #bokumachi #contents #sidebar .user .photo .middle
-    {
-        padding : 0px 3px;
-        background : url('../../image/action/mypage/sidebar.user.photo.frame.middle.png') repeat-y;
-    }
-    #bokumachi #contents #sidebar .user .photo .middle .frame
-    {
-        text-align : center;
-        border : solid 1px #999999;
-    }
-    #bokumachi #contents #sidebar .user .photo .bottom
-    {
-        height : 3px;
-        background : url('../../image/action/mypage/sidebar.user.photo.frame.bottom.png') no-repeat;
-    }
     
-    #bokumachi #contents #sidebar .user .photo IMG
-    {
-        
-    }
     
-    #bokumachi #contents #sidebar .user .introduction
-    {
-        margin-top : 1px;
-    }
-    #bokumachi #contents #sidebar .user .introduction .top
-    {
-        height : 13px;
-        background : url('../../image/action/mypage/sidebar.user.introduction.frame.top.png') no-repeat;
-        font-size : 0px;
-    }
-    #bokumachi #contents #sidebar .user .introduction .middle
-    {
-        background : url('../../image/action/mypage/sidebar.user.introduction.frame.middle.png') repeat-y;
-    }
-    #bokumachi #contents #sidebar .user .introduction .bottom
-    {
-        height : 10px;
-        background : url('../../image/action/mypage/sidebar.user.introduction.frame.bottom.png') no-repeat;
-        font-size : 0px;
-    }
     
-    #bokumachi #contents #sidebar .user .operate
-    {
-        margin-top : 10px;
-    }
     
     
 /********************

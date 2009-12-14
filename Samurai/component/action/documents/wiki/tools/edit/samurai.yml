@@ -1,0 +1,19 @@
+###
+ # documents - wiki - tools - edit - *.yml
+ #/
+Convert:
+    * : 'trim'c:wq
+    title,content : 'toObject > dto'
+    
+Validate:
+    title.required : '入力してください'
+    title.maxlength : '入力内容が長すぎます,255'
+    content.required : '入力してください'
+    content.maxlength : '入力内容が長すぎます,5012'
+    checksum.required : '入力内容が不正です'
+
+Token:
+    name : token_documents_wiki_tools_edit
+
+View:
+    invalidInput : 'Action: documents_wiki_tools_edit'

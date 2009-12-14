@@ -1,0 +1,22 @@
+/**
+ * css/action/documents/wiki.css
+ * 
+ * アクション - documents - wiki
+ * 
+ * @package     SamuraiWEB
+ * @subpackage  www.css
+ * @copyright   2007-2009 Samurai Framework Project
+ * @author      hayabusa <scholar@hayabusa-lab.jp>
+ */
+/********************
+  編集
+********************/
+    #samurai #contents.documents.wiki.tools .edit table.form td.input .title
+    {
+        width : 420px;
+    }
+    #samurai #contents.documents.wiki.tools .edit table.form td.input .content
+    {
+        width : 420px;
+        height : 400px;
+    }

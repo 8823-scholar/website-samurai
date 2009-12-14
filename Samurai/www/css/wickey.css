@@ -179,9 +179,15 @@
 /********************
  * 脚注
  *******************/
+    .wickey a.footnote
+    {
+        vertical-align : super;
+    }
     .wickey p.footnote
     {
+        padding-top : 5px;
         font-size : 10px;
+        background : url('../image/layout/tag.hr.dashed.png') top repeat-x;
     }
     
     

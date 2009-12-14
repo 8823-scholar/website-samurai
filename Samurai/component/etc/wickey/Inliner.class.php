@@ -75,6 +75,7 @@ class Etc_Wickey_Inliner
             $pattern = '/(\[\[(?:(.+?)&gt;)?(.+?)(?::(?!\/\/)(.+?))?\]\]|(' . $this->_pattern_url . ')|(' . $this->_pattern_mail . '))/i';
             $text = preg_replace_callback($pattern, array($this, '_renderLinkCallback'), $text);
         }
+
         //脚注
         $pattern = '/(^|[^\(])?\(\(([^\(\)]+?)\)\)([^\)]|$)/';
         $text = preg_replace_callback($pattern, array($this, '_renderFootnoteCallBack'), $text);
@@ -149,5 +150,16 @@ class Etc_Wickey_Inliner
     public function getFootnotes()
     {
         return $this->_footnotes;
+    }
+
+
+    /**
+     * インライナーを初期化する
+     *
+     * @access     public
+     */
+    public function clear()
+    {
+        $this->_footnotes = array();
     }
 }

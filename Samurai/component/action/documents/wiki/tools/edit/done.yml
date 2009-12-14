@@ -1,0 +1,8 @@
+###
+ # documents - wiki - tools - edit - done.yml
+ #/
+Token:
+    mode : check,remove
+
+View:
+    success : 'documents/wiki/tools_edit_done.tpl'

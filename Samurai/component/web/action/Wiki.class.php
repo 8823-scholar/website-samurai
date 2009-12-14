@@ -16,11 +16,13 @@ class Web_Action_Wiki extends Web_Action
         $locale;
     public
         $Session,
+        $Wickey,
         $WikiManager;
 
 
     /**
-     * コンストラクタ。
+     * コンストラクタ
+     *
      * @access     public
      */
     public function __construct()
@@ -31,6 +33,7 @@ class Web_Action_Wiki extends Web_Action
 
     /**
      * wikiをセットする
+     *
      * @access     protected
      */
     protected function _setWiki()
@@ -41,6 +44,10 @@ class Web_Action_Wiki extends Web_Action
         //wikiの取得
         $this->WikiManager->setLocale($this->locale);
         $this->wiki = $this->WikiManager->getByName($this->Request->get('name'));
-        if(!$this->wiki) throw new Web_Exception('No such wiki.');
+        if($this->wiki){
+            $this->wiki->name_encoded = urlencode($this->wiki->name);
+        } else {
+            throw new Web_Exception('No such wiki.');
+        }
     }
 }

@@ -1,16 +1,16 @@
 <?php
 /**
- * ドキュメント / WIKI
+ * ドキュメント / WIKI / 編集
  * 
  * @package    SamuraiWEB
- * @subpackage action.documents.wiki
+ * @subpackage Action
  * @copyright  2007-2009 Samurai Framework Project
  * @author     hayabusa <scholar@hayabusa-lab.jp>
  */
-class Action_Documents_Wiki_Show extends Web_Action_Wiki
+class Action_Documents_Wiki_Tools_Edit extends Web_Action_Wiki
 {
     public
-        $Wickey;
+        $checksum = '';
 
 
     /**
@@ -22,7 +22,9 @@ class Action_Documents_Wiki_Show extends Web_Action_Wiki
     {
         parent::execute();
         $this->_setWiki();
-        $this->Wickey->addTag('h3');
+
+        //同時編集への配慮としてチェックサムを保持
+        $this->checksum = md5($this->wiki->title . $this->wiki->content);
 
         return 'success';
     }
