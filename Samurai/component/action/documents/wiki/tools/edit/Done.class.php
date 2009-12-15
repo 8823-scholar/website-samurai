@@ -18,12 +18,27 @@ class Action_Documents_Wiki_Tools_Edit_Done extends Web_Action_Wiki
     {
         parent::execute();
         $this->_setWiki();
-        $this->Wickey->addTag('h3');
+
+        //チェックサム
+        if(!$this->_checkSum()) return 'merge';
 
         $dto = $this->Request->get('dto');
         $dto->content = $this->Wickey->supplement($dto->content);
         $this->WikiManager->save($this->wiki, $dto);
 
         return 'success';
+    }
+
+
+    /**
+     * checksumで同時編集をチェックする
+     *
+     * @access     private
+     * @return     boolean
+     */
+    private function _checkSum()
+    {
+        $checksum = $this->Request->get('checksum');
+        return !$this->wiki || $checksum == md5($this->wiki->title . $this->wiki->content);
     }
 }

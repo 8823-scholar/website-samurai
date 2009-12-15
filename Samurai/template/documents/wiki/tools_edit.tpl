@@ -26,6 +26,7 @@
                 {Html->hidden name='name' value=$wiki->name}
                 {Html->hidden name='locale' value=$wiki->locale}
                 {Html->hidden name='checksum' value=$request.checksum|default:$checksum}
+                {Html->hidden name='original' value=$request.original|default:$wiki->content}
                 <table class='form'>
                     <tr>
                         <th class='required'>タイトル</th>

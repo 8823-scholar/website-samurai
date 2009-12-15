@@ -1,0 +1,8 @@
+###
+ # documents - wiki - tools - edit - merge.yml
+ #/
+Convert@delete:
+Validate@delete:
+
+View:
+    success : 'documents/wiki/tools_edit_merge.tpl'

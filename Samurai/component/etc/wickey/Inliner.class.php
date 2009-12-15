@@ -38,7 +38,7 @@ class Etc_Wickey_Inliner
      * @access   private
      * @var      string
      */
-    private $_pattern_url = '[a-zA-Z0-9\+]+:\/\/[a-zA-Z0-9%&=\.\/\?\-]+';
+    private $_pattern_url = '[a-zA-Z0-9\+]+:\/\/[a-zA-Z0-9%&=:\.\/\?\-]+(#[a-zA-Z0-9:]*)?';
 
     /**
      * メールアドレスの正規表現
@@ -72,7 +72,7 @@ class Etc_Wickey_Inliner
     {
         //オートリンク
         if(!isset($option->in_a) || !$option->in_a){
-            $pattern = '/(\[\[(?:(.+?)&gt;)?(.+?)(?::(?!\/\/)(.+?))?\]\]|(' . $this->_pattern_url . ')|(' . $this->_pattern_mail . '))/i';
+            $pattern = '/(\[\[(?:(.+?)&gt;)?(.+?)(#.+?)?\]\]|(' . $this->_pattern_url . ')|(' . $this->_pattern_mail . '))/i';
             $text = preg_replace_callback($pattern, array($this, '_renderLinkCallback'), $text);
         }
 
@@ -101,16 +101,17 @@ class Etc_Wickey_Inliner
      */
     private function _renderLinkCallback(array $matches)
     {
-        //hitした文字列がURLそのものの場合
         $string = isset($matches[1]) ? $matches[1] : '' ;
         $alias = isset($matches[2]) ? $matches[2] : '' ;
         $wikiname = isset($matches[3]) ? $matches[3] : '' ;
+        $flagment = isset($matches[4]) ? $matches[4] : '' ;
         
         //URLの場合
         if(preg_match('/^' . $this->_pattern_url . '$/', $string)
             || preg_match('/^' . $this->_pattern_url . '$/', $wikiname)){
             $href = $wikiname != '' ? $wikiname : $string;
-            return sprintf('<a href="%s" target="_blank">%s</a>', $href, $alias != '' ? $alias : $string);
+            $alias = $alias != '' ? $alias : ( preg_match('/^' . $this->_pattern_url . '$/', $string) ? $string : $wikiname ) ;
+            return sprintf('<a href="%s" target="_blank">%s</a>', $href . $flagment, $alias != '' ? $alias : $string);
         //メールアドレスの場合
         } elseif(preg_match('/^' . $this->_pattern_mail . '$/', $string)
             || preg_match('/^' . $this->_pattern_mail . '$/', $wikiname)){
@@ -118,7 +119,7 @@ class Etc_Wickey_Inliner
             return sprintf('<a href="mailto:%s">%s</a>', $href, $alias != '' ? $alias : $string);
         } else {
             $href = urlencode($wikiname);
-            return sprintf('<a href="%s">%s</a>', $href, $alias != '' ? $alias : $wikiname);
+            return sprintf('<a href="%s">%s</a>', $href . $flagment, $alias != '' ? $alias : $wikiname);
         }
     }
 

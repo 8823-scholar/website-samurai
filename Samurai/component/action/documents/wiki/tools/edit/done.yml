@@ -5,4 +5,5 @@ Token:
     mode : check,remove
 
 View:
+    merge : 'Action: documents_wiki_tools_edit_merge'
     success : 'documents/wiki/tools_edit_done.tpl'

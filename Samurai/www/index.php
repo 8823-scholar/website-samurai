@@ -15,6 +15,7 @@ if(!preg_match('/samurai-fw\.org$/', $_SERVER['HTTP_HOST'])){
     define('SAMURAI_ENVIRONMENT', 'local');
 }
 include_once('Samurai/Samurai.class.php');
+Samurai::unshiftSamuraiDir('D:\satoshi_kiuchi\ProgramFiles\php\PEAR\Samurai.BEFOOL');
 Samurai::unshiftSamuraiDir(dirname(dirname(__FILE__)));
 Samurai::init();
 //Samurai_Controllerの起動

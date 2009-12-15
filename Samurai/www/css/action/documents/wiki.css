@@ -20,3 +20,52 @@
         width : 420px;
         height : 400px;
     }
+
+
+/********************
+  diff
+********************/
+    #samurai #contents.documents.wiki.tools .merge table.diff
+    {
+        width : 100%;
+        border : 1px solid #CCCCCC;
+        margin : 10px 0px;
+    }
+    #samurai #contents.documents.wiki.tools .merge table.diff th
+    {
+        padding : 2px;
+        background : #EEEEEE;
+        border : 1px solid #CCCCCC;
+        text-align : center;
+    }
+    #samurai #contents.documents.wiki.tools .merge table.diff td
+    {
+        padding : 2px;
+        font-size   : 90%;
+        font-family : 'ＭＳ ゴシック', monospace;
+    }
+    #samurai #contents.documents.wiki.tools .merge table.diff td.line
+    {
+        width : 25px;
+        text-align : right;
+        background : #EEEEDD;
+        border : 1px solid #CCCCCC;
+    }
+    #samurai #contents.documents.wiki.tools .merge table.diff td.context
+    {
+        background : #FFFFFF;
+    }
+    #samurai #contents.documents.wiki.tools .merge table.diff td.added
+    {
+        background : #DDFFDD;
+    }
+    #samurai #contents.documents.wiki.tools .merge table.diff td.deleted
+    {
+        background : #FFDDDD;
+    }
+    #samurai #contents.documents.wiki.tools .merge table.diff td.conflict
+    {
+        color : #FFFFFF;
+        background : #D87878;
+    }
+

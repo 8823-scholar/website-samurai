@@ -1,0 +1,11 @@
+###
+ # documents - wiki - *.dicon
+ #/
+Diff:
+    class : Befool_Text_Diff
+
+DiffRendererHtml:
+    class : Befool_Text_Diff_Renderer_HtmlInline
+
+DiffRendererText:
+    class : Befool_Text_Diff_Renderer_Text
