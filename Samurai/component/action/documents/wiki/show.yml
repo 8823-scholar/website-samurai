@@ -3,3 +3,4 @@
  #/
 View:
     success : 'documents/wiki/show.tpl'
+    newpage : 'documents/wiki/tools_new.tpl'

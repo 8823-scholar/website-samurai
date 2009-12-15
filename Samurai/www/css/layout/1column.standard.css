@@ -121,39 +121,3 @@
         background : #FEE1E1 url('../../image/icon/error.png') 5px 5px no-repeat;
         text-align : left;
     }
-
-
-
-
-
-/********************
-  ボックス
-********************/
-    #bokumachi #contents #main .column .box
-    {
-        
-    }
-    #bokumachi #contents #main .column .box UL.menu
-    {
-        margin : 10px 0px;
-    }
-    
-    
-    
-    
-    
-    #bokumachi #contents #main TABLE.form TH
-    {
-        width : 115px;
-        padding : 5px;
-        padding-left : 10px;
-        text-align : left;
-        vertical-align : top;
-        color : #666666;
-        border : 1px solid #CCCCCC;
-        background : #F5F5F5 url('../../image/layout/form.th.optional.png') left repeat-y;
-    }
-    #bokumachi #contents #main TABLE.form TH.required
-    {
-        background : #F5F5F5 url('../../image/layout/form.th.required.png') left repeat-y;
-    }

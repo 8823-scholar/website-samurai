@@ -1,5 +1,10 @@
 ###
  # documents - wiki - tools - edit.yml
  #/
+Validate:
+    name.required : '入力してください'
+    name.match : '使用できる文字列は英数字およびハイフン(-)、アンダースコア(_)、スラッシュ(/)です,/^[a-z_\/\-]+$/i'
+
 View:
     success : 'documents/wiki/tools_edit.tpl'
+    invalidInput : 'documents/wiki/tools_new.tpl'

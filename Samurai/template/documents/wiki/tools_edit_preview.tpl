@@ -11,10 +11,15 @@
         <li>{Html->a href='/' value='ホーム'}</li>
         <li class='delimiter'>&gt;</li>
         <li>{Html->a href="/documents/`$locale`/FrontPage" value='ドキュメント'}</li>
-        <li class='delimiter'>&gt;</li>
-        <li>{Html->a href="/documents/`$locale`/`$wiki->name_encoded`" value=$wiki->title}<li>
-        <li class='delimiter'>&gt;</li>
-        <li class='selected'>編集(確認)<li>
+        {if $wiki->is_newpage}
+            <li class='delimiter'>&gt;</li>
+            <li class='selected'>新規作成(確認)<li>
+        {else}
+            <li class='delimiter'>&gt;</li>
+            <li>{Html->a href="/documents/`$locale`/`$wiki->name_encoded`" value=$wiki->title}<li>
+            <li class='delimiter'>&gt;</li>
+            <li class='selected'>編集(確認)<li>
+        {/if}
         <li class='clear'></li>
     </ul>
 
@@ -25,7 +30,7 @@
         </div>
 
 
-        <H2>{$wiki->title|escape:'html'}の編集</H2>
+        <H2>{$wiki->title|default:$wiki->name|escape:'html'}の編集</H2>
         <div class='edit column'>
             {Html->form action='/documents/wiki/tools/edit/done'}
                 {Html->hidden name='name' value=$wiki->name}

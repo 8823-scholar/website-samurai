@@ -17,7 +17,7 @@ class Action_Documents_Wiki_Tools_Edit_Preview extends Web_Action_Wiki
     public function execute()
     {
         parent::execute();
-        $this->_setWiki();
+        $this->_setWiki(false);
         $this->Wickey->addTag('h3');
 
         return 'success';

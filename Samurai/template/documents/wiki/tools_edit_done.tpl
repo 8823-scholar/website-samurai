@@ -11,10 +11,15 @@
         <li>{Html->a href='/' value='ホーム'}</li>
         <li class='delimiter'>&gt;</li>
         <li>{Html->a href="/documents/`$locale`/FrontPage" value='ドキュメント'}</li>
-        <li class='delimiter'>&gt;</li>
-        <li>{Html->a href="/documents/`$locale`/`$wiki->name_encoded`" value=$wiki->title}<li>
-        <li class='delimiter'>&gt;</li>
-        <li class='selected'>編集(完了)<li>
+        {if $wiki->is_newpage}
+            <li class='delimiter'>&gt;</li>
+            <li class='selected'>新規作成(完了)<li>
+        {else}
+            <li class='delimiter'>&gt;</li>
+            <li>{Html->a href="/documents/`$locale`/`$wiki->name_encoded`" value=$wiki->title}<li>
+            <li class='delimiter'>&gt;</li>
+            <li class='selected'>編集(完了)<li>
+        {/if}
         <li class='clear'></li>
     </ul>
 

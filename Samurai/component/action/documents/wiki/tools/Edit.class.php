@@ -21,10 +21,12 @@ class Action_Documents_Wiki_Tools_Edit extends Web_Action_Wiki
     public function execute()
     {
         parent::execute();
-        $this->_setWiki();
+        $this->_setWiki(false);
 
-        //同時編集への配慮としてチェックサムを保持
-        $this->checksum = md5($this->wiki->title . $this->wiki->content);
+        if(!$this->wiki->is_newpage){
+            //同時編集への配慮としてチェックサムを保持
+            $this->checksum = md5($this->wiki->title . $this->wiki->content);
+        }
 
         return 'success';
     }

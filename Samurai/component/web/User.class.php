@@ -11,8 +11,21 @@
  */
 class Web_User
 {
-    public
-        $logined = false;
+    /**
+     * ユーザーID
+     *
+     * @access   public
+     * @var      int
+     */
+    public $id = 0;
+
+    /**
+     * ログイン状態
+     *
+     * @access   public
+     * @var      boolean
+     */
+    public $logined = false;
 
 
     /**

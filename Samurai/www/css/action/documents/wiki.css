@@ -9,6 +9,15 @@
  * @author      hayabusa <scholar@hayabusa-lab.jp>
  */
 /********************
+ * 新規ページ作成
+ *******************/
+    #samurai #contents.documents.wiki.tools .new table.form td.input .name
+    {
+        width : 420px;
+    }
+
+
+/********************
   編集
 ********************/
     #samurai #contents.documents.wiki.tools .edit table.form td.input .title

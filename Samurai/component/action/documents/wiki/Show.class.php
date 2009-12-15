@@ -3,7 +3,7 @@
  * ドキュメント / WIKI
  * 
  * @package    SamuraiWEB
- * @subpackage action.documents.wiki
+ * @subpackage Action.Documents.Wiki
  * @copyright  2007-2009 Samurai Framework Project
  * @author     hayabusa <scholar@hayabusa-lab.jp>
  */
@@ -21,9 +21,9 @@ class Action_Documents_Wiki_Show extends Web_Action_Wiki
     public function execute()
     {
         parent::execute();
-        $this->_setWiki();
+        $this->_setWiki(false);
         $this->Wickey->addTag('h3');
 
-        return 'success';
+        return $this->wiki->is_newpage ? 'newpage' : 'success';
     }
 }

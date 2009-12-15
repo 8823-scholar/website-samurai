@@ -114,6 +114,12 @@
         background : #FEE1E1 url('../../image/icon/error.png') 5px 5px no-repeat;
         text-align : left;
     }
+    #samurai #contents #main table.form .example
+    {
+        margin : 0px;
+        padding : 5px;
+        color : #777777;
+    }
 
     
     
@@ -212,11 +218,7 @@
     {
         color : #777777;
     }
-    #bokumachi #contents #main TABLE.form .example
-    {
-        padding : 5px;
-        color : #777777;
-    }
+    
     
     
 /********************

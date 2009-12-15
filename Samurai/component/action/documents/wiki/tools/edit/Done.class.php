@@ -17,14 +17,21 @@ class Action_Documents_Wiki_Tools_Edit_Done extends Web_Action_Wiki
     public function execute()
     {
         parent::execute();
-        $this->_setWiki();
+        $this->_setWiki(false);
 
         //チェックサム
         if(!$this->_checkSum()) return 'merge';
 
         $dto = $this->Request->get('dto');
         $dto->content = $this->Wickey->supplement($dto->content);
-        $this->WikiManager->save($this->wiki, $dto);
+
+        if($this->wiki->is_newpage){
+            $dto->name = $this->Request->get('name');
+            $dto->locale = $this->Request->get('locale');
+            $this->WikiManager->add($dto, $this->User);
+        } else {
+            $this->WikiManager->save($this->wiki, $dto, $this->User);
+        }
 
         return 'success';
     }
@@ -39,6 +46,6 @@ class Action_Documents_Wiki_Tools_Edit_Done extends Web_Action_Wiki
     private function _checkSum()
     {
         $checksum = $this->Request->get('checksum');
-        return !$this->wiki || $checksum == md5($this->wiki->title . $this->wiki->content);
+        return $this->wiki->is_newpage || $checksum == md5($this->wiki->title . $this->wiki->content);
     }
 }
