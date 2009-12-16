@@ -121,146 +121,19 @@
         color : #777777;
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
 /********************
-  リスト
-********************/
-    #bokumachi #contents #main TABLE.list
+ * sidebar
+ *******************/
+    #samurai #contents #sidebar .column
     {
-        width : 100%;
+        margin-bottom : 15px;
     }
-    #bokumachi #contents #main TABLE.list TH
+    #samurai #contents #sidebar .column h5
     {
-        padding : 5px;
-        border : 1px solid #CCCCCC;
-        background : #F5F5F5;
-        text-align : center;
-        color : #666666;
-    }
-    #bokumachi #contents #main TABLE.list TD
-    {
-        padding : 5px;
-        border : 1px solid #CCCCCC;
-        background : #FFFFFF;
-    }
-    #bokumachi #contents #main TABLE.list TD.none
-    {
-        padding : 10px;
-        text-align : right;
-    }
-    
-    #bokumachi #contents #main .column UL LI.none
-    {
-        padding : 5px;
-        text-align : right;
-    }
-    
-    #bokumachi #contents #sidebar .column .box .middle UL.list LI
-    {
-        
-    }
-    
-    
-/********************
-  フォーム
-********************/
-    #bokumachi #contents #main TABLE.form
-    {
-        width : 100%;
-        border : 1px solid #CCCCCC;
-    }
-    #bokumachi #contents #main TABLE.form TH
-    {
-        width : 115px;
-        padding : 5px;
-        padding-left : 10px;
-        text-align : left;
-        vertical-align : top;
-        color : #666666;
-        border : 1px solid #CCCCCC;
-        background : #F5F5F5 url('../../image/layout/form.th.optional.png') left repeat-y;
-    }
-    #bokumachi #contents #main TABLE.form TH.required
-    {
-        background : #F5F5F5 url('../../image/layout/form.th.required.png') left repeat-y;
-    }
-    #bokumachi #contents #main TABLE.form TD.input
-    {
-        padding : 5px;
-        vertical-align : top;
-        border : 1px solid #CCCCCC;
-    }
-    #bokumachi #contents #main TABLE.form TD.submit
-    {
-        padding : 20px;
-        text-align : center;
-    }
-    #bokumachi #contents #main TABLE.form TD.submit INPUT.submit,
-    #bokumachi #contents #main TABLE.form TD.submit BUTTON.submit
-    {
-        height : 34px;
-        margin : 0px 10px;
-        padding-left : 15px;
-        padding-right : 15px;
-        border : 1px solid #BBBBBB;
-        color : #444444;
-        background : #E5E5E5 url('../../image/layout/form.submit.png') repeat-x;
-        vertical-align : middle;
-    }
-    #bokumachi #contents #main INPUT.dummy
-    {
-        color : #777777;
-    }
-    
-    
-    
-/********************
-  pager
-********************/
-    #bokumachi #contents #main .pager
-    {
-        padding : 10px;
-        text-align : center;
-    }
-    #bokumachi #contents #main .pager .now
-    {
-        padding : 5px;
-        margin-left : 3px;
-        margin-right : 3px;
-        background : #FFFFFF;
-        border : 1px solid #CCCCCC;
+        padding : 6px 8px;
         font-weight : bold;
-    }
-    #bokumachi #contents #main .pager .page
-    {
-        margin-left : 3px;
-        margin-right : 3px;
-        border : 1px solid #CCCCCC;
-    }
-    #bokumachi #contents #main .pager .prev
-    {
-        margin-right : 7px;
-        border : 1px solid #CCCCCC;
-    }
-    #bokumachi #contents #main .pager .next
-    {
-        margin-left : 7px;
-        border : 1px solid #CCCCCC;
-    }
-    #bokumachi #contents #main .pager A
-    {
-        padding : 5px;
-        background : #EEEEEE;
-    }
-    #bokumachi #contents #main .pager A:hover
-    {
-        background : #FFFFFF;
-        color : #333333;
+        /*background : url('../../image/layout/sidebar.tag.h5.png') no-repeat left top;*/
     }

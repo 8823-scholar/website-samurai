@@ -1,0 +1,9 @@
+###
+ # documents - wiki - tools - history.yml
+ #/
+View:
+    success : 'documents/wiki/tools_history.tpl'
+    view : 'documents/wiki/tools_history_view.tpl'
+    diff : 'documents/wiki/tools_history_diff.tpl'
+    diffnow : 'documents/wiki/tools_history_diffnow.tpl'
+    source : 'documents/wiki/tools_history_source.tpl'

@@ -18,8 +18,8 @@
 
 
 /********************
-  編集
-********************/
+ * 編集
+ *******************/
     #samurai #contents.documents.wiki.tools .edit table.form td.input .title
     {
         width : 420px;
@@ -32,8 +32,8 @@
 
 
 /********************
-  diff
-********************/
+ * diff
+ *******************/
     #samurai #contents.documents.wiki.tools .merge table.diff
     {
         width : 100%;
@@ -78,3 +78,25 @@
         background : #D87878;
     }
 
+
+/********************
+ * 変更履歴
+ *******************/
+    #samurai #contents.documents.wiki.tools .history ul.menu
+    {
+        padding-left : 10px;
+    }
+    #samurai #contents.documents.wiki.tools .history ul.menu li
+    {
+        list-style-type : disc;
+        list-style-position : inside;
+        margin-bottom : 5px;
+    }
+    #samurai #contents.documents.wiki.tools .history ul.menu ul.histories
+    {
+        padding-left : 30px;
+    }
+    #samurai #contents.documents.wiki.tools .history ul.menu ul.histories li
+    {
+        list-style-type : circle;
+    }
