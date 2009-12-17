@@ -22,7 +22,7 @@ class Action_Documents_Wiki_Show extends Web_Action_Wiki
     {
         parent::execute();
         $this->_setWiki(false);
-        $this->Wickey->addTag('h3');
+        $this->Wickey->addTag('h3', array('inputable' => false));
 
         return $this->wiki->is_newpage ? 'newpage' : 'success';
     }

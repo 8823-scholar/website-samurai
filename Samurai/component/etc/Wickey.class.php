@@ -75,16 +75,23 @@ class Etc_Wickey
      * 許容タグを追加
      *
      * @access     public
-     * @param      string  $tag     タグ名
-     * @param      string  $class   コンバーターのクラス名
+     * @param      string  $tag      タグ名
+     * @param      array   $params   コンバーターのクラス名
      */
-    public function addTag($tag, $class='')
+    public function addTag($tag, $params = array())
     {
         $tag = strtolower($tag);
-        if($class == ''){
-            $class = 'Etc_Wickey_Converter_' . ucfirst($tag);
+        $default = array('tag' => $tag, 'class' => '', 'inputable' => true);
+        if(is_string($params)){
+            $class = $params;
+            $params = array_merge($default, array('class' => $class));
+        } else {
+            $params = array_merge($default, $params);
+            if($params['class'] == ''){
+                $params['class'] = 'Etc_Wickey_Converter_' . ucfirst($tag);
+            }
         }
-        $this->_tags[$tag] = $class;
+        $this->_tags[$tag] = $params;
     }
 
 
@@ -154,8 +161,10 @@ class Etc_Wickey
         $text = htmlspecialchars(rtrim($text));
 
         //許可されているタグの復活
-        foreach($this->_tags as $tag => $tmp){
-            $text = preg_replace(array('/&lt;('.$tag.')(.*?)&gt;/i', '/&lt;\/('.$tag.')&gt;/i'), array('<\\1\\2>', '</\\1>'), $text);
+        foreach($this->_tags as $tag => $params){
+            if($params['inputable']){
+                $text = preg_replace(array('/&lt;('.$tag.')(.*?)&gt;/i', '/&lt;\/('.$tag.')&gt;/i'), array('<\\1\\2>', '</\\1>'), $text);
+            }
         }
 
         return $text;
@@ -239,7 +248,7 @@ class Etc_Wickey
         $tag = strtolower($tag);
         if(!isset($this->_converters[$tag])){
             if(!isset($this->_tags[$tag])) throw new Etc_Wickey_Exception('This tag is not accepted. -> ' . $tag);
-            $class = $this->_tags[$tag];
+            $class = $this->_tags[$tag]['class'];
             if(!Samurai_Loader::loadByClass($class)) throw new Etc_Wickey_Exception('Wickey converter is not found. -> ' . $class);
             $this->_converters[$tag] = new $class;
             Samurai::getContainer()->injectDependency($this->_converters[$tag]);

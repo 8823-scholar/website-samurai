@@ -10,17 +10,23 @@ AG:
 ## Main
 ForumManager:
     class : Web_Forum_Manager
+
 PackageManager:
     class : Web_Package_Manager
+
 WikiManager:
     class : Web_Wiki_Manager
+FileScanner:
+    class : Etc_File_Scanner
 
 
 ## Other
 Wickey:
     class : Etc_Wickey
+
 Pager:
     class : Etc_Helper_Pager_Activegateway
+
 Mail:
     class : Etc_Mail
 

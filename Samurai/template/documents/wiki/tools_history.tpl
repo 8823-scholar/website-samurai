@@ -34,8 +34,12 @@
                         [
                             {Html->a href="/documents/wiki/tools/history?name=`$_name_encoded`&locale=`$history.locale`&do=diff&rev=`$history.revision`"
                                 value='差分'} |
-                            {Html->a href="/documents/wiki/tools/history?name=`$_name_encoded`&locale=`$history.locale`&do=diffnow&rev=`$history.revision`"
-                                value='現在との差分'} |
+                            {if $history.revision != $wiki->revision}
+                                {Html->a href="/documents/wiki/tools/history?name=`$_name_encoded`&locale=`$history.locale`&do=diffnow&rev=`$history.revision`"
+                                    value='現在との差分'} |
+                            {else}
+                                現在との差分 |
+                            {/if}
                             {Html->a href="/documents/wiki/tools/history?name=`$_name_encoded`&locale=`$history.locale`&do=source&rev=`$history.revision`"
                                 value='ソース'}
                         ]

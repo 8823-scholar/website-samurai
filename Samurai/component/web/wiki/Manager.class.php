@@ -13,6 +13,14 @@
 class Web_Wiki_Manager extends Web_Model
 {
     /**
+     * ファイル検索コンポーネント
+     *
+     * @access   public
+     * @var      object
+     */
+    public $FileScanner;
+
+    /**
      * 言語設定
      *
      * @access   public
@@ -43,6 +51,14 @@ class Web_Wiki_Manager extends Web_Model
      * @var      boolean
      */
     public $auto_revision_up = true;
+
+    /**
+     * 添付ファイルが格納される場所
+     *
+     * @access   public
+     * @var      string
+     */
+    public $attach_dir = '';
 
     /**
      * テーブル名
@@ -468,10 +484,48 @@ class Web_Wiki_Manager extends Web_Model
 
 
     /**
+     * 添付ファイルの一覧を取得
+     *
+     * @access     public
+     * @return     array
+     */
+    public function getAttaches()
+    {
+        $attaches = array();
+        if(!is_dir($this->attach_dir)) return $attaches;
+        foreach($this->FileScanner->scan($this->attach_dir) as $file){
+            $attaches[] = $this->getAttachInfo($file->path);
+        }
+        return $attaches;
+    }
+
+    /**
+     * 添付ファイルの情報を返却する
+     *
+     * @access     public
+     * @param      string   $path
+     * @return     array
+     */
+    public function getAttachInfo($path)
+    {
+        $name = basename($path);
+        $info = array(
+            'path' => $path,
+            'size' => filesize($path),
+            'name' => $name,
+            'original_name' => preg_match('/^[0-9a-z]+$/i', $name) ? pack('H*', $name) : $name,
+        );
+        return $info;
+    }
+
+
+
+
+    /**
      * ロケールの設定
      *
-     * @access   public
-     * @param    string   $locale
+     * @access     public
+     * @param      string   $locale
      */
     public function setLocale($locale)
     {
@@ -481,11 +535,22 @@ class Web_Wiki_Manager extends Web_Model
     /**
      * デフォルトのロケールを設定
      *
-     * @access   public
-     * @param    string   $locale
+     * @access     public
+     * @param      string   $locale
      */
     public function setDefaultLocale($locale)
     {
         $this->default_locale = $locale;
+    }
+
+    /**
+     * 添付ファイルディレクトリの設定
+     *
+     * @access     public
+     * @param      string   $dir
+     */
+    public function setAttachDir($dir)
+    {
+        $this->attach_dir = $dir;
     }
 }

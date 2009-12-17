@@ -1,0 +1,5 @@
+###
+ # documents - wiki - tools - attach.yml
+ #/
+View:
+    success : 'documents/wiki/tools_attach.tpl'
