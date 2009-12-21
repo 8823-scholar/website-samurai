@@ -29,12 +29,20 @@
             <h3>添付ファイル一覧</h3>
             <ul class='list'>
             {foreach from=$attaches item='attach'}
-                <li>{Html->a value=$attach.original_name
-                        href="/documents/wiki/tools/attach/view?name=`$wiki->name_encoded`&locale=`$wiki->locale`&attach=`$attach.name`"}</li>
+                <li>
+                    {Html->a value=$attach.original_name
+                        href="/documents/wiki/tools/attach/view?name=`$wiki->name_encoded`&locale=`$wiki->locale`&attach=`$attach.name`"}
+                    &nbsp;&nbsp;<span class='tag'>&lt;attach name="{$attach.original_name|escape:'html'}" /&gt;</span>
+                </li>
             {foreachelse}
                 <li class='none'>アップロードされたファイルはまだありません。</li>
             {/foreach}
             </ul>
+            {if $attaches}
+                <p class='example'>
+                    WIKIに貼り付けたい場合は、右側のタグをコピペしてあげてください。
+                </p>
+            {/if}
         </div>
 
         <div class='attach-upload'>

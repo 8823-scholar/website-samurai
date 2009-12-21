@@ -158,7 +158,7 @@ class Etc_Wickey
     private function _prepare($text)
     {
         //エスケープ
-        $text = htmlspecialchars(rtrim($text));
+        $text = htmlspecialchars(rtrim($text), ENT_NOQUOTES);
 
         //許可されているタグの復活
         foreach($this->_tags as $tag => $params){

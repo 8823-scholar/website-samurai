@@ -100,3 +100,12 @@
     {
         list-style-type : circle;
     }
+
+
+/********************
+ * 添付ファイル
+ *******************/
+    #samurai #contents.documents.wiki.tools .attaches ul.list li .tag
+    {
+        color : #666666;
+    }

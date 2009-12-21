@@ -240,12 +240,19 @@ class Etc_Dom_Parser
                         $mark = $i + 1;
                     }
                     else {
-                        throw new Etc_Dom_Exception('ERR_EXPECT_VALUE_QUOTE');
+                        //throw new Etc_Dom_Exception('ERR_EXPECT_VALUE_QUOTE');
+                        $quote = ' ';
+                        $state = self::ST_ATTR_QUOTE;
+                        $mark = $i;
                     }
                     break;
                     
                 case self::ST_ATTR_QUOTE:
                     if($char == $quote && $last_char != '\\'){
+                        $attributes[$attribute] = mb_substr($text, $mark, $i - $mark);
+                        $state = self::ST_TAG_ATTRIBUTES;
+                    }
+                    elseif($quote == ' ' && $this->isWhiteChar($char)){
                         $attributes[$attribute] = mb_substr($text, $mark, $i - $mark);
                         $state = self::ST_TAG_ATTRIBUTES;
                     }

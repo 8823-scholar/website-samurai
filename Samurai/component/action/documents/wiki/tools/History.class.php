@@ -29,6 +29,7 @@ class Action_Documents_Wiki_Tools_History extends Web_Action_Wiki
         parent::execute();
         $this->_setWiki();
         $this->Wickey->addTag('h3', array('inputable' => false));
+        $this->Wickey->addTag('attach');
 
         $condition = $this->WikiManager->getCondition();
         $histories = $this->WikiManager->getHistories($this->wiki->id, $condition);

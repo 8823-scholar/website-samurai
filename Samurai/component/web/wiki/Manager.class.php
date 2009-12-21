@@ -484,6 +484,20 @@ class Web_Wiki_Manager extends Web_Model
 
 
     /**
+     * 添付ファイルを取得する
+     *
+     * @access     public
+     * @param      string   $hashed_name
+     * @return     array
+     */
+    public function getAttach($hashed_name)
+    {
+        $path = $this->attach_dir . '/' . $hashed_name;
+        if(!is_dir($this->attach_dir) || !file_exists($path)) return NULL;
+        return $this->getAttachInfo($path);
+    }
+
+    /**
      * 添付ファイルの一覧を取得
      *
      * @access     public
@@ -509,11 +523,24 @@ class Web_Wiki_Manager extends Web_Model
     public function getAttachInfo($path)
     {
         $name = basename($path);
+        $original_name = preg_match('/^[0-9a-z]+$/i', $name) ? pack('H*', $name) : $name ;
+        $info = pathinfo($original_name);
+        switch($info['extension']){
+            case 'png':
+            case 'gif':
+                $content_type = 'image/' . $info['extension'];
+                break;
+            case 'jpg':
+            case 'jpeg':
+                $content_type = 'image/pjpeg';
+                break;
+        }
         $info = array(
             'path' => $path,
             'size' => filesize($path),
             'name' => $name,
-            'original_name' => preg_match('/^[0-9a-z]+$/i', $name) ? pack('H*', $name) : $name,
+            'original_name' => $original_name,
+            'content_type' => $content_type,
         );
         return $info;
     }
