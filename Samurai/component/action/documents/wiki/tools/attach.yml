@@ -1,5 +1,8 @@
 ###
  # documents - wiki - tools - attach.yml
  #/
+Token:
+    name : token_documents_wiki_attach
+
 View:
     success : 'documents/wiki/tools_attach.tpl'

@@ -105,7 +105,15 @@
 /********************
  * 添付ファイル
  *******************/
+    #samurai #contents.documents.wiki.tools .attaches ul.list li
+    {
+        line-height : 18px;
+    }
     #samurai #contents.documents.wiki.tools .attaches ul.list li .tag
     {
         color : #666666;
+    }
+    #samurai #contents.documents.wiki.tools .attaches ul.list li img
+    {
+        vertical-align : top;
     }

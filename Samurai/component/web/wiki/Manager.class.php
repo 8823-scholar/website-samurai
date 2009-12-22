@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * WIKIマネージャー
  * 
@@ -6,7 +6,7 @@
  * wiki構文の解釈は行わないで、別途wickeyに任せる。
  * 
  * @package    SamuraiWEB
- * @subpackage wiki
+ * @subpackage Wiki
  * @copyright  2007-2009 Samurai Framework Project
  * @author     hayabusa <scholar@hayabusa-lab.jp>
  */
@@ -487,12 +487,13 @@ class Web_Wiki_Manager extends Web_Model
      * 添付ファイルを取得する
      *
      * @access     public
+     * @param      int      $wiki_id
      * @param      string   $hashed_name
      * @return     array
      */
-    public function getAttach($hashed_name)
+    public function getAttach($wiki_id, $hashed_name)
     {
-        $path = $this->attach_dir . '/' . $hashed_name;
+        $path = $this->attach_dir . DS . $wiki_id . DS . $hashed_name;
         if(!is_dir($this->attach_dir) || !file_exists($path)) return NULL;
         return $this->getAttachInfo($path);
     }
@@ -501,13 +502,15 @@ class Web_Wiki_Manager extends Web_Model
      * 添付ファイルの一覧を取得
      *
      * @access     public
+     * @param      int      $wiki_id
      * @return     array
      */
-    public function getAttaches()
+    public function getAttaches($wiki_id)
     {
         $attaches = array();
-        if(!is_dir($this->attach_dir)) return $attaches;
-        foreach($this->FileScanner->scan($this->attach_dir) as $file){
+        $attach_dir = $this->attach_dir . DS . $wiki_id;
+        if(!is_dir($attach_dir)) return $attaches;
+        foreach($this->FileScanner->scan($attach_dir) as $file){
             $attaches[] = $this->getAttachInfo($file->path);
         }
         return $attaches;
@@ -525,7 +528,7 @@ class Web_Wiki_Manager extends Web_Model
         $name = basename($path);
         $original_name = preg_match('/^[0-9a-z]+$/i', $name) ? pack('H*', $name) : $name ;
         $info = pathinfo($original_name);
-        switch($info['extension']){
+        switch(strtolower($info['extension'])){
             case 'png':
             case 'gif':
                 $content_type = 'image/' . $info['extension'];
@@ -544,6 +547,36 @@ class Web_Wiki_Manager extends Web_Model
         );
         return $info;
     }
+
+    /**
+     * 添付ファイルを追加する
+     *
+     * @access     public
+     * @param      int      $wiki_id
+     * @param      object   $file
+     * @return     array
+     */
+    public function addAttachByUploadedFile($wiki_id, $file)
+    {
+        $path = $this->attach_dir . DS . $wiki_id . DS . bin2hex($file->name);
+        $file->move($path);
+        return $this->getAttachInfo($path);
+    }
+
+    /**
+     * 既に添付されているかどうかをチェックする
+     *
+     * @access     public
+     * @param      int      $wiki_id
+     * @param      string   $name
+     * @return     boolean
+     */
+    public function isAlreadyAttached($wiki_id, $name)
+    {
+        $path = $this->attach_dir . DS . $wiki_id . DS . bin2hex($name);
+        return file_exists($path);
+    }
+
 
 
 

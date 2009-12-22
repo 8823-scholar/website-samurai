@@ -24,8 +24,8 @@ class Action_Documents_Wiki_Tools_Attach extends Web_Action_Wiki
         $this->_setWiki();
 
         //添付ファイル一覧の取得
-        $this->WikiManager->setAttachDir(BASE_DIR . '/data/attach/wiki/' . $this->wiki->id);
-        $this->attaches = $this->WikiManager->getAttaches();
+        $this->WikiManager->setAttachDir(BASE_DIR . '/data/attach/wiki');
+        $this->attaches = $this->WikiManager->getAttaches($this->wiki->id);
 
         return 'success';
     }

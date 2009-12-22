@@ -1,0 +1,18 @@
+###
+ # documents - wiki - tools - attach - done.yml
+ #/
+Token:
+    name : token_documents_wiki_attach 
+    mode : check,remove
+
+Upload:
+    attach:
+        required : true
+        size : 10240000
+        mime : image/pjpeg,image/jpeg,image/png,image/gif
+        extension : jpeg,jpg,png,gif
+
+View:
+    success : 'documents/wiki/tools_attach_done.tpl'
+    already : 'Action: documents_wiki_tools_attach'
+    invalidUpload : 'Action: documents_wiki_tools_attach'

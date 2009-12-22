@@ -24,8 +24,8 @@ class Action_Documents_Wiki_Tools_Attach_View extends Web_Action_Wiki
         $this->_setWiki();
 
         //添付ファイルの取得
-        $this->WikiManager->setAttachDir(BASE_DIR . '/data/attach/wiki/' . $this->wiki->id);
-        $attach = $this->WikiManager->getAttach($this->Request->get('attach'));
+        $this->WikiManager->setAttachDir(BASE_DIR . '/data/attach/wiki');
+        $attach = $this->WikiManager->getAttach($this->wiki->id, $this->Request->get('attach'));
         if(!$attach) throw new Web_Exception('No such attach.');
 
         //出力へセット

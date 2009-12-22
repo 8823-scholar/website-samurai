@@ -24,7 +24,7 @@
     </ul>
 
     <div id='main'>
-        <H2>{$wiki->title|escape:'html'}の添付ファイル</H2>
+        <h2>{$wiki->title|escape:'html'}の添付ファイル</h2>
         <div class='attaches column'>
             <h3>添付ファイル一覧</h3>
             <ul class='list'>
@@ -33,6 +33,8 @@
                     {Html->a value=$attach.original_name
                         href="/documents/wiki/tools/attach/view?name=`$wiki->name_encoded`&locale=`$wiki->locale`&attach=`$attach.name`"}
                     &nbsp;&nbsp;<span class='tag'>&lt;attach name="{$attach.original_name|escape:'html'}" /&gt;</span>
+                    &nbsp;&nbsp;{Html->a image="/image/action/documents/wiki/icon.trash.mini.png" title='削除'
+                                    href="/documents/wiki/tools/attach/delete?name=`$wiki->name_encoded`&locale=`$wiki->locale`"}
                 </li>
             {foreachelse}
                 <li class='none'>アップロードされたファイルはまだありません。</li>
@@ -56,7 +58,7 @@
                     <tr>
                         <th class='required'>ファイル</th>
                         <td class='input'>
-                            {if $errors.attach} <div class='error'>{$errros.attach}</div> {/if}
+                            {if $errors.attach} <div class='error'>{$errors.attach}</div> {/if}
                             {Html->file name='attach'}
                         </td>
                     </tr>
