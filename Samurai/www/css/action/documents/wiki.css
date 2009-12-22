@@ -117,3 +117,7 @@
     {
         vertical-align : top;
     }
+    #samurai #contents.documents.wiki.tools .attach.done .example
+    {
+        font-weight : bold;
+    }

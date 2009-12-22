@@ -577,6 +577,18 @@ class Web_Wiki_Manager extends Web_Model
         return file_exists($path);
     }
 
+    /**
+     * 添付ファイルを削除する
+     *
+     * @access    public
+     * @param     int      $wiki_id
+     * @param     string   $hashed_name
+     */
+    public function deleteAttach($wiki_id, $hashed_name)
+    {
+        $path = $this->attach_dir . DS . $wiki_id . DS . $hashed_name;
+        return file_exists($path) && unlink($path);
+    }
 
 
 

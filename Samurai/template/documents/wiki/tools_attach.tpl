@@ -11,15 +11,10 @@
         <li>{Html->a href='/' value='ホーム'}</li>
         <li class='delimiter'>&gt;</li>
         <li>{Html->a href="/documents/`$locale`/FrontPage" value='ドキュメント'}</li>
-        {if $wiki->is_newpage}
-            <li class='delimiter'>&gt;</li>
-            <li class='selected'>新規作成<li>
-        {else}
-            <li class='delimiter'>&gt;</li>
-            <li>{Html->a href="/documents/`$locale`/`$wiki->name_encoded`" value=$wiki->title}<li>
-            <li class='delimiter'>&gt;</li>
-            <li class='selected'>編集<li>
-        {/if}
+        <li class='delimiter'>&gt;</li>
+        <li>{Html->a href="/documents/`$locale`/`$wiki->name_encoded`" value=$wiki->title}<li>
+        <li class='delimiter'>&gt;</li>
+        <li class='selected'>添付ファイル<li>
         <li class='clear'></li>
     </ul>
 
@@ -34,7 +29,7 @@
                         href="/documents/wiki/tools/attach/view?name=`$wiki->name_encoded`&locale=`$wiki->locale`&attach=`$attach.name`"}
                     &nbsp;&nbsp;<span class='tag'>&lt;attach name="{$attach.original_name|escape:'html'}" /&gt;</span>
                     &nbsp;&nbsp;{Html->a image="/image/action/documents/wiki/icon.trash.mini.png" title='削除'
-                                    href="/documents/wiki/tools/attach/delete?name=`$wiki->name_encoded`&locale=`$wiki->locale`"}
+                                    href="/documents/wiki/tools/attach/delete?name=`$wiki->name_encoded`&locale=`$wiki->locale`&attach=`$attach.name`"}
                 </li>
             {foreachelse}
                 <li class='none'>アップロードされたファイルはまだありません。</li>

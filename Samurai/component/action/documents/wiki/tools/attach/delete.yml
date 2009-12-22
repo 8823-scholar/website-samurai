@@ -1,0 +1,5 @@
+###
+ # documents - wiki - tools - attach - delete.yml
+ #/
+View:
+    success : 'documents/wiki/tools_attach_delete.tpl'
