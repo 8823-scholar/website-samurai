@@ -1,0 +1,21 @@
+/**
+ * css/action/auth.css
+ * 
+ * アクション - auth
+ * 
+ * @package     SamuraiWEB
+ * @subpackage  Www.Css
+ * @copyright   2007-2009 Samurai Framework Project
+ * @author      KIUCHI Satoshinosuke <scholar@hayabusa-lab.jp>
+ */
+/********************
+ * ログイン
+ *******************/
+    #samurai #contents.auth .login .form input.name
+    {
+        width : 200px;
+    }
+    #samurai #contents.auth .login .form input.pass
+    {
+        width : 200px;
+    }

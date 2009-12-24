@@ -15,7 +15,7 @@
                     <h5>SamuraiFWで構築されたサイト</h5>
                     <ul>
                         <li>{Html->a href='/' value='Samurai Framework ( this page is. )'}</li>
-                        <li>{Html->a href='http://bokumachi/machi/koenji' value='ぼくらの街 高円寺'}</li>
+                        <li>{Html->a href='http://bokumachi.jp/machi/koenji' value='ぼくらの街 高円寺'}</li>
                         <li>{Html->a href='http://ithink-ican.jp/' value='I think I can !'}</li>
                     </ul>
                 </div>

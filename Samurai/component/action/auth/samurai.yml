@@ -1,0 +1,8 @@
+###
+ # auth - *.yml
+ #/
+#Convert:
+#    * : 'trim'
+#    
+#Validate:
+#    

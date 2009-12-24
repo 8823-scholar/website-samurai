@@ -1,0 +1,27 @@
+###
+ # auth - login.yml
+ #/
+Convert:
+    * : trim
+
+Validate:
+    name.required : 'ユーザー名を入力してください'
+    pass.required : 'パスワードを入力してください'
+
+Auth@move:
+    type : db
+    name : user
+    enable : true
+    authtype : request
+    dsn      : base
+    table    : user
+    hash     : none
+    field:
+        user : name
+    request:
+        user : name
+
+View:
+    success : 'Location: <next>'
+    invalidAuth : 'auth/login.tpl'
+    invalidInput : 'auth/login.tpl'

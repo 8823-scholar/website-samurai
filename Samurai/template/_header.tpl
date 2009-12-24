@@ -40,7 +40,12 @@
             
             <ul class='menu right'>
                 <li>{Html->a href='/etc/donate' value='寄付'}</li>
-                <li>{Html->a href='/auth/login' value='ログイン'}</li>
+                {if $User->logined}
+                    <li>{Html->a href='/auth/login' value='ログイン'}</li>
+                {else}
+                    <li>{Html->a href='/auth/logout' value='ログアウト'}</li>
+                    <li>ようこそ！{$User->name|escape:'html'}さん</li>
+                {/if}
             </ul>
             
             <div class='clear'></div>

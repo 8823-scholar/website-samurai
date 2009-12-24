@@ -1,13 +1,11 @@
-<?
+<?php
 /**
- * Web_User
- * 
  * ユーザーそのものを体現するクラス
  * 
  * @package    SamuraiWEB
  * @subpackage User
- * @copyright  Samurai Framework Project
- * @author     Satoshi Kiuchi <satoshi.kiuchi@befool.co.jp>
+ * @copyright  2007-2009 Samurai Framework Project
+ * @author     KIUCHI Satoshinosuke <scholar@hayabusa-lab.jp>
  */
 class Web_User
 {
@@ -20,6 +18,22 @@ class Web_User
     public $id = 0;
 
     /**
+     * ユーザー名
+     *
+     * @access   public
+     * @var      string
+     */
+    public $name;
+
+    /**
+     * ロール
+     *
+     * @access   public
+     * @var      string
+     */
+    public $role = 'normal';
+
+    /**
      * ログイン状態
      *
      * @access   public
@@ -27,13 +41,45 @@ class Web_User
      */
     public $logined = false;
 
+    /**
+     * ActiveGateway
+     *
+     * @access   public
+     * @var      object   ActiveGateway
+     */
+    public $AG;
+
 
     /**
-     * コンストラクタ。
+     * コンストラクタ
+     *
      * @access     public
+     * @param      int      $id
      */
-    public function __construct()
+    public function __construct($id = NULL)
     {
-        
+        $this->AG = Samurai::getContainer()->getComponent('AG');
+        if($id){
+            $this->load($id);
+        }
+    }
+
+
+
+
+    /**
+     * ユーザー情報をロード
+     *
+     * @access     public
+     * @param      int      $id
+     */
+    public function load($id)
+    {
+        $user = $this->AG->find($id);
+        if($user){
+            $this->id = $id;
+            $this->name = $user->name;
+            $this->role = $user->role;
+        }
     }
 }
