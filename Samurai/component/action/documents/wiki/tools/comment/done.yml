@@ -1,0 +1,8 @@
+###
+ # documents - wiki - tools - comment - done.yml
+ #/
+Token:
+    mode : check,remove
+
+View:
+    success : 'documents/wiki/tools_comment_done.tpl'

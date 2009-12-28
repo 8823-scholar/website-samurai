@@ -121,3 +121,52 @@
     {
         font-weight : bold;
     }
+
+
+/********************
+ * コメント
+ *******************/
+    /** リスト **/
+    #samurai #contents.documents.wiki #main .comment.column table.list
+    {
+        width : 100%;
+        margin : 10px 0px;
+    }
+    #samurai #contents.documents.wiki #main .comment.column table.list td
+    {
+        border : none;
+    }
+    #samurai #contents.documents.wiki #main .comment.column table.list td.info
+    {
+        text-align : right;
+        border-bottom : 1px dashed #CCCCCC;
+    }
+    #samurai #contents.documents.wiki #main .comment.column table.list tr.last td.info
+    {
+        border : none;
+    }
+    /** 書き込み **/
+    #samurai #contents.documents.wiki #main .comment.column table.form td
+    {
+        border : none;
+        padding : 2px;
+    }
+    #samurai #contents.documents.wiki #main .comment.column table.form td.input .cname
+    {
+        width : 200px;
+    }
+    #samurai #contents.documents.wiki #main .comment.column table.form td.input .comment
+    {
+        width : 490px;
+        height : 50px;
+    }
+    #samurai #contents.documents.wiki #main .comment.column table.form td.submit
+    {
+        text-align : right;
+    }
+    #samurai #contents.documents.wiki #main .comment.column table.form td.submit input
+    {
+        width : 70px;
+        height : 50px;
+        margin : 0px;
+    }

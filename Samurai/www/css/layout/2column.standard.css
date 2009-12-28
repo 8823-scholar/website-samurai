@@ -122,6 +122,20 @@
     }
 
 
+/********************
+ * エラー
+ *******************/
+    #samurai #contents #main ul.errors
+    {
+        padding : 5px;
+        background : #FEE1E1;
+    }
+    #samurai #contents #main ul.errors li
+    {
+        padding : 2px 0px 2px 22px;
+        margin-bottom : 2px;
+        background : url('../../image/icon/error.png') left top no-repeat;
+    }
 
 
 /********************

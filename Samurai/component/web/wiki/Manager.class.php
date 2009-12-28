@@ -8,7 +8,7 @@
  * @package    SamuraiWEB
  * @subpackage Wiki
  * @copyright  2007-2009 Samurai Framework Project
- * @author     hayabusa <scholar@hayabusa-lab.jp>
+ * @author     KIUCHI Satoshinosuke <scholar@hayabusa-lab.jp>
  */
 class Web_Wiki_Manager extends Web_Model
 {
@@ -249,8 +249,9 @@ class Web_Wiki_Manager extends Web_Model
     public function addComment($wiki_id, $dto, Web_User $User = NULL)
     {
         $dto->wiki_id = $wiki_id;
-        if($User !== NULL){
+        if($User && $User->id){
             $dto->user_id = $User->id;
+            $dto->name = NULL;
         }
         return $this->AG->create($this->_table_comments, $dto);
     }

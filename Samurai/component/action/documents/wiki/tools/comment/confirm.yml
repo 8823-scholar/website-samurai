@@ -1,0 +1,5 @@
+###
+ # documents - wiki - tools - comment - confirm.yml
+ #/
+View:
+    success : 'documents/wiki/tools_comment_confirm.tpl'

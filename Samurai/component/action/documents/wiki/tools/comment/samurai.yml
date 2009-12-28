@@ -1,0 +1,19 @@
+###
+ # documents - wiki - tools - comment - *.yml
+ #/
+Convert:
+    * : 'trim'
+    
+ValidateIfUnlogined:
+    cname.required : '名前を入力してください'
+    cname.maxlength : '名前が長すぎます,128'
+
+Validate:
+    comment.required : 'コメントを入力してください'
+    comment.maxlength : 'コメントが長すぎます,1024'
+
+Token:
+    name : token_documents_wiki_tools_comment
+
+View:
+    invalidInput : 'Action: documents_wiki_show'
