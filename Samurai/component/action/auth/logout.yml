@@ -1,0 +1,10 @@
+###
+ # auth - logout.yml
+ #/
+Auth:
+    type : logout
+    name : user
+    enable : true
+
+View:
+    success : 'Location: /'

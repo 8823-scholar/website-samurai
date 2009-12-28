@@ -5,9 +5,9 @@
  * font-sizeやline-heightなどを調整
  * 
  * @package     Samurai
- * @subpackage  www.css
- * @copyright   BEFOOL,Inc.
- * @author      Satoshi Kiuchi <satoshi.kiuchi@befool.co.jp>
+ * @subpackage  Www.Css
+ * @copyright   2007-2010 Samurai Framework Project
+ * @author      KIUCHI Satoshinosuke <scholar@hayabusa-lab.jp>
  */
 /********************
   基本設定
@@ -64,6 +64,15 @@
         padding : 5px;
         border : 1px solid #CCCCCC;
         vertical-align : top;
+    }
+
+
+/********************
+ * フォーム
+ *******************/
+    #samurai textarea
+    {
+        padding : 2px;
     }
 
 

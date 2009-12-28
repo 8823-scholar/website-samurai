@@ -4,9 +4,9 @@
  * アクション - documents - wiki
  * 
  * @package     SamuraiWEB
- * @subpackage  www.css
+ * @subpackage  Www.Css
  * @copyright   2007-2009 Samurai Framework Project
- * @author      hayabusa <scholar@hayabusa-lab.jp>
+ * @author      KIUCHI Satoshinosuke <scholar@hayabusa-lab.jp>
  */
 /********************
  * 新規ページ作成
@@ -140,6 +140,10 @@
     {
         text-align : right;
         border-bottom : 1px dashed #CCCCCC;
+    }
+    #samurai #contents.documents.wiki #main .comment.column table.list td.info .date
+    {
+        color : #999999;
     }
     #samurai #contents.documents.wiki #main .comment.column table.list tr.last td.info
     {

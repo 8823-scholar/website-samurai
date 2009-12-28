@@ -7,7 +7,7 @@
  * 
  * @package    SamuraiWEB
  * @subpackage Wiki
- * @copyright  2007-2009 Samurai Framework Project
+ * @copyright  2007-2010 Samurai Framework Project
  * @author     KIUCHI Satoshinosuke <scholar@hayabusa-lab.jp>
  */
 class Web_Wiki_Manager extends Web_Model
@@ -176,6 +176,24 @@ class Web_Wiki_Manager extends Web_Model
         $this->_initAGCondition($condition);
         if($wiki_id !== NULL) $condition->where->wiki_id = $wiki_id;
         return $this->AG->findAllDetail($this->_table_comments, $condition);
+    }
+
+    /**
+     * コメントをユーザー情報と共に複数取得する
+     *
+     * @access     public
+     * @param      int      $wiki_id
+     * @param      object   $condition   ActiveGatewayCondition
+     * @return     ActiveGatewayRecords
+     */
+    public function getCommentsWithUserInfo($wiki_id, $condition = NULL)
+    {
+        $this->_initAGCondition($condition);
+        $sql = "SELECT `a`.*, CASE WHEN `b`.`id` IS NOT NULL THEN `b`.name ELSE `a`.`name` END AS `name`
+                FROM `:twc` AS `a` LEFT JOIN `:tu` AS `b` ON `a`.`user_id` = `b`.`id` AND `b`.`active` = '1'
+                WHERE `a`.`active` = '1'";
+        $sql = str_replace(array(':twc', ':tu'), array($this->_table_comments, 'user'), $sql);
+        return $this->AG->findAllSql($this->_table_comments, $sql);
     }
 
 

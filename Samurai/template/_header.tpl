@@ -40,7 +40,7 @@
             
             <ul class='menu right'>
                 <li>{Html->a href='/etc/donate' value='寄付'}</li>
-                {if $User->logined}
+                {if !$User->logined}
                     <li>{Html->a href='/auth/login' value='ログイン'}</li>
                 {else}
                     <li>{Html->a href='/auth/logout' value='ログアウト'}</li>

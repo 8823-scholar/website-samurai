@@ -37,7 +37,9 @@
                     <td class='comment'>{Wickey->render text=$comment.comment}</td>
                 </tr>
                 <tr class='{$_class}'>
-                    <td class='info'>by {$comment.name|escape:'html'} ,at {$comment.created_at|date_format:'%Y年%m月%d日 %H:%I'}</td>
+                    <td class='info'>
+                        <span class='user'>by {$comment.name|escape:'html'}</span>
+                        ,<span class='date'>at {$comment.created_at|date_format:'%Y年%m月%d日 %H:%I'}</span></td>
                 </tr>
             {foreachelse}
                 <tr>

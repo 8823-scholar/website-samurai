@@ -4,7 +4,7 @@
  * 
  * @package    SamuraiWEB
  * @subpackage Action.Documents.Wiki
- * @copyright  2007-2009 Samurai Framework Project
+ * @copyright  2007-2010 Samurai Framework Project
  * @author     KIUCHI Satoshinosuke <scholar@hayabusa-lab.jp>
  */
 class Action_Documents_Wiki_Show extends Web_Action_Wiki
@@ -29,7 +29,7 @@ class Action_Documents_Wiki_Show extends Web_Action_Wiki
 
         if(!$this->wiki->is_newpage){
             $condition = $this->WikiManager->getCondition();
-            $comments = $this->WikiManager->getComments($this->wiki->id, $condition);
+            $comments = $this->WikiManager->getCommentsWithUserInfo($this->wiki->id, $condition);
             $this->comments = $comments->toArray();
         }
 

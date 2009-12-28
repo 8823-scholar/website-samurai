@@ -29,8 +29,3 @@ Pager:
 
 Mail:
     class : Etc_Mail
-
-
-## Mock
-User:
-    class : Web_User

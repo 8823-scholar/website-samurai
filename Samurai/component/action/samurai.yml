@@ -23,8 +23,8 @@ Cookie:
     
 Session:
     cookie_lifetime : 31536000
-    gc_maxlifetime  : 43200
-    gc_divisor      : 10000
+    gc_maxlifetime : 43200
+    gc_divisor : 10000
     
 DIContainer:
     
@@ -32,7 +32,11 @@ Auth:
     type : db
     name : user
     enable : false
-    
+
+'Auth::AuthWeb':
+    type : web
+    name : user
+
 View:
     login : 'Action: auth_login'
     error_403 : 'Action: error_403'
