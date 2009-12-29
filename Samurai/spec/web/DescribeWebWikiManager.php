@@ -4,8 +4,8 @@
  *
  * @package    SamuraiWEB
  * @subpackage spec
- * @copyright  Samurai Framework Project
- * @author     hayabusa <scholar@hayabusa-lab.jp>
+ * @copyright  2007-2010 Samurai Framework Project
+ * @author     KIUCHI Satoshinosuke <scholar@hayabusa-lab.jp>
  */
 class DescribeWebWikiManager extends PHPSpec_Context
 {
@@ -305,6 +305,7 @@ class DescribeWebWikiManager extends PHPSpec_Context
             CREATE TEMPORARY TABLE IF NOT EXISTS `wiki` (
                 `id` int(11) NOT NULL auto_increment,
                 `name` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT 'ページ名',
+                `title` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT 'ページタイトル',
                 `content` text collate utf8_unicode_ci NOT NULL COMMENT '内容',
                 `locale` varchar(3) collate utf8_unicode_ci NOT NULL default 'ja' COMMENT '言語',
                 `localized_for` int(11) default NULL COMMENT 'あるWIKI翻訳の場合(=wiki.id)',
@@ -338,6 +339,7 @@ class DescribeWebWikiManager extends PHPSpec_Context
                 `id` int(11) NOT NULL AUTO_INCREMENT,
                 `wiki_id` int(11) NOT NULL DEFAULT '0' COMMENT '=wiki.id',
                 `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'ページ名',
+                `title` varchar(266) COLLATE utf8_unicode_ci NOT NULL COMMENT 'ページタイトル',
                 `content` text COLLATE utf8_unicode_ci NOT NULL COMMENT '内容',
                 `locale` varchar(3) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'ja' COMMENT '言語',
                 `localized_for` int(11) DEFAULT NULL COMMENT 'あるWIKI翻訳の場合(=wiki.id)',

@@ -6,8 +6,8 @@
  * 
  * @package    SamuraiWEB
  * @subpackage Action
- * @copyright  Samurai Framework Project
- * @author     hayabusa <scholar@hayabusa-lab.jp>
+ * @copyright  2007-2010 Samurai Framework Project
+ * @author     KIUCHI Satoshinosuke <scholar@hayabusa-lab.jp>
  */
 class Web_Action_Wiki extends Web_Action
 {

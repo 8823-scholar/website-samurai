@@ -1,11 +1,11 @@
-<?
+<?php
 /**
  * DescribeWebPackageManager
  *
  * @package    SamuraiWEB
  * @subpackage Spec
- * @copyright  Samurai Framework Project
- * @author     hayabusa <scholar@hayabusa-lab.jp>
+ * @copyright  2007-2010 Samurai Framework Project
+ * @author     KIUCHI Satoshinosuke <scholar@hayabusa-lab.jp>
  */
 class DescribeWebPackageManager extends PHPSpec_Context
 {

@@ -19,6 +19,9 @@ WikiManager:
 FileScanner:
     class : Etc_File_Scanner
 
+HaikuManager:
+    class : Web_Haiku_Manager
+
 
 ## Other
 Wickey:

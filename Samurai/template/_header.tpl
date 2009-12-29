@@ -15,14 +15,16 @@
         {Html->load type='css' file='/css/common.css'}
         {Html->load type='css' file=$css|default:'/css/layout/standard.css'}
         {Html->load type='css' file='/css/wickey.css'}
-        
+
+        {Html->load type='javascript' file='/js/jquery/jquery-1.3.2.js'}
+        {Html->load type='javascript' file='/js/samurai.js'}
+        {Html->load type='javascript' file='/js/samurai/haiku.js'}
         {if $js}
             {Html->load type='javascript' file=$js}
         {/if}
-        
-        {assign_array var='html.title.' value='Samurai Framework'}
-        {assign_array var='html.title.' value='PHP WEB Framework'}
-        <title>{$html.title|@join:' | '|escape:'html'}</title>
+
+        {assign_array var='html.title.' value='Samurai Framework | PHP Web Framework'}
+        <title>{$html.title|@join:' - '|escape:'html'}</title>
     </head>
     <body>
     <div id='samurai'>
@@ -55,8 +57,14 @@
         {** コンテンツ **}
         <div id='contents' class='{$action|default:"someaction"}'>
             <div class='top haiku'>
-                <span class='phrase'>世の人は 我をなんとも 言わば言え 我為すことは 我のみぞ知る</span>
-                <span class='composed_by'>by 坂本竜馬</span>
+                <script type='text/javascript'>
+                {literal}
+                    var Haiku = new Samurai.Haiku();
+                    Haiku.append2Header();
+                {/literal}
+                </script>
+                <span class='phrase' id='haiku-phrase'>&nbsp;</span>
+                <span class='composed_by' id='haiku-composed_by'>&nbsp;</span>
                 <div class='clear'></div>
             </div>
             <div class='middle'>

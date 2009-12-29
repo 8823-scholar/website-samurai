@@ -12,8 +12,8 @@ generator:
         suffix : 'tpl'
     generator:
         package   : 'SamuraiWEB'
-        author    : 'hayabusa <scholar@hayabusa-lab.jp>'
-        copyright : '2007-2009 Samurai Framework Project'
+        author    : 'KIUCHI Satoshinosuke <scholar@hayabusa-lab.jp>'
+        copyright : '2007-2010 Samurai Framework Project'
         licence   : 'http://www.opensource.org/licenses/bsd-license.php The BSD License'
 #    encoding:
 #        config   : UTF-8

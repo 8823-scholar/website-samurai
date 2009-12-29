@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Web_Action_Forum
  * 
@@ -6,8 +6,8 @@
  * 
  * @package    SamuraiWEB
  * @subpackage Action
- * @copyright  Samurai Framework Project
- * @author     Satoshi Kiuchi <satoshi.kiuchi@befool.co.jp>
+ * @copyright  2007-2010 Samurai Framework Project
+ * @author     KIUCHI Satoshinosuke <scholar@hayabusa-lab.jp>
  */
 class Web_Action_Forum extends Web_Action
 {
