@@ -8,6 +8,9 @@
 <link rel='stylesheet' type='text/css' href='/css/base.css'>
 <link rel='stylesheet' type='text/css' href='/css/common.css'>
 <link rel='stylesheet' type='text/css' href='/css/layout/phpdoc.css'>
+<script type='text/javascript' src='/js/jquery/jquery-1.3.2.js'></script>
+<script type='text/javascript' src='/js/samurai.js'></script>
+<script type='text/javascript' src='/js/samurai/haiku.js'></script>
 </head>
 <body>
     <div id='samurai'>
@@ -15,7 +18,7 @@
             <ul class='menu left'>
                 <li><a href='/' class='with-icon samurai'>SamuraiFW</a></li>
                 <li><a href='/about/samurai'>概要</a></li>
-                <li><a href='/downloads/index'>ダウンロード</a></li>
+                <li><a href='/package/releases'>ダウンロード</a></li>
                 <li><a href='/source/api/2.0/'>API</a></li>
                 <li><a href='/documents/ja/FrontPage'>ドキュメント</a></li>
                 <li><a href='/development/'>開発</a></li>
@@ -23,20 +26,23 @@
             </ul>
             <ul class='menu right'>
                 <li><a href='/etc/donate'>寄付</a></li>
-                <li><a href='/auth/login'>ログイン</a></li>
             </ul>
             <div class='clear'></div>
         </div>
 
         <div id='contents' class='source spi'>
             <div class='top haiku'>
-                <span class='phrase'>世の人は 我をなんとも 言わば言え 我為すことは 我のみぞ知る</span>
-                <span class='composed_by'>by 坂本竜馬</span>
+                <script type='text/javascript'>
+                    var Haiku = new Samurai.Haiku();
+                    Haiku.append2Header();
+                </script>
+                <span class='phrase' id='haiku-phrase'>&nbsp;</span>
+                <span class='composed_by' id='haiku-composed_by'>&nbsp;</span>
                 <div class='clear'></div>
             </div>
 
             <div class='middle'>
-                <h1>API - 2.0</h1>
+                <h1>API</h1>
 
                 <ul class='breads'>
                     <li><a href='/'>ホーム</a></li>
