@@ -16,7 +16,7 @@
             <li>{Html->a href='/documents/tutorial/install#quick' value='クイックインストール'}</li>
             <li>{Html->a href='/downloads/version/2.1.0-alpha' value='開発版ダウンロード(2.1.0-alpha)'}</li>
             <li class='blank'></li>
-            <li>{Html->a href='/about/samurai' value='Samurai Frameworkとは？'}</li>
+            <li>{Html->a href='/about/samuraifw' value='Samurai Frameworkとは？'}</li>
             <li>{Html->a href='/community/index' value='ユーザーコミュニティ'}</li>
         </ul>
     </div>
@@ -64,12 +64,19 @@
         <div class='nearly_posted column'>
             <h4>コミュニティへの最近の投稿</h4>
             <ul>
-            {section loop=10 name='nealy_posted'}
+            {foreach from=$articles item='article'}
                 <li>
-                    <span class='date'>2009.11.14 17:26</span><br />
-                    <span class='subject'>インストールの仕方が分かりません。</span>
+                    <span class='date'>{$article.created_at|date_format:'%Y.%m.%d %H:%I'}</span><br />
+                    {if !$article.root_id}
+                        <span class='subject'>{Html->a href="/community/forum/`$article.forum_id`/topic/`$article.id`" value=$article.subject|truncate:64}</span>
+                    {else} 
+                        <span class='subject'>{Html->a href="/community/forum/`$article.forum_id`/topic/`$article.root_id`#article:`$article.id`"
+                                                    value=$article.subject|truncate:64}</span>
+                    {/if}
                 </li>
-            {/section}
+            {foreachelse}
+                <li class='none'>まだ書き込みはありません(´；ω；｀)ﾌﾞﾜｯ</li>
+            {/foreach}
             </ul>
         </div>
     </div>

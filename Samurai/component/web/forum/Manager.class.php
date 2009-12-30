@@ -1,23 +1,36 @@
-<?
+<?php
 /**
- * Web_Forum_Manager
- * 
  * コンポーネント - フォーラム
+ *
+ * フォーラム関連のデータ操作を目的としたコンポーネント
  * 
  * @package    SamuraiWEB
  * @subpackage Forum
- * @copyright  Samurai Framework Project
- * @author     Satoshi Kiuchi <satoshi.kiuchi@befool.co.jp>
+ * @copyright  2007-2010 Samurai Framework Project
+ * @author     KIUCHI Satoshinosuke <scholar@hayabusa-lab.jp>
  */
 class Web_Forum_Manager extends Samurai_Model
 {
-    protected
-        $_table = 'forum',
-        $_table_articles = 'forum_articles';
+    /**
+     * テーブル名(forum)
+     *
+     * @access   protected
+     * @var      string
+     */
+    protected $_table = 'forum';
+
+    /**
+     * テーブル名(articles)
+     *
+     * @access   protected
+     * @var      string
+     */
+    protected $_table_articles = 'forum_articles';
 
 
     /**
-     * コンストラクタ。
+     * コンストラクタ
+     *
      * @access     public
      */
     public function __construct()
@@ -28,6 +41,7 @@ class Web_Forum_Manager extends Samurai_Model
 
     /**
      * 取得
+     *
      * @access     public
      * @param      mixed    $id
      * @return     object   ActiveGatewayRecord
@@ -43,6 +57,7 @@ class Web_Forum_Manager extends Samurai_Model
 
     /**
      * 複数取得
+     *
      * @access     public
      * @param      object   $condition   ActiveGatewayCondition
      * @return     object   ActiveGatewayRecords
@@ -56,6 +71,7 @@ class Web_Forum_Manager extends Samurai_Model
 
     /**
      * 記事の取得
+     *
      * @access     public
      * @param      int      $forum_id
      * @param      mixed    $id
@@ -75,6 +91,7 @@ class Web_Forum_Manager extends Samurai_Model
 
     /**
      * 記事の複数取得
+     *
      * @access     public
      * @param      int      $forum_id
      * @param      object   $condition   ActiveGatewayCondition
@@ -83,13 +100,16 @@ class Web_Forum_Manager extends Samurai_Model
     public function getArticles($forum_id, $condition=NULL)
     {
         $this->_initAGCondition($condition);
-        $condition->where->forum_id = $forum_id;
+        if($forum_id !== NULL){
+            $condition->where->forum_id = $forum_id;
+        }
         if(!$condition->order) $condition->order->updated_at = 'DESC';
         return $this->AG->findAllDetail($this->_table_articles, $condition);
     }
 
     /**
      * 記事の再帰的取得
+     *
      * @access     public
      * @param      int      $forum_id
      * @param      int      $article_id
@@ -106,6 +126,7 @@ class Web_Forum_Manager extends Samurai_Model
 
     /**
      * 子記事をアペンドする
+     *
      * @access     public
      * @param      object   ActiveGatewayRecord
      * @return     void
@@ -126,6 +147,7 @@ class Web_Forum_Manager extends Samurai_Model
 
     /**
      * 作成
+     *
      * @access     public
      * @param      mixed    $dto
      * @return     object   ActiveGatewayRecord
@@ -138,6 +160,7 @@ class Web_Forum_Manager extends Samurai_Model
 
     /**
      * 記事の追加
+     *
      * @access     public
      * @param      int      $forum_id
      * @param      mixed    $dto
@@ -167,6 +190,7 @@ class Web_Forum_Manager extends Samurai_Model
 
     /**
      * 保存
+     *
      * @access     public
      * @param      object   $forum        ActiveGatewayRecord
      * @param      mixed    $attributes   上書き値
@@ -179,6 +203,7 @@ class Web_Forum_Manager extends Samurai_Model
 
     /**
      * 記事の保存
+     *
      * @access     public
      * @param      object   $article      ActiveGatewayRecord
      * @param      mixed    $attributes   上書き値
@@ -191,6 +216,7 @@ class Web_Forum_Manager extends Samurai_Model
 
     /**
      * 編集
+     *
      * @access     public
      * @param      mixed    $id
      * @param      mixed    $attributes
@@ -206,6 +232,7 @@ class Web_Forum_Manager extends Samurai_Model
 
     /**
      * 記事の編集
+     *
      * @access     public
      * @param      int      $forum_id
      * @param      mixed    $id
@@ -226,6 +253,7 @@ class Web_Forum_Manager extends Samurai_Model
 
     /**
      * 破壊
+     *
      * @access     public
      * @param      object   $forum
      */
@@ -239,6 +267,7 @@ class Web_Forum_Manager extends Samurai_Model
 
     /**
      * 記事の破壊
+     *
      * @access     public
      * @param      object   $article
      */
@@ -249,6 +278,7 @@ class Web_Forum_Manager extends Samurai_Model
 
     /**
      * 削除
+     *
      * @access     public
      * @param      mixed    $id
      */
@@ -261,6 +291,7 @@ class Web_Forum_Manager extends Samurai_Model
 
     /**
      * 記事の削除
+     *
      * @access     public
      * @param      int      $forum_id
      * @param      mixed    $id
@@ -281,6 +312,7 @@ class Web_Forum_Manager extends Samurai_Model
 
     /**
      * 返信
+     *
      * @access    public
      * @param     object   $parent   ActiveGatewayRecord
      * @param     object   $dto
