@@ -28,7 +28,10 @@
 
             <ul class='menu right'>
                 <li><a href='/etc/donate'>寄付</a></li>
-                <li><a href='/auth/login'>ログイン</a></li>
+                <py:choose test="len(req.authname)">
+                    <py:when test="0"><li><a href='/development/login'>ログイン</a></li></py:when>
+                    <py:otherwise><li><a href='/development/logout'>ログアウト</a></li><li>ようこそ！${req.authname}さん</li></py:otherwise>
+                </py:choose>
             </ul>
 
             <div class='clear'></div>

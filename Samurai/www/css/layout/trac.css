@@ -4,9 +4,9 @@
  * レイアウト - trac
  * 
  * @package     Samurai
- * @subpackage  www.css
- * @copyright   BEFOOL,Inc.
- * @author      Satoshi Kiuchi <satoshi.kiuchi@befool.co.jp>
+ * @subpackage  Www.Css
+ * @copyright   2007-2010 Samurai Framework Project
+ * @author      KIUCHI Satoshinosuke <scholar@hayabusa-lab.jp>
  */
 /** インポート **/
 @import url('./standard.css');
@@ -75,9 +75,14 @@
     {
         margin : 0px;
     }
+    #samurai #footer ul
+    {
+        margin : 0px;
+    }
     #samurai #footer ul.abouts
     {
         clear : right;
+        margin-top : 10px;
     }
 
 
