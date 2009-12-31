@@ -1,25 +1,52 @@
-<?
+<?php
 /**
- * Web_Package_Manager
- * 
  * コンポーネント - パッケージ
+ *
+ * パッケージ関連のデータ操作を目的としたコンポーネント
  * 
  * @package    SamuraiWEB
  * @subpackage Package
- * @copyright  Samurai Framework Project
- * @author     hayabusa <scholar@hayabusa-lab.jp>
+ * @copyright  2007-2010 Samurai Framework Project
+ * @author     KIUCHI Satoshinosuke <scholar@hayabusa-lab.jp>
  */
 class Web_Package_Manager extends Samurai_Model
 {
-    protected
-        $_table = 'package',
-        $_table_releases = 'package_releases',
-        $_table_releases_files = 'package_releases_files',
-        $_table_mainteners = 'package_mainteners';
+    /**
+     * テーブル名(package)
+     *
+     * @access   protected
+     * @var      string
+     */
+    protected $_table = 'package';
+
+    /**
+     * テーブル名(releases)
+     *
+     * @access   protected
+     * @var      string
+     */
+    protected $_table_releases = 'package_releases';
+
+    /**
+     * テーブル名(releases_files)
+     *
+     * @access   protected
+     * @var      string
+     */
+    protected $_table_releases_files = 'package_releases_files';
+
+    /**
+     * テーブル名(mainteners)
+     *
+     * @access   protected
+     * @var      string
+     */
+    protected $_table_mainteners = 'package_mainteners';
 
 
     /**
-     * コンストラクタ。
+     * コンストラクタ
+     *
      * @access     public
      */
     public function __construct()
@@ -30,6 +57,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * 取得
+     *
      * @access     public
      * @param      mixed    $id
      * @return     object   ActiveGatewayRecord
@@ -45,6 +73,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * aliasから取得
+     *
      * @access     public
      * @param      string   $alias
      * @return     object   ActiveGatewayRecord
@@ -56,6 +85,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * 複数取得
+     *
      * @access     public
      * @param      object   $condition   ActiveGatewayCondition
      * @return     object   ActiveGatewayRecords
@@ -69,6 +99,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * リリースの取得
+     *
      * @access     public
      * @param      int      $package_id
      * @param      mixed    $id
@@ -88,6 +119,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * リリースの複数取得
+     *
      * @access     public
      * @param      int      $package_id
      * @param      object   $condition   ActiveGatewayCondition
@@ -103,6 +135,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * リリースファイルの取得
+     *
      * @access     public
      * @param      int      $package_id
      * @param      int      $release_id
@@ -124,6 +157,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * リリースファイルの複数取得
+     *
      * @access     public
      * @param      int      $package_id
      * @param      int      $release_id
@@ -141,6 +175,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * メンテナーの取得
+     *
      * @access     public
      * @param      int      $package_id
      * @param      mixed    $id
@@ -160,6 +195,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * メンテナーの複数取得
+     *
      * @access     public
      * @param      int      $package_id
      * @param      object   $condition   ActiveGatewayCondition
@@ -179,6 +215,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * 作成
+     *
      * @access     public
      * @param      mixed    $dto
      * @return     object   ActiveGatewayRecord
@@ -191,6 +228,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * リリースの追加
+     *
      * @access     public
      * @param      int      $package_id
      * @param      mixed    $dto
@@ -206,6 +244,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * リリースファイルの追加
+     *
      * @access     public
      * @param      int      $package_id
      * @param      int      $release_id
@@ -223,6 +262,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * メンテナーの追加
+     *
      * @access     public
      * @param      int      $package_id
      * @param      mixed    $dto
@@ -239,6 +279,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * 保存
+     *
      * @access     public
      * @param      object   $package      ActiveGatewayRecord
      * @param      mixed    $attributes   上書き値
@@ -251,6 +292,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * リリースの保存
+     *
      * @access     public
      * @param      object   $release      ActiveGatewayRecord
      * @param      mixed    $attributes   上書き値
@@ -263,6 +305,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * リリースファイルの保存
+     *
      * @access     public
      * @param      object   $file         ActiveGatewayRecord
      * @param      mixed    $attributes   上書き値
@@ -275,6 +318,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * メンテナーの保存
+     *
      * @access     public
      * @param      object   $maintener    ActiveGatewayRecord
      * @param      mixed    $attributes   上書き値
@@ -289,6 +333,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * 編集
+     *
      * @access     public
      * @param      mixed    $id
      * @param      mixed    $attributes
@@ -304,6 +349,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * リリースの編集
+     *
      * @access     public
      * @param      int      $package_id
      * @param      mixed    $id
@@ -323,6 +369,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * リリースファイルの編集
+     *
      * @access     public
      * @param      int      $package_id
      * @param      int      $release_id
@@ -344,6 +391,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * メンテナーの編集
+     *
      * @access     public
      * @param      int      $package_id
      * @param      mixed    $id
@@ -365,6 +413,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * 破壊
+     *
      * @access     public
      * @param      object   $package
      */
@@ -375,6 +424,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * リリースの破壊
+     *
      * @access     public
      * @param      object   $release
      */
@@ -385,6 +435,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * リリースファイルの破壊
+     *
      * @access     public
      * @param      object   $file
      */
@@ -395,6 +446,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * メンテナーの破壊
+     *
      * @access     public
      * @param      object   $maintener
      */
@@ -407,6 +459,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * 削除
+     *
      * @access     public
      * @param      mixed    $id
      */
@@ -423,6 +476,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * リリースの削除
+     *
      * @access     public
      * @param      int      $package_id
      * @param      mixed    $id
@@ -441,6 +495,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * リリースファイルの削除
+     *
      * @access     public
      * @param      int      $package_id
      * @param      int      $release_id
@@ -461,6 +516,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * メンテナーの削除
+     *
      * @access     public
      * @param      int      $package_id
      * @param      mixed    $id
@@ -483,6 +539,7 @@ class Web_Package_Manager extends Samurai_Model
 
     /**
      * ダウンロードされた
+     *
      * @access    public
      * @param     object   $file   ActiveGatewayRecord
      */

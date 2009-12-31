@@ -23,9 +23,15 @@ wiki:
     url   : '/documents/:locale/:name'
     param : { action : documents_wiki_show }
 
-download:
+package_releases:
+    url   : '/package/:package_alias/releases'
+    param : { action : package_releases }
+package_release_files:
+    url   : '/package/:package_alias/:release_name/files'
+    param : { action : package_release_files }
+package_download:
     url   : '/package/:package_alias/:release_id/:file_id/:file_name/download'
     param : { action : package_download_page }
-download_archive:
+package_download_archive:
     url   : '/package/:package_alias/:release_id/:file_id/:file_name'
     param : { action : package_download_do }

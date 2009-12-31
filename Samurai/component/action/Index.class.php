@@ -10,9 +10,12 @@
 class Action_Index extends Web_Action
 {
     public
+        $release,
+        $release_dev,
         $articles = array();
     public
-        $ForumManager;
+        $ForumManager,
+        $PackageManager;
 
 
     /**
@@ -32,6 +35,38 @@ class Action_Index extends Web_Action
         $articles = $this->ForumManager->getArticles(NULL, $condition);
         $this->articles = $articles->toArray();
 
+        //Samuraiのリリースを取得
+        $package = $this->PackageManager->getByAlias('samurai');
+        $this->_setRelease($package);
+        $this->_setDevRelease($package);
+
         return 'success';
+    }
+
+
+    /**
+     * 最新のstableリリースを取得
+     *
+     * @access     private
+     */
+    private function _setRelease($package)
+    {
+        $condition = $this->PackageManager->getCondition();
+        $condition->where->stability = 'stable';
+        $condition->order->version = 'DESC';
+        $this->release = $this->PackageManager->getRelease($package->id, $condition);
+    }
+
+    /**
+     * 最新の開発版リリースを取得
+     *
+     * @access     private
+     */
+    private function _setDevRelease($package)
+    {
+        $condition = $this->PackageManager->getCondition();
+        $condition->where->stability = array('alpha', 'beta');
+        $condition->order->version = 'DESC';
+        $this->release_dev = $this->PackageManager->getRelease($package->id, $condition);
     }
 }

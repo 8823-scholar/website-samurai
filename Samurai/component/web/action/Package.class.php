@@ -1,7 +1,5 @@
 <?php
 /**
- * Web_Action_Package
- * 
  * パッケージメインアクション
  * 
  * @package    SamuraiWEB
@@ -20,7 +18,8 @@ class Web_Action_Package extends Web_Action
 
 
     /**
-     * コンストラクタ。
+     * コンストラクタ
+     *
      * @access     public
      */
     public function __construct()
@@ -31,6 +30,7 @@ class Web_Action_Package extends Web_Action
 
     /**
      * パッケージをセットする
+     *
      * @access     protected
      */
     protected function _setPackage()
@@ -41,16 +41,26 @@ class Web_Action_Package extends Web_Action
 
     /**
      * リリースをセットする
+     *
      * @access     protected
      */
     protected function _setRelease()
     {
-        $this->release = $this->PackageManager->getRelease($this->package->id, $this->Request->get('release_id'));
+        if($release_name = $this->Request->get('release_name')){
+            list($version, $stability) = explode('-', $release_name);
+            $condition = $this->PackageManager->getCondition();
+            $condition->where->version = $version;
+            $condition->where->stability = $stability;
+            $this->release = $this->PackageManager->getRelease($this->package->id, $condition);
+        } else {
+            $this->release = $this->PackageManager->getRelease($this->package->id, $this->Request->get('release_id'));
+        }
         if(!$this->release) throw new Web_Exception('No such release.');
     }
 
     /**
      * リリースファイルをセットする
+     *
      * @access     protected
      */
     protected function _setFile()

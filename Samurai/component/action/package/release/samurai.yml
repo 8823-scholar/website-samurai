@@ -1,0 +1,8 @@
+###
+ # package - release - *.yml
+ #/
+#Convert:
+#    * : 'trim'
+#    
+#Validate:
+#    

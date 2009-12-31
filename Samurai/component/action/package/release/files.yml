@@ -1,0 +1,5 @@
+###
+ # package - release - files.yml
+ #/
+View:
+    success : 'package/release_files.tpl'

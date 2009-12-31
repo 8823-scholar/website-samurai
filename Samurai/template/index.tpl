@@ -7,14 +7,18 @@
     <div id='topimage'>
         <ul class='main'>
             <li class='download'>
-                {Html->a href='/downloads/version/2.0.0-stable' value="SamuraiFWをダウンロード<br /><span class='version'>Version 2.0.0-stable</span>" escape=false}
+                {Html->a href="/package/samurai/`$release->version`-`$release->stability`/files"
+                            value="SamuraiFWをダウンロード<br /><span class='version'>Version `$release->version`-`$release->stability`</span>" escape=false}
             </li>
         </ul>
         <ul class='sub'>
-            <li>{Html->a href='/trac/wiki/changelog/2.x.x' value='変更ログ'}</li>
-            <li>{Html->a href='/documents/tutorial/upgrade' value='アップグレード方法'}</li>
-            <li>{Html->a href='/documents/tutorial/install#quick' value='クイックインストール'}</li>
-            <li>{Html->a href='/downloads/version/2.1.0-alpha' value='開発版ダウンロード(2.1.0-alpha)'}</li>
+            <li>{Html->a href="/development/wiki/changelog/`$release->version`" value='変更ログ'}</li>
+            <li>{Html->a href='/documents/install#quick' value='クイックインストール'}</li>
+            <li>{Html->a href='/documents/install#upgrade' value='アップグレード方法'}</li>
+            {if $release_dev}
+                <li>{Html->a href="/package/samurai/`$release_dev->version`-`$release_dev->stability`/files"
+                        value="開発版ダウンロード(`$release_dev->version`-`$release_dev->stability`)"}</li>
+            {/if}
             <li class='blank'></li>
             <li>{Html->a href='/about/samuraifw' value='Samurai Frameworkとは？'}</li>
             <li>{Html->a href='/community/index' value='ユーザーコミュニティ'}</li>
