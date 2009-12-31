@@ -2,4 +2,4 @@
  # package - download - page.yml
  #/
 View:
-    success : 'package/download/page.tpl'
+    success : 'package/download_page.tpl'

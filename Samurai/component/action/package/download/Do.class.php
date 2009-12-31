@@ -1,13 +1,11 @@
-<?
+<?php
 /**
- * Action_Package_Download_Do
- * 
  * パッケージ / ダウンロード
  * 
  * @package    SamuraiWEB
  * @subpackage Action.Package
- * @copyright  Samurai Framework Project
- * @author     hayabusa <scholar@hayabusa-lab.jp>
+ * @copyright  2007-2010 Samurai Framework Project
+ * @author     KIUCHI Satoshinosuke <scholar@hayabusa-lab.jp>
  */
 class Action_Package_Download_Do extends Web_Action_Package
 {
@@ -17,7 +15,8 @@ class Action_Package_Download_Do extends Web_Action_Package
 
 
     /**
-     * 実行トリガー。
+     * 実行トリガー
+     *
      * @access     public
      */
     public function execute()

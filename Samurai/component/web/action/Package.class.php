@@ -65,7 +65,13 @@ class Web_Action_Package extends Web_Action
      */
     protected function _setFile()
     {
-        $this->file = $this->PackageManager->getReleaseFile($this->package->id, $this->release->id, $this->Request->get('file_id'));
+        if($filename = $this->Request->get('file_name')){
+            $condition = $this->PackageManager->getCondition();
+            $condition->where->filename = $filename;
+            $this->file = $this->PackageManager->getReleaseFile($this->package->id, $this->release->id, $condition);
+        } else {
+            $this->file = $this->PackageManager->getReleaseFile($this->package->id, $this->release->id, $this->Request->get('file_id'));
+        }
         if(!$this->file) throw new Web_Exception('No such file.');
     }
 }

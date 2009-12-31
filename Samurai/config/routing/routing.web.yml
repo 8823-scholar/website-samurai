@@ -30,8 +30,8 @@ package_release_files:
     url   : '/package/:package_alias/:release_name/files'
     param : { action : package_release_files }
 package_download:
-    url   : '/package/:package_alias/:release_id/:file_id/:file_name/download'
+    url   : '/package/:package_alias/:release_name/file/:file_name/download'
     param : { action : package_download_page }
 package_download_archive:
-    url   : '/package/:package_alias/:release_id/:file_id/:file_name'
+    url   : '/package/:package_alias/:release_name/file/:file_name'
     param : { action : package_download_do }

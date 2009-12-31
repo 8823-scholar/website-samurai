@@ -1,7 +1,7 @@
 {**
- * package - download - page.tpl
+ * package - download_page.tpl
  *}
-{assign var='_download_url' value="/package/`$package->alias`/`$release->id`/`$file->id`/`$file->filename`"}
+{assign var='_download_url' value="/package/`$package->alias`/`$release->version`-`$release->stability`/file/`$file->filename`"}
 {assign_array var='html.title.' value='ダウンロード'}
 {assign_array var='html.title.' value="`$package->name` version:`$release->version`"}
 {assign_array var='html.title.' value='パッケージ'}
@@ -15,7 +15,11 @@
         <li class='delimiter'>&gt;</li>
         <li>{Html->a href='/package/releases' value='ダウンロード'}</li>
         <li class='delimiter'>&gt;</li>
-        <li class='selected'>{$package->name|escape:'html'} version:{$release->version}<li>
+        <li>{Html->a href="/package/`$package->alias`/releases" value=$package->name}</li>
+        <li class='delimiter'>&gt;</li>
+        <li>{Html->a href="/package/`$package->alias`/`$release->version`-`$release->stability`/files" value="`$release->version`-`$release->stability`"}</li>
+        <li class='delimiter'>&gt;</li>
+        <li class='selected'>ダウンロード({$file->filename|escape:'html'})<li>
         <li class='clear'></li>
     </ul>
 

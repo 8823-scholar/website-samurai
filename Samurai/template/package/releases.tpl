@@ -38,7 +38,8 @@
                     {foreach from=$package.stable.files item='file'}
                         <tr>
                             <td class='filename'>
-                                {Html->a href="/package/`$package.alias`/`$file.release_id`/`$file.id`/`$file.filename`/download" value=$file.filename}
+                                {Html->a href="/package/`$package.alias`/`$package.stable.version`-`$package.stable.stability`/file/`$file.filename`/download"
+                                            value=$file.filename}
                             </td>
                             <td class='size'>{$file.size|bytes}</td>
                             <td class='downloaded_count'>{$file.downloaded_count}</td>
@@ -59,7 +60,8 @@
                     {foreach from=$package.unstable.files item='file'}
                         <tr>
                             <td class='filename'>
-                                {Html->a href="/package/`$package.alias`/`$file.release_id`/`$file.id`/`$file.filename`/download" value=$file.filename}
+                                {Html->a href="/package/`$package.alias`/`$package.unstable.version`-`$package.unstable.stability`/file/`$file.filename`/download"
+                                            value=$file.filename}
                             </td>
                             <td class='size'>{$file.size|bytes}</td>
                             <td class='downloaded_count'>{$file.downloaded_count}</td>
