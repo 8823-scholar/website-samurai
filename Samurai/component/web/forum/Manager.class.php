@@ -224,7 +224,7 @@ class Web_Forum_Manager extends Samurai_Model
     public function edit($id, $attributes=array())
     {
         if(is_object($id) && $id instanceof ActiveGatewayCondition){
-            $this->AG->updateDetail($this->_table, $attributes, $id);
+            $this->AG->updateDetail($this->_table, $id, $attributes);
         } else {
             $this->AG->update($this->_table, $id, $attributes);
         }
@@ -247,7 +247,7 @@ class Web_Forum_Manager extends Samurai_Model
             $condition->where->id = $id;
         }
         $condition->where->forum_id = $forum_id;
-        $this->AG->updateDetail($this->_table_articles, $attributes, $condition);
+        $this->AG->updateDetail($this->_table_articles, $condition, $attributes);
     }
 
 

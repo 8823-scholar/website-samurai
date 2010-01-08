@@ -341,7 +341,7 @@ class Web_Package_Manager extends Samurai_Model
     public function edit($id, $attributes=array())
     {
         if(is_object($id) && $id instanceof ActiveGatewayCondition){
-            $this->AG->updateDetail($this->_table, $attributes, $id);
+            $this->AG->updateDetail($this->_table, $id, $attributes);
         } else {
             $this->AG->update($this->_table, $id, $attributes);
         }
@@ -364,7 +364,7 @@ class Web_Package_Manager extends Samurai_Model
             $condition->where->id = $id;
         }
         $condition->where->package_id = $package_id;
-        $this->AG->updateDetail($this->_table_releases, $attributes, $condition);
+        $this->AG->updateDetail($this->_table_releases, $condition, $attributes);
     }
 
     /**
@@ -386,7 +386,7 @@ class Web_Package_Manager extends Samurai_Model
         }
         $condition->where->package_id = $package_id;
         $condition->where->release_id = $release_id;
-        $this->AG->updateDetail($this->_table_releases_files, $attributes, $condition);
+        $this->AG->updateDetail($this->_table_releases_files, $condition, $attributes);
     }
 
     /**
@@ -406,7 +406,7 @@ class Web_Package_Manager extends Samurai_Model
             $condition->where->id = $id;
         }
         $condition->where->package_id = $package_id;
-        $this->AG->updateDetail($this->_table_mainteners, $attributes, $condition);
+        $this->AG->updateDetail($this->_table_mainteners, $condition, $attributes);
     }
 
 

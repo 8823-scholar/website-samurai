@@ -349,7 +349,7 @@ class Web_Wiki_Manager extends Web_Model
     public function edit($id, $attributes = array())
     {
         $condition = $this->_toAGCondition($id, $this->_table);
-        return $this->AG->updateDetail($this->_table, $attributes, $condition);
+        return $this->AG->updateDetail($this->_table, $condition, $attributes);
     }
 
     /**
@@ -364,7 +364,7 @@ class Web_Wiki_Manager extends Web_Model
     {
         $condition = $this->_toAGCondition($id, $this->_table_comments);
         $condition->where->wiki_id = $wiki_id;
-        $this->AG->updateDetail($this->_table_comments, $attributes, $condition);
+        $this->AG->updateDetail($this->_table_comments, $condition, $attributes);
     }
 
     /**
@@ -379,7 +379,7 @@ class Web_Wiki_Manager extends Web_Model
     {
         $condition = $this->_toAGCondition($id, $this->_table_histories);
         $condition->where->wiki_id = $wiki_id;
-        $this->AG->updateDetail($this->_table_histories, $attributes, $condition);
+        $this->AG->updateDetail($this->_table_histories, $condition, $attributes);
     }
 
 
