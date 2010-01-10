@@ -37,8 +37,10 @@ class Action_Index extends Web_Action
 
         //Samuraiのリリースを取得
         $package = $this->PackageManager->getByAlias('samurai');
-        $this->_setRelease($package);
-        $this->_setDevRelease($package);
+        if($package){
+            $this->_setRelease($package);
+            $this->_setDevRelease($package);
+        }
 
         return 'success';
     }
