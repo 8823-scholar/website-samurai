@@ -17,9 +17,11 @@
         <div class='menu-wiki column'>
             <h5>WIKIメニュー</h5>
             <ul>
-                <li>{Html->a href="/documents/wiki/tools/edit?name=`$wiki->name_encoded`&locale=`$locale`" value='編集'}</li>
+                {if $User->logined}
+                    <li>{Html->a href="/documents/wiki/tools/edit?name=`$wiki->name_encoded`&locale=`$locale`" value='編集'}</li>
+                    <li>{Html->a href="/documents/wiki/tools/attach?name=`$wiki->name_encoded`&locale=`$locale`" value='ファイル添付'}</li>
+                {/if}
                 <li>{Html->a href="/documents/wiki/tools/history?name=`$wiki->name_encoded`&locale=`$locale`" value='変更履歴'}</li>
-                <li>{Html->a href="/documents/wiki/tools/attach?name=`$wiki->name_encoded`&locale=`$locale`" value='ファイル添付'}</li>
             </ul>
         </div>
     {/if}

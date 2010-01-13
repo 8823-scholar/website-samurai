@@ -124,6 +124,10 @@ class Etc_Wickey_Parser
                         $this->_addBlock($el, $line);
                     }
                     break;
+                case 'code':
+                    $line = $this->_cutTo($text, '||&lt;');
+                    $this->_addBlock($el, $line, 0, $option);
+                    break;
                 case 'quote':
                     $level = $this->_checkLevel($line, 4);
                     if($el == $last_el){
@@ -182,8 +186,12 @@ class Etc_Wickey_Parser
             case $line[0] == '+':
                 return 'ol';
                 break;
-            case $line[0] == '|' && preg_match('/^|.*?|$/', $line):
+            case $line[0] == '|' && preg_match('/^\|.*?\|$/', $line):
                 return 'table';
+                break;
+            case $line[0] == '&' && preg_match('/^&gt;\|(.+)?\|/', $line, $matches):
+                $option->type = isset($matches[1]) ? $matches[1] : NULL ;
+                return 'code';
                 break;
             case $line[0] == '&' && strpos($line, '&gt;') === 0:
                 return 'quote';
@@ -348,7 +356,7 @@ class Etc_Wickey_Parser
             case 'h':
                 $level = $block->contents[0]->level + $this->_h_start -1;
                 $line  = $block->contents[0]->line;
-                if(preg_match('/^([a-z0-9]+)\*(.*)/', $line, $matches)){
+                if(preg_match('/^([a-z0-9:_\-]+)\*(.*)/', $line, $matches)){
                     $id = $matches[1];
                     $line = $matches[2];
                 } else {
@@ -371,6 +379,14 @@ class Etc_Wickey_Parser
                     $html .= $this->_renderTable($content->line);
                 }
                 $html .= '</table>';
+                break;
+            case 'code':
+                $content = $block->contents[0];
+                if($type = $content->option->type){
+                    $html .= '<modifier code="' . $type . '">' . $content->line . '</modifier>';
+                } else {
+                    $html .= '<modifier code>' . $content->line . '</modifier>';
+                }
                 break;
             case 'quote':
                 $now_level = 0;
@@ -534,7 +550,7 @@ class Etc_Wickey_Parser
             $el = $this->_checkBlock($line, $option);
             switch($el){
                 case 'h':
-                    if(!preg_match('/^\*+[a-z0-9]+\*/', $line)){
+                    if(!preg_match('/^\*+[a-z0-9:_\-]+\*/', $line)){
                         $line = mb_ereg_replace('^(\*+)(.*)', sprintf('\\1%s*\\2', uniqid()), $line);
                     }
                     $blocks[] = $line;

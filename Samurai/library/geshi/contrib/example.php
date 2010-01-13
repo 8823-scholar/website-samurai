@@ -6,57 +6,33 @@
  * and the language files in subdirectory "../geshi/")
  *
  * @author  Nigel McNie
- * @version $Id: example.php 2139 2009-07-22 21:40:26Z benbe $
+ * @version $Id: example.php 1512 2008-07-21 21:05:40Z benbe $
  */
 header('Content-Type: text/html; charset=utf-8');
 
 error_reporting(E_ALL);
 
-define('GESHI_DBG_ENABLE', true);
-
-chdir('../geshi/languages');
-$dir = opendir('.');
-$languages = array();
-while ($lang = readdir($dir)) {
-    if ($lang[0] == '.' || !is_dir($lang)) {
-        continue;
-    }
-    // get dialects
-    chdir($lang);
-    $subdir = opendir('.');
-    $len = strlen($lang);
-    while ($file = readdir($subdir)) {
-        if ($file[0] == '.' || !is_file($file) || substr($file, -4) != '.php'
-               || substr($file, 0, 6) == 'class.' || $file == 'common.php') {
-            continue;
-        }
-        $languages[$lang][] = substr($file, 0, -4);
-    }
-    closedir($subdir);
-    chdir('..');
-    sort($languages[$lang]);
+// Rudimentary checking of where GeSHi is. In a default install it will be in ../, but
+// it could be in the current directory if the include_path is set. There's nowhere else
+// we can reasonably guess.
+if (is_readable('../geshi.php')) {
+    $path = '../';
+} elseif (is_readable('geshi.php')) {
+    $path = './';
+} else {
+    die('Could not find geshi.php - make sure it is in your include path!');
 }
-closedir($dir);
-chdir('../../');
-
-ksort($languages);
+require $path . 'geshi.php';
 
 $fill_source = false;
-$parsed_code = '';
-$debug_output = '';
-
-ob_start();
-require 'class.geshi.php';
-
 if (isset($_POST['submit'])) {
     if (get_magic_quotes_gpc()) {
         $_POST['source'] = stripslashes($_POST['source']);
     }
-    if (trim($_POST['source']) == '') {
-        //$_POST['language'] = preg_replace('#[^a-zA-Z0-9\-_]#', '', $_POST['language']);
-        //$_POST['source'] = implode('', @file($path . 'geshi/' . $_POST['language'] . '.php'));
-        $_POST['source'] = file_get_contents('../class.geshi.php');
-        $_POST['language'] = 'php/php5';
+    if (!strlen(trim($_POST['source']))) {
+        $_POST['language'] = preg_replace('#[^a-zA-Z0-9\-_]#', '', $_POST['language']);
+        $_POST['source'] = implode('', @file($path . 'geshi/' . $_POST['language'] . '.php'));
+        $_POST['language'] = 'php';
     } else {
         $fill_source = true;
     }
@@ -75,19 +51,19 @@ if (isset($_POST['submit'])) {
     // HEADER_PRE puts the <pre> tag around the list (<ol>) which is invalid in HTML 4 and XHTML 1
     // HEADER_DIV puts a <div> tag arount the list (valid!) but needs to replace whitespaces with &nbsp
     //            thus producing much larger overhead. You can set the tab width though.
-    //$geshi->set_header_type(GESHI_HEADER_PRE_VALID);
+    $geshi->set_header_type(GESHI_HEADER_PRE_VALID);
 
     // Enable CSS classes. You can use get_stylesheet() to output a stylesheet for your code. Using
     // CSS classes results in much less output source.
-    //$geshi->enable_classes();
+    $geshi->enable_classes();
 
     // Enable line numbers. We want fancy line numbers, and we want every 5th line number to be fancy
-    //$geshi->enable_line_numbers(GESHI_FANCY_LINE_NUMBERS, 5);
+    $geshi->enable_line_numbers(GESHI_FANCY_LINE_NUMBERS, 5);
 
     // Set the style for the PRE around the code. The line numbers are contained within this box (not
     // XHTML compliant btw, but if you are liberally minded about these things then you'll appreciate
     // the reduced source output).
-    //$geshi->set_overall_style('font: normal normal 90% monospace; color: #000066; border: 1px solid #d0d0d0; background-color: #f0f0f0;', false);
+    $geshi->set_overall_style('font: normal normal 90% monospace; color: #000066; border: 1px solid #d0d0d0; background-color: #f0f0f0;', false);
 
     // Set the style for line numbers. In order to get style for line numbers working, the <li> element
     // is being styled. This means that the code on the line will also be styled, and most of the time
@@ -98,31 +74,27 @@ if (isset($_POST['submit'])) {
     // <li style="[set_line_style styles]"><div style="[set_code_style styles]>...</div></li>
     // ...
     // </ol></pre>
-    //$geshi->set_line_style('color: #003030;', 'font-weight: bold; color: #006060;', true);
-    //$geshi->set_code_style('color: #000020;', true);
+    $geshi->set_line_style('color: #003030;', 'font-weight: bold; color: #006060;', true);
+    $geshi->set_code_style('color: #000020;', true);
 
     // Styles for hyperlinks in the code. GESHI_LINK for default styles, GESHI_HOVER for hover style etc...
     // note that classes must be enabled for this to work.
-    //$geshi->set_link_styles(GESHI_LINK, 'color: #000060;');
-    //$geshi->set_link_styles(GESHI_HOVER, 'background-color: #f0f000;');
+    $geshi->set_link_styles(GESHI_LINK, 'color: #000060;');
+    $geshi->set_link_styles(GESHI_HOVER, 'background-color: #f0f000;');
 
     // Use the header/footer functionality. This puts a div with content within the PRE element, so it is
     // affected by the styles set by set_overall_style. So if the PRE has a border then the header/footer will
     // appear inside it.
-    //$geshi->set_header_content('<SPEED> <TIME> GeSHi &copy; 2004-2007, Nigel McNie, 2007-2008 Benny Baumann. View source of example.php for example of using GeSHi');
-    //$geshi->set_header_content_style('font-family: sans-serif; color: #808080; font-size: 70%; font-weight: bold; background-color: #f0f0ff; border-bottom: 1px solid #d0d0d0; padding: 2px;');
+    $geshi->set_header_content('<SPEED> <TIME> GeSHi &copy; 2004-2007, Nigel McNie, 2007-2008 Benny Baumann. View source of example.php for example of using GeSHi');
+    $geshi->set_header_content_style('font-family: sans-serif; color: #808080; font-size: 70%; font-weight: bold; background-color: #f0f0ff; border-bottom: 1px solid #d0d0d0; padding: 2px;');
 
     // You can use <TIME> and <VERSION> as placeholders
-    //$geshi->set_footer_content('Parsed in <TIME> seconds at <SPEED>, using GeSHi <VERSION>');
-    //$geshi->set_footer_content_style('font-family: sans-serif; color: #808080; font-size: 70%; font-weight: bold; background-color: #f0f0ff; border-top: 1px solid #d0d0d0; padding: 2px;');
-
-    $parsed_code = $geshi->parseCode();
+    $geshi->set_footer_content('Parsed in <TIME> seconds at <SPEED>, using GeSHi <VERSION>');
+    $geshi->set_footer_content_style('font-family: sans-serif; color: #808080; font-size: 70%; font-weight: bold; background-color: #f0f0ff; border-top: 1px solid #d0d0d0; padding: 2px;');
 } else {
     // make sure we don't preselect any language
     $_POST['language'] = null;
 }
-$debug_output = ob_get_contents();
-ob_end_clean();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -134,7 +106,7 @@ ob_end_clean();
     <?php
     if (isset($_POST['submit'])) {
         // Output the stylesheet. Note it doesn't output the <style> tag
-        //echo $geshi->get_stylesheet(true);
+        echo $geshi->get_stylesheet(true);
     }
     ?>
     html {
@@ -191,12 +163,10 @@ include_path, and that the language files are in a subdirectory of GeSHi's direc
 <p>Enter your source and a language to highlight the source in and submit, or just choose a language to
 have that language file highlighted in PHP.</p>
 <?php
-if (!empty($parsed_code)) {
+if (isset($_POST['submit'])) {
     // The fun part :)
-    echo $parsed_code . '<hr />';
-}
-if (!empty($debug_output)) {
-    echo '<pre>'.$debug_output.'</pre>';
+    echo $geshi->parse_code();
+    echo '<hr />';
 }
 ?>
 <form action="<?php echo basename($_SERVER['PHP_SELF']); ?>" method="post">
@@ -208,17 +178,28 @@ if (!empty($debug_output)) {
 <p>
 <select name="language" id="language">
 <?php
-foreach ($languages as $lang => $dialects) {
-    echo "<optgroup label='$lang'>\n";
-    foreach ($dialects as $dialect) {
-        if (isset($_POST['language']) && $_POST['language'] == $lang.'/'.$dialect) {
-            $selected = 'selected="selected"';
-        } else {
-            $selected = '';
-        }
-        echo '<option value="' . $lang .'/'. $dialect . '" '. $selected .'>' . $dialect . "</option>\n";
+if (!($dir = @opendir(dirname(__FILE__) . '/geshi'))) {
+    if (!($dir = @opendir(dirname(__FILE__) . '/../geshi'))) {
+        echo '<option>No languages available!</option>';
     }
-    echo "</optgroup>\n";
+}
+$languages = array();
+while ($file = readdir($dir)) {
+    if ( $file[0] == '.' || strpos($file, '.', 1) === false) {
+        continue;
+    }
+    $lang = substr($file, 0,  strpos($file, '.'));
+    $languages[] = $lang;
+}
+closedir($dir);
+sort($languages);
+foreach ($languages as $lang) {
+    if (isset($_POST['language']) && $_POST['language'] == $lang) {
+        $selected = 'selected="selected"';
+    } else {
+        $selected = '';
+    }
+    echo '<option value="' . $lang . '" '. $selected .'>' . $lang . "</option>\n";
 }
 
 ?>

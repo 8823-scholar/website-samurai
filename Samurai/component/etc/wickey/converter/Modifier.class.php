@@ -263,23 +263,21 @@ class Etc_Wickey_Converter_Modifier extends Etc_Wickey_Converter
         $this->_appendAttribute($new_node, 'class', $attr->value);
         //ハイライト処理
         $source = html_entity_decode($node->innerHTML());
-        $source = preg_replace('|<br />\n|i', "\n", $source);
+        $source = trim(preg_replace('|<br />\n|i', "\n", $source));
         if($code = $attr->value){
             $geshi = $this->_getGeshi();
-            $geshi->setSource($source);
-            $geshi->setLanguage($code);
-            $source = $geshi->parseCode();
+            $geshi->set_source($source);
+            $geshi->set_language($code);
+            $source = $geshi->parse_code();
             $dom = new Etc_Dom_Document();
             $dom->load($source);
-            for($i = 0; $i < $dom->childNodes->length; $i++){
-                $source = $dom->childNodes->item($i);
+            for($i = 0; $i < $dom->childNodes->item(0)->childNodes->length; $i++){
+                $source = $dom->childNodes->item(0)->childNodes->item($i);
                 $new_node->appendChild($source);
             }
         } else {
             $new_node->appendChild($root->createTextNode($source));
         }
-        //後方の改行は無視
-        //$this->_removeNextBR($node);
         return $new_node;
     }    
 
@@ -293,13 +291,15 @@ class Etc_Wickey_Converter_Modifier extends Etc_Wickey_Converter
     private function _getGeshi()
     {
         if(!$this->geshi){
-            Samurai_Loader::load(Samurai_Config::get('directory.library') . '/geshi/class.geshi.php');
+            Samurai_Loader::load(Samurai_Config::get('directory.library') . '/geshi/geshi.php');
+            /*
             Samurai_Loader::load(Samurai_Config::get('directory.library') . '/geshi/geshi/classes/class.geshirenderer.php');
             Samurai_Loader::load(Samurai_Config::get('directory.library') . '/geshi/geshi/classes/renderers/class.geshirendererhtml.php');
             Samurai_Loader::loadByClass('Etc_Wickey_Helper_GeshiRenderer');
+             */
             $this->geshi = new GeSHi('', '');
         }
-        $this->geshi->setRenderer(new Etc_Wickey_Helper_GeshiRenderer());
+        //$this->geshi->setRenderer(new Etc_Wickey_Helper_GeshiRenderer());
         return $this->geshi;
     }
 }
