@@ -116,7 +116,7 @@ class Etc_Wickey
 
             //スタンダードWIKI表記解釈
             $text = $this->Parser->parseAndRender($text);
-            $text = "<div class='wickey'>" . $text . "</div>";
+            $text = "<div class='wickey'>" . $text . "</div><br style='clear:both;' />";
 
             //DOM型WIKI変換
             $dom->load($text);
@@ -203,12 +203,13 @@ class Etc_Wickey
             if(strtolower($new_node->tagName) == 'a') $option->in_a = false;
         } elseif($node->nodeType === XML_TEXT_NODE){
             $new_value = $this->Inliner->render($node->getValue(), $option);
-            if($new_value != $node->nodeValue){
+            if($new_value != $node->getValue()){
                 $dom = new Etc_Dom_Document();
                 $dom->load($new_value);
                 for($i = 0; $i < $dom->childNodes->length; $i++){
                     $new_node = $dom->childNodes->item($i);
                     $node->parentNode->insertBefore($new_node, $node);
+                    $this->_nodeTransform($new_node, $option);
                 }
                 $node->parentNode->removeChild($node);
             }

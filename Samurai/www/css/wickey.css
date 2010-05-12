@@ -26,8 +26,8 @@
     {
         height : auto !important;
         margin-left : 0px !important;
-        margin-bottom : 5px !important;
-        color : #999999 !important;
+        margin-bottom : 8px !important;
+        color : #333333 !important;
         padding : 2px 5px !important;
         font-size : 14px !important;
         font-weight : bold !important;
@@ -35,11 +35,12 @@
     .wickey .section h4
     {
         height : auto !important;
+        margin-top : 15px;
         margin-left : 5px !important;
         margin-bottom : 10px !important;
-        color : inherit !important;
+        color : #444444 !important;
         background-image : none !important;
-        padding : 2px 5px !important;
+        padding : 1px 5px !important;
         font-size : 13px !important;
         font-weight : bold !important;
     }
@@ -48,7 +49,7 @@
         height : auto !important;
         margin-left : 10px !important;
         margin-bottom : 8px !important;
-        color : inherit !important;
+        color : #555555 !important;
         background-image : none !important;
         padding : 2px !important;
         font-size : inherit !important;
@@ -58,7 +59,7 @@
     .wickey .section h4 a,
     .wickey .section h5 a
     {
-        color : #555555 !important;
+        color : inherit !important;
     }
     .wickey .section div.h3-menu
     {
@@ -80,6 +81,7 @@
     .wickey .section div.paragraph
     {
         clear : both;
+        line-height : 1.6;
         margin : 5px 0px 15px 5px !important;
     }
     .wickey .section table
@@ -107,6 +109,16 @@
         border : none;
         border-top : 1px dashed #999999 !important;
         margin-bottom : 15px !important;
+    }
+    .wickey .section div.left
+    {
+        float : left !important;
+        margin-bottom : 10px !important;
+    }
+    .wickey .section div.right
+    {
+        float : right !important;
+        margin-bottom : 10px !important;
     }
 
 
@@ -185,6 +197,7 @@
     }
     .wickey p.footnote
     {
+        clear : both;
         padding-top : 5px;
         font-size : 10px;
         background : url('../image/layout/tag.hr.dashed.png') top repeat-x;

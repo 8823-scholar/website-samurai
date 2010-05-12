@@ -205,6 +205,7 @@ class Etc_Wickey_Converter_Modifier extends Etc_Wickey_Converter
         $div = $this->option->root->createElement('div');
         foreach($new_node->attributes as $attr) $div->setAttributeNode($attr);
         $this->_appendAttribute($div, 'style', 'text-align:left;');
+        $this->_removeNextBR($node);
         return $div;
     }
     /**
@@ -217,6 +218,7 @@ class Etc_Wickey_Converter_Modifier extends Etc_Wickey_Converter
         $div = $this->option->root->createElement('div');
         foreach($new_node->attributes as $attr) $div->setAttributeNode($attr);
         $this->_appendAttribute($div, 'style', 'text-align:right;');
+        $this->_removeNextBR($node);
         return $div;
     }
     /**
@@ -229,6 +231,21 @@ class Etc_Wickey_Converter_Modifier extends Etc_Wickey_Converter
         $div = $this->option->root->createElement('div');
         foreach($new_node->attributes as $attr) $div->setAttributeNode($attr);
         $this->_appendAttribute($div, 'style', 'text-align:center;');
+        $this->_removeNextBR($node);
+        return $div;
+    }
+    
+    /**
+     * フロート
+     *
+     * @access     protected
+     */
+    protected function _doFloat(Etc_Dom_Node $new_node, $attr, $node=NULL)
+    {
+        $div = $this->option->root->createElement('div');
+        foreach($new_node->attributes as $attr) $div->setAttributeNode($attr);
+        $this->_appendAttribute($div, 'class', $node->getAttribute('float'));
+        $this->_removeNextBR($node);
         return $div;
     }
 
@@ -292,14 +309,8 @@ class Etc_Wickey_Converter_Modifier extends Etc_Wickey_Converter
     {
         if(!$this->geshi){
             Samurai_Loader::load(Samurai_Config::get('directory.library') . '/geshi/geshi.php');
-            /*
-            Samurai_Loader::load(Samurai_Config::get('directory.library') . '/geshi/geshi/classes/class.geshirenderer.php');
-            Samurai_Loader::load(Samurai_Config::get('directory.library') . '/geshi/geshi/classes/renderers/class.geshirendererhtml.php');
-            Samurai_Loader::loadByClass('Etc_Wickey_Helper_GeshiRenderer');
-             */
-            $this->geshi = new GeSHi('', '');
         }
-        //$this->geshi->setRenderer(new Etc_Wickey_Helper_GeshiRenderer());
+        $this->geshi = new GeSHi('', '');
         return $this->geshi;
     }
 }

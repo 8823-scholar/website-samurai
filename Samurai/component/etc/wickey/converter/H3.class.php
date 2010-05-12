@@ -27,6 +27,7 @@ class Etc_Wickey_Converter_H3 extends Etc_Wickey_Converter
      */
     public function convert(Etc_Dom_Node $node)
     {
+        return $node;
         $root = $this->option->root;
         $new_node = $root->createElement('div', array('class' => 'h3-menu'));
         

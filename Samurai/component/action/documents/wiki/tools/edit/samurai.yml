@@ -7,11 +7,11 @@ Convert:
     
 Validate:
     name.required : '入力内容が不正です'
-    name.match : '入力内容が不正です,/^[a-z_\/\-]+$/i'
+    name.match : '入力内容が不正です,/^[a-z0-9_\/\-]+$/i'
     title.required : '入力してください'
     title.maxlength : '入力内容が長すぎます,255'
     content.required : '入力してください'
-    content.maxlength : '入力内容が長すぎます,5012'
+    content.maxlength : '入力内容が長すぎます,10240'
 
 Token:
     name : token_documents_wiki_tools_edit

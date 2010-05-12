@@ -422,7 +422,7 @@ class Etc_Dom_Parser
      */
     protected function _onTextData($text)
     {
-        $text = html_entity_decode($text);
+        $text = html_entity_decode($text, ENT_QUOTES, Samurai_Config::get('encoding.internal'));
         $this->_pushNode(new Etc_Dom_Text($text));
     }
 

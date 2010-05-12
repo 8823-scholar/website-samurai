@@ -85,7 +85,7 @@ abstract class Etc_Wickey_Converter
     protected function _removeNextBR(Etc_Dom_Node $node)
     {
         $next = $node->nextSibling;
-        if($next && $next->nodeType == XML_ELEMENT_NODE && $next->tagName == 'br'){
+        if($next && $next->nodeType == XML_ELEMENT_NODE && strtolower($next->tagName) == 'br'){
             $node->parentNode->removeChild($next);
         }
     }

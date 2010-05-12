@@ -38,7 +38,7 @@ class Etc_Wickey_Inliner
      * @access   private
      * @var      string
      */
-    private $_pattern_url = '[a-zA-Z0-9\+]+:\/\/[a-zA-Z0-9%&=:\.\/\?\-]+(#[a-zA-Z0-9:]*)?';
+    private $_pattern_url = '[a-zA-Z0-9\+]+:\/\/[a-zA-Z0-9_%&=:~\.\/\?\-]+(#[a-zA-Z0-9:]*)?';
 
     /**
      * メールアドレスの正規表現
@@ -72,9 +72,13 @@ class Etc_Wickey_Inliner
     {
         //オートリンク
         if(!isset($option->in_a) || !$option->in_a){
-            $pattern = '/(\[\[(?:(.+?)&gt;)?(.+?)(#.+?)?\]\]|(' . $this->_pattern_url . ')|(' . $this->_pattern_mail . '))/i';
+            $pattern = '/(\[\[(?:(.+)&gt;)?(.+?)(#.+?)?\]\]|(' . $this->_pattern_url . ')|(' . $this->_pattern_mail . '))/i';
             $text = preg_replace_callback($pattern, array($this, '_renderLinkCallback'), $text);
         }
+
+        //太字・斜体
+        $pattern = '/(\'\'\'(.+?)\'\'\'|\'\'(.+?)\'\')/';
+        $text = preg_replace_callback($pattern, array($this, '_renderStyles'), $text);
 
         //脚注
         $pattern = '/(^|[^\(])?\(\(([^\(\)]+?)\)\)([^\)]|$)/';
@@ -121,6 +125,29 @@ class Etc_Wickey_Inliner
             $href = urlencode($wikiname);
             return sprintf('<a href="%s">%s</a>', $href . $flagment, $alias != '' ? $alias : $wikiname);
         }
+    }
+
+
+    /**
+     * 太字・斜体などを解釈
+     *
+     * @access     private
+     * @param      array    $matches
+     * @return     string
+     */
+    private function _renderStyles(array $matches)
+    {
+        switch(true){
+            //太字
+            case isset($matches[3]) && $matches[3]:
+                return '<modifier bold>' . $matches[3] . '</modifier>';
+                break;
+            //斜体
+            case isset($matches[2]) && $matches[2]:
+                return '<modifier italic>' . $matches[2] . '</modifier>';
+                break;
+        }
+        return '';
     }
 
 

@@ -302,7 +302,7 @@ class Etc_Wickey_Parser
     private function _cutTo(&$text, $eob, $onlyline=true)
     {
         $cutted = '';
-        while($line = array_shift($text)){
+        while(($line = array_shift($text)) || $line !== NULL){
             if($onlyline && preg_match('/^' . preg_quote($eob, '/') . '$/', $line)){
                 break;
             } elseif(!$onlyline && strpos($line, $eob) !== false){
@@ -338,6 +338,7 @@ class Etc_Wickey_Parser
             }
             $html[] = '</div>';
         }
+        //echo nl2br(htmlspecialchars(join("\n", $html)));
         return join("\n", $html);
     }
 
