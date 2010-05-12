@@ -1,0 +1,7 @@
+#
+# index.yml
+#
+
+View:
+    success : 'index.tpl'
+
