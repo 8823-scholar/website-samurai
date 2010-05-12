@@ -1,0 +1,7 @@
+#
+# request.yml
+#
+
+View:
+    success : 'request.tpl'
+

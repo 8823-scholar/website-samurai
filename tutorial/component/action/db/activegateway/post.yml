@@ -1,0 +1,12 @@
+#
+# db - activegateway - post.yml
+#
+
+Validate:
+    name.required : '名前を入力してください。'
+
+
+View:
+    success : 'db/activegateway/post.tpl'
+    invalidInput : 'db/activegateway/list.tpl'
+

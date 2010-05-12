@@ -1,0 +1,13 @@
+#
+# validate - *.yml
+#
+
+Convert:
+    * : 'strim'
+
+Validate:
+    name.required : '名前を入力してください。'
+
+View:
+    invalidInput : 'validate.tpl'
+

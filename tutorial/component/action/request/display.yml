@@ -1,0 +1,7 @@
+#
+# request - display.yml
+#
+
+View:
+    success : 'request/display.tpl'
+

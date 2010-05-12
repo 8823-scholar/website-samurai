@@ -1,0 +1,7 @@
+#
+# db - activegateway - list.yml
+#
+
+View:
+    success : 'db/activegateway/list.tpl'
+

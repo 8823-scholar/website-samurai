@@ -1,0 +1,7 @@
+#
+# validate.yml
+#
+
+View:
+    success : 'validate.tpl'
+

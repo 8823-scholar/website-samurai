@@ -1,0 +1,7 @@
+#
+# validate - display.yml
+#
+
+View:
+    success : 'validate/display.tpl'
+
