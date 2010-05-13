@@ -14,7 +14,7 @@
 
     {** WIKIメニュー **}
     {if $wiki && !$wiki->is_newpage}
-        <div class='menu-wiki column'>
+        <div class='menu-contents menu-wiki column'>
             <h5>WIKIメニュー</h5>
             <ul>
                 {if $User->logined}

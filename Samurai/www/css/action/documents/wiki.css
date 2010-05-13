@@ -174,3 +174,54 @@
         height : 50px;
         margin : 0px;
     }
+
+
+
+
+/********************
+ * サイドメニュー
+ *******************/
+    #samurai #contents.documents.wiki #sidebar .menu-contents.column h5
+    {
+        padding : 5px 5px 5px 8px;
+        color : #EEEEEE;
+        background : url('../../../image/action/documents/wiki/sidebar.tag.h5.png') top left no-repeat;
+        border-bottom : 1px solid #999999;
+    }
+    #samurai #contents.documents.wiki #sidebar .menu-contents.column ul
+    {
+        border : 1px solid #999999;
+        border-top : 1px solid #888888;
+        background : #F5F5F5;
+    }
+    #samurai #contents.documents.wiki #sidebar .menu-contents.column ul li
+    {
+        margin-top: -1px;
+        border-top : 1px dashed #999999;
+    }
+    #samurai #contents.documents.wiki #sidebar .menu-contents.column ul li a
+    {
+        display : block;
+        padding : 3px 5px 3px 11px;
+        background: url('../../../image/action/documents/wiki/sidebar.tag.li.png') 3px 7px no-repeat;
+    }
+    #samurai #contents.documents.wiki #sidebar .menu-contents.column ul ul
+    {
+        border : none;
+    }
+    #samurai #contents.documents.wiki #sidebar .menu-contents.column ul ul li a
+    {
+        padding-left : 20px;
+        background: url('../../../image/action/documents/wiki/sidebar.tag.li.png') 12px 7px no-repeat;
+    }
+    #samurai #contents.documents.wiki #sidebar .menu-contents.column ul ul ul li a
+    {
+        padding-left : 29px;
+        background: url('../../../image/action/documents/wiki/sidebar.tag.li.png') 21px 7px no-repeat;
+    }
+    #samurai #contents.documents.wiki #sidebar .menu-contents.column ul li a:hover,
+    #samurai #contents.documents.wiki #sidebar .menu-contents.column ul li.selected a
+    {
+        background-color : #DDDDDD;
+    }
+
