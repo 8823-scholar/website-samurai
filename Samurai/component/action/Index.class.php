@@ -70,5 +70,6 @@ class Action_Index extends Web_Action
         $condition->where->stability = array('alpha', 'beta');
         $condition->order->version = 'DESC';
         $this->release_dev = $this->PackageManager->getRelease($package->id, $condition);
+        if(!$this->release) $this->release = $this->release_dev;
     }
 }
