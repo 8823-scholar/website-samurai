@@ -25,7 +25,7 @@
  * 
  * @package    Samurai
  * @subpackage Etc.Wickey
- * @copyright  2007-2009 Samurai Framework Project
+ * @copyright  2007-2010 Samurai Framework Project
  * @author     hayabusa <scholar@hayabusa-lab.jp>
  */
 class Etc_Wickey_Converter_Modifier extends Etc_Wickey_Converter

@@ -37,14 +37,18 @@ class Etc_Wickey_Helper_Smarty
     public function render(array $params, Smarty $Smarty)
     {
         $text = '';
+        $option = new stdClass();
         foreach($params as $_key => $_val){
             switch($_key){
             case 'text':
                 $$_key = (string)$_val;
                 break;
+            case 'base':
+                $option->base = (string)$_val;
+                break;
             }
         }
-        return $this->Wickey->render($text);
+        return $this->Wickey->render($text, $option);
     }
 
 

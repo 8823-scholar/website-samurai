@@ -1,5 +1,10 @@
 ###
  # documents - wiki - tools - comment - confirm.yml
  #/
+
+ValidateIfUnlogined:
+    antispam.required : '認証コードを入力してください。'
+    antispam.antispam : '認証コードが正しくありません。,documents_wiki_comment'
+
 View:
     success : 'documents/wiki/tools_comment_confirm.tpl'

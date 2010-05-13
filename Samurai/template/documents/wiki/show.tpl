@@ -18,7 +18,7 @@
     <div id='main'>
         <H2>{$wiki->title|escape:'html'}</H2>
         <div class='show column'>
-            {Wickey->render text=$wiki->content}
+            {Wickey->render text=$wiki->content base="/documents/`$locale`/"}
         </div>
 
         <h2>コメント</h2>
@@ -61,19 +61,32 @@
                 {Html->hidden name='locale' value=$wiki->locale}
                 <table class='form' id='form-comment'>
                     <tr>
+                        <th class='required'>お名前</th>
                         <td class='input'>
                             {if $User->logined}
-                                お名前 : {$User->name|escape:'html'}
+                                {$User->name|escape:'html'}
                             {else}
-                                お名前 : {Html->text name='cname' value=$request.cname|default:$cookie.name}
+                                {Html->text name='cname' value=$request.cname|default:$cookie.name}
                             {/if}
                         </td>
                     </tr>
+                    {if !$User->logined}
+                        <tr>
+                            <th class='required'>認証コード</th>
+                            <td class='input'>
+                                <img src='/etc/antispam?space=documents_wiki_comment' class='antispam' /><br />
+                                {Html->text name='antispam'}
+                            </td>
+                        </tr>
+                    {/if}
                     <tr>
+                        <th class='required'>本文</th>
                         <td class='input'>
                             {Html->textarea name='comment' value=$request.comment}
                         </td>
-                        <td class='submit'>
+                    </tr>
+                    <tr>
+                        <td class='submit' colspan='2'>
                             {Html->submit value='確認画面'}
                         </td>
                     </tr>

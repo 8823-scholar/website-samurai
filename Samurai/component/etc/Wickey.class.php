@@ -1,4 +1,7 @@
 <?php
+
+Samurai_Loader::loadByClass('Etc_Dom_Document');
+
 /**
  * WIKIエンジン
  *
@@ -7,10 +10,9 @@
  * 
  * @package    Etc
  * @subpackage Wickey
- * @copyright  2007-2009 Samurai Framework Project
+ * @copyright  2007-2010 Samurai Framework Project
  * @author     hayabusa <scholar@hayabusa-lab.jp>
  */
-Samurai_Loader::loadByClass('Etc_Dom_Document');
 class Etc_Wickey
 {
     /**

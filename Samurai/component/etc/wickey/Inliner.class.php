@@ -48,6 +48,14 @@ class Etc_Wickey_Inliner
      */
     private $_pattern_mail = '[a-zA-Z0-9_\-\.]+@[a-zA-Z]([a-zA-Z0-9\-]+)?\.[a-zA-Z\.]+';
 
+    /**
+     * オプション
+     *
+     * @access   private
+     * @var      object
+     */
+    private $_option;
+
 
     /**
      * コンストラクタ
@@ -70,6 +78,7 @@ class Etc_Wickey_Inliner
      */
     public function render($text, $option = NULL)
     {
+        $this->_option = $option;
         //オートリンク
         if(!isset($option->in_a) || !$option->in_a){
             $pattern = '/(\[\[(?:(.+)&gt;)?(.+?)(#.+?)?\]\]|(' . $this->_pattern_url . ')|(' . $this->_pattern_mail . '))/i';
@@ -123,6 +132,7 @@ class Etc_Wickey_Inliner
             return sprintf('<a href="mailto:%s">%s</a>', $href, $alias != '' ? $alias : $string);
         } else {
             $href = urlencode($wikiname);
+            if(isset($this->_option->base)) $href = $this->_option->base . $href;
             return sprintf('<a href="%s">%s</a>', $href . $flagment, $alias != '' ? $alias : $wikiname);
         }
     }

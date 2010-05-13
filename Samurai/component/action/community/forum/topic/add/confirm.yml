@@ -1,6 +1,7 @@
 ###
  # community - forum - topic - add - confirm.yml
  #/
+
 ValidateIfUnlogined:
     antispam.required : '入力してください。'
     antispam.antispam : '入力内容が正しくありません。,forum_topic_add'
