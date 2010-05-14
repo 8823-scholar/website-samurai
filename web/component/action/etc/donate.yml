@@ -1,0 +1,7 @@
+#
+# etc - donate.yml
+#
+
+View:
+    success : 'etc/donate.tpl'
+

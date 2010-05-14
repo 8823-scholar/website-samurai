@@ -1,9 +1,10 @@
 <? if(isset($license) && $license != ''){ ?>
- * @license    <?=$license."\n"?>
+ * @license    <?php echo $license . "\n"; ?>
 <? } ?>
 <? if(isset($copyright) && $copyright != ''){ ?>
- * @copyright  <?=$copyright."\n"?>
+ * @copyright  <?php echo $copyright . "\n"; ?>
 <? } ?>
 <? if(isset($author) && $author != ''){ ?>
- * @author     <?=$author."\n"?>
+ * @author     <?php echo $author . "\n"; ?>
 <? } ?>
+ * @version    SVN: $Id: $
