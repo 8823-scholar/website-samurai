@@ -111,6 +111,7 @@ class Etc_Wickey_Parser
                 case 'ul':
                 case 'ol':
                     $level = $this->_checkLevel($line);
+                    $line = $this->_checkEOLBr($line, $text);
                     if($el == $last_el){
                         $this->_addBlockToLast($el, $line, $level);
                     } else {
@@ -227,6 +228,27 @@ class Etc_Wickey_Parser
         }
         $line = trim(substr($line, $length * $i));
         return $i;
+    }
+
+
+    /**
+     * 行末改行をチェックする
+     *
+     * @access     private
+     * @param      string  $line
+     * @param      array   $text
+     * @return     string
+     */
+    private function _checkEOLBr($line, &$text)
+    {
+        if(preg_match('/~$/', $line)){
+            $line = substr($line, 0, -1);
+            $line .= '<br />' . array_shift($text);
+            if($text){
+                $line = $this->_checkEOLBr($line, $text);
+            }
+        }
+        return $line;
     }
 
 
@@ -461,12 +483,15 @@ class Etc_Wickey_Parser
     {
         $html = '<tr>';
         $cols = explode('|', $line);
+        $colspan = 1;
         array_pop($cols);
         array_shift($cols);
         foreach($cols as $col){
+            $value = $col;
             $styles = array();
             while(preg_match('/^([a-z]+)(\((.+?)\))?:/i', $col, $matches)){
                 $col = substr($col, strlen($matches[0]));
+                $value = $col;
                 switch(strtolower($matches[1])){
                     case 'width':
                         if(isset($matches[3])) $styles[] = 'width:' . $matches[3];
@@ -482,13 +507,20 @@ class Etc_Wickey_Parser
                     case 'right':
                         $styles[] = 'text-align:' . strtolower($matches[1]);
                         break;
+                    default:
+                        $value = $matches[0] . $col;
+                        break;
                 }
             }
             $style = $styles ? sprintf(' style="%s"', htmlspecialchars(join(';', $styles))) : '' ;
-            if(preg_match('/^\*/', $col)){
-                $html .= sprintf('<th%s>%s</th>', $style, substr($col, 1));
+            if($value == '&gt;'){
+                $colspan++;
+            } elseif(preg_match('/^\*/', $value)){
+                if($colspan > 1) $style .= ' colspan="' . $colspan . '"';
+                $html .= sprintf('<th%s>%s</th>', $style, substr($value, 1));
             } else {
-                $html .= sprintf('<td%s>%s</td>', $style, $col);
+                if($colspan > 1) $style .= ' colspan="' . $colspan . '"';
+                $html .= sprintf('<td%s>%s</td>', $style, $value);
             }
         }
         $html .= '</tr>';

@@ -12,9 +12,9 @@
             </li>
         </ul>
         <ul class='sub'>
-            <li>{Html->a href="/development/wiki/changelog/`$release->version`" value='変更ログ'}</li>
-            <li>{Html->a href='/documents/install#quick' value='クイックインストール'}</li>
-            <li>{Html->a href='/documents/install#upgrade' value='アップグレード方法'}</li>
+            {*<li>{Html->a href="/development/wiki/changelog/`$release->version`" value='変更ログ'}</li>*}
+            <li>{Html->a href='/documents/ja/install#quick' value='クイックインストール'}</li>
+            <li>{Html->a href='/documents/ja/install#upgrade' value='アップグレード方法'}</li>
             {if $release_dev}
                 <li>{Html->a href="/package/samurai/`$release_dev->version`-`$release_dev->stability`/files"
                         value="開発版ダウンロード(`$release_dev->version`-`$release_dev->stability`)"}</li>
@@ -51,11 +51,12 @@
                     <li>コアクラスさえもコンポーネントの一つに過ぎない徹底されたコンポーネント指向だから、コアクラスの差し替えも簡単。</li>
                 </ul>
                 <ul class='right'>
-                    <li>国際化(i18n)にも完全対応。</li>
+                    <li>強力なマッチング機能を持った<em>URLルーティング。</em></li>
+                    <li>国際化(i18n)にも完全対応(準備中です&lt;&gt;)。</li>
                     <li>PHPSpecなどのテストツールとデフォルトで連動しているので、テストが楽しい！<em>積極的なリファクタリング</em>が可能です。</li>
                     <li>コードジェネレイターで開発速度が大幅にアップします。</li>
-                    <li>携帯サイト対応もフレームワークが正式サポート！</li>
-                    <li>充実したドキュメント＆サポート体制。オール日本語での対応が可能です（英語でももちろん可能です）。</li>
+                    <li>携帯サイト対応もフレームワークでサポート！</li>
+                    <li>充実したドキュメント＆サポート体制。オール日本語での対応が可能です（英語は頑張ります）。</li>
                 </ul>
                 <div class='clear'></div>
             </ul>

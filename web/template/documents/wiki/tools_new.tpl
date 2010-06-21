@@ -42,14 +42,7 @@
         </div>
     </div>
 
-    <div id='sidebar'>
-        {** WIKIメニュー **}
-        <div class='menu-wiki column'>
-            <h4>WIKIメニュー</h4>
-            <ul>
-                <li>{Html->a href="/documents/wiki/tools/edit?name=`$wiki->name_encoded`&locale=`$locale`" value='編集'}</li>
-            </ul>
-        </div>
-    </div>
+    {** サイドバー **}
+    {include file='documents/wiki/_sidebar.tpl'}
 
 {include file='_footer.tpl'}

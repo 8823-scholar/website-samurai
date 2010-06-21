@@ -5,6 +5,7 @@ Debug:
     ip:
         - 127.0.*
         - 192.168.0.*
+        - 203.152.205.7
     debugger:
         - Log
         - ExecutionTime

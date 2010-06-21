@@ -85,12 +85,16 @@ class Etc_Wickey_Converter_Attach extends Etc_Wickey_Converter
      */
     private function _convert2Img(Etc_Dom_Node $node)
     {
+        $a = $this->option->root->createElement('a');
         $img = $this->option->root->createElement('img');
         $img->single = true;
         $url = BASE_URI . '/documents/wiki/tools/attach/view?name=' . $this->Request->get('name');
         $url .= '&attach=' . bin2hex($node->getAttribute('name')) ;
+        $a->setAttribute('href', $url);
+        $a->setAttribute('target', '_blank');
         $img->setAttribute('src', $url);
         if($node->hasAttribute('width')) $img->setAttribute('width', $node->getAttribute('width'));
-        return $img;
+        $a->appendChild($img);
+        return $a;
     }
 }

@@ -139,7 +139,11 @@
     .wickey .section ul li
     {
         list-style-type : disc !important;
+        /*
         list-style-position : inside !important;
+        */
+        list-style-position : outside !important;
+        margin-left : 13px;
         margin-bottom : 3px !important;
     }
     .wickey .section ul ul li

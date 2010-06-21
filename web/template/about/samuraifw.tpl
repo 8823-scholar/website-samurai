@@ -25,8 +25,8 @@
                     <li><em>O/Rマッパー</em>「Active Gateway」付属</li>
                     <li><em>DIContainer</em>によるオブジェクトの依存性注入と初期化処理の自動化</li>
                     <li>コアクラスもコンポーネントの一つにすぎないという、徹底されたコンポーネント指向</li>
-                    <li>国際化(<em>i18n</em>)機能も充実(の予定)</li>
-                    <li>携帯への対応もデフォルトでサポート</li>
+                    <li>国際化(<em>i18n</em>)機能も充実(準備中)</li>
+                    <li>携帯への対応もサポート</li>
                     <li>コードジェネレータによる完全自動化されたコード生成</li>
                     <li>PHPSpecなどのテストツールとデフォルトで連動</li>
                 </ul>
@@ -48,11 +48,11 @@
         <div class='thank column'>
             <p>
                 Samurai Frameworkは、PHPフレームワークMapleを強くリスペクトしています。<br />
-                全体的な構造、DIContainerという要素または仕組み、ActiveGatewayという同名のO/Rマッパーなど、Mapleとの共通点は数えきれないほど存在しています。<br />
+                全体的な構造、DIContainerという要素または仕組み、ActiveGatewayという同名のO/Rマッパーなど、
+                Mapleとの共通点は数えきれないほど存在しています。<br />
                 これは、メインの開発者である木内智史之介(hayabusa)が元Mapleのコミッタであったという事実に由来しています。<br />
                 <br />
-                木内智史之介がMapleに出会わなければ、また、Mapleのコミッタとして開発に参加していなければ、Samurai Frameworkは誕生しなかったでしょう。<br />
-                <br />
+                木内智史之介がMapleに出会わなければ、また、Mapleのコミッタとして開発に参加していなければ、Samurai Frameworkは誕生しなかったと思います。<br />
                 Mapleへの心からの感謝の意と、尊敬の意をここに表します。<br />
             </p>
         </div>

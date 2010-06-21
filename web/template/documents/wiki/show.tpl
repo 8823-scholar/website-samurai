@@ -11,6 +11,10 @@
         <li class='delimiter'>&gt;</li>
         <li>{Html->a href="/documents/`$locale`/FrontPage" value='ドキュメント'}</li>
         <li class='delimiter'>&gt;</li>
+        {foreach from=$breads item='bread'}
+            <li>{Html->a href="/documents/`$locale`/`$bread.path`" value=$bread.title}</li>
+            <li class='delimiter'>&gt;</li>
+        {/foreach}
         <li class='selected'>{$wiki->title|escape:'html'}<li>
         <li class='clear'></li>
     </ul>

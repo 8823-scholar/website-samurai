@@ -11,7 +11,7 @@
  * 
  * @package    Etc
  * @subpackage Wickey
- * @copyright  2007-2009 Samurai Framework Project
+ * @copyright  2007-2010 Samurai Framework Project
  * @author     hayabusa <scholar@hayabusa-lab.jp>
  */
 class Etc_Wickey_Inliner
@@ -79,11 +79,16 @@ class Etc_Wickey_Inliner
     public function render($text, $option = NULL)
     {
         $this->_option = $option;
+
         //オートリンク
         if(!isset($option->in_a) || !$option->in_a){
-            $pattern = '/(\[\[(?:(.+)&gt;)?(.+?)(#.+?)?\]\]|(' . $this->_pattern_url . ')|(' . $this->_pattern_mail . '))/i';
+            $pattern = '/(\[\[(?:(.+)&gt;)?(.*?)(#.+?)?\]\]|(' . $this->_pattern_url . ')|(' . $this->_pattern_mail . '))/i';
             $text = preg_replace_callback($pattern, array($this, '_renderLinkCallback'), $text);
         }
+
+        //リファレンスなど
+        $pattern = '/(&amp;[a-z]+;)/';
+        $text = preg_replace_callback($pattern, array($this, '_renderReference'), $text);
 
         //太字・斜体
         $pattern = '/(\'\'\'(.+?)\'\'\'|\'\'(.+?)\'\')/';
@@ -124,7 +129,8 @@ class Etc_Wickey_Inliner
             || preg_match('/^' . $this->_pattern_url . '$/', $wikiname)){
             $href = $wikiname != '' ? $wikiname : $string;
             $alias = $alias != '' ? $alias : ( preg_match('/^' . $this->_pattern_url . '$/', $string) ? $string : $wikiname ) ;
-            return sprintf('<a href="%s" target="_blank">%s</a>', $href . $flagment, $alias != '' ? $alias : $string);
+            $target = strpos($href, BASE_URL) !== 0 ? ' target="_blank"' : '';
+            return sprintf('<a href="%s"%s>%s</a>', $href . $flagment, $target, $alias != '' ? $alias : $string);
         //メールアドレスの場合
         } elseif(preg_match('/^' . $this->_pattern_mail . '$/', $string)
             || preg_match('/^' . $this->_pattern_mail . '$/', $wikiname)){
@@ -135,6 +141,27 @@ class Etc_Wickey_Inliner
             if(isset($this->_option->base)) $href = $this->_option->base . $href;
             return sprintf('<a href="%s">%s</a>', $href . $flagment, $alias != '' ? $alias : $wikiname);
         }
+    }
+
+
+    /**
+     * リファレンスを解釈
+     *
+     * @access     private
+     * @param      array    $matches
+     * @return     string
+     */
+    private function _renderReference(array $matches)
+    {
+        $ref = str_replace('&amp;', '&', $matches[1]);
+        switch($ref){
+        case '&br;':
+            return '<br />';
+        case '&nbsp;':
+            return $ref;
+            break;
+        }
+        return $matches[1];
     }
 
 

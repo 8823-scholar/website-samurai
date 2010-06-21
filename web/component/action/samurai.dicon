@@ -3,32 +3,35 @@
  #/
 ## ActiveGateway
 AG:
-    class : 'ActiveGatewayManager::getActiveGateway'
-    args  : ['base']
+    class: 'ActiveGatewayManager::getActiveGateway'
+    args: ['base']
 
 
 ## Main
+UserManager:
+    class: Web_User_Manager
+
 ForumManager:
-    class : Web_Forum_Manager
+    class: Web_Forum_Manager
 
 PackageManager:
-    class : Web_Package_Manager
+    class: Web_Package_Manager
 
 WikiManager:
-    class : Web_Wiki_Manager
+    class: Web_Wiki_Manager
 FileScanner:
-    class : Etc_File_Scanner
+    class: Etc_File_Scanner
 
 HaikuManager:
-    class : Web_Haiku_Manager
+    class: Web_Haiku_Manager
 
 
 ## Other
 Wickey:
-    class : Etc_Wickey
+    class: Etc_Wickey
 
 Pager:
-    class : Etc_Helper_Pager_Activegateway
+    class: Etc_Helper_Pager_Activegateway
 
 Mail:
-    class : Etc_Mail
+    class: Etc_Mail

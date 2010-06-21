@@ -21,8 +21,10 @@ forum_topic:
     requirements : { forum_id : '^\d+$', topic_id : '^\d+$' }
 
 wiki:
-    url   : '/documents/:locale/:name'
-    param : { action : documents_wiki_show }
+    url: '/documents/:locale/:name'
+    param: { action : documents_wiki_show }
+    requirements: { locale: '^((?!wiki).)+$' }
+    matching: prefix
 
 package_releases:
     url   : '/package/:package_alias/releases'

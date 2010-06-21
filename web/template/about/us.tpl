@@ -30,7 +30,6 @@
                 <li>木内智史之介(hayabusa) <span class='mail'>&lt;{Html->mail to='scholar@hayabusa-lab.jp' value='scholar@hayabusa-lab.jp'}&gt;</span></li>
                 <li>if真下 <span class='mail'>&lt;{Html->mail to='hisayuki.mashimo@befool.co.jp' value='hisayuki.mashimo@befool.co.jp'}&gt;</span></li>
                 <li>海老壱 <span class='mail'>&lt;{Html->mail to='zato.ebi1@gmail.com' value='zato.ebi1@gmail.com'}&gt;</span></li>
-                <li>ザザミン <span class='mail'>&lt;{Html->mail to='zazamin@zazamin.jp' value='zazamin@zazamin.jp'}&gt;</span></li>
             </ul>
             <p>
                 私たちは、常に新しい仲間を募集しています。<br />

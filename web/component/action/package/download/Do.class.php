@@ -34,6 +34,7 @@ class Action_Package_Download_Do extends Web_Action_Package
             case 'zip':
                 $this->Response->setHeader('content-type', 'application/zip');
                 break;
+            case 'gz':
             case 'tgz':
                 $this->Response->setHeader('content-type', 'application/x-compressed');
                 break;
@@ -48,3 +49,4 @@ class Action_Package_Download_Do extends Web_Action_Package
         }
     }
 }
+

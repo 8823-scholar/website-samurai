@@ -204,17 +204,38 @@
     }
     #samurai #contents.documents.wiki #sidebar .menu-contents.column ul ul li a
     {
-        padding-left : 20px;
-        background: url('../../../image/action/documents/wiki/sidebar.tag.li.png') 12px 7px no-repeat;
+        padding-left : 23px;
+        background: url('../../../image/action/documents/wiki/sidebar.tag.li.png') 14px 7px no-repeat;
     }
     #samurai #contents.documents.wiki #sidebar .menu-contents.column ul ul ul li a
     {
-        padding-left : 29px;
-        background: url('../../../image/action/documents/wiki/sidebar.tag.li.png') 21px 7px no-repeat;
+        padding-left : 32px;
+        background: url('../../../image/action/documents/wiki/sidebar.tag.li.png') 24px 7px no-repeat;
     }
     #samurai #contents.documents.wiki #sidebar .menu-contents.column ul li a:hover,
     #samurai #contents.documents.wiki #sidebar .menu-contents.column ul li.selected a
     {
         background-color : #DDDDDD;
+    }
+
+    /** 最近編集されたページなど **/
+    #samurai #contents.documents.wiki #sidebar .menu-wiki.column ul li.name
+    {
+        padding: 3px;
+        text-align: right;
+        border-bottom: none;
+    }
+    #samurai #contents.documents.wiki #sidebar .menu-wiki.column ul li.date
+    {
+        padding: 0px 3px 3px;
+        text-align: right;
+        font-size: 10px;
+        border-top: none;
+        color: #666666;
+    }
+    #samurai #contents.documents.wiki #sidebar .near-edits.column ul li.date
+    {
+        padding: 3px;
+        font-weight: bolder;
     }
 

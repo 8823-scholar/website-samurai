@@ -2,5 +2,7 @@
  # documents - wiki - show.yml
  #/
 View:
-    success : 'documents/wiki/show.tpl'
-    newpage : 'documents/wiki/tools_new.tpl'
+    success: 'documents/wiki/show.tpl'
+    alias: 'Location: /documents/<locale>/<path>'
+    newpage: 'documents/wiki/tools_new.tpl'
+
