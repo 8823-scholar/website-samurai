@@ -10,6 +10,8 @@
 class Action_Db_Activegateway_List extends Samurai_Action
 {
     public
+        $pear_db;
+    public
         $footstamps = array();
 
 

@@ -1,0 +1,11 @@
+#
+# *.dicon
+#
+
+pear_db:
+    class: 'DB::connect'
+    args: ['mysql://satoshi.kiuchi:htw4iPpXg6Ps@192.168.200.1/samurai']
+Mail:
+    class: Etc_Mail
+    instance: prototype
+
