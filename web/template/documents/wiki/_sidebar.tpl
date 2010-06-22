@@ -24,11 +24,11 @@
                 <li>{Html->a href="/documents/wiki/tools/history?name=`$wiki->name_encoded`&locale=`$locale`" value='変更履歴'}</li>
                 {if $wiki->creator}
                     <li class='name'>作成者 : {$wiki->creator->name|escape}</li>
-                    <li class='name date'>{$wiki->created_at|date_format:'%Y年%m月%d日 %H:%I:%S'}</li>
+                    <li class='name date'>{$wiki->created_at|date_format:'%Y年%m月%d日 %H:%M:%S'}</li>
                 {/if}
                 {if $wiki->updater}
                     <li class='name'>最終更新者 : {$wiki->updater->name|escape}</li>
-                    <li class='name date'>{$wiki->updated_at|date_format:'%Y年%m月%d日 %H:%I:%S'}</li>
+                    <li class='name date'>{$wiki->updated_at|date_format:'%Y年%m月%d日 %H:%M:%S'}</li>
                 {/if}
             </ul>
         </div>

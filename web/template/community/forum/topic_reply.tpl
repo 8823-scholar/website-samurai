@@ -50,7 +50,7 @@
                             <span class='mail'>{Html->mail to=$article->mail value=$article->mail}</span><br />
                         {/if}
                         <br />
-                        <span class='date'>投稿日時：{$article->created_at|date_format:'%Y年%m月%d日 %H:%I'}</span><br />
+                        <span class='date'>投稿日時：{$article->created_at|date_format:'%Y年%m月%d日 %H:%M'}</span><br />
                     </td>
                     <td class='contents'>
                         <div class='subject'>

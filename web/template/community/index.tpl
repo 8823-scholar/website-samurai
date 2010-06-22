@@ -60,7 +60,7 @@
                                         {Html->a href="/community/forum/`$forum.id`/topic/`$forum.last_article.id`" value=$forum.last_article.subject}
                                     {/if}
                                 </span><br />
-                                <span class='date'>投稿日：{$forum.last_posted_at|date_format:'%Y年%m月%d日 %H:%I'}</span><br />
+                                <span class='date'>投稿日：{$forum.last_posted_at|date_format:'%Y年%m月%d日 %H:%M'}</span><br />
                             {/if}
                         </td>
                     </tr>

@@ -32,7 +32,7 @@
                         {$release->version}-{$release->stability}
                     </td>
                     <td class='datetime' colspan='2'>
-                        {$release->datetime|date_format:'%Y年%m月%d日 %H:%I'}
+                        {$release->datetime|date_format:'%Y年%m月%d日 %H:%M'}
                     </td>
                 </tr>
                 {foreach from=$files item='file'}

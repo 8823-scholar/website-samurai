@@ -53,7 +53,7 @@
                                 {else}
                                     by {$topic.name|escape:'html'}
                                 {/if}
-                                ({$topic.created_at|date_format:'%Y年%m月%d日 %H:%I'})
+                                ({$topic.created_at|date_format:'%Y年%m月%d日 %H:%M'})
                             </div>
                         </td>
                         <td class='articles'>
@@ -66,7 +66,7 @@
                                 <span class='subject'>
                                     {Html->a href="/community/forum/`$topic.forum_id`/topic/`$topic.id`?page=`$topic.last_article.page`#article:`$topic.last_article.id`" value=$topic.last_article.subject}
                                 </span><br />
-                                <span class='date'>{$topic.last_replied_at|date_format:'%Y年%m月%d日 %H:%I'}</span>
+                                <span class='date'>{$topic.last_replied_at|date_format:'%Y年%m月%d日 %H:%M'}</span>
                             {/if}
                         </td>
                     </tr>

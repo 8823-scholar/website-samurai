@@ -43,7 +43,7 @@
                 <tr class='{$_class}'>
                     <td class='info'>
                         <span class='user'>by {$comment.name|escape:'html'}</span>
-                        ,<span class='date'>at {$comment.created_at|date_format:'%Y年%m月%d日 %H:%I'}</span></td>
+                        ,<span class='date'>at {$comment.created_at|date_format:'%Y年%m月%d日 %H:%M'}</span></td>
                 </tr>
             {foreachelse}
                 <tr>

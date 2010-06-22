@@ -32,7 +32,7 @@
                             {$package.stable.version}-{$package.stable.stability}
                         </td>
                         <td class='datetime' colspan='2'>
-                            {$package.stable.datetime|date_format:'%Y年%m月%d日 %H:%I'}
+                            {$package.stable.datetime|date_format:'%Y年%m月%d日 %H:%M'}
                         </td>
                     </tr>
                     {foreach from=$package.stable.files item='file'}
@@ -54,7 +54,7 @@
                             {$package.unstable.version}-{$package.unstable.stability}
                         </td>
                         <td class='datetime' colspan='2'>
-                            {$package.unstable.datetime|date_format:'%Y年%m月%d日 %H:%I'}
+                            {$package.unstable.datetime|date_format:'%Y年%m月%d日 %H:%M'}
                         </td>
                     </tr>
                     {foreach from=$package.unstable.files item='file'}

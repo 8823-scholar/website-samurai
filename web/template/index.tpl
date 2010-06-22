@@ -71,7 +71,7 @@
             <ul>
             {foreach from=$articles item='article'}
                 <li>
-                    <span class='date'>{$article.created_at|date_format:'%Y.%m.%d %H:%I'}</span><br />
+                    <span class='date'>{$article.created_at|date_format:'%Y.%m.%d %H:%M'}</span><br />
                     {if !$article.root_id}
                         <span class='subject'>{Html->a href="/community/forum/`$article.forum_id`/topic/`$article.id`" value=$article.subject|truncate:64}</span>
                     {else} 

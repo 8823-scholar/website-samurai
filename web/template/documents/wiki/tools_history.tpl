@@ -27,7 +27,7 @@
                 <ul class='histories'>
                     {foreach from=$histories item='history'}
                     {assign var='_name_encoded' value=$history.name|urlencode}
-                    {assign var='_date' value=$history.created_at|date_format:'%Y年%m月%d日 %H:%I:%S'}
+                    {assign var='_date' value=$history.created_at|date_format:'%Y年%m月%d日 %H:%M:%S'}
                     <li>
                         {Html->a href="/documents/wiki/tools/history?name=`$_name_encoded`&locale=`$history.locale`&do=view&rev=`$history.revision`"
                             value="`$history.revision` (`$_date`)"}
