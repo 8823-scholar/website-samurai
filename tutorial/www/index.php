@@ -11,11 +11,14 @@ require_once 'Samurai/Samurai.class.php';
 
 //SamuraiFWの起動
 define('SAMURAI_APPLICATION_NAME', 'tutorial');
-if(!preg_match('/samurai-fw\.org$/', $_SERVER['HTTP_HOST'])){
-    define('SAMURAI_ENVIRONMENT', 'local');
-    Samurai::unshiftSamuraiDir('D:\satoshi_kiuchi\ProgramFiles\php\PEAR\Samurai.BEFOOL');
-} else {
-    Samurai::unshiftSamuraiDir('/usr/share/pear/Samurai.BEFOOL');
+if(!getenv('SAMURAI_ENVIRONMENT')){
+    switch($_SERVER['HTTP_HOST']){
+    case 'samurai-fw.org':
+        break;
+    default:
+        define('SAMURAI_ENVIRONMENT', 'local');
+        break;
+    }
 }
 Samurai::unshiftSamuraiDir(dirname(dirname(__FILE__)));
 Samurai::init();
