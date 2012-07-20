@@ -1,0 +1,884 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.1//EN' 'http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'> 
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='ja' dir='ltr'>
+<head>
+<meta http-equiv='content-type' content='text/html; charset=UTF-8' />
+<title>phpDocumentor Parser Errors and Warnings | Samurai Framework</title>
+<link rel="stylesheet" type="text/css" href="media/style.css">
+<link rel='stylesheet' type='text/css' href='/css/base.css'>
+<link rel='stylesheet' type='text/css' href='/css/common.css'>
+<link rel='stylesheet' type='text/css' href='/css/layout/phpdoc.css'>
+<script type='text/javascript' src='/js/jquery/jquery-1.3.2.js'></script>
+<script type='text/javascript' src='/js/samurai.js'></script>
+<script type='text/javascript' src='/js/samurai/haiku.js'></script>
+</head>
+<body>
+    <div id='samurai'>
+        <div id='header'>
+            <ul class='menu left'>
+                <li><a href='/' class='with-icon samurai'>SamuraiFW</a></li>
+                <li><a href='/about/samuraifw'>概要</a></li>
+                <li><a href='/package/releases'>ダウンロード</a></li>
+                <li><a href='/source/api/2.0/'>API</a></li>
+                <li><a href='/documents/ja/FrontPage'>ドキュメント</a></li>
+                <li><a href='/development/'>開発</a></li>
+                <li><a href='/community/index'>コミュニティ</a></li>
+            </ul>
+            <ul class='menu right'>
+                <li><a href='/etc/donate'>寄付</a></li>
+            </ul>
+            <div class='clear'></div>
+        </div>
+
+        <div id='contents' class='source spi'>
+            <div class='top haiku'>
+                <script type='text/javascript'>
+                    var Haiku = new Samurai.Haiku();
+                    Haiku.append2Header();
+                </script>
+                <span class='phrase' id='haiku-phrase'>&nbsp;</span>
+                <span class='composed_by' id='haiku-composed_by'>&nbsp;</span>
+                <div class='clear'></div>
+            </div>
+
+            <div class='middle'>
+                <h1>API</h1>
+
+                <ul class='breads'>
+                    <li><a href='/'>ホーム</a></li>
+                    <li class='delimiter'>&gt;</li>
+                    <li>API<li>
+                    <li class='delimiter'>&gt;</li>
+                    <li><a href='/source/api/2.0/'>2.0</a><li>
+                                            <li class='delimiter'>&gt;</li>
+                        <li class='selected'>default</li>
+                                        <li class='clear'></li>
+                </ul>
+
+                <div id='main'>
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%" class='top'>
+  <tr>
+    <td class="header_menu">
+        
+                                    
+                                                                                          		  [ <a href="classtrees_default.html" class="menu">class tree: default</a> ]
+		  [ <a href="elementindex_default.html" class="menu">index: default</a> ]
+		  	    [ <a href="elementindex.html" class="menu">all elements</a> ]
+    </td>
+  </tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class='main'>
+  <tr valign="top">
+    <td width="200" class="menu">
+	<div id="ric">
+					<p><a href="ric_README.html">README</a></p>
+					<p><a href="ric_INSTALL.html">INSTALL</a></p>
+					<p><a href="ric_CHANGELOG.html">CHANGELOG</a></p>
+			</div>
+      <b>Packages:</b><br />
+              <a href="li_default.html">default</a><br />
+              <a href="li_ActiveGateway.html">ActiveGateway</a><br />
+              <a href="li_Samurai.html">Samurai</a><br />
+              <a href="li_Spyc.html">Spyc</a><br />
+            <br /><br />
+                </td>
+    <td class='content'>
+      <table cellpadding="10" cellspacing="0" width="100%" border="0"><tr><td valign="top">
+
+<a href="#Post-parsing">Post-parsing</a><br>
+<a href="#action.skeleton.php">action.skeleton.php</a><br>
+<a href="#action_usage.php">action_usage.php</a><br>
+<a href="#ActiveGateway.class.php">ActiveGateway.class.php</a><br>
+<a href="#ActiveGatewayManager.class.php">ActiveGatewayManager.class.php</a><br>
+<a href="#ActiveGatewayRecords.class.php">ActiveGatewayRecords.class.php</a><br>
+<a href="#ag.skeleton.php">ag.skeleton.php</a><br>
+<a href="#Alnum.class.php">Alnum.class.php</a><br>
+<a href="#Array.class.php">Array.class.php</a><br>
+<a href="#Auth.class.php">Auth.class.php</a><br>
+<a href="#Basic.class.php">Basic.class.php</a><br>
+<a href="#Cli.class.php">Cli.class.php</a><br>
+<a href="#cli.simple.skeleton.php">cli.simple.skeleton.php</a><br>
+<a href="#cli.smarty.skeleton.php">cli.smarty.skeleton.php</a><br>
+<a href="#Client.class.php">Client.class.php</a><br>
+<a href="#command.php">command.php</a><br>
+<a href="#Compare.class.php">Compare.class.php</a><br>
+<a href="#Component.class.php">Component.class.php</a><br>
+<a href="#component.skeleton.php">component.skeleton.php</a><br>
+<a href="#component_usage.php">component_usage.php</a><br>
+<a href="#Container.class.php">Container.class.php</a><br>
+<a href="#Convert.class.php">Convert.class.php</a><br>
+<a href="#Cookie.class.php">Cookie.class.php</a><br>
+<a href="#css.skeleton.php">css.skeleton.php</a><br>
+<a href="#Date.class.php">Date.class.php</a><br>
+<a href="#Db.class.php">Db.class.php</a><br>
+<a href="#dBug.php">dBug.php</a><br>
+<a href="#db_usage.php">db_usage.php</a><br>
+<a href="#Debug.class.php">Debug.class.php</a><br>
+<a href="#Device.class.php">Device.class.php</a><br>
+<a href="#DeviceChanger.class.php">DeviceChanger.class.php</a><br>
+<a href="#dicon.skeleton.php">dicon.skeleton.php</a><br>
+<a href="#DIContainer.class.php">DIContainer.class.php</a><br>
+<a href="#dot.samurai.skeleton.php">dot.samurai.skeleton.php</a><br>
+<a href="#Either.class.php">Either.class.php</a><br>
+<a href="#ExecutionTime.class.php">ExecutionTime.class.php</a><br>
+<a href="#Filter.class.php">Filter.class.php</a><br>
+<a href="#filter.skeleton.php">filter.skeleton.php</a><br>
+<a href="#filter_usage.php">filter_usage.php</a><br>
+<a href="#Future.class.php">Future.class.php</a><br>
+<a href="#Gd.class.php">Gd.class.php</a><br>
+<a href="#generator.php">generator.php</a><br>
+<a href="#htaccess.skeleton.php">htaccess.skeleton.php</a><br>
+<a href="#Http.class.php">Http.class.php</a><br>
+<a href="#Https.class.php">Https.class.php</a><br>
+<a href="#index.php">index.php</a><br>
+<a href="#index.skeleton.php">index.skeleton.php</a><br>
+<a href="#info.php">info.php</a><br>
+<a href="#info.skeleton.php">info.skeleton.php</a><br>
+<a href="#initialization.skeleton.php">initialization.skeleton.php</a><br>
+<a href="#input.php">input.php</a><br>
+<a href="#Ip.class.php">Ip.class.php</a><br>
+<a href="#Kana.class.php">Kana.class.php</a><br>
+<a href="#Log.class.php">Log.class.php</a><br>
+<a href="#Logout.class.php">Logout.class.php</a><br>
+<a href="#Mail.class.php">Mail.class.php</a><br>
+<a href="#MailMobile.class.php">MailMobile.class.php</a><br>
+<a href="#Match.class.php">Match.class.php</a><br>
+<a href="#Maxcount.class.php">Maxcount.class.php</a><br>
+<a href="#Maxlength.class.php">Maxlength.class.php</a><br>
+<a href="#Minlength.class.php">Minlength.class.php</a><br>
+<a href="#Mobile.class.php">Mobile.class.php</a><br>
+<a href="#Mysql.class.php">Mysql.class.php</a><br>
+<a href="#Native.class.php">Native.class.php</a><br>
+<a href="#Numeric.class.php">Numeric.class.php</a><br>
+<a href="#Package.class.php">Package.class.php</a><br>
+<a href="#package_usage.php">package_usage.php</a><br>
+<a href="#Part.class.php">Part.class.php</a><br>
+<a href="#Past.class.php">Past.class.php</a><br>
+<a href="#PhpErrorHandler.class.php">PhpErrorHandler.class.php</a><br>
+<a href="#Phptal.class.php">Phptal.class.php</a><br>
+<a href="#phptal.php">phptal.php</a><br>
+<a href="#production.php">production.php</a><br>
+<a href="#Project.class.php">Project.class.php</a><br>
+<a href="#project_aborted.php">project_aborted.php</a><br>
+<a href="#project_usage.php">project_usage.php</a><br>
+<a href="#Range.class.php">Range.class.php</a><br>
+<a href="#Renderer.class.php">Renderer.class.php</a><br>
+<a href="#renderer.phptal.skeleton.php">renderer.phptal.skeleton.php</a><br>
+<a href="#renderer.simple.skeleton.php">renderer.simple.skeleton.php</a><br>
+<a href="#renderer.smarty.skeleton.php">renderer.smarty.skeleton.php</a><br>
+<a href="#Request.class.php">Request.class.php</a><br>
+<a href="#Required.class.php">Required.class.php</a><br>
+<a href="#Routing.class.php">Routing.class.php</a><br>
+<a href="#routing.skeleton.php">routing.skeleton.php</a><br>
+<a href="#Samurai.class.php">Samurai.class.php</a><br>
+<a href="#samurai.dicon.skeleton.php">samurai.dicon.skeleton.php</a><br>
+<a href="#samurai.frontfilter.skeleton.php">samurai.frontfilter.skeleton.php</a><br>
+<a href="#samurai.yaml.skeleton.php">samurai.yaml.skeleton.php</a><br>
+<a href="#Sendmail.class.php">Sendmail.class.php</a><br>
+<a href="#Session.class.php">Session.class.php</a><br>
+<a href="#Simple.class.php">Simple.class.php</a><br>
+<a href="#simple.php">simple.php</a><br>
+<a href="#SimpleDisplay.class.php">SimpleDisplay.class.php</a><br>
+<a href="#SimpleFile.class.php">SimpleFile.class.php</a><br>
+<a href="#Smarty.class.php">Smarty.class.php</a><br>
+<a href="#smarty.php">smarty.php</a><br>
+<a href="#Spec.class.php">Spec.class.php</a><br>
+<a href="#spyc.php">spyc.php</a><br>
+<a href="#Sqlite2.class.php">Sqlite2.class.php</a><br>
+<a href="#Strim.class.php">Strim.class.php</a><br>
+<a href="#Template.class.php">Template.class.php</a><br>
+<a href="#template_usage.php">template_usage.php</a><br>
+<a href="#Through.class.php">Through.class.php</a><br>
+<a href="#ToArray.class.php">ToArray.class.php</a><br>
+<a href="#ToDate.class.php">ToDate.class.php</a><br>
+<a href="#ToFull.class.php">ToFull.class.php</a><br>
+<a href="#ToHalf.class.php">ToHalf.class.php</a><br>
+<a href="#ToInteger.class.php">ToInteger.class.php</a><br>
+<a href="#ToKana.class.php">ToKana.class.php</a><br>
+<a href="#Token.class.php">Token.class.php</a><br>
+<a href="#ToObject.class.php">ToObject.class.php</a><br>
+<a href="#ToString.class.php">ToString.class.php</a><br>
+<a href="#Upload.class.php">Upload.class.php</a><br>
+<a href="#Url.class.php">Url.class.php</a><br>
+<a href="#usage.php">usage.php</a><br>
+<a href="#Validate.class.php">Validate.class.php</a><br>
+<a href="#version.php">version.php</a><br>
+<a href="#ViewJson.class.php">ViewJson.class.php</a><br>
+<a href="#ViewSimple.class.php">ViewSimple.class.php</a><br>
+<a href="#web.phptal.skeleton.php">web.phptal.skeleton.php</a><br>
+<a href="#web.simple.skeleton.php">web.simple.skeleton.php</a><br>
+<a href="#web.smarty.skeleton.php">web.smarty.skeleton.php</a><br>
+<a href="#Whitelist.class.php">Whitelist.class.php</a><br>
+<a href="#yaml.skeleton.php">yaml.skeleton.php</a><br>
+<a href="#_doc_comment.skeleton.php">_doc_comment.skeleton.php</a><br>
+<a name="Post-parsing"></a>
+<h1>Post-parsing</h1>
+<h2>Warnings:</h2><br>
+<b>Warning</b> - Class Samurai_Renderer_Engine_Phptal parent PHPTAL not found<br>
+<b>Warning</b> - Class Samurai_Renderer_Engine_Smarty parent Smarty not found<br>
+<b>Warning</b> - 
+duplicate define element "SAMURAI_APPLICATION_NAME" in file /home/samurai-fw/repositries/samurai/tags/2.0.7beta/www/info.php will be ignored.
+Use an @ignore tag on the original if you want this case to be documented.<br>
+<b>Warning</b> - 
+duplicate define element "SAMURAI_APPLICATION_NAME" in file /home/samurai-fw/repositries/samurai/tags/2.0.7beta/generator/generator.php will be ignored.
+Use an @ignore tag on the original if you want this case to be documented.<br>
+<a name="Action.class.php"></a>
+<h1>Action.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 67</b> - Unknown tag "@override" used<br>
+<b>Warning on line 117</b> - Unknown tag "@implements" used<br>
+<a name="action.skeleton.php"></a>
+<h1>action.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 20</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/action.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="action_usage.php"></a>
+<h1>action_usage.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 20</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/generator/template/add/action_usage.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="ActiveGateway.class.php"></a>
+<h1>ActiveGateway.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 52</b> - Unknown tag "@override" used<br>
+<b>Warning on line 53</b> - Unknown tag "@override" used<br>
+<b>Warning on line 79</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 86</b> - Unknown tag "@override" used<br>
+<b>Warning on line 97</b> - Unknown tag "@override" used<br>
+<b>Warning on line 107</b> - Unknown tag "@const" used<br>
+<b>Warning on line 114</b> - Unknown tag "@const" used<br>
+<b>Warning on line 121</b> - Unknown tag "@const" used<br>
+<b>Warning on line 128</b> - Unknown tag "@const" used<br>
+<a name="ActiveGatewayManager.class.php"></a>
+<h1>ActiveGatewayManager.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 36</b> - Page-level DocBlock precedes "require_once dirname(__FILE__).'/ActiveGateway.class.php'", use another DocBlock to document the source element<br>
+<a name="ActiveGatewayRecords.class.php"></a>
+<h1>ActiveGatewayRecords.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 258</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 267</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 275</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 283</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 292</b> - Unknown tag "@implements" used<br>
+<a name="ag.skeleton.php"></a>
+<h1>ag.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 18</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/config/ag.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="Alnum.class.php"></a>
+<h1>Alnum.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@implements" used<br>
+<a name="Array.class.php"></a>
+<h1>Array.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@implements" used<br>
+<a name="Auth.class.php"></a>
+<h1>Auth.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 75</b> - Unknown tag "@override" used<br>
+<a name="Basic.class.php"></a>
+<h1>Basic.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 59</b> - Unknown tag "@implements" used<br>
+<a name="Cli.class.php"></a>
+<h1>Cli.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 75</b> - Unknown tag "@override" used<br>
+<b>Warning on line 85</b> - Unknown tag "@override" used<br>
+<b>Warning on line 88</b> - Unknown tag "@override" used<br>
+<b>Warning on line 95</b> - Unknown tag "@override" used<br>
+<b>Warning on line 99</b> - Unknown tag "@override" used<br>
+<a name="cli.simple.skeleton.php"></a>
+<h1>cli.simple.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/template/cli.simple.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="cli.smarty.skeleton.php"></a>
+<h1>cli.smarty.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 5</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/template/cli.smarty.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="Client.class.php"></a>
+<h1>Client.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 76</b> - Unknown tag "@const" used<br>
+<b>Warning on line 84</b> - Unknown tag "@const" used<br>
+<b>Warning on line 92</b> - Unknown tag "@const" used<br>
+<b>Warning on line 100</b> - Unknown tag "@const" used<br>
+<b>Warning on line 108</b> - Unknown tag "@const" used<br>
+<a name="command.php"></a>
+<h1>command.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 10</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/generator/template/error/command.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="Compare.class.php"></a>
+<h1>Compare.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@implements" used<br>
+<a name="Component.class.php"></a>
+<h1>Component.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 60</b> - Unknown tag "@implements" used<br>
+<a name="component.skeleton.php"></a>
+<h1>component.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 18</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/component.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="component_usage.php"></a>
+<h1>component_usage.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 22</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/generator/template/add/component_usage.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="Container.class.php"></a>
+<h1>Container.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 253</b> - Unknown tag "@import:" used<br>
+<h2>Errors:</h2><br>
+<b>Error on line 253</b> - Unclosed code tag in DocBlock, parsing will be incorrect<br>
+<a name="Convert.class.php"></a>
+<h1>Convert.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 85</b> - Unknown tag "@override" used<br>
+<a name="Cookie.class.php"></a>
+<h1>Cookie.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 70</b> - Unknown tag "@override" used<br>
+<a name="css.skeleton.php"></a>
+<h1>css.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 46</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/www/css.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="Date.class.php"></a>
+<h1>Date.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@implements" used<br>
+<a name="Db.class.php"></a>
+<h1>Db.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 116</b> - Unknown tag "@implements" used<br>
+<a name="dBug.php"></a>
+<h1>dBug.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 132</b> - no @package tag was used in a DocBlock for class dBug<br>
+<b>Warning on line 428</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/library/dBug/dBug.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="db_usage.php"></a>
+<h1>db_usage.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 15</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/generator/template/migrate/db_usage.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="Debug.class.php"></a>
+<h1>Debug.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 135</b> - Unknown tag "@override" used<br>
+<b>Warning on line 218</b> - Unknown tag "@override" used<br>
+<a name="Device.class.php"></a>
+<h1>Device.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 52</b> - Unknown tag "@override" used<br>
+<b>Warning on line 59</b> - Unknown tag "@override" used<br>
+<b>Warning on line 67</b> - Unknown tag "@override" used<br>
+<b>Warning on line 79</b> - Unknown tag "@implements" used<br>
+<a name="DeviceChanger.class.php"></a>
+<h1>DeviceChanger.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 52</b> - Unknown tag "@override" used<br>
+<b>Warning on line 77</b> - Unknown tag "@override" used<br>
+<b>Warning on line 112</b> - Unknown tag "@implements" used<br>
+<a name="dicon.skeleton.php"></a>
+<h1>dicon.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 2</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/action/dicon.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="DIContainer.class.php"></a>
+<h1>DIContainer.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 86</b> - Unknown tag "@override" used<br>
+<a name="dot.samurai.skeleton.php"></a>
+<h1>dot.samurai.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 31</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/dot.samurai.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="Either.class.php"></a>
+<h1>Either.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@implements" used<br>
+<a name="ExecutionTime.class.php"></a>
+<h1>ExecutionTime.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 52</b> - Unknown tag "@override" used<br>
+<b>Warning on line 79</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 94</b> - Unknown tag "@override" used<br>
+<b>Warning on line 99</b> - Unknown tag "@override" used<br>
+<b>Warning on line 109</b> - Unknown tag "@override" used<br>
+<a name="Filter.class.php"></a>
+<h1>Filter.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 59</b> - Unknown tag "@override" used<br>
+<a name="filter.skeleton.php"></a>
+<h1>filter.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 37</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/filter.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="filter_usage.php"></a>
+<h1>filter_usage.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 22</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/generator/template/add/filter_usage.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="Future.class.php"></a>
+<h1>Future.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 64</b> - Unknown tag "@implements" used<br>
+<a name="Gd.class.php"></a>
+<h1>Gd.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@implements" used<br>
+<a name="htaccess.skeleton.php"></a>
+<h1>htaccess.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 20</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/www/htaccess.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="Http.class.php"></a>
+<h1>Http.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 112</b> - Unknown tag "@const" used<br>
+<b>Warning on line 217</b> - Unknown tag "@override" used<br>
+<a name="Https.class.php"></a>
+<h1>Https.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 74</b> - Unknown tag "@override" used<br>
+<a name="index.php"></a>
+<h1>index.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 36</b> - Page-level DocBlock precedes "require_once 'Samurai/Samurai.class.php'", use another DocBlock to document the source element<br>
+<h2>Errors:</h2><br>
+<b>Error on line 48</b> - SAMURAI_APPLICATION_NAME define's DocBlock has @package tag, illegal. ignoring tag "@package Samurai"<br>
+<a name="index.skeleton.php"></a>
+<h1>index.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 16</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/www/index.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="info.php"></a>
+<h1>info.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 36</b> - Page-level DocBlock precedes "require_once 'Samurai/Samurai.class.php'", use another DocBlock to document the source element<br>
+<h2>Errors:</h2><br>
+<b>Error on line 47</b> - SAMURAI_APPLICATION_NAME define's DocBlock has @package tag, illegal. ignoring tag "@package Samurai"<br>
+<a name="info.skeleton.php"></a>
+<h1>info.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/www/info.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="initialization.skeleton.php"></a>
+<h1>initialization.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 19</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/spec/initialization.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="input.php"></a>
+<h1>input.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 15</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/generator/template/error/input.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="Ip.class.php"></a>
+<h1>Ip.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@implements" used<br>
+<a name="Kana.class.php"></a>
+<h1>Kana.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@implements" used<br>
+<a name="Log.class.php"></a>
+<h1>Log.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 52</b> - Unknown tag "@override" used<br>
+<b>Warning on line 79</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 103</b> - Unknown tag "@override" used<br>
+<a name="Logout.class.php"></a>
+<h1>Logout.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 71</b> - Unknown tag "@implements" used<br>
+<a name="Mail.class.php"></a>
+<h1>Mail.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 59</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 77</b> - Unknown tag "@override" used<br>
+<b>Warning on line 97</b> - Unknown tag "@implements" used<br>
+<a name="MailMobile.class.php"></a>
+<h1>MailMobile.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 52</b> - Unknown tag "@implements" used<br>
+<a name="Match.class.php"></a>
+<h1>Match.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@implements" used<br>
+<a name="Maxcount.class.php"></a>
+<h1>Maxcount.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 67</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 77</b> - Unknown tag "@override" used<br>
+<a name="Maxlength.class.php"></a>
+<h1>Maxlength.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 67</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 78</b> - Unknown tag "@override" used<br>
+<a name="Minlength.class.php"></a>
+<h1>Minlength.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 61</b> - Unknown tag "@override" used<br>
+<a name="Mobile.class.php"></a>
+<h1>Mobile.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 68</b> - Unknown tag "@override" used<br>
+<b>Warning on line 70</b> - Unknown tag "@override" used<br>
+<b>Warning on line 73</b> - Unknown tag "@override" used<br>
+<a name="Mysql.class.php"></a>
+<h1>Mysql.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@override" used<br>
+<b>Warning on line 70</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 83</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 102</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 112</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 122</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 133</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 144</b> - Unknown tag "@override" used<br>
+<b>Warning on line 152</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 163</b> - Unknown tag "@implements" used<br>
+<a name="Native.class.php"></a>
+<h1>Native.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 75</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 75</b> - Unknown tag "@override" used<br>
+<a name="Numeric.class.php"></a>
+<h1>Numeric.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@implements" used<br>
+<a name="Package.class.php"></a>
+<h1>Package.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 36</b> - Page-level DocBlock precedes "require_once 'PEAR.php'", use another DocBlock to document the source element<br>
+<a name="package_usage.php"></a>
+<h1>package_usage.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 13</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/generator/template/make/package_usage.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="Part.class.php"></a>
+<h1>Part.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 134</b> - Unknown tag "@const" used<br>
+<a name="Past.class.php"></a>
+<h1>Past.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 64</b> - Unknown tag "@implements" used<br>
+<a name="PhpErrorHandler.class.php"></a>
+<h1>PhpErrorHandler.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 55</b> - Unknown tag "@const" used<br>
+<b>Warning on line 63</b> - Unknown tag "@const" used<br>
+<b>Warning on line 71</b> - Unknown tag "@const" used<br>
+<b>Warning on line 79</b> - Unknown tag "@const" used<br>
+<b>Warning on line 87</b> - Unknown tag "@const" used<br>
+<b>Warning on line 95</b> - Unknown tag "@const" used<br>
+<b>Warning on line 103</b> - Unknown tag "@const" used<br>
+<b>Warning on line 111</b> - Unknown tag "@const" used<br>
+<b>Warning on line 119</b> - Unknown tag "@const" used<br>
+<b>Warning on line 127</b> - Unknown tag "@const" used<br>
+<b>Warning on line 135</b> - Unknown tag "@const" used<br>
+<b>Warning on line 143</b> - Unknown tag "@const" used<br>
+<b>Warning on line 151</b> - Unknown tag "@const" used<br>
+<b>Warning on line 218</b> - Unknown tag "@override" used<br>
+<b>Warning on line 239</b> - Unknown tag "@implements" used<br>
+<a name="Phptal.class.php"></a>
+<h1>Phptal.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 36</b> - Page-level DocBlock precedes "require_once 'PHPTAL.php'", use another DocBlock to document the source element<br>
+<b>Warning on line 64</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 74</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 85</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 94</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 103</b> - Unknown tag "@implements" used<br>
+<a name="Project.class.php"></a>
+<h1>Project.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 230</b> - Unknown tag "@implements" used<br>
+<a name="project_aborted.php"></a>
+<h1>project_aborted.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/generator/template/add/project_aborted.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="project_usage.php"></a>
+<h1>project_usage.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 21</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/generator/template/add/project_usage.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="Range.class.php"></a>
+<h1>Range.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@implements" used<br>
+<a name="Renderer.class.php"></a>
+<h1>Renderer.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 52</b> - Unknown tag "@override" used<br>
+<b>Warning on line 79</b> - Unknown tag "@implements" used<br>
+<a name="renderer.phptal.skeleton.php"></a>
+<h1>renderer.phptal.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 9</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/config/renderer.phptal.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="renderer.simple.skeleton.php"></a>
+<h1>renderer.simple.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 9</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/config/renderer.simple.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="renderer.smarty.skeleton.php"></a>
+<h1>renderer.smarty.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 23</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/config/renderer.smarty.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="Request.class.php"></a>
+<h1>Request.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 52</b> - Unknown tag "@override" used<br>
+<b>Warning on line 103</b> - Unknown tag "@implements" used<br>
+<a name="Required.class.php"></a>
+<h1>Required.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@implements" used<br>
+<a name="Routing.class.php"></a>
+<h1>Routing.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 77</b> - Unknown tag "@override" used<br>
+<a name="routing.skeleton.php"></a>
+<h1>routing.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 11</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/config/routing.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="Samurai.class.php"></a>
+<h1>Samurai.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 36</b> - Page-level DocBlock precedes "define PS", use another DocBlock to document the source element<br>
+<b>Warning on line 52</b> - Unknown tag "@override" used<br>
+<b>Warning on line 55</b> - Unknown tag "@const" used<br>
+<b>Warning on line 62</b> - Unknown tag "@const" used<br>
+<b>Warning on line 79</b> - Unknown tag "@implements" used<br>
+<a name="samurai.dicon.skeleton.php"></a>
+<h1>samurai.dicon.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 9</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/config/samurai.dicon.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="samurai.frontfilter.skeleton.php"></a>
+<h1>samurai.frontfilter.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 5</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/config/samurai.frontfilter.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="samurai.yaml.skeleton.php"></a>
+<h1>samurai.yaml.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 25</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/config/samurai.yaml.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="Sendmail.class.php"></a>
+<h1>Sendmail.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 68</b> - Unknown tag "@implements" used<br>
+<a name="Session.class.php"></a>
+<h1>Session.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 67</b> - Unknown tag "@override" used<br>
+<b>Warning on line 100</b> - Unknown tag "@override" used<br>
+<b>Warning on line 116</b> - Unknown tag "@override" used<br>
+<b>Warning on line 132</b> - Unknown tag "@override" used<br>
+<a name="Simple.class.php"></a>
+<h1>Simple.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 71</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 80</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 103</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 112</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 121</b> - Unknown tag "@implements" used<br>
+<a name="simple.php"></a>
+<h1>simple.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 17</b> - Page-level DocBlock precedes "include $application_override", use another DocBlock to document the source element<br>
+<a name="SimpleDisplay.class.php"></a>
+<h1>SimpleDisplay.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 58</b> - Unknown tag "@override" used<br>
+<b>Warning on line 74</b> - Unknown tag "@implements" used<br>
+<a name="SimpleFile.class.php"></a>
+<h1>SimpleFile.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 71</b> - Unknown tag "@override" used<br>
+<b>Warning on line 90</b> - Unknown tag "@implements" used<br>
+<a name="Smarty.class.php"></a>
+<h1>Smarty.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 36</b> - Page-level DocBlock precedes "require_once 'Smarty/Smarty.class.php'", use another DocBlock to document the source element<br>
+<b>Warning on line 64</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 72</b> - Unknown tag "@override" used<br>
+<b>Warning on line 74</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 83</b> - Unknown tag "@override" used<br>
+<b>Warning on line 84</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 93</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 100</b> - Unknown tag "@override" used<br>
+<b>Warning on line 102</b> - Unknown tag "@implements" used<br>
+<a name="Spec.class.php"></a>
+<h1>Spec.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 69</b> - Unknown tag "@implements" used<br>
+<a name="spyc.php"></a>
+<h1>spyc.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 866</b> - docblock template never terminated with /**#@-*/<br>
+<a name="Sqlite2.class.php"></a>
+<h1>Sqlite2.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 65</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 78</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 95</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 105</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 115</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 124</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 133</b> - Unknown tag "@override" used<br>
+<b>Warning on line 177</b> - Unknown tag "@implements" used<br>
+<b>Warning on line 189</b> - Unknown tag "@implements" used<br>
+<a name="Strim.class.php"></a>
+<h1>Strim.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 53</b> - Unknown tag "@override" used<br>
+<a name="Template.class.php"></a>
+<h1>Template.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 107</b> - Unknown tag "@implements" used<br>
+<a name="template_usage.php"></a>
+<h1>template_usage.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 23</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/generator/template/add/template_usage.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="Through.class.php"></a>
+<h1>Through.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 52</b> - Unknown tag "@override" used<br>
+<a name="ToArray.class.php"></a>
+<h1>ToArray.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@override" used<br>
+<a name="ToDate.class.php"></a>
+<h1>ToDate.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@override" used<br>
+<a name="ToFull.class.php"></a>
+<h1>ToFull.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@override" used<br>
+<a name="ToHalf.class.php"></a>
+<h1>ToHalf.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@override" used<br>
+<a name="ToInteger.class.php"></a>
+<h1>ToInteger.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@override" used<br>
+<a name="ToKana.class.php"></a>
+<h1>ToKana.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@override" used<br>
+<a name="Token.class.php"></a>
+<h1>Token.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 87</b> - Unknown tag "@override" used<br>
+<a name="ToObject.class.php"></a>
+<h1>ToObject.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@override" used<br>
+<a name="ToString.class.php"></a>
+<h1>ToString.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@override" used<br>
+<a name="Upload.class.php"></a>
+<h1>Upload.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 95</b> - Unknown tag "@override" used<br>
+<a name="Url.class.php"></a>
+<h1>Url.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@implements" used<br>
+<a name="usage.php"></a>
+<h1>usage.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 16</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/generator/template/utility/usage.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="Validate.class.php"></a>
+<h1>Validate.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 102</b> - Unknown tag "@override" used<br>
+<a name="version.php"></a>
+<h1>version.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 11</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/generator/template/utility/version.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="ViewJson.class.php"></a>
+<h1>ViewJson.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 75</b> - Unknown tag "@override" used<br>
+<a name="ViewSimple.class.php"></a>
+<h1>ViewSimple.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 134</b> - Unknown tag "@override" used<br>
+<a name="web.phptal.skeleton.php"></a>
+<h1>web.phptal.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 18</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/template/web.phptal.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="web.simple.skeleton.php"></a>
+<h1>web.simple.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 20</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/template/web.simple.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="web.smarty.skeleton.php"></a>
+<h1>web.smarty.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 18</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/template/web.smarty.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="Whitelist.class.php"></a>
+<h1>Whitelist.class.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 50</b> - Unknown tag "@implements" used<br>
+<a name="yaml.skeleton.php"></a>
+<h1>yaml.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 14</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/action/yaml.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="_doc_comment.skeleton.php"></a>
+<h1>_doc_comment.skeleton.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - File "/home/samurai-fw/repositries/samurai/tags/2.0.7beta/skeleton/_doc_comment.skeleton.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<a name="generator.php"></a>
+<h1>generator.php</h1>
+<h2>Errors:</h2><br>
+<b>Error on line 49</b> - "define" SAMURAI_APPLICATION_NAME's DocBlock has @subpackage tags, illegal. ignoring tag "@subpackage Generator"<br>
+<b>Error on line 49</b> - SAMURAI_APPLICATION_NAME define's DocBlock has @package tag, illegal. ignoring tag "@package Samurai"<br>
+<a name="phptal.php"></a>
+<h1>phptal.php</h1>
+<h2>Errors:</h2><br>
+<b>Error on line 48</b> - "include" include's DocBlock has @subpackage tags, illegal. ignoring tag "@subpackage Config-Renderer"<br>
+<b>Error on line 48</b> - include include's DocBlock has @package tag, illegal. ignoring tag "@package Samurai"<br>
+<a name="production.php"></a>
+<h1>production.php</h1>
+<h2>Errors:</h2><br>
+<b>Error on line 48</b> - BASE_URI define's DocBlock has @package tag, illegal. ignoring tag "@package Samurai"<br>
+<b>Error on line 48</b> - "define" BASE_URI's DocBlock has @subpackage tags, illegal. ignoring tag "@subpackage Config-Environment"<br>
+<a name="smarty.php"></a>
+<h1>smarty.php</h1>
+<h2>Errors:</h2><br>
+<b>Error on line 76</b> - include include's DocBlock has @package tag, illegal. ignoring tag "@package Samurai"<br>
+<b>Error on line 76</b> - "include" include's DocBlock has @subpackage tags, illegal. ignoring tag "@subpackage Config-Renderer"<br>
+        <div class="credit">
+		    <hr />
+		    Documentation generated on Tue, 22 Jun 2010 14:51:58 +0900 by <a href="http://www.phpdoc.org">phpDocumentor 1.4.2</a>
+	      </div>
+      </td></tr></table>
+    </td>
+  </tr>
+</table>
+
+                </div>
+
+            <div class='clear'></div>
+        </div>
+        <div class='bottom'></div>
+    </div>
+
+    <div id='footer'>
+        <ul class='abouts'>
+            <li><a href='/about/us'>Samurai Framework Project</a></li>
+            <li>&nbsp;|&nbsp;<a href='/about/privacy'>プライバシーポリシー</a></li>
+        </ul>
+        <div class='copyright'>
+            Copyright &copy; 2009. <a href='/about/us'>Samurai Framework Project</a>. All rights reserved.
+        </div>
+        <div class='clear'></div>
+    </div>
+
+    
+    <script type='text/javascript'>
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+        try {
+            var pageTracker = _gat._getTracker('UA-11073209-3');
+            pageTracker._trackPageview();
+        } catch(err) {}
+    </script>
+    
+
+</body>
+</html>
