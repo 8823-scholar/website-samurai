@@ -36,7 +36,7 @@
                 <li>{Html->a href='/package/releases' value='ダウンロード'}</li>
                 <li>{Html->a href='/source/api/2.0/' value='API'}</li>
                 <li>{Html->a href='/documents/ja/FrontPage' value='ドキュメント'}</li>
-                <li>{Html->a href='/development/' value='開発'}</li>
+                <li><a href='https://github.com/8823-scholar/Samurai' target='_blank'>開発</a></li>
                 <li>{Html->a href='/community/index' value='コミュニティ'}</li>
             </ul>
             
