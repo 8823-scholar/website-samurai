@@ -78,7 +78,7 @@
                         <tr>
                             <th class='required'>認証コード</th>
                             <td class='input'>
-                                <img src='/etc/antispam?space=documents_wiki_comment' class='antispam' /><br />
+                                {Html->img src='/etc/antispam?space=documents_wiki_comment' class='antispam'}<br />
                                 {Html->text name='antispam'}
                             </td>
                         </tr>

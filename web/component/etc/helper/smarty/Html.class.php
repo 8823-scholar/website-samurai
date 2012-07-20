@@ -580,6 +580,39 @@ class Etc_Helper_Smarty_Html
         }
         return $this->_makeTag('button', $params, $value, true);
     }
+
+
+
+    /**
+     * img
+     *
+     * @access  public
+     * @return  string
+     */
+    public function img($params = array())
+    {
+        $src = '';
+        $no_prefix = false;
+        foreach($params as $_key => $_val){
+            if(is_int($_key)) continue;
+            switch($_key){
+                case 'src':
+                    $$_key = (string)$_val;
+                    unset($params[$_key]);
+                    break;
+                case 'no_prefix':
+                    $$_key = (bool)$_val;
+                    unset($params[$_key]);
+                    break;
+            }
+        }
+        //hrefへの付加
+        if($this->use_session){
+            $args[session_name()] = session_id();
+        }
+        $params['src'] = $this->isAbsolutePath($src, false) && !$no_prefix ? $this->prefix . $src : $src ;
+        return $this->_makeTag('img', $params, NULL);
+    }
     
     
     

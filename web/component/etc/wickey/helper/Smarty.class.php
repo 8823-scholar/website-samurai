@@ -44,7 +44,7 @@ class Etc_Wickey_Helper_Smarty
                 $$_key = (string)$_val;
                 break;
             case 'base':
-                $option->base = (string)$_val;
+                $option->base = BASE_URI . (string)$_val;
                 break;
             }
         }

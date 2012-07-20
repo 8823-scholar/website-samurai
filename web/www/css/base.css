@@ -14,7 +14,7 @@
 ********************/
     body
     {
-        background : #FFFFFF url('../../image/layout/background.png') repeat fixed !important;
+        background : #FFFFFF url('../image/layout/background.png') repeat fixed !important;
     }
     #samurai
     {
